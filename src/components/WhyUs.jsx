@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { RevealText } from '../hooks/useScrollReveal';
 
 export default function WhyUs() {
@@ -42,10 +43,17 @@ export default function WhyUs() {
 
             <div className="why-pillars-list">
               {pillars.map((pillar, idx) => (
-                <div key={idx} className="why-pillar-item">
+                <motion.div 
+                  key={idx} 
+                  className="why-pillar-item"
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                >
                   <span className="pillar-badge">{pillar.num}</span>
                   <span>{pillar.text} <strong>{pillar.highlight}</strong></span>
-                </div>
+                </motion.div>
               ))}
             </div>
 
@@ -58,22 +66,34 @@ export default function WhyUs() {
 
         {/* Studio Metrics Row */}
         <div className="metrics-row">
-          <div className="metric-card">
-            <span className="metric-big-num">85%</span>
-            <span className="metric-label">CLIENT<br/>RETENTION</span>
-          </div>
-          <div className="metric-card">
-            <span className="metric-big-num">12+</span>
-            <span className="metric-label">YEARS<br/>EXPERIENCE</span>
-          </div>
-          <div className="metric-card">
-            <span className="metric-big-num">5X</span>
-            <span className="metric-label">FASTER<br/>DELIVERY</span>
-          </div>
+          {[
+            { num: "85%", label: "CLIENT\nRETENTION" },
+            { num: "12+", label: "YEARS\nEXPERIENCE" },
+            { num: "5X", label: "FASTER\nDELIVERY" }
+          ].map((metric, idx) => (
+            <motion.div 
+              key={idx} 
+              className="metric-card"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -4 }}
+            >
+              <span className="metric-big-num">{metric.num}</span>
+              <span className="metric-label" style={{ whiteSpace: 'pre-line' }}>{metric.label}</span>
+            </motion.div>
+          ))}
         </div>
 
         {/* Partnership Callout Banner with Aurora */}
-        <div className="partnership-banner">
+        <motion.div 
+          className="partnership-banner"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="partnership-aurora" aria-hidden="true"></div>
           <div>
             <div className="section-badge">
@@ -87,7 +107,7 @@ export default function WhyUs() {
               We don't vanish for weeks then drop finished work. You're involved at every step: workshops, reviews, testing.
             </p>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

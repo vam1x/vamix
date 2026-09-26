@@ -1,11 +1,18 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { RevealText } from '../hooks/useScrollReveal';
 
 export default function Results() {
   return (
     <section className="section results-section" id="results">
       {/* Left Editorial Column */}
-      <div className="results-left">
+      <motion.div 
+        className="results-left"
+        initial={{ opacity: 0, x: -24 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
             <div className="section-badge" style={{ marginBottom: 0 }}>
@@ -38,16 +45,22 @@ export default function Results() {
             <span style={{ textAlign: 'right', maxWidth: '350px' }}>INTIMIDATING, EXPERT-ONLY INTERFACE THAT BLOCKED RETAIL USER ADOPTION</span>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Right Immersive Photo Quote */}
-      <div className="results-right-quote">
+      <motion.div 
+        className="results-right-quote"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="results-quote-overlay" aria-hidden="true"></div>
         <RevealText 
           text="THEY DIDN'T JUST MAKE IT PRETTY. THEY MADE IT WORK. OUR USERS WENT FROM CONFUSED TO CONFIDENT IN WEEKS. BEST DESIGN INVESTMENT WE'VE MADE."
           className="results-quote-text"
         />
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -1,34 +1,39 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useLenis } from 'lenis/react';
 import RollingText from './RollingText';
 
 export default function Header({ isDrawerOpen, setIsDrawerOpen }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
+  const checkDark = (currentScroll) => {
+    setIsScrolled(currentScroll > 40);
+
+    const headerEl = document.querySelector('.site-header');
+    if (!headerEl) return;
+
+    const headerRect = headerEl.getBoundingClientRect();
+    const midY = headerRect.top + headerRect.height / 2;
+    const darkSections = document.querySelectorAll('.section-dark');
+    
+    let overDark = false;
+    darkSections.forEach(sec => {
+      const secRect = sec.getBoundingClientRect();
+      if (midY >= secRect.top && midY <= secRect.bottom) {
+        overDark = true;
+      }
+    });
+
+    setIsDark(overDark);
+  };
+
+  useLenis(({ scroll }) => {
+    checkDark(scroll);
+  });
+
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 40);
-
-      // Detect if header overlaps dark sections
-      const headerEl = document.querySelector('.site-header');
-      if (!headerEl) return;
-
-      const headerRect = headerEl.getBoundingClientRect();
-      const midY = headerRect.top + headerRect.height / 2;
-      const darkSections = document.querySelectorAll('.section-dark');
-      
-      let overDark = false;
-      darkSections.forEach(sec => {
-        const secRect = sec.getBoundingClientRect();
-        if (midY >= secRect.top && midY <= secRect.bottom) {
-          overDark = true;
-        }
-      });
-
-      setIsDark(overDark);
-    };
-
+    const handleScroll = () => checkDark(window.scrollY);
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
@@ -48,10 +53,12 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen }) {
 
       {/* Center Interactive Menu Button with Split-Flap Rolling Letters */}
       <div className="header-menu-container">
-        <button 
+        <motion.button 
           className={`menu-toggle-btn ${isDrawerOpen ? 'is-active' : ''}`} 
           onClick={() => setIsDrawerOpen(!isDrawerOpen)}
           aria-label="Toggle Navigation Drawer"
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
         >
           <span className="menu-btn-icon">
             <span className="bar-h"></span>
@@ -60,12 +67,17 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen }) {
           <span className="menu-btn-text">
             <RollingText text="MENU" />
           </span>
-        </button>
+        </motion.button>
       </div>
 
       {/* Right Quick Consult Banner with Ruby Avatar */}
       <div className="header-actions">
-        <a href="#contact" className="consult-banner">
+        <motion.a 
+          href="#contact" 
+          className="consult-banner"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
           <span>FREE 30-MIN DESIGN CONSULT.<br/>NO PITCH. <span className="bold">JUST CLARITY.</span></span>
           <img 
             src="https://framerusercontent.com/images/awFufuyIlbDdk2me7dySF9Y3r8.png?width=2048&height=2048" 
@@ -73,7 +85,7 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen }) {
             className="consult-avatar" 
           />
           <div className="consult-circle-btn">+</div>
-        </a>
+        </motion.a>
       </div>
     </header>
   );

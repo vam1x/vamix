@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { useLenis } from 'lenis/react';
 import RollingText from './RollingText';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const lenis = useLenis();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +19,11 @@ export default function Contact() {
 
   const scrollToTop = (e) => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 1.2 });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -24,7 +31,12 @@ export default function Contact() {
       <div className="section-container">
         
         <div className="contact-layout">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
             <div className="section-badge">
               <span className="section-badge-dot"></span>
               <span>12 READY TO START?</span>
@@ -59,22 +71,24 @@ export default function Contact() {
                 />
               </div>
 
-              <button 
+              <motion.button 
                 type="submit" 
                 className="contact-submit-btn"
                 style={isSubmitted ? { backgroundColor: '#171717', color: '#ffffff' } : {}}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
               >
                 <span>{isSubmitted ? "REQUEST SENT! WE WILL REPLY SHORTLY" : <RollingText text="LET'S TALK" />}</span>
                 <span>→</span>
                 <span className="submit-btn-line"></span>
-              </button>
+              </motion.button>
 
               <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-dark-muted)', marginTop: '1rem' }}>
                 <p>BY SUBMITTING, YOU AGREE TO OUR <strong>TERMS</strong> AND <strong>PRIVACY POLICY</strong>.</p>
                 <p>WE ARE BASED IN <strong>DELHI</strong></p>
               </div>
             </form>
-          </div>
+          </motion.div>
 
           {/* Bottom Mega-Nav Links Column */}
           <nav style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', justifyContent: 'center', fontFamily: 'var(--font-mono)', fontSize: '15px', fontWeight: 600, textTransform: 'uppercase' }}>

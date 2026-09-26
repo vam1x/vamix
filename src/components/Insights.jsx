@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import RollingText from './RollingText';
 
 export default function Insights() {
@@ -30,21 +31,39 @@ export default function Insights() {
       <div className="section-container">
         
         <div className="insights-header-row">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <div className="section-badge">
               <span className="section-badge-dot"></span>
               <span>10 LATEST</span>
             </div>
             <h2 className="section-title-huge" style={{ marginBottom: 0 }}>INSIGHTS</h2>
-          </div>
-          <a href="./blog" className="btn-pill btn-pill-light">
+          </motion.div>
+          <motion.a 
+            href="./blog" 
+            className="btn-pill btn-pill-light"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
             <RollingText text="ALL ARTICLES ↗" />
-          </a>
+          </motion.a>
         </div>
 
         <div className="articles-grid">
           {articles.map((art, idx) => (
-            <article key={idx} className="article-card">
+            <motion.article 
+              key={idx} 
+              className="article-card"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.55, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -6 }}
+            >
               <div>
                 <div className="article-date">{art.date}</div>
                 <h3 className="article-title">{art.title}</h3>
@@ -52,7 +71,7 @@ export default function Insights() {
               <a href={art.link} className="article-read-link" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                 <RollingText text="READ ARTICLE" /> <span>→</span>
               </a>
-            </article>
+            </motion.article>
           ))}
         </div>
 

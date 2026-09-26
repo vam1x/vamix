@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { RevealText } from '../hooks/useScrollReveal';
 
 export default function Timeline() {
@@ -17,18 +18,32 @@ export default function Timeline() {
         {/* 4 Milestones Cards */}
         <div className="timeline-milestones-grid">
           {milestones.map((item, idx) => (
-            <div key={idx} className="milestone-card">
+            <motion.div 
+              key={idx} 
+              className="milestone-card"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -4 }}
+            >
               <div className="milestone-year">
                 <span>{item.year}</span>
                 <span style={{ fontSize: '1.5rem' }}>{item.icon}</span>
               </div>
               <p className="milestone-desc">{item.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Belief Statement Quote */}
-        <div className="belief-quote-wrap">
+        <motion.div 
+          className="belief-quote-wrap"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7 }}
+        >
           <span className="belief-giant-quote-mark" aria-hidden="true">“</span>
           <div className="section-badge">
             <span className="section-badge-dot"></span>
@@ -39,7 +54,7 @@ export default function Timeline() {
             className="section-title-huge"
             theme="light"
           />
-        </div>
+        </motion.div>
 
       </div>
     </section>

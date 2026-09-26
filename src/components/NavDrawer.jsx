@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import RollingText from './RollingText';
 
 export default function NavDrawer({ isOpen, onClose }) {
@@ -13,39 +14,56 @@ export default function NavDrawer({ isOpen, onClose }) {
     };
   }, [isOpen]);
 
-  return (
-    <div 
-      className={`nav-drawer ${isOpen ? 'open' : ''}`} 
-      role="dialog" 
-      aria-modal="true" 
-      aria-label="Main Navigation"
-    >
-      <nav className="nav-drawer-links">
-        <a href="./" className="nav-drawer-link" onClick={onClose}>
-          <RollingText text="HOME" />
-        </a>
-        <a href="./about" className="nav-drawer-link" onClick={onClose}>
-          <RollingText text="ABOUT" />
-        </a>
-        <a href="./case-studies" className="nav-drawer-link" onClick={onClose}>
-          <RollingText text="CASE STUDIES" />
-        </a>
-        <a href="./blog" className="nav-drawer-link" onClick={onClose}>
-          <RollingText text="INSIGHTS" />
-        </a>
-        <a href="./careers" className="nav-drawer-link" onClick={onClose}>
-          <RollingText text="CAREERS" />
-        </a>
-        <a href="./contact" className="nav-drawer-link" onClick={onClose}>
-          <RollingText text="CONTACT" />
-        </a>
-      </nav>
+  const links = [
+    { title: "HOME", href: "./" },
+    { title: "ABOUT", href: "./about" },
+    { title: "CASE STUDIES", href: "./case-studies" },
+    { title: "INSIGHTS", href: "./blog" },
+    { title: "CAREERS", href: "./careers" },
+    { title: "CONTACT", href: "./contact" }
+  ];
 
-      <div className="nav-drawer-footer">
-        <span>NEW DELHI, INDIA</span>
-        <span>TENNESSEE, USA</span>
-        <span>HI@WEBUS.IN</span>
-      </div>
-    </div>
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div 
+          className="nav-drawer open" 
+          role="dialog" 
+          aria-modal="true" 
+          aria-label="Main Navigation"
+          initial={{ opacity: 0, clipPath: 'inset(0% 0% 100% 0%)' }}
+          animate={{ opacity: 1, clipPath: 'inset(0% 0% 0% 0%)' }}
+          exit={{ opacity: 0, clipPath: 'inset(0% 0% 100% 0%)' }}
+          transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+        >
+          <nav className="nav-drawer-links">
+            {links.map((link, idx) => (
+              <motion.a 
+                key={link.title}
+                href={link.href} 
+                className="nav-drawer-link" 
+                onClick={onClose}
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.15 + idx * 0.04, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <RollingText text={link.title} />
+              </motion.a>
+            ))}
+          </nav>
+
+          <motion.div 
+            className="nav-drawer-footer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.45 }}
+          >
+            <span>NEW DELHI, INDIA</span>
+            <span>TENNESSEE, USA</span>
+            <span>HI@WEBUS.IN</span>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

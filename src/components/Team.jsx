@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { RevealText } from '../hooks/useScrollReveal';
 
 export default function Team() {
@@ -68,13 +69,27 @@ export default function Team() {
 
         <div className="team-grid">
           {members.map((member, idx) => (
-            <div key={idx} className="team-card">
+            <motion.div 
+              key={idx} 
+              className="team-card"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -6 }}
+            >
               <div className="team-card-header">
                 <span>{member.roleHeader}</span>
                 <span>{member.badge}</span>
               </div>
               <div className="team-photo-wrap">
-                <img src={member.img} alt={member.name} className="team-photo-img" />
+                <motion.img 
+                  src={member.img} 
+                  alt={member.name} 
+                  className="team-photo-img"
+                  whileHover={{ scale: 1.04 }}
+                  transition={{ duration: 0.35 }}
+                />
               </div>
               <div className="team-gradient-line"></div>
               <div className="team-card-body">
@@ -88,7 +103,7 @@ export default function Team() {
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

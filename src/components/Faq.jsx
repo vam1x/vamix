@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState(0);
@@ -31,13 +32,18 @@ export default function Faq() {
       <div className="section-container">
         
         <div className="faq-container">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <div className="section-badge">
               <span className="section-badge-dot"></span>
               <span>11 HELP & INFO</span>
             </div>
             <h2 className="section-title-huge">FAQ</h2>
-          </div>
+          </motion.div>
 
           <div className="faq-list">
             {faqs.map((faq, idx) => {
@@ -53,11 +59,28 @@ export default function Faq() {
                       <span className="faq-num-pill">0{idx + 1}</span>
                       <span>{faq.q}</span>
                     </span>
-                    <span className="faq-icon">+</span>
+                    <motion.span 
+                      className="faq-icon"
+                      animate={{ rotate: isOpen ? 45 : 0 }}
+                      transition={{ duration: 0.25 }}
+                    >
+                      +
+                    </motion.span>
                   </button>
-                  <div className="faq-answer-panel">
-                    <p className="faq-answer-text">{faq.a}</p>
-                  </div>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div 
+                        className="faq-answer-panel"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                        style={{ overflow: 'hidden' }}
+                      >
+                        <p className="faq-answer-text">{faq.a}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               );
             })}

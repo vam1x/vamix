@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { RevealText } from '../hooks/useScrollReveal';
 import RollingText from './RollingText';
 
@@ -54,7 +55,13 @@ export default function Approach() {
         
         {/* Intro Grid & Manifesto */}
         <div className="approach-intro-grid">
-          <div className="approach-left">
+          <motion.div 
+            className="approach-left"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
             <div className="section-badge">
               <span className="section-badge-dot"></span>
               <span>OUR APPROACH</span>
@@ -63,7 +70,11 @@ export default function Approach() {
               HOW WE BUILD WHAT WE DESIGN
             </h3>
             
-            <div className="approach-mockup-frame">
+            <motion.div 
+              className="approach-mockup-frame"
+              whileHover={{ scale: 1.01 }}
+              transition={{ duration: 0.3 }}
+            >
               <span className="corner-cross tl">+</span>
               <span className="corner-cross tr">+</span>
               <span className="corner-cross bl">+</span>
@@ -73,14 +84,20 @@ export default function Approach() {
                 alt="Webus Product Interface Dashboard Mockup" 
                 className="approach-mockup-img" 
               />
-            </div>
+            </motion.div>
 
             <p style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--text-light-muted)', lineHeight: 1.6, textTransform: 'uppercase', marginTop: '2rem' }}>
               WE SOLVE HARD PRODUCT PROBLEMS THROUGH DESIGN, ENGINEERING, AND TESTING WITH USERS. WE DESIGN AND SHIP PRODUCTS PEOPLE KEEP USING.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="approach-right">
+          <motion.div 
+            className="approach-right"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          >
             <div className="section-badge">
               <span className="section-badge-dot"></span>
               <span>01 WHO WE ARE</span>
@@ -95,7 +112,7 @@ export default function Approach() {
               <p style={{ fontWeight: 700, color: '#ffffff' }}>JASPAL S RATTEY</p>
               <p style={{ color: 'var(--text-light-muted)', fontSize: '11px' }}>FOUNDER & PRODUCT DIRECTOR</p>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Services Track 02 Header */}
@@ -110,25 +127,47 @@ export default function Approach() {
               className="section-title-huge"
             />
           </div>
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
             <p className="section-subhead" style={{ marginBottom: '2rem' }}>
               Two tracks under one roof. We find what to build, shape how it works, and ship the software that makes it real—from product discovery and design ops to web, mobile, internal tools, and AI.
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <a href="#projects" className="btn-pill btn-pill-light">
+              <motion.a 
+                href="#projects" 
+                className="btn-pill btn-pill-light"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
                 <RollingText text="OUR CASE STUDIES" />
-              </a>
-              <a href="./services" className="btn-pill btn-pill-white">
+              </motion.a>
+              <motion.a 
+                href="./services" 
+                className="btn-pill btn-pill-white"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
                 <RollingText text="ALL SERVICES" />
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* 6 Services Items */}
         <div className="services-list-wrap">
           {services.map((svc, idx) => (
-            <div key={idx} className="service-item-row">
+            <motion.div 
+              key={idx} 
+              className="service-item-row"
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.6, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+            >
               <span className="service-num">{svc.num}</span>
               <h3 className="service-title">{svc.title}</h3>
               <div className="service-img-preview">
@@ -142,7 +181,7 @@ export default function Approach() {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

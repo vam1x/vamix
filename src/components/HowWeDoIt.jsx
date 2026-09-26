@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { RevealText } from '../hooks/useScrollReveal';
 
 export default function HowWeDoIt() {
@@ -44,7 +45,15 @@ export default function HowWeDoIt() {
             <span className="corner-cross br">+</span>
 
             {steps.map((step, idx) => (
-              <div key={idx} className="step-card">
+              <motion.div 
+                key={idx} 
+                className="step-card"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -4 }}
+              >
                 <div className="step-card-num">
                   <span>{step.num}</span>
                   <div className="grip-icon">
@@ -54,7 +63,7 @@ export default function HowWeDoIt() {
                   </div>
                 </div>
                 <p className="step-card-text">{step.text}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -73,7 +82,14 @@ export default function HowWeDoIt() {
 
           <div className="delay-matrix-list">
             {delayRows.map((row, idx) => (
-              <div key={idx} className="delay-row">
+              <motion.div 
+                key={idx} 
+                className="delay-row"
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              >
                 <div className="delay-row-content">
                   <span>{row.num}</span>
                   <span>{row.text} <strong>{row.bold}</strong></span>
@@ -82,7 +98,7 @@ export default function HowWeDoIt() {
                   {row.badge}
                 </div>
                 <span className="delay-code-tag">{row.tag}</span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

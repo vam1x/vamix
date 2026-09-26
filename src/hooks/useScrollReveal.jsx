@@ -1,43 +1,51 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
+import { useLenis } from 'lenis/react';
 
 /**
  * Custom React Hook for fluid continuous character illumination on scroll
- * Matches the Framer scroll-driven text reveal engine on Webus.in
+ * Synchronized with Lenis smooth scrolling engine (used by Webus.in)
  */
 export function useScrollReveal() {
   const containerRef = useRef(null);
   const [progress, setProgress] = useState(0);
 
+  const calculateProgress = () => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    // Element-height adaptive scroll progress calculation
+    const elementHeight = rect.height;
+    const start = windowHeight * 0.85;
+    const total = (windowHeight * 0.55) + elementHeight;
+    const current = start - rect.top;
+
+    let p = current / total;
+    p = Math.max(0, Math.min(1, p));
+    setProgress(p);
+  };
+
+  // Synchronize directly with Lenis RAF frame loop
+  useLenis(() => {
+    calculateProgress();
+  });
+
   useEffect(() => {
     let ticking = false;
 
-    const updateScroll = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Element-height adaptive scroll progress calculation
-      const elementHeight = rect.height;
-      const start = windowHeight * 0.85;
-      const total = (windowHeight * 0.55) + elementHeight;
-      const current = start - rect.top;
-
-      let p = current / total;
-      p = Math.max(0, Math.min(1, p));
-      setProgress(p);
-      ticking = false;
-    };
-
     const onScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(updateScroll);
+        window.requestAnimationFrame(() => {
+          calculateProgress();
+          ticking = false;
+        });
         ticking = true;
       }
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
-    updateScroll();
+    calculateProgress();
 
     return () => {
       window.removeEventListener('scroll', onScroll);

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import RollingText from './RollingText';
 
-export default function NavDrawer({ isOpen, onClose }) {
+export default function NavDrawer({ isOpen, onClose, navigate, currentPath }) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -15,13 +15,25 @@ export default function NavDrawer({ isOpen, onClose }) {
   }, [isOpen]);
 
   const links = [
-    { title: "HOME", href: "./" },
-    { title: "ABOUT", href: "./about" },
-    { title: "CASE STUDIES", href: "./case-studies" },
-    { title: "INSIGHTS", href: "./blog" },
-    { title: "CAREERS", href: "./careers" },
-    { title: "CONTACT", href: "./contact" }
+    { title: "HOME", href: "./", path: "/" },
+    { title: "ABOUT", href: "./about", path: "/#approach" },
+    { title: "CASE STUDIES", href: "./case-studies", path: "/#projects" },
+    { title: "INSIGHTS", href: "./blog", path: "/#insights" },
+    { title: "CAREERS", href: "./careers", path: "/#team" },
+    { title: "CONTACT", href: "./contact", path: "/contact" }
   ];
+
+  const handleLinkClick = (e, link) => {
+    if (link.path === '/' || link.path === '/contact') {
+      if (navigate) {
+        e.preventDefault();
+        navigate(link.path);
+        onClose();
+        return;
+      }
+    }
+    onClose();
+  };
 
   return (
     <AnimatePresence>
@@ -41,8 +53,8 @@ export default function NavDrawer({ isOpen, onClose }) {
               <motion.a 
                 key={link.title}
                 href={link.href} 
-                className="nav-drawer-link" 
-                onClick={onClose}
+                className={`nav-drawer-link ${(link.path === currentPath) ? 'is-active' : ''}`} 
+                onClick={(e) => handleLinkClick(e, link)}
                 initial={{ opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, delay: 0.15 + idx * 0.04, ease: [0.16, 1, 0.3, 1] }}

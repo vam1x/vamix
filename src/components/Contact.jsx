@@ -4,7 +4,7 @@ import { useLenis } from 'lenis/react';
 import RollingText from './RollingText';
 import SectionGrid, { GridCrosshair } from './SectionGrid';
 
-export default function Contact() {
+export default function Contact({ navigate }) {
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const lenis = useLenis();
@@ -103,12 +103,32 @@ export default function Contact() {
 
           {/* Bottom Mega-Nav Links Column */}
           <nav style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', justifyContent: 'center', fontFamily: 'var(--font-mono)', fontSize: '15px', fontWeight: 600, textTransform: 'uppercase' }}>
-            <a href="./"><RollingText text="HOME" /></a>
+            <a 
+              href="./" 
+              onClick={(e) => {
+                if (navigate) {
+                  e.preventDefault();
+                  navigate('/');
+                }
+              }}
+            >
+              <RollingText text="HOME" />
+            </a>
             <a href="./about"><RollingText text="ABOUT" /></a>
             <a href="./case-studies"><RollingText text="CASE STUDIES" /></a>
             <a href="./blog"><RollingText text="INSIGHTS" /></a>
             <a href="./careers"><RollingText text="CAREERS" /></a>
-            <a href="./contact"><RollingText text="CONTACT" /></a>
+            <a 
+              href="./contact" 
+              onClick={(e) => {
+                if (navigate) {
+                  e.preventDefault();
+                  navigate('/contact');
+                }
+              }}
+            >
+              <RollingText text="CONTACT" />
+            </a>
           </nav>
         </div>
 

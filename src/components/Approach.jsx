@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { RevealText } from '../hooks/useScrollReveal';
 import RollingText from './RollingText';
+import SectionGrid, { GridCrosshair } from './SectionGrid';
 
 export default function Approach() {
   const services = [
@@ -51,38 +52,54 @@ export default function Approach() {
 
   return (
     <section className="section section-dark approach-section" id="approach">
+      {/* Blueprint Grid Lines & Top Boundary with Crosshairs */}
+      <SectionGrid
+        theme="dark"
+        showTopLine={true}
+      />
+
       <div className="section-container">
-        
-        {/* Intro Grid & Manifesto */}
+
+        {/* Intro Grid & Manifesto (4-Column Layout) */}
         <div className="approach-intro-grid">
-          <motion.div 
+          {/* Column 1: Left Approach Header Box & Mockup */}
+          <motion.div
             className="approach-left"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="section-badge">
-              <span className="section-badge-dot"></span>
-              <span>OUR APPROACH</span>
+            <div className="approach-header-box">
+              <div className="section-badge">
+                <span className="section-badge-dot"></span>
+                <span>OUR APPROACH</span>
+              </div>
+              <h3 className="approach-heading">
+                HOW WE BUILD WHAT WE DESIGN
+              </h3>
+
+              {/* Horizontal divider line under title with crosshairs and dot */}
+              <div className="approach-header-divider">
+                <GridCrosshair style={{ left: '0px', top: '0px' }} />
+                <GridCrosshair style={{ right: '0px', top: '0px' }} />
+                <span className="approach-header-dot"></span>
+              </div>
             </div>
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '2rem' }}>
-              HOW WE BUILD WHAT WE DESIGN
-            </h3>
-            
-            <motion.div 
+
+            <motion.div
               className="approach-mockup-frame"
               whileHover={{ scale: 1.01 }}
               transition={{ duration: 0.3 }}
             >
-              <span className="corner-cross tl">+</span>
-              <span className="corner-cross tr">+</span>
-              <span className="corner-cross bl">+</span>
-              <span className="corner-cross br">+</span>
-              <img 
-                src="https://framerusercontent.com/images/aSnx8r69QAkgwoNJwYhujjsNU0.png?width=1672&height=941" 
-                alt="Webus Product Interface Dashboard Mockup" 
-                className="approach-mockup-img" 
+              <GridCrosshair style={{ left: '0px', top: '0px' }} />
+              <GridCrosshair style={{ right: '0px', top: '0px' }} />
+              <GridCrosshair style={{ left: '0px', bottom: '0px' }} />
+              <GridCrosshair style={{ right: '0px', bottom: '0px' }} />
+              <img
+                src="https://framerusercontent.com/images/aSnx8r69QAkgwoNJwYhujjsNU0.png?width=1672&height=941"
+                alt="Webus Product Interface Dashboard Mockup"
+                className="approach-mockup-img"
               />
             </motion.div>
 
@@ -91,7 +108,11 @@ export default function Approach() {
             </p>
           </motion.div>
 
-          <motion.div 
+          {/* Column 2: Empty Spacer Column showing Blueprint Grid Lines */}
+          <div className="approach-spacer" aria-hidden="true" />
+
+          {/* Columns 3 & 4: Manifesto & Founder Signature */}
+          <motion.div
             className="approach-right"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -102,8 +123,8 @@ export default function Approach() {
               <span className="section-badge-dot"></span>
               <span>01 WHO WE ARE</span>
             </div>
-            
-            <RevealText 
+
+            <RevealText
               text="WE'RE A PRODUCT STUDIO THAT DESIGNS AND BUILDS. WE DON'T CHASE TRENDS OR ADD UNNECESSARY FLOURISHES. WE FOCUS ON WHAT USERS NEED, WHAT BUSINESSES REQUIRE, AND WHAT ACTUALLY SHIPS."
               className="approach-manifesto-text"
             />
@@ -122,7 +143,7 @@ export default function Approach() {
               <span className="section-badge-dot"></span>
               <span>02 SERVICES</span>
             </div>
-            <RevealText 
+            <RevealText
               text="TURNING IDEAS INTO PRODUCTS PEOPLE LOVE"
               className="section-title-huge"
             />
@@ -137,16 +158,16 @@ export default function Approach() {
               Two tracks under one roof. We find what to build, shape how it works, and ship the software that makes it real—from product discovery and design ops to web, mobile, internal tools, and AI.
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <motion.a 
-                href="#projects" 
+              <motion.a
+                href="#projects"
                 className="btn-pill btn-pill-light"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <RollingText text="OUR CASE STUDIES" />
               </motion.a>
-              <motion.a 
-                href="./services" 
+              <motion.a
+                href="./services"
                 className="btn-pill btn-pill-white"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -157,17 +178,25 @@ export default function Approach() {
           </motion.div>
         </div>
 
-        {/* 6 Services Items */}
+        {/* 6 Services Items with Blueprint Dividing Lines & Crosshairs */}
         <div className="services-list-wrap">
           {services.map((svc, idx) => (
-            <motion.div 
-              key={idx} 
+            <motion.div
+              key={idx}
               className="service-item-row"
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.6, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
             >
+              <GridCrosshair style={{ left: '0%', top: '0px' }} />
+              <GridCrosshair style={{ left: '100%', top: '0px' }} />
+              {idx === services.length - 1 && (
+                <>
+                  <GridCrosshair style={{ left: '0%', bottom: '0px' }} />
+                  <GridCrosshair style={{ left: '100%', bottom: '0px' }} />
+                </>
+              )}
               <span className="service-num">{svc.num}</span>
               <h3 className="service-title">{svc.title}</h3>
               <div className="service-img-preview">

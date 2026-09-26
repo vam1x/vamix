@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { RevealText } from '../hooks/useScrollReveal';
+import SectionGrid, { GridCrosshair } from './SectionGrid';
 
 export default function Timeline() {
   const milestones = [
@@ -12,14 +13,29 @@ export default function Timeline() {
 
   return (
     <section className="section timeline-section" id="timeline">
+      {/* Blueprint Grid Lines & Top Boundary with Crosshairs */}
+      <SectionGrid
+        theme="light"
+        showTopLine={true}
+      />
+
       <div className="timeline-arc-glow" aria-hidden="true"></div>
       <div className="section-container">
-        
+
+        {/* 4 Column Divider Line with Crosshairs */}
+        <div className="timeline-grid-header-line" aria-hidden="true" style={{ marginTop: 0 }}>
+          <GridCrosshair style={{ left: '0%', top: '0px' }} />
+          <GridCrosshair style={{ left: '25%', top: '0px' }} />
+          <GridCrosshair style={{ left: '50%', top: '0px' }} />
+          <GridCrosshair style={{ left: '75%', top: '0px' }} />
+          <GridCrosshair style={{ left: '100%', top: '0px' }} />
+        </div>
+
         {/* 4 Milestones Cards */}
         <div className="timeline-milestones-grid">
           {milestones.map((item, idx) => (
-            <motion.div 
-              key={idx} 
+            <motion.div
+              key={idx}
               className="milestone-card"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -37,7 +53,7 @@ export default function Timeline() {
         </div>
 
         {/* Belief Statement Quote */}
-        <motion.div 
+        <motion.div
           className="belief-quote-wrap"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +65,7 @@ export default function Timeline() {
             <span className="section-badge-dot"></span>
             <span>09 WHAT WE BELIEVE</span>
           </div>
-          <RevealText 
+          <RevealText
             text="WE DIDN'T BUILD THIS STUDIO TO FOLLOW TRENDS. WE BUILT IT TO SOLVE REAL PROBLEMS, CLEARLY AND WITHOUT WASTE."
             className="section-title-huge"
             theme="light"

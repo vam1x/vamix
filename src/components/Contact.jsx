@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLenis } from 'lenis/react';
 import RollingText from './RollingText';
+import SectionGrid, { GridCrosshair } from './SectionGrid';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '' });
@@ -28,8 +29,14 @@ export default function Contact() {
 
   return (
     <section className="section contact-section" id="contact">
+      {/* Blueprint Grid Lines & Top Boundary with Crosshairs */}
+      <SectionGrid
+        theme="light"
+        showTopLine={true}
+      />
+
       <div className="section-container">
-        
+
         <div className="contact-layout">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -46,33 +53,37 @@ export default function Contact() {
               Whether you have questions or just want to explore options, we're here.
             </p>
 
-            <form className="contact-form-card" onSubmit={handleSubmit}>
+            <form className="contact-form-card" onSubmit={handleSubmit} style={{ position: 'relative' }}>
+              <GridCrosshair style={{ left: '0%', top: '0%' }} />
+              <GridCrosshair style={{ left: '100%', top: '0%' }} />
+              <GridCrosshair style={{ left: '0%', top: '100%' }} />
+              <GridCrosshair style={{ left: '100%', top: '100%' }} />
               <div className="form-field-group">
                 <label className="form-field-label">NAME</label>
-                <input 
-                  type="text" 
-                  className="form-input-styled" 
-                  placeholder="YOUR NAME" 
+                <input
+                  type="text"
+                  className="form-input-styled"
+                  placeholder="YOUR NAME"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required 
+                  required
                 />
               </div>
 
               <div className="form-field-group">
                 <label className="form-field-label">EMAIL ADDRESS</label>
-                <input 
-                  type="email" 
-                  className="form-input-styled" 
-                  placeholder="EMAIL@ADDRESS.COM" 
+                <input
+                  type="email"
+                  className="form-input-styled"
+                  placeholder="EMAIL@ADDRESS.COM"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required 
+                  required
                 />
               </div>
 
-              <motion.button 
-                type="submit" 
+              <motion.button
+                type="submit"
                 className="contact-submit-btn"
                 style={isSubmitted ? { backgroundColor: '#171717', color: '#ffffff' } : {}}
                 whileHover={{ scale: 1.01 }}

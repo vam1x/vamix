@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SectionGrid, { GridCrosshair } from './SectionGrid';
 
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState(0);
@@ -29,8 +30,14 @@ export default function Faq() {
 
   return (
     <section className="section faq-section" id="faq">
+      {/* Blueprint Grid Lines & Top Boundary with Crosshairs */}
+      <SectionGrid
+        theme="light"
+        showTopLine={true}
+      />
+
       <div className="section-container">
-        
+
         <div className="faq-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -49,8 +56,10 @@ export default function Faq() {
             {faqs.map((faq, idx) => {
               const isOpen = openIndex === idx;
               return (
-                <div key={idx} className={`faq-item ${isOpen ? 'active' : ''}`}>
-                  <button 
+                <div key={idx} className={`faq-item ${isOpen ? 'active' : ''}`} style={{ position: 'relative' }}>
+                  <GridCrosshair style={{ left: '0%', top: '0px' }} />
+                  <GridCrosshair style={{ left: '100%', top: '0px' }} />
+                  <button
                     className="faq-question-btn"
                     onClick={() => setOpenIndex(isOpen ? -1 : idx)}
                     aria-expanded={isOpen}
@@ -59,7 +68,7 @@ export default function Faq() {
                       <span className="faq-num-pill">0{idx + 1}</span>
                       <span>{faq.q}</span>
                     </span>
-                    <motion.span 
+                    <motion.span
                       className="faq-icon"
                       animate={{ rotate: isOpen ? 45 : 0 }}
                       transition={{ duration: 0.25 }}
@@ -69,7 +78,7 @@ export default function Faq() {
                   </button>
                   <AnimatePresence initial={false}>
                     {isOpen && (
-                      <motion.div 
+                      <motion.div
                         className="faq-answer-panel"
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}

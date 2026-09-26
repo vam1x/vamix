@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Design & Development Agency India - Product Studio | Webus (React Live Preview)</title>
-  <meta name="description" content="One team designs your product and builds it. Live React 18 Clone with Motion & Animations.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-  
+  <meta name="description"
+    content="One team designs your product and builds it. Live React 18 Clone with Motion & Animations.">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
   <!-- Global & Animation Styles -->
   <link rel="stylesheet" href="src/index.css">
   <link rel="stylesheet" href="src/animations.css">
@@ -16,12 +19,53 @@
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
+
 <body>
   <div id="root"></div>
 
   <!-- Live React Application Script -->
   <script type="text/babel">
     const { useState, useEffect, useRef } = React;
+
+    // GridCrosshair Component
+    function GridCrosshair({ style = {}, className = '' }) {
+      return (
+        <div className={`grid-crosshair ${className}`} style={style} aria-hidden="true">
+          <span className="cross-v" />
+          <span className="cross-h" />
+        </div>
+      );
+    }
+
+    // SectionGrid Component
+    function SectionGrid({ theme = 'light', showTopLine = true, showBottomLine = false, crosshairPositions = [0, 4] }) {
+      const colPercentages = ['0%', '25%', '50%', '75%', '100%'];
+      return (
+        <div className={`section-grid-backdrop ${theme === 'dark' ? 'grid-dark' : 'grid-light'}`} aria-hidden="true">
+          <div className="section-grid-container">
+            <div className="section-grid-line col-0" style={{ left: '0%' }} />
+            <div className="section-grid-line col-1" style={{ left: '25%' }} />
+            <div className="section-grid-line col-2" style={{ left: '50%' }} />
+            <div className="section-grid-line col-3" style={{ left: '75%' }} />
+            <div className="section-grid-line col-4" style={{ left: '100%' }} />
+            {showTopLine && (
+              <div className="section-grid-h-line top">
+                {crosshairPositions.map(colIdx => (
+                  <GridCrosshair key={`top-cross-${colIdx}`} style={{ left: colPercentages[colIdx], top: '0px' }} />
+                ))}
+              </div>
+            )}
+            {showBottomLine && (
+              <div className="section-grid-h-line bottom">
+                {crosshairPositions.map(colIdx => (
+                  <GridCrosshair key={`bot-cross-${colIdx}`} style={{ left: colPercentages[colIdx], top: '0px' }} />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
 
     // 1. RollingText Component
     function RollingText({ text, className = '' }) {
@@ -111,14 +155,14 @@
         <header className={`site-header ${isScrolled ? 'scrolled' : ''} ${isDark ? 'dark-mode' : ''}`} role="banner">
           <a href="./" className="brand-link" aria-label="Webus Home">
             <svg className="logo-svg" viewBox="0 0 85 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M 0 0.516 L 85 0.516 L 85 25.996 L 0 25.996 Z" fill="transparent"/>
-              <path d="M 57.393 18.376 L 57.127 18.592 C 57.076 18.623 56.727 18.886 56.08 19.381 C 54.829 20.349 53.798 21.114 52.984 21.675 C 52.337 22.138 51.658 22.551 50.953 22.912 C 50.546 23.137 50.099 23.271 49.639 23.307 C 49.374 23.313 49.112 23.253 48.875 23.133 C 48.641 23.014 48.439 22.838 48.287 22.619 C 47.929 22.099 47.75 21.471 47.777 20.834 C 47.805 19.378 47.994 17.929 48.34 16.514 C 48.72 14.854 49.227 13.228 49.856 11.652 C 50.554 9.879 51.409 8.797 52.42 8.405 C 52.818 8.242 53.243 8.164 53.67 8.174 C 53.965 8.157 54.259 8.203 54.535 8.308 C 54.809 8.411 55.059 8.572 55.269 8.781 C 55.476 8.986 55.638 9.234 55.744 9.509 C 55.848 9.781 55.892 10.074 55.874 10.366 C 55.862 10.854 55.78 11.338 55.63 11.802 C 55.425 12.424 55.174 13.028 54.877 13.609 L 54.689 14.058 C 54.089 15.128 53.637 16.279 53.345 17.478 C 53.345 17.716 53.429 17.835 53.596 17.835 C 53.828 17.798 54.042 17.684 54.206 17.509 C 54.612 17.135 54.999 16.738 55.364 16.32 C 55.687 15.928 56.146 15.438 56.741 14.852 L 57.32 14.279 L 57.821 13.754 C 58.623 12.94 59.487 12.193 60.404 11.521 C 60.884 11.136 61.459 10.897 62.064 10.833 C 62.899 10.833 63.316 11.549 63.316 12.982 C 63.316 13.28 63.279 13.811 63.207 14.574 C 63.081 16.058 63.018 17.315 63.018 18.345 C 63.028 18.551 63.036 18.739 63.041 18.909 C 63.047 19.079 63.05 19.298 63.05 19.566 C 63.123 20.257 63.175 20.788 63.207 21.159 L 63.316 22.041 C 63.316 22.349 63.035 22.622 62.473 22.86 C 61.85 23.108 61.186 23.229 60.518 23.216 C 59.915 23.233 59.316 23.098 58.775 22.822 C 58.295 22.566 57.908 22.157 57.67 21.655 C 57.404 21.065 57.276 20.419 57.295 19.769 C 57.295 19.675 57.306 19.517 57.326 19.282 C 57.346 19.048 57.376 18.747 57.393 18.376 Z M 68.107 23.878 C 68.433 23.852 68.75 23.759 69.041 23.606 C 69.327 23.455 69.582 23.245 69.787 22.989 C 70.265 22.495 70.535 21.841 70.545 21.157 C 70.554 20.955 70.518 20.753 70.44 20.567 C 70.361 20.378 70.242 20.21 70.092 20.075 C 69.442 19.603 68.701 19.282 67.919 19.132 C 66.717 18.896 65.599 18.346 64.684 17.539 C 64.459 17.32 64.279 17.055 64.157 16.761 C 64.036 16.47 63.976 16.156 63.98 15.84 C 64.019 14.546 64.476 13.3 65.286 12.284 C 66.172 11.085 67.311 10.091 68.624 9.37 C 69.874 8.641 71.283 8.25 72.719 8.233 C 73.372 8.23 74.015 8.389 74.595 8.697 C 75.151 8.981 75.629 9.404 75.987 9.926 C 76.323 10.411 76.503 10.992 76.502 11.589 C 76.483 12.239 76.288 12.87 75.94 13.412 C 75.576 14.028 75.095 14.562 74.526 14.981 C 74.064 15.359 73.499 15.578 72.911 15.607 C 72.646 15.614 72.385 15.55 72.152 15.422 C 71.94 15.298 71.832 15.164 71.832 15.02 C 71.845 14.804 71.887 14.59 71.957 14.386 C 72.167 13.63 72.281 12.852 72.297 12.068 C 72.293 11.405 72.084 10.761 71.702 10.229 C 71.334 10.458 70.997 10.738 70.702 11.062 C 70.307 11.515 69.994 12.039 69.781 12.608 C 69.554 13.133 69.432 13.699 69.421 14.274 C 69.404 14.592 69.494 14.906 69.676 15.163 C 69.906 15.424 70.197 15.618 70.521 15.727 C 71.101 15.938 71.693 16.109 72.295 16.238 C 73.259 16.433 74.198 16.744 75.092 17.163 C 75.297 17.296 75.491 17.446 75.67 17.61 C 76.077 18.06 76.29 18.648 76.265 19.25 C 76.247 20.021 76.013 20.77 75.592 21.407 C 75.022 22.268 74.32 23.028 73.514 23.656 C 72.625 24.426 71.615 25.033 70.528 25.451 C 69.471 25.824 68.361 26.007 67.245 25.993 C 66.291 26.046 65.343 25.809 64.517 25.312 C 64.208 25.116 63.952 24.84 63.776 24.513 C 63.603 24.19 63.516 23.825 63.525 23.457 C 63.551 22.832 63.783 22.235 64.182 21.764 C 64.627 21.186 65.183 20.71 65.816 20.365 C 66.4 20.023 67.058 19.837 67.73 19.824 C 68.199 19.824 68.434 19.927 68.434 20.133 C 68.404 20.317 68.334 20.492 68.23 20.644 C 67.861 21.242 67.651 21.93 67.621 22.638 C 67.631 23.099 67.804 23.54 68.107 23.878 Z M 31.248 17.843 C 30.602 18.259 29.864 18.501 29.104 18.547 C 28.812 18.543 28.524 18.474 28.261 18.343 C 28.283 18.512 28.338 18.674 28.423 18.82 C 28.508 18.967 28.622 19.096 28.757 19.199 C 28.893 19.303 29.048 19.378 29.213 19.422 C 29.379 19.466 29.551 19.477 29.721 19.455 C 30.658 19.455 31.877 18.911 33.376 17.825 C 33.886 17.375 34.488 17.052 35.137 16.88 C 35.226 16.88 35.316 16.886 35.404 16.898 L 35.404 15.565 L 34.986 14.506 C 34.607 14.994 34.194 15.453 33.752 15.88 C 33.002 16.642 32.16 17.301 31.248 17.843 Z M 22.408 14.814 C 22.899 13.404 23.57 12.068 24.403 10.841 C 24.7 10.412 25.02 10 25.363 9.609 C 25.433 8.841 25.477 8.064 25.477 7.27 C 25.477 4.524 25.109 3.151 24.372 3.151 C 24.062 3.151 23.592 3.452 22.962 4.055 C 21.668 5.239 21.021 6.412 21.022 7.575 C 21.022 7.787 21.033 8.014 21.054 8.257 C 21.118 9.153 21.15 9.931 21.151 10.588 C 21.152 11.663 21.069 12.737 20.903 13.798 C 20.764 14.725 20.556 15.639 20.28 16.533 C 20.074 17.22 19.77 17.872 19.377 18.466 C 19.025 18.974 18.68 19.228 18.339 19.227 C 17.157 19.227 16.566 17.721 16.565 14.709 C 16.587 13.01 16.762 11.317 17.086 9.651 C 17.404 7.873 17.857 6.123 18.441 4.419 C 18.657 3.892 18.803 3.337 18.874 2.77 C 18.877 2.623 18.841 2.478 18.771 2.35 C 18.699 2.219 18.597 2.11 18.474 2.032 C 18.171 1.837 17.818 1.741 17.462 1.755 C 16.735 1.77 16.014 1.89 15.319 2.112 C 14.728 2.252 14.169 2.508 13.673 2.868 C 13.021 3.429 11.891 5.474 10.285 9.004 C 10.135 9.399 9.965 9.785 9.775 10.162 C 9.37 11.025 8.931 11.872 8.459 12.698 C 8.271 13.027 8.072 13.35 7.864 13.666 C 7.671 13.958 7.484 14.254 7.303 14.553 C 6.756 15.41 6.243 16.145 5.762 16.757 L 5.697 16.694 C 5.707 15.447 5.734 14.185 5.777 12.905 C 5.82 11.626 5.868 10.617 5.921 9.879 C 5.975 9.14 6.071 8.178 6.209 6.994 C 6.342 5.598 6.55 4.211 6.835 2.84 C 6.872 2.701 6.894 2.557 6.9 2.412 C 6.906 2.295 6.885 2.179 6.839 2.073 C 6.793 1.965 6.723 1.869 6.635 1.794 C 6.429 1.637 6.177 1.558 5.921 1.572 C 5.447 1.592 4.976 1.666 4.519 1.794 C 3.933 1.939 3.357 2.125 2.795 2.35 C 2.288 2.527 1.807 2.777 1.368 3.094 C 1.048 3.347 0.794 3.68 0.63 4.061 C 0.214 4.98 0.005 6.835 0.005 9.626 C -0.025 12.554 0.141 15.48 0.503 18.386 C 0.834 20.79 1.273 22.283 1.819 22.865 C 1.933 22.997 2.079 23.098 2.244 23.158 C 2.378 23.218 2.522 23.253 2.669 23.262 C 3.2 23.234 3.719 23.091 4.192 22.841 C 4.73 22.596 5.228 22.267 5.669 21.866 C 6.653 20.788 7.55 19.627 8.348 18.395 C 9.284 16.993 10.141 15.538 10.916 14.035 L 10.98 14.035 L 10.98 15.113 C 10.98 17.935 11.407 20.019 12.262 21.368 C 12.675 22.028 13.253 22.561 13.935 22.91 C 14.628 23.266 15.399 23.43 16.172 23.385 C 17.134 23.382 18.072 23.078 18.863 22.514 C 19.599 21.994 20.274 21.387 20.875 20.707 C 21.183 20.365 21.477 20.009 21.756 19.641 C 21.7 19.308 21.671 18.97 21.671 18.632 C 21.703 17.325 21.952 16.034 22.408 14.814 Z" fill="currentColor"/>
+              <path d="M 0 0.516 L 85 0.516 L 85 25.996 L 0 25.996 Z" fill="transparent" />
+              <path d="M 57.393 18.376 L 57.127 18.592 C 57.076 18.623 56.727 18.886 56.08 19.381 C 54.829 20.349 53.798 21.114 52.984 21.675 C 52.337 22.138 51.658 22.551 50.953 22.912 C 50.546 23.137 50.099 23.271 49.639 23.307 C 49.374 23.313 49.112 23.253 48.875 23.133 C 48.641 23.014 48.439 22.838 48.287 22.619 C 47.929 22.099 47.75 21.471 47.777 20.834 C 47.805 19.378 47.994 17.929 48.34 16.514 C 48.72 14.854 49.227 13.228 49.856 11.652 C 50.554 9.879 51.409 8.797 52.42 8.405 C 52.818 8.242 53.243 8.164 53.67 8.174 C 53.965 8.157 54.259 8.203 54.535 8.308 C 54.809 8.411 55.059 8.572 55.269 8.781 C 55.476 8.986 55.638 9.234 55.744 9.509 C 55.848 9.781 55.892 10.074 55.874 10.366 C 55.862 10.854 55.78 11.338 55.63 11.802 C 55.425 12.424 55.174 13.028 54.877 13.609 L 54.689 14.058 C 54.089 15.128 53.637 16.279 53.345 17.478 C 53.345 17.716 53.429 17.835 53.596 17.835 C 53.828 17.798 54.042 17.684 54.206 17.509 C 54.612 17.135 54.999 16.738 55.364 16.32 C 55.687 15.928 56.146 15.438 56.741 14.852 L 57.32 14.279 L 57.821 13.754 C 58.623 12.94 59.487 12.193 60.404 11.521 C 60.884 11.136 61.459 10.897 62.064 10.833 C 62.899 10.833 63.316 11.549 63.316 12.982 C 63.316 13.28 63.279 13.811 63.207 14.574 C 63.081 16.058 63.018 17.315 63.018 18.345 C 63.028 18.551 63.036 18.739 63.041 18.909 C 63.047 19.079 63.05 19.298 63.05 19.566 C 63.123 20.257 63.175 20.788 63.207 21.159 L 63.316 22.041 C 63.316 22.349 63.035 22.622 62.473 22.86 C 61.85 23.108 61.186 23.229 60.518 23.216 C 59.915 23.233 59.316 23.098 58.775 22.822 C 58.295 22.566 57.908 22.157 57.67 21.655 C 57.404 21.065 57.276 20.419 57.295 19.769 C 57.295 19.675 57.306 19.517 57.326 19.282 C 57.346 19.048 57.376 18.747 57.393 18.376 Z M 68.107 23.878 C 68.433 23.852 68.75 23.759 69.041 23.606 C 69.327 23.455 69.582 23.245 69.787 22.989 C 70.265 22.495 70.535 21.841 70.545 21.157 C 70.554 20.955 70.518 20.753 70.44 20.567 C 70.361 20.378 70.242 20.21 70.092 20.075 C 69.442 19.603 68.701 19.282 67.919 19.132 C 66.717 18.896 65.599 18.346 64.684 17.539 C 64.459 17.32 64.279 17.055 64.157 16.761 C 64.036 16.47 63.976 16.156 63.98 15.84 C 64.019 14.546 64.476 13.3 65.286 12.284 C 66.172 11.085 67.311 10.091 68.624 9.37 C 69.874 8.641 71.283 8.25 72.719 8.233 C 73.372 8.23 74.015 8.389 74.595 8.697 C 75.151 8.981 75.629 9.404 75.987 9.926 C 76.323 10.411 76.503 10.992 76.502 11.589 C 76.483 12.239 76.288 12.87 75.94 13.412 C 75.576 14.028 75.095 14.562 74.526 14.981 C 74.064 15.359 73.499 15.578 72.911 15.607 C 72.646 15.614 72.385 15.55 72.152 15.422 C 71.94 15.298 71.832 15.164 71.832 15.02 C 71.845 14.804 71.887 14.59 71.957 14.386 C 72.167 13.63 72.281 12.852 72.297 12.068 C 72.293 11.405 72.084 10.761 71.702 10.229 C 71.334 10.458 70.997 10.738 70.702 11.062 C 70.307 11.515 69.994 12.039 69.781 12.608 C 69.554 13.133 69.432 13.699 69.421 14.274 C 69.404 14.592 69.494 14.906 69.676 15.163 C 69.906 15.424 70.197 15.618 70.521 15.727 C 71.101 15.938 71.693 16.109 72.295 16.238 C 73.259 16.433 74.198 16.744 75.092 17.163 C 75.297 17.296 75.491 17.446 75.67 17.61 C 76.077 18.06 76.29 18.648 76.265 19.25 C 76.247 20.021 76.013 20.77 75.592 21.407 C 75.022 22.268 74.32 23.028 73.514 23.656 C 72.625 24.426 71.615 25.033 70.528 25.451 C 69.471 25.824 68.361 26.007 67.245 25.993 C 66.291 26.046 65.343 25.809 64.517 25.312 C 64.208 25.116 63.952 24.84 63.776 24.513 C 63.603 24.19 63.516 23.825 63.525 23.457 C 63.551 22.832 63.783 22.235 64.182 21.764 C 64.627 21.186 65.183 20.71 65.816 20.365 C 66.4 20.023 67.058 19.837 67.73 19.824 C 68.199 19.824 68.434 19.927 68.434 20.133 C 68.404 20.317 68.334 20.492 68.23 20.644 C 67.861 21.242 67.651 21.93 67.621 22.638 C 67.631 23.099 67.804 23.54 68.107 23.878 Z M 31.248 17.843 C 30.602 18.259 29.864 18.501 29.104 18.547 C 28.812 18.543 28.524 18.474 28.261 18.343 C 28.283 18.512 28.338 18.674 28.423 18.82 C 28.508 18.967 28.622 19.096 28.757 19.199 C 28.893 19.303 29.048 19.378 29.213 19.422 C 29.379 19.466 29.551 19.477 29.721 19.455 C 30.658 19.455 31.877 18.911 33.376 17.825 C 33.886 17.375 34.488 17.052 35.137 16.88 C 35.226 16.88 35.316 16.886 35.404 16.898 L 35.404 15.565 L 34.986 14.506 C 34.607 14.994 34.194 15.453 33.752 15.88 C 33.002 16.642 32.16 17.301 31.248 17.843 Z M 22.408 14.814 C 22.899 13.404 23.57 12.068 24.403 10.841 C 24.7 10.412 25.02 10 25.363 9.609 C 25.433 8.841 25.477 8.064 25.477 7.27 C 25.477 4.524 25.109 3.151 24.372 3.151 C 24.062 3.151 23.592 3.452 22.962 4.055 C 21.668 5.239 21.021 6.412 21.022 7.575 C 21.022 7.787 21.033 8.014 21.054 8.257 C 21.118 9.153 21.15 9.931 21.151 10.588 C 21.152 11.663 21.069 12.737 20.903 13.798 C 20.764 14.725 20.556 15.639 20.28 16.533 C 20.074 17.22 19.77 17.872 19.377 18.466 C 19.025 18.974 18.68 19.228 18.339 19.227 C 17.157 19.227 16.566 17.721 16.565 14.709 C 16.587 13.01 16.762 11.317 17.086 9.651 C 17.404 7.873 17.857 6.123 18.441 4.419 C 18.657 3.892 18.803 3.337 18.874 2.77 C 18.877 2.623 18.841 2.478 18.771 2.35 C 18.699 2.219 18.597 2.11 18.474 2.032 C 18.171 1.837 17.818 1.741 17.462 1.755 C 16.735 1.77 16.014 1.89 15.319 2.112 C 14.728 2.252 14.169 2.508 13.673 2.868 C 13.021 3.429 11.891 5.474 10.285 9.004 C 10.135 9.399 9.965 9.785 9.775 10.162 C 9.37 11.025 8.931 11.872 8.459 12.698 C 8.271 13.027 8.072 13.35 7.864 13.666 C 7.671 13.958 7.484 14.254 7.303 14.553 C 6.756 15.41 6.243 16.145 5.762 16.757 L 5.697 16.694 C 5.707 15.447 5.734 14.185 5.777 12.905 C 5.82 11.626 5.868 10.617 5.921 9.879 C 5.975 9.14 6.071 8.178 6.209 6.994 C 6.342 5.598 6.55 4.211 6.835 2.84 C 6.872 2.701 6.894 2.557 6.9 2.412 C 6.906 2.295 6.885 2.179 6.839 2.073 C 6.793 1.965 6.723 1.869 6.635 1.794 C 6.429 1.637 6.177 1.558 5.921 1.572 C 5.447 1.592 4.976 1.666 4.519 1.794 C 3.933 1.939 3.357 2.125 2.795 2.35 C 2.288 2.527 1.807 2.777 1.368 3.094 C 1.048 3.347 0.794 3.68 0.63 4.061 C 0.214 4.98 0.005 6.835 0.005 9.626 C -0.025 12.554 0.141 15.48 0.503 18.386 C 0.834 20.79 1.273 22.283 1.819 22.865 C 1.933 22.997 2.079 23.098 2.244 23.158 C 2.378 23.218 2.522 23.253 2.669 23.262 C 3.2 23.234 3.719 23.091 4.192 22.841 C 4.73 22.596 5.228 22.267 5.669 21.866 C 6.653 20.788 7.55 19.627 8.348 18.395 C 9.284 16.993 10.141 15.538 10.916 14.035 L 10.98 14.035 L 10.98 15.113 C 10.98 17.935 11.407 20.019 12.262 21.368 C 12.675 22.028 13.253 22.561 13.935 22.91 C 14.628 23.266 15.399 23.43 16.172 23.385 C 17.134 23.382 18.072 23.078 18.863 22.514 C 19.599 21.994 20.274 21.387 20.875 20.707 C 21.183 20.365 21.477 20.009 21.756 19.641 C 21.7 19.308 21.671 18.97 21.671 18.632 C 21.703 17.325 21.952 16.034 22.408 14.814 Z" fill="currentColor" />
             </svg>
           </a>
 
           <div className="header-menu-container">
-            <button 
-              className={`menu-toggle-btn ${isDrawerOpen ? 'is-active' : ''}`} 
+            <button
+              className={`menu-toggle-btn ${isDrawerOpen ? 'is-active' : ''}`}
               onClick={() => setIsDrawerOpen(!isDrawerOpen)}
               aria-label="Toggle Navigation Drawer"
             >
@@ -134,7 +178,7 @@
 
           <div className="header-actions">
             <a href="#contact" className="consult-banner">
-              <span>FREE 30-MIN DESIGN CONSULT.<br/>NO PITCH. <span className="bold">JUST CLARITY.</span></span>
+              <span>FREE 30-MIN DESIGN CONSULT.<br />NO PITCH. <span className="bold">JUST CLARITY.</span></span>
               <img src="https://framerusercontent.com/images/awFufuyIlbDdk2me7dySF9Y3r8.png?width=2048&height=2048" alt="Ruby Rattey" className="consult-avatar" />
               <div className="consult-circle-btn">+</div>
             </a>
@@ -194,7 +238,9 @@
     // 6. Hero Component
     function Hero() {
       return (
-        <section className="hero-section" id="hero">
+        <section className="hero-section" id="hero" style={{ position: 'relative' }}>
+          <SectionGrid theme="light" showTopLine={false} />
+
           <div className="hero-split-grid" aria-hidden="true">
             <div className="hero-left-art">
               <img src="https://framerusercontent.com/images/cx9DzPrXWjEIHDWlLpzDmBWYZI.png?width=1024&height=1536" alt="Macro Material Abstraction" className="hero-texture-img" />
@@ -250,19 +296,34 @@
 
       return (
         <section className="section section-dark approach-section" id="approach">
+          <SectionGrid theme="dark" showTopLine={true} />
+
           <div className="section-container">
             <div className="approach-intro-grid">
               <div className="approach-left">
-                <div className="section-badge"><span className="section-badge-dot"></span><span>OUR APPROACH</span></div>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '2rem' }}>HOW WE BUILD WHAT WE DESIGN</h3>
+                <div className="approach-header-box">
+                  <div className="section-badge"><span className="section-badge-dot"></span><span>OUR APPROACH</span></div>
+                  <h3 className="approach-heading">HOW WE BUILD WHAT WE DESIGN</h3>
+                  <div className="approach-header-divider">
+                    <GridCrosshair style={{ left: '0px', top: '0px' }} />
+                    <GridCrosshair style={{ right: '0px', top: '0px' }} />
+                    <span className="approach-header-dot"></span>
+                  </div>
+                </div>
+
                 <div className="approach-mockup-frame">
-                  <span className="corner-cross tl">+</span><span className="corner-cross tr">+</span><span className="corner-cross bl">+</span><span className="corner-cross br">+</span>
+                  <GridCrosshair style={{ left: '0px', top: '0px' }} />
+                  <GridCrosshair style={{ right: '0px', top: '0px' }} />
+                  <GridCrosshair style={{ left: '0px', bottom: '0px' }} />
+                  <GridCrosshair style={{ right: '0px', bottom: '0px' }} />
                   <img src="https://framerusercontent.com/images/aSnx8r69QAkgwoNJwYhujjsNU0.png?width=1672&height=941" alt="Webus Product Interface Dashboard Mockup" className="approach-mockup-img" />
                 </div>
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--text-light-muted)', lineHeight: 1.6, textTransform: 'uppercase', marginTop: '2rem' }}>
                   WE SOLVE HARD PRODUCT PROBLEMS THROUGH DESIGN, ENGINEERING, AND TESTING WITH USERS. WE DESIGN AND SHIP PRODUCTS PEOPLE KEEP USING.
                 </p>
               </div>
+
+              <div className="approach-spacer" aria-hidden="true" />
 
               <div className="approach-right">
                 <div className="section-badge"><span className="section-badge-dot"></span><span>01 WHO WE ARE</span></div>
@@ -293,6 +354,14 @@
             <div className="services-list-wrap">
               {services.map((svc, idx) => (
                 <div key={idx} className="service-item-row">
+                  <GridCrosshair style={{ left: '0%', top: '0px' }} />
+                  <GridCrosshair style={{ left: '100%', top: '0px' }} />
+                  {idx === services.length - 1 && (
+                    <>
+                      <GridCrosshair style={{ left: '0%', bottom: '0px' }} />
+                      <GridCrosshair style={{ left: '100%', bottom: '0px' }} />
+                    </>
+                  )}
                   <span className="service-num">{svc.num}</span>
                   <h3 className="service-title">{svc.title}</h3>
                   <div className="service-img-preview"><img src={svc.img} alt={svc.title} /></div>
@@ -320,7 +389,8 @@
       ];
 
       return (
-        <section className="section why-section" id="why">
+        <section className="section why-section" id="why" style={{ position: 'relative' }}>
+          <SectionGrid theme="light" showTopLine={true} />
           <div className="section-container">
             <div className="why-split-grid">
               <div className="why-left">
@@ -337,23 +407,23 @@
                 <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '1.5rem' }}>OUR ADVANTAGES INCLUDE:</h3>
                 <div className="why-pillars-list">
                   {pillars.map((pillar, idx) => (
-                    <div key={idx} className="why-pillar-item">
+                    <div key={idx} className="why-pillar-item" style={{ position: 'relative' }}>
+                      <GridCrosshair style={{ left: '0px', top: '0px' }} />
                       <span className="pillar-badge">{pillar.num}</span>
                       <span>{pillar.text} <strong>{pillar.highlight}</strong></span>
                     </div>
                   ))}
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '2rem', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-dark-subtle)' }}>
+                <div style={{ marginTop: '2rem', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-dark-subtle)' }}>
                   <span>SOURCE: CLIENT FEEDBACK & PROJECT DATA</span>
-                  <span>📅 APR 2025</span>
                 </div>
               </div>
             </div>
 
             <div className="metrics-row">
-              <div className="metric-card"><span className="metric-big-num">85%</span><span className="metric-label">CLIENT<br/>RETENTION</span></div>
-              <div className="metric-card"><span className="metric-big-num">12+</span><span className="metric-label">YEARS<br/>EXPERIENCE</span></div>
-              <div className="metric-card"><span className="metric-big-num">5X</span><span className="metric-label">FASTER<br/>DELIVERY</span></div>
+              <div className="metric-card"><span className="metric-big-num">85%</span><span className="metric-label">CLIENT<br />RETENTION</span></div>
+              <div className="metric-card"><span className="metric-big-num">12+</span><span className="metric-label">YEARS<br />EXPERIENCE</span></div>
+              <div className="metric-card"><span className="metric-big-num">5X</span><span className="metric-label">FASTER<br />DELIVERY</span></div>
             </div>
 
             <div className="partnership-banner">
@@ -386,7 +456,8 @@
       ];
 
       return (
-        <section className="section path-section" id="path">
+        <section className="section path-section" id="path" style={{ position: 'relative' }}>
+          <SectionGrid theme="light" showTopLine={true} />
           <div className="section-container">
             <div className="path-grid">
               <div>
@@ -396,7 +467,11 @@
               </div>
 
               <div className="steps-2x2-grid">
-                <span className="corner-cross tl">+</span><span className="corner-cross tr">+</span><span className="corner-cross bl">+</span><span className="corner-cross br">+</span>
+                <GridCrosshair style={{ left: '0%', top: '0%' }} />
+                <GridCrosshair style={{ left: '100%', top: '0%' }} />
+                <GridCrosshair style={{ left: '0%', top: '100%' }} />
+                <GridCrosshair style={{ left: '100%', top: '100%' }} />
+                <GridCrosshair style={{ left: '50%', top: '50%' }} />
                 {steps.map((step, idx) => (
                   <div key={idx} className="step-card">
                     <div className="step-card-num">
@@ -433,14 +508,15 @@
     // 10. Results Component
     function Results() {
       return (
-        <section className="section results-section" id="results">
+        <section className="section results-section" id="results" style={{ position: 'relative' }}>
+          <SectionGrid theme="light" showTopLine={true} />
           <div className="results-left">
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <div className="section-badge" style={{ marginBottom: 0 }}><span className="section-badge-dot"></span><span>05 RESULTS</span></div>
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', opacity: 0.4 }}>WEBUS®</span>
               </div>
-              <h2 className="section-title-huge" style={{ marginBottom: '2rem' }}>SUCCESS<br/>STORY</h2>
+              <h2 className="section-title-huge" style={{ marginBottom: '2rem' }}>SUCCESS<br />STORY</h2>
               <p className="section-subhead" style={{ marginBottom: '4rem' }}>
                 Bitfront partnered with Webus to redesign its crypto exchange interface, removing intimidation from digital asset trading while preserving professional-grade capability. The platform was rebuilt to guide users from first transaction to advanced trading with clarity and confidence.
               </p>
@@ -480,7 +556,8 @@
       ];
 
       return (
-        <section className="section more-projects-section" id="projects">
+        <section className="section more-projects-section" id="projects" style={{ position: 'relative' }}>
+          <SectionGrid theme="light" showTopLine={true} />
           <div className="section-container">
             <div className="projects-split-showcase">
               <div><div className="section-badge"><span className="section-badge-dot"></span><span>MORE PROJECTS</span></div></div>
@@ -488,7 +565,9 @@
                 {projects.map((project, idx) => {
                   const isActive = activeProject === idx;
                   return (
-                    <div key={idx} className="project-selector-item">
+                    <div key={idx} className="project-selector-item" style={{ position: 'relative' }}>
+                      <GridCrosshair style={{ left: '0%', top: '0px' }} />
+                      <GridCrosshair style={{ left: '100%', top: '0px' }} />
                       <div className={`project-item-title ${isActive ? 'active' : ''}`} onClick={() => setActiveProject(isActive ? -1 : idx)}>
                         {project.title}
                       </div>
@@ -516,10 +595,18 @@
       ];
 
       return (
-        <section className="section team-section" id="team">
+        <section className="section team-section" id="team" style={{ position: 'relative' }}>
+          <SectionGrid theme="light" showTopLine={true} />
           <div className="section-container">
             <div className="section-badge"><span className="section-badge-dot"></span><span>07 WHO WE ARE</span></div>
             <RevealText text="THE TEAM" className="section-title-huge" />
+            <div className="team-grid-header-line" aria-hidden="true">
+              <GridCrosshair style={{ left: '0%', top: '0px' }} />
+              <GridCrosshair style={{ left: '25%', top: '0px' }} />
+              <GridCrosshair style={{ left: '50%', top: '0px' }} />
+              <GridCrosshair style={{ left: '75%', top: '0px' }} />
+              <GridCrosshair style={{ left: '100%', top: '0px' }} />
+            </div>
             <div className="team-grid">
               {members.map((member, idx) => (
                 <div key={idx} className="team-card">
@@ -554,9 +641,17 @@
       ];
 
       return (
-        <section className="section timeline-section" id="timeline">
+        <section className="section timeline-section" id="timeline" style={{ position: 'relative' }}>
+          <SectionGrid theme="light" showTopLine={true} />
           <div className="timeline-arc-glow" aria-hidden="true"></div>
           <div className="section-container">
+            <div className="timeline-grid-header-line" aria-hidden="true" style={{ marginTop: 0 }}>
+              <GridCrosshair style={{ left: '0%', top: '0px' }} />
+              <GridCrosshair style={{ left: '25%', top: '0px' }} />
+              <GridCrosshair style={{ left: '50%', top: '0px' }} />
+              <GridCrosshair style={{ left: '75%', top: '0px' }} />
+              <GridCrosshair style={{ left: '100%', top: '0px' }} />
+            </div>
             <div className="timeline-milestones-grid">
               {milestones.map((item, idx) => (
                 <div key={idx} className="milestone-card">
@@ -585,7 +680,8 @@
       ];
 
       return (
-        <section className="section insights-section" id="insights">
+        <section className="section insights-section" id="insights" style={{ position: 'relative' }}>
+          <SectionGrid theme="light" showTopLine={true} />
           <div className="section-container">
             <div className="insights-header-row">
               <div><div className="section-badge"><span className="section-badge-dot"></span><span>10 LATEST</span></div><h2 className="section-title-huge" style={{ marginBottom: 0 }}>INSIGHTS</h2></div>
@@ -619,7 +715,8 @@
       ];
 
       return (
-        <section className="section faq-section" id="faq">
+        <section className="section faq-section" id="faq" style={{ position: 'relative' }}>
+          <SectionGrid theme="light" showTopLine={true} />
           <div className="section-container">
             <div className="faq-container">
               <div><div className="section-badge"><span className="section-badge-dot"></span><span>11 HELP & INFO</span></div><h2 className="section-title-huge">FAQ</h2></div>
@@ -627,7 +724,9 @@
                 {faqs.map((faq, idx) => {
                   const isOpen = openIndex === idx;
                   return (
-                    <div key={idx} className={`faq-item ${isOpen ? 'active' : ''}`}>
+                    <div key={idx} className={`faq-item ${isOpen ? 'active' : ''}`} style={{ position: 'relative' }}>
+                      <GridCrosshair style={{ left: '0%', top: '0px' }} />
+                      <GridCrosshair style={{ left: '100%', top: '0px' }} />
                       <button className="faq-question-btn" onClick={() => setOpenIndex(isOpen ? -1 : idx)} aria-expanded={isOpen}>
                         <span style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}><span className="faq-num-pill">0{idx + 1}</span><span>{faq.q}</span></span>
                         <span className="faq-icon">+</span>
@@ -660,7 +759,8 @@
       };
 
       return (
-        <section className="section contact-section" id="contact">
+        <section className="section contact-section" id="contact" style={{ position: 'relative' }}>
+          <SectionGrid theme="light" showTopLine={true} />
           <div className="section-container">
             <div className="contact-layout">
               <div>
@@ -668,7 +768,11 @@
                 <h2 className="section-title-huge">GET IN TOUCH</h2>
                 <p className="section-subhead">Whether you have questions or just want to explore options, we're here.</p>
 
-                <form className="contact-form-card" onSubmit={handleSubmit}>
+                <form className="contact-form-card" onSubmit={handleSubmit} style={{ position: 'relative' }}>
+                  <GridCrosshair style={{ left: '0%', top: '0%' }} />
+                  <GridCrosshair style={{ left: '100%', top: '0%' }} />
+                  <GridCrosshair style={{ left: '0%', top: '100%' }} />
+                  <GridCrosshair style={{ left: '100%', top: '100%' }} />
                   <div className="form-field-group">
                     <label className="form-field-label">NAME</label>
                     <input type="text" className="form-input-styled" placeholder="YOUR NAME" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required />
@@ -702,8 +806,8 @@
             <div className="footer-meta-row">
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <svg className="logo-svg" viewBox="0 0 85 26" fill="currentColor" style={{ width: '70px' }}>
-                  <path d="M 0 0.516 L 85 0.516 L 85 25.996 L 0 25.996 Z" fill="transparent"/>
-                  <path d="M 57.393 18.376 L 57.127 18.592 C 57.076 18.623 56.727 18.886 56.08 19.381 C 54.829 20.349 53.798 21.114 52.984 21.675 C 52.337 22.138 51.658 22.551 50.953 22.912 C 50.546 23.137 50.099 23.271 49.639 23.307 C 49.374 23.313 49.112 23.253 48.875 23.133 C 48.641 23.014 48.439 22.838 48.287 22.619 C 47.929 22.099 47.75 21.471 47.777 20.834 C 47.805 19.378 47.994 17.929 48.34 16.514 C 48.72 14.854 49.227 13.228 49.856 11.652 C 50.554 9.879 51.409 8.797 52.42 8.405 C 52.818 8.242 53.243 8.164 53.67 8.174 C 53.965 8.157 54.259 8.203 54.535 8.308 C 54.809 8.411 55.059 8.572 55.269 8.781 C 55.476 8.986 55.638 9.234 55.744 9.509 C 55.848 9.781 55.892 10.074 55.874 10.366 C 55.862 10.854 55.78 11.338 55.63 11.802 C 55.425 12.424 55.174 13.028 54.877 13.609 L 54.689 14.058 C 54.089 15.128 53.637 16.279 53.345 17.478 C 53.345 17.716 53.429 17.835 53.596 17.835 C 53.828 17.798 54.042 17.684 54.206 17.509 C 54.612 17.135 54.999 16.738 55.364 16.32 C 55.687 15.928 56.146 15.438 56.741 14.852 L 57.32 14.279 L 57.821 13.754 C 58.623 12.94 59.487 12.193 60.404 11.521 C 60.884 11.136 61.459 10.897 62.064 10.833 C 62.899 10.833 63.316 11.549 63.316 12.982 C 63.316 13.28 63.279 13.811 63.207 14.574 C 63.081 16.058 63.018 17.315 63.018 18.345 C 63.028 18.551 63.036 18.739 63.041 18.909 C 63.047 19.079 63.05 19.298 63.05 19.566 C 63.123 20.257 63.175 20.788 63.207 21.159 L 63.316 22.041 C 63.316 22.349 63.035 22.622 62.473 22.86 C 61.85 23.108 61.186 23.229 60.518 23.216 C 59.915 23.233 59.316 23.098 58.775 22.822 C 58.295 22.566 57.908 22.157 57.67 21.655 C 57.404 21.065 57.276 20.419 57.295 19.769 C 57.295 19.675 57.306 19.517 57.326 19.282 C 57.346 19.048 57.376 18.747 57.393 18.376 Z" fill="currentColor"/>
+                  <path d="M 0 0.516 L 85 0.516 L 85 25.996 L 0 25.996 Z" fill="transparent" />
+                  <path d="M 57.393 18.376 L 57.127 18.592 C 57.076 18.623 56.727 18.886 56.08 19.381 C 54.829 20.349 53.798 21.114 52.984 21.675 C 52.337 22.138 51.658 22.551 50.953 22.912 C 50.546 23.137 50.099 23.271 49.639 23.307 C 49.374 23.313 49.112 23.253 48.875 23.133 C 48.641 23.014 48.439 22.838 48.287 22.619 C 47.929 22.099 47.75 21.471 47.777 20.834 C 47.805 19.378 47.994 17.929 48.34 16.514 C 48.72 14.854 49.227 13.228 49.856 11.652 C 50.554 9.879 51.409 8.797 52.42 8.405 C 52.818 8.242 53.243 8.164 53.67 8.174 C 53.965 8.157 54.259 8.203 54.535 8.308 C 54.809 8.411 55.059 8.572 55.269 8.781 C 55.476 8.986 55.638 9.234 55.744 9.509 C 55.848 9.781 55.892 10.074 55.874 10.366 C 55.862 10.854 55.78 11.338 55.63 11.802 C 55.425 12.424 55.174 13.028 54.877 13.609 L 54.689 14.058 C 54.089 15.128 53.637 16.279 53.345 17.478 C 53.345 17.716 53.429 17.835 53.596 17.835 C 53.828 17.798 54.042 17.684 54.206 17.509 C 54.612 17.135 54.999 16.738 55.364 16.32 C 55.687 15.928 56.146 15.438 56.741 14.852 L 57.32 14.279 L 57.821 13.754 C 58.623 12.94 59.487 12.193 60.404 11.521 C 60.884 11.136 61.459 10.897 62.064 10.833 C 62.899 10.833 63.316 11.549 63.316 12.982 C 63.316 13.28 63.279 13.811 63.207 14.574 C 63.081 16.058 63.018 17.315 63.018 18.345 C 63.028 18.551 63.036 18.739 63.041 18.909 C 63.047 19.079 63.05 19.298 63.05 19.566 C 63.123 20.257 63.175 20.788 63.207 21.159 L 63.316 22.041 C 63.316 22.349 63.035 22.622 62.473 22.86 C 61.85 23.108 61.186 23.229 60.518 23.216 C 59.915 23.233 59.316 23.098 58.775 22.822 C 58.295 22.566 57.908 22.157 57.67 21.655 C 57.404 21.065 57.276 20.419 57.295 19.769 C 57.295 19.675 57.306 19.517 57.326 19.282 C 57.346 19.048 57.376 18.747 57.393 18.376 Z" fill="currentColor" />
                 </svg>
               </div>
               <div>
@@ -742,10 +846,6 @@
 
       return (
         <div className="app-root">
-          <div className="grid-guides" aria-hidden="true">
-            <div></div><div></div><div></div><div></div>
-          </div>
-
           <Header isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
           <NavDrawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
 
@@ -773,4 +873,5 @@
     root.render(<App />);
   </script>
 </body>
+
 </html>

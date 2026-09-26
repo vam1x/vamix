@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import SectionGrid from './SectionGrid';
 
 export default function Hero() {
   const avatars = [
@@ -23,25 +24,23 @@ export default function Hero() {
 
   return (
     <section className="webus-hero" id="hero" data-framer-name="Hero">
-      {/* Background Blueprint Grid Guides (4 Columns) */}
-      <div className="hero-grid-lines" aria-hidden="true">
-        <div className="hero-grid-col"></div>
-        <div className="hero-grid-col"></div>
-        <div className="hero-grid-col"></div>
-        <div className="hero-grid-col"></div>
-      </div>
+      {/* Background Blueprint Grid Guides (5 Lines / 4 Columns with Crosshairs) */}
+      <SectionGrid
+        theme="light"
+        showTopLine={false}
+      />
 
       {/* Left Material Art Backdrop Panel (41% Desktop / 28% Mobile Right) */}
       <div className="hero-art-panel" aria-hidden="true" data-framer-name="Image container">
-        <motion.div 
+        <motion.div
           className="hero-art-img-wrapper"
           initial={{ opacity: 0, scale: 1.04 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          <img 
-            src="https://framerusercontent.com/images/cx9DzPrXWjEIHDWlLpzDmBWYZI.png?width=1024&height=1536" 
-            alt="Macro material abstraction" 
+          <img
+            src="https://framerusercontent.com/images/cx9DzPrXWjEIHDWlLpzDmBWYZI.png?width=1024&height=1536"
+            alt="Macro material abstraction"
             className="hero-art-img"
             loading="eager"
             fetchpriority="high"
@@ -51,14 +50,14 @@ export default function Hero() {
 
       {/* Main Content Container */}
       <div className="hero-container" data-framer-name="Content">
-        
+
         {/* Top Text Block */}
         <div className="hero-text-block" data-framer-name="Text">
 
           {/* Tier 1: Top (Filler Left, Social Proof Right) */}
           <div className="hero-tier-top" data-framer-name="Top">
             <div className="hero-filler" data-framer-name="Filler"></div>
-            <motion.div 
+            <motion.div
               className="hero-social-proof"
               data-framer-name="Container"
               initial={{ opacity: 0, y: 20 }}
@@ -91,15 +90,15 @@ export default function Hero() {
 
           {/* Tier 2: H1 Full-Width Headline (with Difference Blend) */}
           <div className="hero-tier-h1" data-framer-name="H1">
-            <motion.div 
+            <motion.div
               className="hero-h1-row"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             >
-              <svg 
-                className="hero-h1-svg" 
-                viewBox="0 0 1120 78" 
+              <svg
+                className="hero-h1-svg"
+                viewBox="0 0 1120 78"
                 preserveAspectRatio="xMidYMid meet"
                 aria-label="DESIGN THAT CONVERTS"
               >
@@ -116,15 +115,15 @@ export default function Hero() {
           <div className="hero-tier-bottom-text" data-framer-name="Bottom">
             <div className="hero-filler" data-framer-name="Filler"></div>
             <div className="hero-secondary-content" data-framer-name="Text">
-              <motion.div 
+              <motion.div
                 className="hero-code-ships-wrap"
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.75, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
               >
-                <svg 
-                  className="hero-code-ships-svg" 
-                  viewBox="0 0 482 54" 
+                <svg
+                  className="hero-code-ships-svg"
+                  viewBox="0 0 482 54"
                   preserveAspectRatio="xMidYMid meet"
                   aria-label="CODE THAT SHIPS"
                 >
@@ -136,7 +135,7 @@ export default function Hero() {
                 </svg>
               </motion.div>
 
-              <motion.p 
+              <motion.p
                 className="hero-statement"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -154,8 +153,8 @@ export default function Hero() {
 
           {/* Tier 4: Huge Action Pill Buttons */}
           <div className="hero-tier-buttons" data-framer-name="Buttons">
-            <motion.a 
-              href="#contact" 
+            <motion.a
+              href="#contact"
               className="hero-pill-btn hero-pill-black"
               data-framer-name="Desktop"
               initial={{ opacity: 0, y: 20 }}
@@ -172,8 +171,8 @@ export default function Hero() {
               </div>
             </motion.a>
 
-            <motion.a 
-              href="#projects" 
+            <motion.a
+              href="#projects"
               className="hero-pill-btn hero-pill-white"
               data-framer-name="Desktop"
               initial={{ opacity: 0, y: 20 }}
@@ -194,7 +193,7 @@ export default function Hero() {
           {/* Tier 5: Partner Logo Ticker (Filler Left, Ticker Right) */}
           <div className="hero-tier-ticker" data-framer-name="Logo">
             <div className="hero-filler" data-framer-name="Filler"></div>
-            <motion.div 
+            <motion.div
               className="hero-ticker-container"
               data-framer-name="Ticker"
               initial={{ opacity: 0 }}
@@ -205,10 +204,10 @@ export default function Hero() {
                 <div className="hero-ticker-track">
                   {tickerLogos.map((logo, idx) => (
                     <div key={idx} className="hero-ticker-item">
-                      <img 
-                        src={logo.src} 
-                        alt={logo.alt} 
-                        className="hero-ticker-img" 
+                      <img
+                        src={logo.src}
+                        alt={logo.alt}
+                        className="hero-ticker-img"
                         style={{ height: `${logo.height}px`, width: 'auto' }}
                       />
                     </div>

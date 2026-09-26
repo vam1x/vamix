@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import RollingText from './RollingText';
+import SectionGrid, { GridCrosshair } from './SectionGrid';
 
 export default function MoreProjects() {
   const [activeProject, setActiveProject] = useState(0);
@@ -40,8 +41,14 @@ export default function MoreProjects() {
 
   return (
     <section className="section more-projects-section" id="projects">
+      {/* Blueprint Grid Lines & Top Boundary with Crosshairs */}
+      <SectionGrid
+        theme="light"
+        showTopLine={true}
+      />
+
       <div className="section-container">
-        
+
         <div className="projects-split-showcase">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -59,8 +66,10 @@ export default function MoreProjects() {
             {projects.map((project, idx) => {
               const isActive = activeProject === idx;
               return (
-                <div key={idx} className="project-selector-item">
-                  <div 
+                <div key={idx} className="project-selector-item" style={{ position: 'relative' }}>
+                  <GridCrosshair style={{ left: '0%', top: '0px' }} />
+                  <GridCrosshair style={{ left: '100%', top: '0px' }} />
+                  <div
                     className={`project-item-title ${isActive ? 'active' : ''}`}
                     onClick={() => setActiveProject(isActive ? -1 : idx)}
                     role="button"
@@ -70,7 +79,7 @@ export default function MoreProjects() {
                   </div>
                   <AnimatePresence initial={false}>
                     {isActive && (
-                      <motion.div 
+                      <motion.div
                         className="project-drawer-panel open"
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}

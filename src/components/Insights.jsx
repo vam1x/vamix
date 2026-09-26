@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import RollingText from './RollingText';
+import SectionGrid, { GridCrosshair } from './SectionGrid';
 
 export default function Insights() {
   const articles = [
@@ -28,8 +29,14 @@ export default function Insights() {
 
   return (
     <section className="section insights-section" id="insights">
+      {/* Blueprint Grid Lines & Top Boundary with Crosshairs */}
+      <SectionGrid
+        theme="light"
+        showTopLine={true}
+      />
+
       <div className="section-container">
-        
+
         <div className="insights-header-row">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -43,8 +50,8 @@ export default function Insights() {
             </div>
             <h2 className="section-title-huge" style={{ marginBottom: 0 }}>INSIGHTS</h2>
           </motion.div>
-          <motion.a 
-            href="./blog" 
+          <motion.a
+            href="./blog"
             className="btn-pill btn-pill-light"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -55,8 +62,8 @@ export default function Insights() {
 
         <div className="articles-grid">
           {articles.map((art, idx) => (
-            <motion.article 
-              key={idx} 
+            <motion.article
+              key={idx}
               className="article-card"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { RevealText } from '../hooks/useScrollReveal';
+import SectionGrid, { GridCrosshair } from './SectionGrid';
 
 export default function Team() {
   const members = [
@@ -56,21 +57,36 @@ export default function Team() {
 
   return (
     <section className="section team-section" id="team">
+      {/* Blueprint Grid Lines & Top Boundary with Crosshairs */}
+      <SectionGrid
+        theme="light"
+        showTopLine={true}
+      />
+
       <div className="section-container">
-        
+
         <div className="section-badge">
           <span className="section-badge-dot"></span>
           <span>07 WHO WE ARE</span>
         </div>
-        <RevealText 
+        <RevealText
           text="THE TEAM"
           className="section-title-huge"
         />
 
+        {/* 4 Column Divider Line with Crosshairs */}
+        <div className="team-grid-header-line" aria-hidden="true">
+          <GridCrosshair style={{ left: '0%', top: '0px' }} />
+          <GridCrosshair style={{ left: '25%', top: '0px' }} />
+          <GridCrosshair style={{ left: '50%', top: '0px' }} />
+          <GridCrosshair style={{ left: '75%', top: '0px' }} />
+          <GridCrosshair style={{ left: '100%', top: '0px' }} />
+        </div>
+
         <div className="team-grid">
           {members.map((member, idx) => (
-            <motion.div 
-              key={idx} 
+            <motion.div
+              key={idx}
               className="team-card"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -83,9 +99,9 @@ export default function Team() {
                 <span>{member.badge}</span>
               </div>
               <div className="team-photo-wrap">
-                <motion.img 
-                  src={member.img} 
-                  alt={member.name} 
+                <motion.img
+                  src={member.img}
+                  alt={member.name}
                   className="team-photo-img"
                   whileHover={{ scale: 1.04 }}
                   transition={{ duration: 0.35 }}
@@ -95,7 +111,7 @@ export default function Team() {
               <div className="team-card-body">
                 <div className="team-member-name">{member.name}</div>
                 <div className="team-member-role">{member.sub}</div>
-                
+
                 {member.skills.map((skill, sIdx) => (
                   <div key={sIdx} className="skill-bar-row">
                     <span className="skill-gauges">{skill.gauge}</span>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { RevealText } from '../hooks/useScrollReveal';
+import SectionGrid, { GridCrosshair } from './SectionGrid';
 
 export default function WhyUs() {
   const pillars = [
@@ -12,15 +13,21 @@ export default function WhyUs() {
 
   return (
     <section className="section why-section" id="why">
+      {/* Blueprint Grid Lines & Top Boundary with Crosshairs */}
+      <SectionGrid
+        theme="light"
+        showTopLine={true}
+      />
+
       <div className="section-container">
-        
+
         <div className="why-split-grid">
           <div className="why-left">
             <div className="section-badge">
               <span className="section-badge-dot"></span>
               <span>03 WHY US?</span>
             </div>
-            <RevealText 
+            <RevealText
               text="WHY COMPANIES CHOOSE WEBUS®"
               className="section-title-huge"
               theme="light"
@@ -43,23 +50,23 @@ export default function WhyUs() {
 
             <div className="why-pillars-list">
               {pillars.map((pillar, idx) => (
-                <motion.div 
-                  key={idx} 
+                <motion.div
+                  key={idx}
                   className="why-pillar-item"
                   initial={{ opacity: 0, x: -16 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 >
+                  <GridCrosshair style={{ left: '0px', top: '0px' }} />
                   <span className="pillar-badge">{pillar.num}</span>
                   <span>{pillar.text} <strong>{pillar.highlight}</strong></span>
                 </motion.div>
               ))}
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '2rem', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-dark-subtle)' }}>
+            <div style={{ marginTop: '2rem', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-dark-subtle)' }}>
               <span>SOURCE: CLIENT FEEDBACK & PROJECT DATA</span>
-              <span>📅 APR 2025</span>
             </div>
           </div>
         </div>
@@ -71,8 +78,8 @@ export default function WhyUs() {
             { num: "12+", label: "YEARS\nEXPERIENCE" },
             { num: "5X", label: "FASTER\nDELIVERY" }
           ].map((metric, idx) => (
-            <motion.div 
-              key={idx} 
+            <motion.div
+              key={idx}
               className="metric-card"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -87,7 +94,7 @@ export default function WhyUs() {
         </div>
 
         {/* Partnership Callout Banner with Aurora */}
-        <motion.div 
+        <motion.div
           className="partnership-banner"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

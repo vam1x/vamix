@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { RevealText } from '../hooks/useScrollReveal';
+import SectionGrid, { GridCrosshair } from './SectionGrid';
 
 export default function HowWeDoIt() {
   const steps = [
@@ -19,15 +20,21 @@ export default function HowWeDoIt() {
 
   return (
     <section className="section path-section" id="path">
+      {/* Blueprint Grid Lines & Top Boundary with Crosshairs */}
+      <SectionGrid
+        theme="light"
+        showTopLine={true}
+      />
+
       <div className="section-container">
-        
+
         <div className="path-grid">
           <div>
             <div className="section-badge">
               <span className="section-badge-dot"></span>
               <span>04 HOW WE DO IT</span>
             </div>
-            <RevealText 
+            <RevealText
               text="THE FAST TRACK TO LIVE PRODUCTS"
               className="section-title-huge"
               theme="light"
@@ -39,14 +46,15 @@ export default function HowWeDoIt() {
 
           {/* 4 Execution Steps 2x2 Grid */}
           <div className="steps-2x2-grid">
-            <span className="corner-cross tl">+</span>
-            <span className="corner-cross tr">+</span>
-            <span className="corner-cross bl">+</span>
-            <span className="corner-cross br">+</span>
+            <GridCrosshair style={{ left: '0%', top: '0%' }} />
+            <GridCrosshair style={{ left: '100%', top: '0%' }} />
+            <GridCrosshair style={{ left: '0%', top: '100%' }} />
+            <GridCrosshair style={{ left: '100%', top: '100%' }} />
+            <GridCrosshair style={{ left: '50%', top: '50%' }} />
 
             {steps.map((step, idx) => (
-              <motion.div 
-                key={idx} 
+              <motion.div
+                key={idx}
                 className="step-card"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -74,7 +82,7 @@ export default function HowWeDoIt() {
             <span className="section-badge-dot"></span>
             <span>WHY DELAY HURTS</span>
           </div>
-          <RevealText 
+          <RevealText
             text="THE LONGER YOU WAIT, THE MORE IT COSTS TO BUILD IT RIGHT."
             className="section-title-huge"
             theme="light"
@@ -82,8 +90,8 @@ export default function HowWeDoIt() {
 
           <div className="delay-matrix-list">
             {delayRows.map((row, idx) => (
-              <motion.div 
-                key={idx} 
+              <motion.div
+                key={idx}
                 className="delay-row"
                 initial={{ opacity: 0, x: -16 }}
                 whileInView={{ opacity: 1, x: 0 }}

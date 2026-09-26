@@ -13,11 +13,11 @@
   --bg-dark-card: #171717;
   --bg-card-light: #f5f5f5;
   --bg-white: #ffffff;
-  
+
   --text-dark: #171717;
   --text-dark-muted: rgba(23, 23, 23, 0.6);
   --text-dark-subtle: rgba(23, 23, 23, 0.38);
-  
+
   --text-light: #f5f5f5;
   --text-light-muted: rgba(245, 245, 245, 0.6);
   --text-light-subtle: rgba(245, 245, 245, 0.35);
@@ -25,11 +25,11 @@
   --border-light: rgba(0, 0, 0, 0.08);
   --border-dark: rgba(255, 255, 255, 0.12);
   --border-hairline: rgba(0, 0, 0, 0.12);
-  
+
   /* Accent Rainbow Gradient */
   --gradient-aurora: linear-gradient(90deg, #a855f7 0%, #3b82f6 30%, #ec4899 70%, #f97316 100%);
   --gradient-rainbow: linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(59, 130, 246, 0.3) 30%, rgba(236, 72, 153, 0.4) 70%, rgba(249, 115, 22, 0.35) 100%);
-  
+
   /* Typography */
   --font-heading: 'Sora', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
@@ -41,20 +41,26 @@
 }
 
 /* Base Reset */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 /* Hide Default Browser Scrollbar Across All Browsers */
-html, body {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+html,
+body {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
 }
 
 ::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera, Edge */
+  display: none;
+  /* Chrome, Safari, Opera, Edge */
   width: 0px;
   height: 0px;
   background: transparent;
@@ -80,7 +86,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -121,7 +128,8 @@ button {
   cursor: pointer;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -131,42 +139,141 @@ img {
   display: block;
 }
 
-/* Blueprint Grid Lines */
-.grid-guides {
-  position: fixed;
+/* ==========================================================================
+   BLUEPRINT GRID SYSTEM & SECTION GUIDES (webus.in architectural spec)
+   ========================================================================== */
+
+/* Section Grid Backdrop Container */
+.section-grid-backdrop {
+  position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  overflow: visible;
+  padding: 0 2rem;
+}
+
+.section-grid-container {
+  position: relative;
+  width: 100%;
   max-width: var(--max-width);
+  height: 100%;
   margin: 0 auto;
-  border-left: 1px solid var(--border-light);
-  border-right: 1px solid var(--border-light);
 }
 
-.grid-guides > div {
-  border-right: 1px solid var(--border-light);
+/* 5 Vertical Column Guidelines (4 Columns across max-width) */
+.section-grid-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
 }
 
-/* Corner Crosshair Decoration */
+.grid-light .section-grid-line {
+  background-color: rgba(0, 0, 0, 0.07);
+}
+
+.grid-dark .section-grid-line {
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+/* Horizontal Section Boundary Guidelines */
+.section-grid-h-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+}
+
+.section-grid-h-line.top {
+  top: 0;
+}
+
+.section-grid-h-line.bottom {
+  bottom: 0;
+}
+
+.grid-light .section-grid-h-line {
+  background-color: rgba(0, 0, 0, 0.07);
+}
+
+.grid-dark .section-grid-h-line {
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+/* Pixel-perfect Crosshair Marker (+) composed of 1px intersecting lines */
+.grid-crosshair {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+  z-index: 3;
+}
+
+.grid-crosshair .cross-v {
+  position: absolute;
+  left: 4px;
+  top: 0;
+  width: 1px;
+  height: 9px;
+  background-color: currentColor;
+}
+
+.grid-crosshair .cross-h {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 9px;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.grid-light .grid-crosshair {
+  color: rgba(23, 23, 23, 0.45);
+}
+
+.grid-dark .grid-crosshair {
+  color: rgba(245, 245, 245, 0.65);
+}
+
+/* Legacy corner-cross compatibility */
 .corner-cross {
   position: absolute;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-dark-subtle);
   pointer-events: none;
   user-select: none;
   line-height: 1;
+  transform: translate(-50%, -50%);
 }
 
-.corner-cross.tl { top: -6px; left: -5px; }
-.corner-cross.tr { top: -6px; right: -5px; }
-.corner-cross.bl { bottom: -6px; left: -5px; }
-.corner-cross.br { bottom: -6px; right: -5px; }
+.corner-cross.tl {
+  top: 0;
+  left: 0;
+}
+
+.corner-cross.tr {
+  top: 0;
+  left: 100%;
+}
+
+.corner-cross.bl {
+  top: 100%;
+  left: 0;
+}
+
+.corner-cross.br {
+  top: 100%;
+  left: 100%;
+}
 
 .section-dark .corner-cross {
-  color: var(--text-light-subtle);
+  color: rgba(245, 245, 245, 0.65);
 }
 
 /* ==========================================================================
@@ -537,7 +644,8 @@ img {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  background-color: var(--bg-primary); /* #e8e8e8 */
+  background-color: var(--bg-primary);
+  /* #e8e8e8 */
   overflow: hidden;
   padding: 190px 0px 110px;
 }
@@ -981,6 +1089,7 @@ img {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -994,13 +1103,16 @@ img {
     min-height: unset;
     padding: 170px 0px 110px;
   }
+
   .hero-container {
     gap: 80px;
     padding: 0px 30px;
   }
+
   .hero-secondary-content {
     gap: 38px;
   }
+
   .hero-bottom-block {
     gap: 70px;
   }
@@ -1112,18 +1224,73 @@ img {
 
 .approach-intro-grid {
   display: grid;
-  grid-template-columns: 40% 60%;
-  gap: 4rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
   align-items: start;
   margin-bottom: 8rem;
   position: relative;
 }
 
+.approach-left {
+  grid-column: 1 / 2;
+  position: relative;
+  padding-right: 2.5rem;
+}
+
+.approach-spacer {
+  grid-column: 2 / 3;
+  min-height: 1px;
+}
+
+.approach-right {
+  grid-column: 3 / 5;
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+/* Approach Header Box & Grid Dividers (As shown in user's image) */
+.approach-header-box {
+  position: relative;
+  padding-top: 0.5rem;
+  padding-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.approach-header-box .approach-heading {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  letter-spacing: -0.02em;
+}
+
+.approach-header-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: -2.5rem;
+  /* Bleed precisely to the column 1-2 divider line */
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.approach-header-dot {
+  position: absolute;
+  right: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
 .approach-mockup-frame {
   position: relative;
-  border: 1px solid var(--border-dark);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 1.5rem;
-  background: rgba(23, 23, 23, 0.6);
+  background: rgba(23, 23, 23, 0.7);
   border-radius: 8px;
 }
 
@@ -1146,6 +1313,7 @@ img {
   grid-template-columns: 50% 50%;
   gap: 3rem;
   margin-bottom: 5rem;
+  position: relative;
 }
 
 .service-item-row {
@@ -1154,9 +1322,13 @@ img {
   gap: 2rem;
   align-items: center;
   padding: 3rem 0;
-  border-top: 1px solid var(--border-dark);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
   position: relative;
   transition: background-color 0.3s ease;
+}
+
+.service-item-row:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .service-num {
@@ -1551,11 +1723,21 @@ img {
   background: var(--bg-primary);
 }
 
+.team-grid-header-line,
+.timeline-grid-header-line {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.07);
+  margin-top: 3.5rem;
+  margin-bottom: 2rem;
+}
+
 .team-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
-  margin-top: 4rem;
+  margin-top: 0;
 }
 
 .team-card {
@@ -2002,16 +2184,20 @@ img {
   .hero-split-grid {
     grid-template-columns: 1fr;
   }
+
   .hero-left-art {
     display: none;
   }
+
   .hero-headline-2,
   .hero-sub-statement {
     margin-left: 0;
   }
+
   .hero-cta-group {
     grid-template-columns: 1fr 1fr;
   }
+
   .approach-intro-grid,
   .why-split-grid,
   .path-grid,
@@ -2022,12 +2208,15 @@ img {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
+
   .service-item-row {
     grid-template-columns: 60px 1fr;
   }
+
   .service-img-preview {
     display: none;
   }
+
   .team-grid,
   .articles-grid,
   .timeline-milestones-grid {
@@ -2039,12 +2228,15 @@ img {
   .site-header {
     padding: 0 1rem;
   }
+
   .consult-banner {
     display: none;
   }
+
   .hero-cta-group {
     grid-template-columns: 1fr;
   }
+
   .team-grid,
   .articles-grid,
   .timeline-milestones-grid,
@@ -2052,11 +2244,13 @@ img {
   .metrics-row {
     grid-template-columns: 1fr;
   }
+
   .footer-bottom-black {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
   }
+
   .footer-meta-row {
     flex-direction: column;
     gap: 1.5rem;

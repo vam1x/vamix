@@ -47,14 +47,6 @@ export default function App() {
       <LenisScrollLock isDrawerOpen={isDrawerOpen} />
 
       <div className="app-root">
-        {/* Blueprint Grid Lines */}
-        <div className="grid-guides" aria-hidden="true">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-
         {/* Sticky Adaptive Header */}
         <Header 
           isDrawerOpen={isDrawerOpen} 

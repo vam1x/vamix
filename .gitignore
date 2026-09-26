@@ -1,0 +1,7 @@
+node_modules/
+dist/
+dist-ssr/
+*.local
+.playwright-mcp/
+*.log
+.DS_Store

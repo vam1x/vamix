@@ -1,0 +1,247 @@
+/* ==========================================================================
+   WEBUS.IN — REACT MOTION & ANIMATION STYLES
+   Exact Framer-Fidelity Mechanical Transforms, Wave Illumination & Physics
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Split-Flap Rolling Text (Framer Mechanical Downward Stagger)
+   -------------------------------------------------------------------------- */
+.roll-text-container {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  height: 1.15em;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+}
+
+.roll-slot {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  height: 1.15em;
+  vertical-align: top;
+}
+
+.roll-char {
+  display: inline-block;
+  height: 1.15em;
+  line-height: 1.15;
+  text-transform: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  color: inherit;
+  white-space: pre;
+  will-change: transform;
+  transition: transform 0.38s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.roll-main {
+  position: relative;
+  transform: translateY(0);
+}
+
+.roll-clone {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  transform: translateY(0);
+}
+
+/* Mechanical downward roll triggers: on self or on any parent button/link/container */
+.roll-text-container.is-active .roll-main,
+.roll-text-container:hover .roll-main,
+a:hover .roll-main,
+button:hover .roll-main,
+.menu-toggle-btn:hover .roll-main,
+.btn-hero:hover .roll-main,
+.nav-drawer-link:hover .roll-main,
+.case-study-btn:hover .roll-main,
+.submit-btn-glow:hover .roll-main {
+  transform: translateY(100%);
+}
+
+.roll-text-container.is-active .roll-clone,
+.roll-text-container:hover .roll-clone,
+a:hover .roll-clone,
+button:hover .roll-clone,
+.menu-toggle-btn:hover .roll-clone,
+.btn-hero:hover .roll-clone,
+.nav-drawer-link:hover .roll-clone,
+.case-study-btn:hover .roll-clone,
+.submit-btn-glow:hover .roll-clone {
+  transform: translateY(100%);
+}
+
+/* --------------------------------------------------------------------------
+   2. Scroll Wave Character-by-Character Illumination
+   -------------------------------------------------------------------------- */
+.reveal-text-block {
+  display: block;
+  width: 100%;
+}
+
+.reveal-word-wrapper {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.reveal-char {
+  display: inline-block;
+  will-change: color;
+  transition: color 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-space {
+  display: inline;
+}
+
+/* --------------------------------------------------------------------------
+   3. Infinite Logo Marquee Ticker
+   -------------------------------------------------------------------------- */
+@keyframes ticker-slide {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.trust-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-slide 32s linear infinite;
+  will-change: transform;
+}
+
+.trust-marquee-wrapper:hover .trust-marquee-track {
+  animation-play-state: paused;
+}
+
+/* --------------------------------------------------------------------------
+   4. Floating Delay Percentage Badges
+   -------------------------------------------------------------------------- */
+@keyframes float-badge {
+  0% {
+    transform: translateY(0px) scale(1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.delay-row:nth-child(1) .delay-badge-pill { animation-delay: 0s; }
+.delay-row:nth-child(2) .delay-badge-pill { animation-delay: 0.6s; }
+.delay-row:nth-child(3) .delay-badge-pill { animation-delay: 1.2s; }
+.delay-row:nth-child(4) .delay-badge-pill { animation-delay: 1.8s; }
+
+/* --------------------------------------------------------------------------
+   5. Aurora Glow Organic Breathing
+   -------------------------------------------------------------------------- */
+@keyframes aurora-pulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.08) translate(-10px, 15px);
+  }
+  100% {
+    opacity: 0.7;
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+.hero-aurora-glow,
+.partnership-aurora,
+.timeline-arc-glow {
+  animation: aurora-pulse 8s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* --------------------------------------------------------------------------
+   6. Audio Barcode Equalizer Pulse (Team Section)
+   -------------------------------------------------------------------------- */
+@keyframes tally-pulse {
+  0%, 100% {
+    opacity: 0.75;
+    letter-spacing: 0.05em;
+  }
+  50% {
+    opacity: 1;
+    letter-spacing: 0.08em;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.4));
+  }
+}
+
+.team-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
+}
+
+.team-card:hover .skill-gauges {
+  animation: tally-pulse 1.2s ease-in-out infinite;
+}
+
+/* --------------------------------------------------------------------------
+   7. Card Zoom & Micro-Transitions
+   -------------------------------------------------------------------------- */
+.approach-service-card {
+  transition: border-color 0.4s ease, background-color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.approach-service-card:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background-color: #1a1a1a;
+}
+
+.approach-service-card img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.approach-service-card:hover img {
+  transform: scale(1.04);
+}
+
+.step-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* --------------------------------------------------------------------------
+   8. Accordions
+   -------------------------------------------------------------------------- */
+.faq-toggle-icon {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-item.is-open .faq-toggle-icon {
+  transform: rotate(45deg);
+}
+
+.faq-item {
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.faq-item:hover {
+  border-color: rgba(0, 0, 0, 0.25);
+}

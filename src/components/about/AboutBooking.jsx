@@ -18,7 +18,7 @@ export default function AboutBooking({ navigate }) {
 
   return (
     <section className="about-booking-section" id="book-call" aria-labelledby="about-booking-title">
-      <SectionGrid theme="light" showTopLine={false} showBottomLine={false} />
+      <SectionGrid theme="light" showTopLine showBottomLine={false} />
       <img className="about-booking-aurora" src={auroraImage} alt="" aria-hidden="true" />
 
       <div className="about-booking-grid">

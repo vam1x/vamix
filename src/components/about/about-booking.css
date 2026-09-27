@@ -15,10 +15,14 @@
   opacity: .027;
   pointer-events: none;
 }
-.about-page-wrapper > .contact-section .section-grid-h-line.top { top: 25px; }
+.about-booking-section + .contact-section .section-grid-h-line.top { top: 25px; }
+.about-booking-section + .contact-section .section-grid-backdrop { padding: 0 40px; }
+.about-booking-section + .contact-section .section-grid-container { max-width: none; }
+.about-booking-section + .contact-section .section-grid-h-line.top .grid-crosshair:not(:first-child):not(:last-child) { display: none; }
 
 .about-booking-section .section-grid-backdrop { padding: 0 40px; }
 .about-booking-section .section-grid-container { max-width: none; }
+.about-booking-section .section-grid-h-line.top { top: 25px; }
 .about-booking-aurora {
   position: absolute;
   z-index: 0;
@@ -121,6 +125,7 @@
 .about-booking-author img { display: block; width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
 
 @media (min-width: 810px) and (max-width: 1199px) {
+  .about-booking-section + .contact-section .section-grid-backdrop { padding: 0 30px; }
   .about-booking-section { height: 834.6px; }
   .about-booking-section .section-grid-backdrop { padding: 0 30px; }
   .about-booking-aurora { width: 61%; }
@@ -136,9 +141,11 @@
 }
 
 @media (max-width: 809px) {
-  .about-page-wrapper > .contact-section .section-grid-h-line.top { top: 20px; }
+  .about-booking-section + .contact-section .section-grid-h-line.top { top: 20px; }
+  .about-booking-section + .contact-section .section-grid-backdrop { padding: 0 20px; }
   .about-booking-section { height: 504.8px; }
   .about-booking-section .section-grid-backdrop { padding: 0 20px; }
+  .about-booking-section .section-grid-h-line.top { top: 20px; }
   .about-booking-aurora { width: 100%; height: 393px; }
   .about-booking-grid { display: block; padding: 70px 20px 0; }
   .about-booking-badge { margin-bottom: 16px; }
@@ -148,7 +155,7 @@
   .about-booking-button { height: 70px; }
   .about-booking-button-text { font-size: 13px; letter-spacing: -.39px; }
   .about-booking-quote-block { padding: 0; margin-top: 46px; }
-  .about-booking-quote { width: 268px; max-width: 100%; font-size: 16px; line-height: 1.35; letter-spacing: -.48px; text-align: left; }
+  .about-booking-quote { width: 268px; max-width: 100%; margin-left: 0; font-size: 16px; line-height: 1.35; letter-spacing: -.48px; text-align: left; }
   .about-booking-author { margin-top: 30px; }
   .about-booking-author-text { font-size: 12px; letter-spacing: -.48px; }
 }

@@ -102,7 +102,7 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
           </div>
 
           {/* Column 4 (Far Right Side): Quick Consult Banner */}
-          <div className="header-col-actions">
+          {!isScrolled && <div className="header-col-actions">
             <a 
               href="/contact" 
               className="consult-banner"
@@ -126,14 +126,14 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
                   />
                 </div>
                 <div className="consult-plus-circle" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round">
                     <line x1="12" y1="5" x2="12" y2="19" />
                     <line x1="5" y1="12" x2="19" y2="12" />
                   </svg>
                 </div>
               </div>
             </a>
-          </div>
+          </div>}
         </div>
       </header>
     </>

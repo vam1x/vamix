@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import RollingText from '../components/RollingText';
-import SectionGrid, { GridCrosshair } from '../components/SectionGrid';
+import SectionGrid from '../components/SectionGrid';
 import Contact from '../components/Contact';
+import AboutBooking from '../components/about/AboutBooking';
 import projects from './caseStudiesData.json';
 import './case-studies.css';
 
-const rubyAvatar = 'https://framerusercontent.com/images/awFufuyIlbDdk2me7dySF9Y3r8.png?width=2048&height=2048';
-
 export default function CaseStudiesPage({ navigate }) {
-  const [activeIdx, setActiveIdx] = useState(0);
+  const [activeIdx, setActiveIdx] = useState(null);
 
   useEffect(() => {
     document.title = 'Case Studies | Webus Product Studio';
@@ -24,7 +22,7 @@ export default function CaseStudiesPage({ navigate }) {
     }
   };
 
-  const currentProject = projects[activeIdx] || projects[0];
+  const currentProject = activeIdx === null ? null : projects[activeIdx];
 
   return (
     <div className="case-studies-page">
@@ -56,7 +54,7 @@ export default function CaseStudiesPage({ navigate }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
-              Real projects where design solved actual business problems, not just made things look prettier.
+              Real projects where design solved actual business<br className="cs-desktop-break" />{' '}problems, not just made things look prettier.
             </motion.p>
           </div>
         </div>
@@ -79,6 +77,7 @@ export default function CaseStudiesPage({ navigate }) {
                     key={project.title}
                     className={`cs-project-row ${isActive ? 'is-active' : ''}`}
                     onMouseEnter={() => setActiveIdx(idx)}
+                    onMouseLeave={() => setActiveIdx(null)}
                     onClick={() => setActiveIdx(idx)}
                   >
                     <button 
@@ -111,8 +110,7 @@ export default function CaseStudiesPage({ navigate }) {
                                 }
                               }}
                             >
-                              <RollingText text="Read more" />
-                              <span className="cs-arrow-icon" aria-hidden="true">↗</span>
+                              TEXT
                             </a>
                           </div>
 
@@ -133,10 +131,10 @@ export default function CaseStudiesPage({ navigate }) {
           </div>
 
           {/* Column 4: Interactive Desktop Image Preview Card (Exact Framed Mockup matching Photo 4) */}
-          <div className="cs-preview-col" aria-hidden="true">
+          <div className="cs-preview-col" aria-hidden="true" style={{ '--preview-offset': `${(activeIdx ?? 0) * 62}px` }}>
             <div className="cs-sticky-preview-wrap">
               <AnimatePresence mode="wait">
-                <motion.div 
+                {currentProject && <motion.div
                   key={currentProject.title}
                   className="cs-featured-preview-card"
                   initial={{ opacity: 0, scale: 0.96 }}
@@ -160,67 +158,15 @@ export default function CaseStudiesPage({ navigate }) {
                       />
                     </div>
                   </div>
-                </motion.div>
+                </motion.div>}
               </AnimatePresence>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 03. "YOUR FIRST STEP" Callout Section (Exact Match to Reference Photo 2) */}
-      <section className="cs-callout-section" id="cs-first-step">
-        <SectionGrid theme="light" showTopLine={true} showBottomLine={false} crosshairPositions={[0, 1, 2, 3, 4]} />
-        <div className="cs-callout-grid">
-          {/* Column 1: Badge */}
-          <div className="cs-callout-badge-col">
-            <div className="cs-pill-badge">
-              <span className="cs-badge-dot" />
-              <span>YOUR FIRST STEP</span>
-            </div>
-          </div>
-
-          {/* Column 2: Heading & Light Book Call Button with Rainbow Bar */}
-          <div className="cs-callout-heading-col">
-            <h2 className="cs-callout-title">
-              BOOK A FREE<br />
-              30-MINUTE<br />
-              CALL.
-            </h2>
-
-            <div className="cs-callout-btn-wrap">
-              <a 
-                href="/contact" 
-                onClick={(e) => handleLink(e, '/contact')}
-                className="cs-book-call-btn"
-              >
-                <span className="cs-book-btn-text">
-                  <RollingText text="BOOK A CALL" />
-                </span>
-                <span className="cs-call-btn-arrow" aria-hidden="true">›</span>
-                {/* Rainbow bottom gradient bar */}
-                <div className="cs-rainbow-bar" aria-hidden="true" />
-              </a>
-            </div>
-          </div>
-
-          {/* Column 3: Ruby Rattey Quote & Profile */}
-          <div className="cs-callout-quote-col">
-            <p className="cs-callout-quote-text">
-              My job is making sure you leave our first call with clarity and next steps.
-            </p>
-            <div className="cs-callout-author">
-              <div className="cs-author-text">
-                <span className="cs-author-name">RUBY RATTEY</span>
-                <span className="cs-author-role">CLIENT SUCCESS MANAGER</span>
-              </div>
-              <img src={rubyAvatar} alt="Ruby Rattey" className="cs-author-avatar" loading="lazy" />
-            </div>
-          </div>
-
-          {/* Column 4: Ambient glow column */}
-          <div className="cs-callout-glow-col" aria-hidden="true" />
-        </div>
-      </section>
+      {/* 03. Shared booking callout, matched to the reference section. */}
+      <AboutBooking navigate={navigate} />
 
       {/* 04. Standard Contact / Get In Touch Form Section */}
       <Contact navigate={navigate} />

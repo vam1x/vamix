@@ -32,14 +32,6 @@ export default function AboutSteps() {
             <span>WHY US?</span>
           </div>
 
-          <motion.a 
-            href="#contact" 
-            className="about-contact-sales-btn"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <RollingText text="Contact sales ↗" />
-          </motion.a>
         </div>
 
         {/* Right Content */}
@@ -60,6 +52,14 @@ export default function AboutSteps() {
               Every decision is backed by research and testing. We don’t guess, we validate. The result is products that work from day one, with fewer revisions and a faster path to launch.
             </p>
           </motion.div>
+
+          <motion.a
+            href="#contact"
+            className="about-contact-sales-btn"
+            whileHover={{ x: 3 }}
+          >
+            <RollingText text="Contact sales ↗" />
+          </motion.a>
 
           {/* Bottom "What Makes Us Different" Block */}
           <div className="about-diff-block">

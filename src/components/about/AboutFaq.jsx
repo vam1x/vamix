@@ -99,7 +99,7 @@ export default function AboutFaq() {
             <h3 className="about-unsure-heading">STILL UNSURE?</h3>
             <a href="#contact" className="about-ask-question-btn">
               <span>ASK A QUESTION</span>
-              <span className="arrow-sym">→</span>
+              <span className="arrow-sym">›</span>
             </a>
           </motion.div>
 
@@ -112,7 +112,7 @@ export default function AboutFaq() {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <p className="about-support-quote">
-              "My role is to make sure every client feels supported from day one."
+              My role is to make sure every client feels supported from day one.
             </p>
             <div className="about-support-profile">
               <img 

@@ -6,7 +6,7 @@ export default function AboutInsights() {
   const articles = [
     {
       date: "SEPTEMBER 18, 2025",
-      title: "The Silent Killers: 5 Signs Your Product Needs a UX Overhaul",
+      title: "The Silent Killers: 5 Signs Your Product Needs a UX Overhaul Slug: 5-signs-product-needs-ux-overhaul",
       img: "https://framerusercontent.com/images/UzIYF9nzfNkoawT6KbDmzWRDsY.png?width=2816&height=1536",
       link: "./blog"
     },

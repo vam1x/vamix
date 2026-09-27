@@ -14,14 +14,14 @@ export default function AboutTeam() {
       name: "RAHUL ROHILLA",
       role: "PRODUCT DESIGN HEAD",
       desc: "SYSTEMS & USER RESEARCH EXPERT",
-      img: "https://framerusercontent.com/images/LiYyq1u80njGedJpBraH2EHZDQ0.png?width=1696&height=2528",
+      img: "https://framerusercontent.com/images/gE8W7P6IkfEZ065NkXkptmimk.png?width=1696&height=2528",
       badgeIcon: "••"
     },
     {
       name: "AHMAR KHAN",
       role: "UI/UX DESIGNER",
       desc: "RAPID PROTOTYPING SPECIALIST",
-      img: "https://framerusercontent.com/images/gE8W7P6IkfEZ065NkXkptmimk.png?width=1696&height=2528",
+      img: "https://framerusercontent.com/images/LiYyq1u80njGedJpBraH2EHZDQ0.png?width=1696&height=2528",
       badgeIcon: "•••"
     },
     {

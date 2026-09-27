@@ -2,26 +2,30 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { RevealText } from '../../hooks/useScrollReveal';
 
+function MilestoneIcon({ index }) {
+  const base = { width: 30, height: 30, viewBox: '0 0 32 32', fill: 'none', stroke: 'currentColor', strokeWidth: 2.5, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true };
+  if (index === 0) return <svg {...base}><circle cx="13.5" cy="13.5" r="9.5" /><path d="m21 21 8 8" /></svg>;
+  if (index === 1) return <svg {...base}><path d="M4 21c3-2 5-2 8-1l3 2 6-4c2-1 4 1 2 3l-7 6c-3 2-7 1-12 0" /><path d="M14 13l2-2 4 1 3 4M21 4v4m-2-2h4" /></svg>;
+  if (index === 2) return <svg {...base}><path d="M6 29V4m0 1c5-3 10 3 17 0v15c-7 3-12-3-17 0" /></svg>;
+  return <svg {...base}><path d="M4 4h9v9H4zM19 4h9v9h-9zM4 19h9v9H4zM19 19h9v9h-9z" /></svg>;
+}
+
 export default function AboutBelief() {
   const milestones = [
     {
       year: "2012",
-      icon: "🔍",
       desc: "FOUNDED IN DELHI TO SOLVE REAL DESIGN PROBLEMS"
     },
     {
       year: "2017",
-      icon: "👤",
       desc: "OPENED TENNESSEE OFFICE TO SERVE US CLIENTS"
     },
     {
       year: "2020",
-      icon: "🚩",
       desc: "CROSSED 50 SUCCESSFUL CLIENT PROJECTS MILESTONE"
     },
     {
       year: "2025",
-      icon: "❖",
       desc: "OVER A DECADE BUILDING PRODUCTS USERS LOVE"
     }
   ];
@@ -88,7 +92,7 @@ export default function AboutBelief() {
             >
               <div className="milestone-year-header">
                 <span className="milestone-year-num">{item.year}</span>
-                <span className="milestone-icon-sym">{item.icon}</span>
+                <span className="milestone-icon-sym"><MilestoneIcon index={idx} /></span>
               </div>
               <p className="milestone-cell-desc">{item.desc}</p>
             </motion.div>

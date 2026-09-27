@@ -40,39 +40,47 @@
 
 .roll-main {
   position: relative;
-  transform: translateY(0);
+  transform: translateY(0%);
 }
 
 .roll-clone {
   position: absolute;
-  top: -100%;
+  top: 0;
   left: 0;
-  transform: translateY(0);
+  transform: translateY(-100%);
 }
 
 /* Mechanical downward roll triggers: on self or on any parent button/link/container */
 .roll-text-container.is-active .roll-main,
 .roll-text-container:hover .roll-main,
+a:hover .roll-text-container .roll-main,
+button:hover .roll-text-container .roll-main,
 a:hover .roll-main,
 button:hover .roll-main,
 .menu-toggle-btn:hover .roll-main,
 .btn-hero:hover .roll-main,
 .nav-drawer-link:hover .roll-main,
 .case-study-btn:hover .roll-main,
+.cs-read-more-btn:hover .roll-main,
+.cs-book-call-btn:hover .roll-main,
 .submit-btn-glow:hover .roll-main {
   transform: translateY(100%);
 }
 
 .roll-text-container.is-active .roll-clone,
 .roll-text-container:hover .roll-clone,
+a:hover .roll-text-container .roll-clone,
+button:hover .roll-text-container .roll-clone,
 a:hover .roll-clone,
 button:hover .roll-clone,
 .menu-toggle-btn:hover .roll-clone,
 .btn-hero:hover .roll-clone,
 .nav-drawer-link:hover .roll-clone,
 .case-study-btn:hover .roll-clone,
+.cs-read-more-btn:hover .roll-clone,
+.cs-book-call-btn:hover .roll-clone,
 .submit-btn-glow:hover .roll-clone {
-  transform: translateY(100%);
+  transform: translateY(0%);
 }
 
 /* --------------------------------------------------------------------------

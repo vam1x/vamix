@@ -17,17 +17,7 @@ import ContactPage from './components/ContactPage';
 import Footer from './components/Footer';
 
 function LenisScrollLock({ isDrawerOpen }) {
-  const lenis = useLenis();
-
-  useEffect(() => {
-    if (!lenis) return;
-    if (isDrawerOpen) {
-      lenis.stop();
-    } else {
-      lenis.start();
-    }
-  }, [isDrawerOpen, lenis]);
-
+  // Navigation is now a compact dropdown card (Image 2), so scroll lock is not needed
   return null;
 }
 
@@ -86,18 +76,10 @@ export default function App() {
       <LenisScrollLock isDrawerOpen={isDrawerOpen} />
 
       <div className="app-root">
-        {/* Sticky Adaptive Header */}
+        {/* Sticky Adaptive Header with Progressive Blur and Dropdown Card */}
         <Header 
           isDrawerOpen={isDrawerOpen} 
           setIsDrawerOpen={setIsDrawerOpen}
-          navigate={navigate}
-          currentPath={currentPath}
-        />
-
-        {/* Fullscreen Navigation Modal Drawer */}
-        <NavDrawer 
-          isOpen={isDrawerOpen} 
-          onClose={() => setIsDrawerOpen(false)}
           navigate={navigate}
           currentPath={currentPath}
         />

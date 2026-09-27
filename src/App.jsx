@@ -19,17 +19,7 @@ import AboutPage from './pages/AboutPage';
 import CaseStudiesPage from './pages/CaseStudiesPage';
 
 function LenisScrollLock({ isDrawerOpen }) {
-  const lenis = useLenis();
-
-  useEffect(() => {
-    if (!lenis) return;
-    if (isDrawerOpen) {
-      lenis.stop();
-    } else {
-      lenis.start();
-    }
-  }, [isDrawerOpen, lenis]);
-
+  // Navigation is now a compact dropdown card (Image 2), so scroll lock is not needed
   return null;
 }
 

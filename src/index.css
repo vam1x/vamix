@@ -767,8 +767,6 @@ img {
 }
 
 /* ==========================================================================
-<<<<<<< HEAD
-=======
    PROGRESSIVE BACKDROP BLUR OVERLAY (Images 1 & 3)
    ========================================================================== */
 .progressive-blur-container {
@@ -3200,32 +3198,6 @@ img {
 }
 
 @media (max-width: 809px) {
-<<<<<<< HEAD
-=======
-  .site-header {
-    padding: 20px 20px 0;
-  }
-
-  .header-menu-container {
-    left: auto;
-    right: 20px;
-    margin-left: 0;
-  }
-
-  .menu-dropdown-card {
-    top: 60px;
-    right: 20px;
-    left: 20px;
-    margin-left: 0;
-    width: auto;
-  }
-
-  .consult-banner,
-  .consult-banner-v2 {
-    display: none;
-  }
-
->>>>>>> f4e1870fc44fd075fee5562e52e6629227ffdf9b
   .hero-cta-group {
     grid-template-columns: 1fr;
   }
@@ -4057,7 +4029,6 @@ img {
 
 /* Contact Page Responsive Media Queries */
 @media (max-width: 1199px) {
-<<<<<<< HEAD
   .about-heading-section {
     padding: 240px 30px 100px;
   }
@@ -4069,9 +4040,6 @@ img {
     line-height: 61.2px;
     letter-spacing: -3.4px;
   }
-=======
-
->>>>>>> f4e1870fc44fd075fee5562e52e6629227ffdf9b
   .contact-hero-grid,
   .contact-conversational-grid,
   .contact-simple-grid,

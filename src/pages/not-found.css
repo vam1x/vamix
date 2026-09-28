@@ -1,0 +1,259 @@
+/* ==========================================================================
+   404 NOT FOUND PAGE STYLES
+   1:1 Match with Webus.in & VAMIX Swiss Brutalist Luxury Design System
+   ========================================================================== */
+
+.not-found-page {
+  background: var(--color-rule, #e8e8e8);
+  color: var(--color-ink, #171717);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: clip;
+}
+
+.not-found-hero {
+  min-height: 90vh;
+  padding: 180px var(--page-gutter, 40px) 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: clip;
+  box-sizing: border-box;
+}
+
+.not-found-container {
+  max-width: var(--container-max, 1920px);
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.not-found-copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-70, 70px);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.not-found-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-34, 34px);
+}
+
+.not-found-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: var(--text-11, 11px);
+  letter-spacing: var(--tracking-tight-2, -0.02em);
+  text-transform: uppercase;
+  color: var(--ink-60, rgba(23, 23, 23, 0.6));
+  font-weight: 500;
+  line-height: 1;
+}
+
+.not-found-eyebrow__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-ink, #171717);
+  display: inline-block;
+}
+
+.not-found-heading h1 {
+  font-family: var(--font-secondary, "Sora", sans-serif);
+  letter-spacing: var(--tracking-tight-5, -0.05em);
+  font-size: clamp(80px, 12vw, 150px);
+  font-weight: 700;
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--color-ink, #171717);
+}
+
+.not-found-desc {
+  color: var(--ink-60, rgba(23, 23, 23, 0.6));
+  font-family: var(--font-display, "Geist", sans-serif);
+  font-size: var(--text-18, 18px);
+  letter-spacing: var(--tracking-tight-2, -0.02em);
+  font-weight: 500;
+  line-height: var(--leading-140, 1.4);
+  white-space: pre-wrap;
+  max-width: 440px;
+  margin: 0;
+}
+
+/* Suggested Destinations */
+.not-found-quicklinks {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.not-found-quicklink {
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: var(--text-12, 12px);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--color-ink, #171717);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 2px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.not-found-quicklink:hover {
+  background: var(--color-ink, #171717);
+  color: var(--color-paper, #f5f5f5);
+  border-color: var(--color-ink, #171717);
+  transform: translateY(-1px);
+}
+
+/* Back to Home CTA button */
+.not-found-cta {
+  box-sizing: border-box;
+  color: var(--color-ink, #171717);
+  font-family: var(--font-secondary, "Sora", sans-serif);
+  font-size: var(--text-15, 15px);
+  height: 80px;
+  letter-spacing: var(--tracking-tight-3, -0.03em);
+  font-weight: 700;
+  line-height: 0.9;
+  padding: 0 var(--space-20, 20px) 0 var(--space-28, 28px);
+  text-transform: uppercase;
+  background: var(--color-paper, #f5f5f5);
+  flex: 0 0 280px;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.not-found-cta:before {
+  border-color: var(--black-07, rgba(0, 0, 0, 0.07));
+  box-sizing: border-box;
+  content: "";
+  pointer-events: none;
+  border-style: solid;
+  border-width: 1px;
+  position: absolute;
+  inset: 0;
+}
+
+.not-found-cta:after {
+  background: var(--gradient-brand, linear-gradient(90deg, #a31bb6 0%, #59bbd5 26.5%, #c9c5c7 51%, #e86167 74%, #f54510 100%));
+  content: "";
+  z-index: 1;
+  height: 2px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: height 0.2s ease;
+}
+
+.not-found-cta:hover:after {
+  height: 3px;
+}
+
+.not-found-cta-arrow {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  display: block;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.not-found-cta:hover .not-found-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Tablet Media Query */
+@media (max-width: 1199px) and (min-width: 810px) {
+  .not-found-hero {
+    padding: 200px var(--space-30, 30px) var(--space-30, 30px);
+    min-height: 85vh;
+  }
+  .not-found-container {
+    align-items: stretch;
+    gap: var(--space-60, 60px);
+    flex-direction: column;
+  }
+  .not-found-copy {
+    gap: var(--space-40, 40px);
+  }
+  .not-found-heading {
+    gap: var(--space-24, 24px);
+  }
+  .not-found-heading h1 {
+    font-size: 80px;
+  }
+  .not-found-desc {
+    font-size: var(--text-17, 17px);
+  }
+  .not-found-cta {
+    font-size: var(--text-14, 14px);
+    flex: none;
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+/* Mobile Media Query */
+@media (max-width: 809px) {
+  .not-found-hero {
+    min-height: 85vh;
+    padding: 140px var(--space-20, 20px) 40px;
+    justify-content: flex-end;
+  }
+  .not-found-container {
+    align-items: stretch;
+    gap: var(--space-30, 30px);
+    flex-direction: column;
+  }
+  .not-found-copy {
+    gap: 28px;
+  }
+  .not-found-heading {
+    gap: var(--space-16, 16px);
+  }
+  .not-found-heading h1 {
+    font-size: clamp(64px, 18vw, 90px);
+  }
+  .not-found-desc {
+    font-size: var(--text-15, 15px);
+  }
+  .not-found-cta {
+    background: var(--color-paper, #f5f5f5);
+    font-size: var(--text-13, 13px);
+    flex: none;
+    height: 70px;
+    width: 100%;
+  }
+  .not-found-quicklinks {
+    gap: 8px;
+  }
+  .not-found-quicklink {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+}

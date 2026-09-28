@@ -18,6 +18,7 @@ import CaseStudiesPage from './pages/CaseStudiesPage';
 import ServicesPage from './pages/ServicesPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function LenisScrollLock({ isDrawerOpen }) {
   // Navigation is now a compact dropdown card (Image 2), so scroll lock is not needed
@@ -45,7 +46,10 @@ export default function App() {
     if (path.includes('contact') || hash.includes('contact') || search.includes('contact')) {
       return 'contact';
     }
-    return 'home';
+    if (path === '/' || path === '' || hash === '#/' || hash === '' || hash === '#') {
+      return 'home';
+    }
+    return 'not-found';
   };
 
   const [currentRoute, setCurrentRoute] = useState(getInitialRoute);
@@ -76,9 +80,17 @@ export default function App() {
       setCurrentRoute('contact');
       window.history.pushState({ route: 'contact' }, '', '/contact');
       window.scrollTo({ top: 0, behavior: 'instant' });
-    } else {
+    } else if (cleanRoute === '' || cleanRoute === 'home' || cleanRoute === '/') {
       setCurrentRoute('home');
       window.history.pushState({ route: 'home' }, '', '/');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    } else if (cleanRoute.includes('404') || cleanRoute === 'not-found') {
+      setCurrentRoute('not-found');
+      window.history.pushState({ route: 'not-found' }, '', '/404');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    } else {
+      setCurrentRoute('not-found');
+      window.history.pushState({ route: 'not-found' }, '', '/' + cleanRoute);
       window.scrollTo({ top: 0, behavior: 'instant' });
     }
     setIsDrawerOpen(false);
@@ -87,6 +99,8 @@ export default function App() {
   useEffect(() => {
     if (currentRoute === 'home') {
       document.title = "Design & Development Agency India - Product Studio | VAMIX";
+    } else if (currentRoute === 'not-found') {
+      document.title = "Page Not Found (404) - VAMIX Digital Product Studio";
     }
   }, [currentRoute]);
 
@@ -106,8 +120,10 @@ export default function App() {
         setCurrentRoute('about');
       } else if (path.includes('contact') || hash.includes('contact')) {
         setCurrentRoute('contact');
-      } else {
+      } else if (path === '/' || path === '' || hash === '#/' || hash === '' || hash === '#') {
         setCurrentRoute('home');
+      } else {
+        setCurrentRoute('not-found');
       }
       window.scrollTo({ top: 0, behavior: 'instant' });
     };
@@ -133,7 +149,7 @@ export default function App() {
     >
       <LenisScrollLock isDrawerOpen={isDrawerOpen} />
 
-      <div className={`app-root ${currentRoute === 'case-studies' ? 'case-studies-route' : ''} ${currentRoute === 'home' ? 'home-route' : ''}`}>
+      <div className={`app-root ${currentRoute === 'case-studies' ? 'case-studies-route' : ''} ${currentRoute === 'home' ? 'home-route' : ''} ${currentRoute === 'not-found' ? 'not-found-route' : ''}`}>
         {/* Sticky Adaptive Header */}
         <Header 
           isDrawerOpen={isDrawerOpen} 
@@ -164,6 +180,8 @@ export default function App() {
             <AboutPage navigate={navigate} />
           ) : currentRoute === 'contact' ? (
             <ContactPage navigate={navigate} />
+          ) : currentRoute === 'not-found' ? (
+            <NotFoundPage navigate={navigate} />
           ) : (
             <>
               {/* Section 01: Hero */}

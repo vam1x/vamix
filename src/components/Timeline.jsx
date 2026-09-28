@@ -21,17 +21,30 @@ export default function Timeline() {
 
       <div className="timeline-arc-glow" aria-hidden="true"></div>
       <div className="section-container">
-
-        {/* 4 Column Divider Line with Crosshairs */}
-        <div className="timeline-grid-header-line" aria-hidden="true" style={{ marginTop: 0 }}>
-          <GridCrosshair style={{ left: '0%', top: '0px' }} />
-          <GridCrosshair style={{ left: '25%', top: '0px' }} />
-          <GridCrosshair style={{ left: '50%', top: '0px' }} />
-          <GridCrosshair style={{ left: '75%', top: '0px' }} />
-          <GridCrosshair style={{ left: '100%', top: '0px' }} />
+        <div className="timeline-belief-grid">
+          <div className="timeline-founder-photo">
+            <img src="https://framerusercontent.com/images/cz23onHcSXhg4ZTu5ZQiuL8tAM8.png?scale-down-to=1024&width=1023&height=1537" alt="Jaspal Singh at his desk" />
+            <span>JASPAL SINGH<br />FOUNDER &amp; DIRECTOR</span>
+          </div>
+          <motion.div
+            className="belief-quote-wrap"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="section-badge">
+              <span className="section-badge-dot"></span>
+              <span>09 WHAT WE BELIEVE</span>
+            </div>
+            <RevealText
+              text="WE DIDN'T BUILD THIS STUDIO TO FOLLOW TRENDS. WE BUILT IT TO SOLVE REAL PROBLEMS, CLEARLY AND WITHOUT WASTING YOUR TIME. GOOD PRODUCTS WORK QUIETLY, BUT ONLY IF THEY'RE BUILT RIGHT."
+              className="section-title-huge"
+              theme="light"
+            />
+          </motion.div>
         </div>
 
-        {/* 4 Milestones Cards */}
         <div className="timeline-milestones-grid">
           {milestones.map((item, idx) => (
             <motion.div
@@ -41,37 +54,12 @@ export default function Timeline() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -4 }}
             >
-              <div className="milestone-year">
-                <span>{item.year}</span>
-                <span style={{ fontSize: '1.5rem' }}>{item.icon}</span>
-              </div>
+              <div className="milestone-year">{item.year}</div>
               <p className="milestone-desc">{item.desc}</p>
             </motion.div>
           ))}
         </div>
-
-        {/* Belief Statement Quote */}
-        <motion.div
-          className="belief-quote-wrap"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7 }}
-        >
-          <span className="belief-giant-quote-mark" aria-hidden="true">“</span>
-          <div className="section-badge">
-            <span className="section-badge-dot"></span>
-            <span>09 WHAT WE BELIEVE</span>
-          </div>
-          <RevealText
-            text="WE DIDN'T BUILD THIS STUDIO TO FOLLOW TRENDS. WE BUILT IT TO SOLVE REAL PROBLEMS, CLEARLY AND WITHOUT WASTE."
-            className="section-title-huge"
-            theme="light"
-          />
-        </motion.div>
-
       </div>
     </section>
   );

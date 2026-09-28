@@ -2,17 +2,20 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SectionGrid from './SectionGrid';
 
-export default function Hero() {
+export default function Hero({ navigate }) {
   const panelRef = useRef(null);
   const h1ContainerRef = useRef(null);
   const [splitX, setSplitX] = useState('calc(41vw - 40px)');
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const updateSplit = () => {
       if (panelRef.current && h1ContainerRef.current) {
         const pRect = panelRef.current.getBoundingClientRect();
         const hRect = h1ContainerRef.current.getBoundingClientRect();
-        const diff = pRect.right - hRect.left;
+        const mobile = window.matchMedia('(max-width: 809.98px)').matches;
+        setIsMobile(mobile);
+        const diff = (mobile ? pRect.left : pRect.right) - hRect.left;
         setSplitX(`${diff}px`);
       }
     };
@@ -106,7 +109,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Tier 2: H1 Full-Width Headline (with Dual Split Clip-Path matching Image 4) */}
+          {/* Tier 2: H1 Full-Width Headline (with Dual Split Clip-Path matching Reference) */}
           <div className="hero-tier-h1" ref={h1ContainerRef} data-framer-name="H1">
             <motion.div
               className="hero-h1-dual-container"
@@ -114,32 +117,41 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             >
-              {/* White Layer over Dark Leather */}
-              <div 
-                className="hero-h1-split-layer hero-h1-layer-white"
-                style={{
-                  clipPath: `polygon(0 0, ${splitX} 0, ${splitX} 100%, 0 100%)`,
-                  WebkitClipPath: `polygon(0 0, ${splitX} 0, ${splitX} 100%, 0 100%)`
-                }}
-                aria-hidden="true"
+              {/* Base Black Layer */}
+              <svg 
+                className="hero-fit-text hero-fit-text-title" 
+                viewBox="0 0 1120 78" 
+                preserveAspectRatio="none"
+                aria-labelledby="hero-title"
               >
-                <h1 className="hero-h1-title-text hero-h1-text-white">
-                  DESIGN THAT CONVERTS
-                </h1>
-              </div>
+                <foreignObject width="100%" height="100%">
+                  <h1 id="hero-title" className="hero-h1-title-text hero-h1-text-black">
+                    DESIGN THAT CONVERTS
+                  </h1>
+                </foreignObject>
+              </svg>
 
-              {/* Black Layer over Light Paper */}
-              <div 
-                className="hero-h1-split-layer hero-h1-layer-black"
+              {/* White Overlay Layer with dynamic clip-path */}
+              <svg 
+                className="hero-fit-text hero-fit-text-title hero-fit-text-fill" 
+                viewBox="0 0 1120 78" 
+                preserveAspectRatio="none" 
+                aria-hidden="true"
                 style={{
-                  clipPath: `polygon(${splitX} 0, 100% 0, 100% 100%, ${splitX} 100%)`,
-                  WebkitClipPath: `polygon(${splitX} 0, 100% 0, 100% 100%, ${splitX} 100%)`
+                  clipPath: isMobile 
+                    ? `polygon(${splitX} 0, 100% 0, 100% 100%, ${splitX} 100%)` 
+                    : `polygon(0 0, ${splitX} 0, ${splitX} 100%, 0 100%)`,
+                  WebkitClipPath: isMobile 
+                    ? `polygon(${splitX} 0, 100% 0, 100% 100%, ${splitX} 100%)` 
+                    : `polygon(0 0, ${splitX} 0, ${splitX} 100%, 0 100%)`
                 }}
               >
-                <h1 className="hero-h1-title-text hero-h1-text-black">
-                  DESIGN THAT CONVERTS
-                </h1>
-              </div>
+                <foreignObject width="100%" height="100%">
+                  <span className="hero-h1-title-text hero-h1-text-white">
+                    DESIGN THAT CONVERTS
+                  </span>
+                </foreignObject>
+              </svg>
             </motion.div>
           </div>
 
@@ -153,9 +165,18 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.75, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
               >
-                <p className="hero-code-ships-title">
-                  CODE THAT SHIPS
-                </p>
+                <svg 
+                  className="hero-fit-text hero-fit-text-code" 
+                  viewBox="0 0 482 54" 
+                  preserveAspectRatio="none" 
+                  aria-hidden="true"
+                >
+                  <foreignObject width="100%" height="100%">
+                    <p className="hero-code-ships-title">
+                      CODE THAT SHIPS
+                    </p>
+                  </foreignObject>
+                </svg>
               </motion.div>
 
               <motion.p
@@ -177,7 +198,13 @@ export default function Hero() {
           {/* Tier 4: Huge Action Pill Buttons */}
           <div className="hero-tier-buttons" data-framer-name="Buttons">
             <motion.a
-              href="#contact"
+              href="/contact"
+              onClick={(e) => {
+                if (navigate) {
+                  e.preventDefault();
+                  navigate('contact');
+                }
+              }}
               className="hero-pill-btn hero-pill-black"
               data-framer-name="Desktop"
               initial={{ opacity: 0, y: 20 }}
@@ -195,7 +222,13 @@ export default function Hero() {
             </motion.a>
 
             <motion.a
-              href="#projects"
+              href="/case-studies"
+              onClick={(e) => {
+                if (navigate) {
+                  e.preventDefault();
+                  navigate('case-studies');
+                }
+              }}
               className="hero-pill-btn hero-pill-white"
               data-framer-name="Desktop"
               initial={{ opacity: 0, y: 20 }}

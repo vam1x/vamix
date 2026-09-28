@@ -8,7 +8,6 @@ import WhyUs from './components/WhyUs';
 import HowWeDoIt from './components/HowWeDoIt';
 import Results from './components/Results';
 import MoreProjects from './components/MoreProjects';
-import Team from './components/Team';
 import Timeline from './components/Timeline';
 import Faq from './components/Faq';
 import Contact from './components/Contact';
@@ -158,8 +157,6 @@ export default function App() {
               {/* Section 06: More Projects Showcase */}
               <MoreProjects navigate={navigate} />
 
-              {/* Section 07: The Team */}
-              <Team navigate={navigate} />
 
               {/* Section 08 & 09: Milestones & Studio Beliefs */}
               <Timeline navigate={navigate} />

@@ -4,74 +4,28 @@ import { motion } from 'framer-motion';
 export default function AboutTeam() {
   const members = [
     {
-      name: "JASPAL SINGH",
-      role: "FOUNDER & PRODUCT DIRECTOR",
-      desc: "13+ YEARS BUILDING PRODUCTS",
-      img: "https://framerusercontent.com/images/4MeRl7e2941aYE8j9iIP9mqKcxA.png?width=1254&height=1254",
-      badgeIcon: "•"
+      roleHeader: "FOUNDER & PRODUCT DIRECTOR",
+      badge: "*",
+      img: "/team/mayur-unagar.png",
+      gradient: "linear-gradient(90deg, #9333ea 0%, #f97316 100%)",
+      name: "MAYUR UNAGAR",
+      sub: "FOUNDER & PRODUCT DIRECTOR"
     },
     {
-      name: "RAHUL ROHILLA",
-      role: "PRODUCT DESIGN HEAD",
-      desc: "SYSTEMS & USER RESEARCH EXPERT",
-      img: "https://framerusercontent.com/images/gE8W7P6IkfEZ065NkXkptmimk.png?width=1696&height=2528",
-      badgeIcon: "••"
+      roleHeader: "CO-FOUNDER & DESIGN HEAD",
+      badge: "**",
+      img: "/team/vinit-pansuriya.png",
+      gradient: "linear-gradient(90deg, #ef4444 0%, #f97316 100%)",
+      name: "VINIT PANSURIYA",
+      sub: "PRODUCT DESIGN HEAD & SYSTEMS"
     },
     {
-      name: "AHMAR KHAN",
-      role: "UI/UX DESIGNER",
-      desc: "RAPID PROTOTYPING SPECIALIST",
-      img: "https://framerusercontent.com/images/LiYyq1u80njGedJpBraH2EHZDQ0.png?width=1696&height=2528",
-      badgeIcon: "•••"
-    },
-    {
-      name: "ANURAG SETHI",
-      role: "US SALES LEAD",
-      desc: "YOUR US-BASED POINT OF CONTACT",
-      img: "https://framerusercontent.com/images/fhY0tSzJsoYVfBzbeoxV6nAlrA.png?width=1696&height=2397",
-      badgeIcon: "••••"
-    },
-    {
-      name: "RUBY RATTEY",
-      role: "CLIENT SUCCESS MANAGER",
-      desc: "ENSURING EVERY CLIENT FEELS SUPPORTED",
-      img: "https://framerusercontent.com/images/X9xLPsYSVWl1LlqQDsYTQiuwG5E.png?width=1696&height=2288",
-      badgeIcon: "•"
-    },
-    {
-      name: "PRABHJOT",
-      role: "SENIOR AI OPERATIONS HEAD",
-      desc: "INTEGRATING AI INTO EVERY WORKFLOW",
-      img: "https://framerusercontent.com/images/ggjJGQwzCvwbhdllMh7BpYl6vHo.png?width=864&height=1016",
-      badgeIcon: "••"
-    },
-    {
-      name: "HIMANSHU RAJPUT",
-      role: "FULL STACK DEVELOPER",
-      desc: "BUILDING WHAT WE DESIGN, END TO END",
-      img: "https://framerusercontent.com/images/vnDfIyoHw2PLIG3FTK7edMabWA.jpg?width=1464&height=1650",
-      badgeIcon: "•••"
-    },
-    {
-      name: "VIKSIT CHAUHAN",
-      role: "AI ENGINEER",
-      desc: "BUILDING THE AI BEHIND OUR PRODUCTS",
-      img: "https://framerusercontent.com/images/MBqo0GIIQocT1gzABuKnzvDNk.jpeg?width=1345&height=1600",
-      badgeIcon: "••••"
-    },
-    {
-      name: "ANKIT",
-      role: "DESIGN ENGINEER",
-      desc: "WHERE DESIGN MEETS CODE",
-      img: "https://framerusercontent.com/images/IC37LVrT6pb4wg7A2jXQpTxNqQ.jpeg?width=1400&height=1600",
-      badgeIcon: "•"
-    },
-    {
-      name: "SURAJ MALIK",
-      role: "PROJECT MANAGER",
-      desc: "KEEPING EVERY PROJECT ON TRACK AND ON TIME",
-      img: "https://framerusercontent.com/images/sEx6L8h3gCY2AeK1MVoRpriKJA.png?width=676&height=848",
-      badgeIcon: "••"
+      roleHeader: "CO-FOUNDER & TECH HEAD",
+      badge: "***",
+      img: "/team/vatsal-kalathiya.png",
+      gradient: "linear-gradient(90deg, #9333ea 0%, #f97316 100%)",
+      name: "VATSAL KALATHIYA",
+      sub: "HEAD OF ENGINEERING & SYSTEMS"
     }
   ];
 
@@ -87,7 +41,7 @@ export default function AboutTeam() {
           </div>
         </div>
 
-        {/* Right Content & 10 Member Cards List */}
+        {/* Right Content */}
         <div className="about-team-content">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -103,45 +57,57 @@ export default function AboutTeam() {
             </p>
           </motion.div>
 
-          {/* Members List */}
-          <div className="about-members-list">
+          {/* 3 Members Card Grid matching the reference design */}
+          <div className="about-team-cards-grid">
             {members.map((member, idx) => (
-              <motion.div 
+              <motion.div
                 key={idx}
-                className="about-member-row"
-                initial={{ opacity: 0, y: 20 }}
+                className="about-team-card"
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.5, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.6)" }}
+                transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
               >
-                <span className="corner-cross tl">+</span>
-                <span className="corner-cross tr">+</span>
-                <span className="corner-cross bl">+</span>
-                <span className="corner-cross br">+</span>
+                {/* Top header bar */}
+                <div className="about-team-card-header">
+                  <span className="about-team-card-role">{member.roleHeader}</span>
+                  <span className="about-team-card-badge">{member.badge}</span>
+                </div>
 
-                {/* Avatar Photo + Aperture Indicator */}
-                <div className="about-member-avatar-wrap">
-                  <img 
-                    src={member.img} 
-                    alt={member.name} 
-                    className="about-member-img" 
-                    loading="lazy" 
+                {/* Photo container */}
+                <div className="about-team-card-photo-wrap">
+                  <img
+                    src={member.img}
+                    alt={member.name}
+                    className="about-team-card-photo"
+                    loading="lazy"
                   />
-                  <div className="about-member-dot-tag" aria-hidden="true">
-                    <span className="dot-shape"></span>
+                </div>
+
+                {/* Bottom accent gradient line */}
+                <div 
+                  className="about-team-card-gradient" 
+                  style={{ background: member.gradient }}
+                  aria-hidden="true"
+                />
+
+                {/* Bottom card footer info */}
+                <div className="about-team-card-footer">
+                  <div className="about-team-card-name-row">
+                    <div className="about-team-card-name-group">
+                      <span className="about-team-card-symbol" aria-hidden="true">◖●</span>
+                      <h3 className="about-team-card-name">{member.name}</h3>
+                    </div>
+                    <svg className="about-team-card-grip" width="6" height="12" viewBox="0 0 6 12" fill="none" aria-hidden="true">
+                      <circle cx="1.5" cy="1.5" r="1" fill="currentColor" />
+                      <circle cx="4.5" cy="1.5" r="1" fill="currentColor" />
+                      <circle cx="1.5" cy="6" r="1" fill="currentColor" />
+                      <circle cx="4.5" cy="6" r="1" fill="currentColor" />
+                      <circle cx="1.5" cy="10.5" r="1" fill="currentColor" />
+                      <circle cx="4.5" cy="10.5" r="1" fill="currentColor" />
+                    </svg>
                   </div>
-                </div>
-
-                {/* Name & Role Header */}
-                <div className="about-member-info">
-                  <h3 className="about-member-name">{member.name}</h3>
-                  <span className="about-member-role">{member.role}</span>
-                </div>
-
-                {/* Monospace Description */}
-                <div className="about-member-desc-wrap">
-                  <span className="about-member-desc">{member.desc}</span>
+                  <div className="about-team-card-sub">{member.sub}</div>
                 </div>
               </motion.div>
             ))}

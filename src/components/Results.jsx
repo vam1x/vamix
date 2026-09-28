@@ -153,8 +153,7 @@ export default function Results({ navigate }) {
 
           <figcaption>
             <div className="case-section__quote-lines">
-              <span>JAMES RODRIGUEZ</span>
-              <span>FOUNDER &amp; CEO DATAVIEW</span>
+              <span>VAMIX STUDIO</span>
             </div>
           </figcaption>
         </figure>

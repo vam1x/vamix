@@ -44,14 +44,6 @@
   color: #ffffff;
 }
 
-.site-header.is-home-hero .menu-toggle-btn .menu-btn-text {
-  color: #171717 !important;
-}
-
-.site-header.is-home-hero .menu-btn-icon .bar-h,
-.site-header.is-home-hero .menu-btn-icon .bar-v {
-  background-color: #171717 !important;
-}
 
 .header-inner-grid {
   display: grid;
@@ -149,56 +141,59 @@
   display: flex;
   align-items: center;
   pointer-events: auto;
-  mix-blend-mode: difference;
   z-index: 101;
-}
-
-.site-header.menu-is-open .header-col-menu {
-  mix-blend-mode: normal;
 }
 
 .menu-toggle-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #ffffff;
+  user-select: none;
+  position: relative;
+  pointer-events: auto;
   font-family: var(--font-mono, 'IBM Plex Mono', monospace);
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 4px 0;
+  letter-spacing: 0.06em;
+  padding: 6px 0;
   margin: 0;
   outline: none;
+  transition: color 0.25s ease, transform 0.2s ease;
+  -webkit-text-stroke: 0.4px currentColor;
+  text-shadow: 0 0 0.5px currentColor;
 }
 
 .menu-btn-icon {
   position: relative;
-  width: 12px;
-  height: 12px;
-  display: inline-flex;
+  width: 15px;
+  height: 15px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
 }
 
 .menu-btn-icon .bar-h {
   position: absolute;
-  width: 12px;
-  height: 2px;
-  background-color: currentColor;
-  border-radius: 1px;
+  width: 15px;
+  height: 2.5px;
+  background-color: currentColor !important;
+  transition: transform 0.35s ease, background-color 0.25s ease;
+  border-radius: 1.5px;
 }
 
 .menu-btn-icon .bar-v {
   position: absolute;
-  width: 2px;
-  height: 12px;
-  background-color: currentColor;
-  border-radius: 1px;
+  width: 2.5px;
+  height: 15px;
+  background-color: currentColor !important;
+  transition: transform 0.35s ease, background-color 0.25s ease;
+  border-radius: 1.5px;
 }
 
 .menu-toggle-btn.is-active .menu-btn-icon {
@@ -208,9 +203,35 @@
 .menu-btn-text {
   display: inline-flex;
   align-items: center;
-  font-size: 15px;
-  font-weight: 700;
-  color: currentColor;
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: currentColor !important;
+  line-height: 1;
+}
+
+/* Background-adaptive color behavior:
+   On black/dark background: white (#ffffff)
+   On white/light background: black (#111111)
+*/
+.menu-toggle-btn.is-over-dark,
+.site-header.is-over-dark .menu-toggle-btn,
+.site-header.theme-light-text .menu-toggle-btn {
+  color: #ffffff !important;
+}
+
+.menu-toggle-btn.is-over-light,
+.site-header.is-over-light .menu-toggle-btn,
+.site-header.theme-dark-text .menu-toggle-btn {
+  color: #111111 !important;
+}
+
+/* When navigation drawer is open, keep menu button white */
+.site-header.menu-is-open .menu-toggle-btn,
+.menu-toggle-btn.is-active {
+  color: #ffffff !important;
 }
 
 /* Header Column 4: Quick Consult Banner */
@@ -888,67 +909,6 @@ img {
   align-items: center;
   z-index: 101;
   pointer-events: auto;
-  mix-blend-mode: difference;
-}
-
-.menu-toggle-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  user-select: none;
-  position: relative;
-  pointer-events: auto;
-  color: #ffffff;
-}
-
-.menu-btn-icon {
-  position: relative;
-  width: 12px;
-  height: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.menu-btn-icon .bar-h {
-  position: absolute;
-  width: 12px;
-  height: 2px;
-  background-color: currentColor !important;
-  transition: transform 0.35s ease;
-  border-radius: 1px;
-}
-
-.menu-btn-icon .bar-v {
-  position: absolute;
-  width: 2px;
-  height: 12px;
-  background-color: currentColor !important;
-  transition: transform 0.35s ease;
-  border-radius: 1px;
-}
-
-.menu-toggle-btn.is-active .menu-btn-icon {
-  transform: rotate(225deg);
-}
-
-.menu-toggle-btn.is-active .menu-btn-icon .bar-h,
-.menu-toggle-btn.is-active .menu-btn-icon .bar-v {
-  background-color: currentColor !important;
-}
-
-.menu-toggle-btn .menu-btn-text {
-  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: currentColor !important;
 }
 
 /* Floating Brutalist Dark Dropdown Menu Card (Image 2) */

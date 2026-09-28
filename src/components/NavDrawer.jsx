@@ -82,6 +82,7 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
             <nav className="nav-card-links" aria-label="Main Navigation">
               {links.map((link) => {
                 const isActive = (link.href === '/about' && currentRoute === 'about') || 
+                                 (link.href === '/services' && currentRoute === 'services') ||
                                  (link.href === '/contact' && currentRoute === 'contact') || 
                                  (link.href === '/case-studies' && currentRoute === 'case-studies') ||
                                  (link.href === '/' && currentRoute === 'home');

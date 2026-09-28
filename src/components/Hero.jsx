@@ -100,7 +100,7 @@ export default function Hero() {
                   <span className="hero-score-val">4.9/5</span>
                 </div>
                 <p className="hero-rating-sub">
-                  <span className="hero-rating-dim">Based on </span>23 verified reviews
+                  <span className="hero-rating-dim">Based on </span>15 verified reviews
                 </p>
               </div>
             </motion.div>

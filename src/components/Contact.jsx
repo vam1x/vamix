@@ -135,6 +135,7 @@ export default function Contact({ navigate }) {
               <nav className="contact-mega-links">
                 <a href="/" onClick={(e) => handleLinkClick(e, '/')}><RollingText text="HOME" /></a>
                 <a href="/about" onClick={(e) => handleLinkClick(e, '/about')}><RollingText text="ABOUT" /></a>
+                <a href="/services" onClick={(e) => handleLinkClick(e, '/services')}><RollingText text="SERVICES" /></a>
                 <a href="/case-studies" onClick={(e) => handleLinkClick(e, '/case-studies')}><RollingText text="CASE STUDIES" /></a>
                 <a href="/contact" onClick={(e) => handleLinkClick(e, '/contact')}><RollingText text="CONTACT" /></a>
               </nav>
@@ -153,10 +154,10 @@ export default function Contact({ navigate }) {
 
               <div className="contact-legal-info">
                 <div className="contact-legal-left">
-                  BY SUBMITTING, YOU AGREE TO OUR <strong>TERMS</strong> AND <strong>PRIVACY POLICY</strong>.
+                  BY SUBMITTING, YOU AGREE TO OUR <a href="/terms-of-service" onClick={(e) => handleLinkClick(e, '/terms-of-service')} style={{ color: 'inherit', textDecoration: 'none' }}><strong>TERMS</strong></a> AND <a href="/privacy-policy" onClick={(e) => handleLinkClick(e, '/privacy-policy')} style={{ color: 'inherit', textDecoration: 'none' }}><strong>PRIVACY POLICY</strong></a>.
                 </div>
                 <div className="contact-legal-right">
-                  WE ARE BASED IN <strong>DELHI</strong>
+                  WE ARE BASED IN <strong>SURAT</strong>
                 </div>
               </div>
             </div>
@@ -171,7 +172,7 @@ export default function Contact({ navigate }) {
             </a>
           </div>
           <div>
-            <span style={{ display: 'block', fontSize: '11px', color: 'var(--text-dark-subtle)' }}>+91 96547 30419</span>
+            <a href="tel:+916359198825" style={{ display: 'block', fontSize: '11px', color: 'var(--text-dark-subtle)', textDecoration: 'none' }}>+91 63591 98825</a>
             <a href="mailto:hi@vamix.com" style={{ fontWeight: 700, fontSize: '1.2rem' }}>HI@VAMIX.COM</a>
           </div>
           <div className="footer-social-links">

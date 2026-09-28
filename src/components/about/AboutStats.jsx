@@ -5,7 +5,7 @@ import VamixLogo from '../VamixLogo';
 export default function AboutStats() {
   const stats = [
     { label: "CLIENT RETENTION RATE", val: "85%" },
-    { label: "COMPLETED CLIENT PROJECTS", val: "66+" },
+    { label: "COMPLETED CLIENT PROJECTS", val: "21+" },
     { label: "FASTER PROJECT DELIVERY", val: "5X" }
   ];
 

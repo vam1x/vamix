@@ -75,7 +75,7 @@ export default function AboutHeading() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="years-number-row">
-            <span className="years-num">13</span>
+            <span className="years-num">3</span>
             <span className="years-plus">+</span>
           </div>
           <p className="years-label">YEARS OF EXCELLENCE</p>
@@ -133,7 +133,7 @@ export default function AboutHeading() {
                   <span className="about-score">4.9/5</span>
                 </div>
                 <div className="about-rating-label">
-                  <span className="muted">Based on </span>23 verified reviews
+                  <span className="muted">Based on </span>15 verified reviews
                 </div>
               </div>
             </motion.div>

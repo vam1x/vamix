@@ -5,10 +5,10 @@ import SectionGrid, { GridCrosshair } from './SectionGrid';
 
 export default function Timeline() {
   const milestones = [
-    { year: "2012", icon: "🔍", desc: "FOUNDED IN DELHI TO SOLVE REAL DESIGN PROBLEMS" },
-    { year: "2017", icon: "⚙️", desc: "OPENED TENNESSEE OFFICE TO SERVE US CLIENTS" },
-    { year: "2020", icon: "🚩", desc: "CROSSED 50 SUCCESSFUL CLIENT PROJECTS MILESTONE" },
-    { year: "2025", icon: "❖", desc: "OVER A DECADE BUILDING PRODUCTS USERS LOVE" }
+    { year: "2023", icon: "🔍", desc: "FOUNDED IN SURAT TO SOLVE REAL DESIGN PROBLEMS" },
+    { year: "2024", icon: "⚙️", desc: "OPENED TENNESSEE OFFICE TO SERVE US CLIENTS" },
+    { year: "2025", icon: "🚩", desc: "CROSSED 20+ SUCCESSFUL CLIENT PROJECTS MILESTONE" },
+    { year: "2026", icon: "❖", desc: "BUILDING DIGITAL PRODUCTS USERS AND TEAMS LOVE" }
   ];
 
   return (

@@ -187,7 +187,7 @@ export default function ContactPage({ navigate }) {
                   </motion.button>
 
                   <p className="conversational-legal-note">
-                    BY SUBMITTING, YOU AGREE TO OUR <strong>TERMS</strong> AND <strong>PRIVACY POLICY</strong>.
+                    BY SUBMITTING, YOU AGREE TO OUR <a href="/terms-of-service" onClick={(e) => { e.preventDefault(); if (navigate) navigate('/terms-of-service'); else window.location.href = '/terms-of-service'; }} style={{ color: 'inherit', textDecoration: 'none' }}><strong>TERMS</strong></a> AND <a href="/privacy-policy" onClick={(e) => { e.preventDefault(); if (navigate) navigate('/privacy-policy'); else window.location.href = '/privacy-policy'; }} style={{ color: 'inherit', textDecoration: 'none' }}><strong>PRIVACY POLICY</strong></a>.
                   </p>
                 </div>
               </form>
@@ -215,7 +215,7 @@ export default function ContactPage({ navigate }) {
                   You don’t need to prepare slides or technical notes, just share what’s on your mind. Whether it’s a quick question or a bigger project idea, we’ll get back to you with a clear next step.
                 </p>
                 <p className="contact-sub-statement">
-                  Every message that comes through this form is read by a real person on our team. No chatbots, no outsourced support. Most of the time, it's Ruby or Jaspal who will see it first and make sure it reaches the right designer or engineer.
+                  Every message that comes through this form is read by a real person on our team. No chatbots, no outsourced support. Our senior product leaders will see it first and make sure it reaches the right designer or engineer.
                 </p>
               </div>
 
@@ -232,8 +232,8 @@ export default function ContactPage({ navigate }) {
               {/* Direct Reach Meta Row */}
               <div className="contact-direct-reach-row">
                 <div className="contact-reach-item">
-                  <a href="tel:+919654730419" className="reach-phone-link">
-                    +91 96547 30419
+                  <a href="tel:+916359198825" className="reach-phone-link">
+                    +91 63591 98825
                   </a>
                   <a href="mailto:hi@vamix.com" className="reach-email-link">
                     HI@VAMIX.COM

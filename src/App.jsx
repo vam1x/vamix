@@ -17,6 +17,8 @@ import Footer from './components/Footer';
 import AboutPage from './pages/AboutPage';
 import CaseStudiesPage from './pages/CaseStudiesPage';
 import ServicesPage from './pages/ServicesPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsOfServicePage from './pages/TermsOfServicePage';
 
 function LenisScrollLock({ isDrawerOpen }) {
   // Navigation is now a compact dropdown card (Image 2), so scroll lock is not needed
@@ -31,7 +33,10 @@ export default function App() {
     const path = window.location.pathname.toLowerCase();
     const hash = window.location.hash.toLowerCase();
     const search = window.location.search.toLowerCase();
-    if (`${path}${hash}${search}`.includes('case-studies')) return 'case-studies';
+    const full = `${path}${hash}${search}`;
+    if (full.includes('privacy-policy') || full.includes('privacy')) return 'privacy-policy';
+    if (full.includes('terms-of-service') || full.includes('terms')) return 'terms-of-service';
+    if (full.includes('case-studies')) return 'case-studies';
     if (path.includes('services') || hash.includes('services') || search.includes('services')) {
       return 'services';
     }
@@ -48,7 +53,15 @@ export default function App() {
 
   const navigate = useCallback((route) => {
     const cleanRoute = route.replace(/^\.?\//, '').toLowerCase();
-    if (cleanRoute.includes('case-studies')) {
+    if (cleanRoute.includes('privacy-policy') || cleanRoute.includes('privacy')) {
+      setCurrentRoute('privacy-policy');
+      window.history.pushState({ route: 'privacy-policy' }, '', '/privacy-policy');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    } else if (cleanRoute.includes('terms-of-service') || cleanRoute.includes('terms')) {
+      setCurrentRoute('terms-of-service');
+      window.history.pushState({ route: 'terms-of-service' }, '', '/terms-of-service');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    } else if (cleanRoute.includes('case-studies')) {
       setCurrentRoute('case-studies');
       window.history.pushState({ route: 'case-studies' }, '', '/case-studies');
       window.scrollTo({ top: 0, behavior: 'instant' });
@@ -73,10 +86,20 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (currentRoute === 'home') {
+      document.title = "Design & Development Agency India - Product Studio | VAMIX";
+    }
+  }, [currentRoute]);
+
+  useEffect(() => {
     const handleLocationChange = () => {
       const path = window.location.pathname.toLowerCase();
       const hash = window.location.hash.toLowerCase();
-      if (path.includes('case-studies') || hash.includes('case-studies')) {
+      if (path.includes('privacy-policy') || hash.includes('privacy-policy') || path.includes('privacy') || hash.includes('privacy')) {
+        setCurrentRoute('privacy-policy');
+      } else if (path.includes('terms-of-service') || hash.includes('terms-of-service') || path.includes('terms') || hash.includes('terms')) {
+        setCurrentRoute('terms-of-service');
+      } else if (path.includes('case-studies') || hash.includes('case-studies')) {
         setCurrentRoute('case-studies');
       } else if (path.includes('services') || hash.includes('services')) {
         setCurrentRoute('services');
@@ -130,7 +153,11 @@ export default function App() {
 
         {/* Main Content Area */}
         <main>
-          {currentRoute === 'case-studies' ? (
+          {currentRoute === 'privacy-policy' ? (
+            <PrivacyPolicyPage navigate={navigate} />
+          ) : currentRoute === 'terms-of-service' ? (
+            <TermsOfServicePage navigate={navigate} />
+          ) : currentRoute === 'case-studies' ? (
             <CaseStudiesPage navigate={navigate} />
           ) : currentRoute === 'services' ? (
             <ServicesPage navigate={navigate} />
@@ -174,7 +201,7 @@ export default function App() {
         </main>
 
         {/* Sub-Footer Legal Bar */}
-        <Footer />
+        <Footer navigate={navigate} />
       </div>
     </ReactLenis>
   );

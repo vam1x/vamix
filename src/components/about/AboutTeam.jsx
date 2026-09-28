@@ -6,7 +6,7 @@ export default function AboutTeam() {
     {
       name: "JASPAL SINGH",
       role: "FOUNDER & PRODUCT DIRECTOR",
-      desc: "13+ YEARS BUILDING PRODUCTS",
+      desc: "3+ YEARS BUILDING PRODUCTS",
       img: "https://framerusercontent.com/images/4MeRl7e2941aYE8j9iIP9mqKcxA.png?width=1254&height=1254",
       badgeIcon: "•"
     },

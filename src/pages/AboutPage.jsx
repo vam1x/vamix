@@ -10,13 +10,13 @@ import Contact from '../components/Contact';
 
 export default function AboutPage({ navigate }) {
   useEffect(() => {
-    document.title = "About VAMIX - Product Studio in Delhi | 12+ Years";
+    document.title = "About VAMIX - Product Studio in Surat | 3+ Years";
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="about-page-wrapper">
-      {/* 01: Top Heading / Hero (13+ Years & Social Proof) */}
+      {/* 01: Top Heading / Hero (3+ Years & Social Proof) */}
       <AboutHeading />
 
       {/* 02: Studio Office Showcase & Metrics Bar */}

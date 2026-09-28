@@ -13,20 +13,20 @@ function MilestoneIcon({ index }) {
 export default function AboutBelief() {
   const milestones = [
     {
-      year: "2012",
-      desc: "FOUNDED IN DELHI TO SOLVE REAL DESIGN PROBLEMS"
+      year: "2023",
+      desc: "FOUNDED IN SURAT TO SOLVE REAL DESIGN PROBLEMS"
     },
     {
-      year: "2017",
+      year: "2024",
       desc: "OPENED TENNESSEE OFFICE TO SERVE US CLIENTS"
     },
     {
-      year: "2020",
-      desc: "CROSSED 50 SUCCESSFUL CLIENT PROJECTS MILESTONE"
+      year: "2025",
+      desc: "CROSSED 20+ SUCCESSFUL CLIENT PROJECTS MILESTONE"
     },
     {
-      year: "2025",
-      desc: "OVER A DECADE BUILDING PRODUCTS USERS LOVE"
+      year: "2026",
+      desc: "BUILDING DIGITAL PRODUCTS USERS AND TEAMS LOVE"
     }
   ];
 
@@ -45,15 +45,11 @@ export default function AboutBelief() {
           <div className="about-founder-col">
             <div className="about-founder-frame">
               <img 
-                src="https://framerusercontent.com/images/FP6nNnQY60yUMD3si95zI4tbxuk.png?width=2048&height=2048" 
-                alt="Jaspal Singh - Founder & Product Director" 
+                src="/images/architectural-studio-corner.jpg" 
+                alt="VAMIX Design Studio & Craft" 
                 className="about-founder-img"
                 loading="lazy"
               />
-            </div>
-            <div className="about-founder-meta">
-              <h4 className="founder-name">JASPAL SINGH</h4>
-              <span className="founder-role">FOUNDER & PRODUCT DIRECTOR</span>
             </div>
           </div>
 

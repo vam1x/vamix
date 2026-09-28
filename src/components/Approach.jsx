@@ -119,8 +119,8 @@ export default function Approach({ navigate }) {
 
               <div className="who-section__credit">
                 <img
-                  src="/team/mayur-unagar.png"
-                  alt="Mayur Unagar"
+                  src="/favicon.svg"
+                  alt="VAMIX"
                   loading="lazy"
                   decoding="async"
                   width="42"
@@ -128,8 +128,8 @@ export default function Approach({ navigate }) {
                   className="who-section__credit-image"
                 />
                 <span className="who-section__credit-lines">
-                  <span>MAYUR UNAGAR</span>
-                  <span>FOUNDER &amp; PRODUCT DIRECTOR</span>
+                  <span>VAMIX</span>
+                  <span>CORE DEVELOPERS</span>
                 </span>
               </div>
             </div>

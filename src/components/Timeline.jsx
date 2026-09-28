@@ -51,16 +51,16 @@ export default function Timeline() {
             transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
           >
             <img
-              src="/beliefs/beliefs-1.webp"
-              alt="Mayur Unagar at his desk"
+              src="/images/architectural-studio-corner.jpg"
+              alt="VAMIX Studio"
               loading="lazy"
               decoding="async"
               width="480"
               height="721"
             />
             <div className="belief-section__profile-copy mono-label">
-              <span>MAYUR UNAGAR</span>
-              <span>FOUNDER &amp; DIRECTOR</span>
+              <span>VAMIX</span>
+              <span>CORE DEVELOPERS</span>
             </div>
           </motion.div>
 

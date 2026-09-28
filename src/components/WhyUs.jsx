@@ -1,121 +1,149 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { RevealText } from '../hooks/useScrollReveal';
-import SectionGrid, { GridCrosshair } from './SectionGrid';
+import SectionGrid from './SectionGrid';
+import AnimatedCounter from './AnimatedCounter';
 
 export default function WhyUs() {
-  const pillars = [
-    { num: "01", text: "USER-FIRST", highlight: "DESIGN APPROACH" },
-    { num: "02", text: "PROVEN RESULTS", highlight: "ACROSS INDUSTRIES" },
-    { num: "03", text: "COLLABORATIVE PROCESS,", highlight: "NO SURPRISES" },
-    { num: "04", text: "12+ YEARS", highlight: "OF DESIGN AND BUILD" }
+  const advantages = [
+    {
+      num: "01",
+      line1: " USER-FIRST",
+      line2: "DESIGN APPROACH"
+    },
+    {
+      num: "02",
+      line1: "PROVEN RESULTS",
+      line2: "ACROSS INDUSTRIES"
+    },
+    {
+      num: "03",
+      line1: "COLLABORATIVE PROCESS, ",
+      line2: "NO SURPRISES"
+    },
+    {
+      num: "04",
+      line1: "13+ YEARS OF",
+      line2: "DESIGN AND BUILD"
+    }
   ];
 
   return (
-    <section className="section why-section" id="why">
-      {/* Blueprint Grid Lines & Top Boundary with Crosshairs */}
+    <section className="advantages-section" id="why-us" aria-labelledby="advantages-title">
+      {/* 4-Column Blueprint Grid Lines */}
       <SectionGrid
         theme="light"
         showTopLine={true}
       />
 
-      <div className="section-container">
-
-        <div className="why-split-grid">
-          <div className="why-left">
-            <div className="section-badge">
-              <span className="section-badge-dot"></span>
-              <span>03 WHY US?</span>
+      <div className="advantages-section__inner">
+        <div className="advantages-row">
+          {/* Left Column (Cols 1-2): Kicker, Heading, Description */}
+          <div className="advantages-lead">
+            <div className="advantages-lead__heading">
+              <div className="section-kicker section-kicker--dark">
+                <span>03</span>
+                <span>Why us?</span>
+              </div>
+              <h2 id="advantages-title">
+                <span className="advantages-lead__muted">WHY COMPANIES</span> CHOOSE VAMIX®
+              </h2>
             </div>
-            <RevealText
-              text="WHY COMPANIES CHOOSE VAMIX®"
-              className="section-title-huge"
-              theme="light"
-            />
-            <p className="section-subhead">
+            <p className="advantages-lead__description">
               We turn messy product problems into tools people trust.
             </p>
           </div>
 
-          <div className="why-right">
-            {/* Geometric Aperture Symbol */}
-            <div style={{ marginBottom: '2rem', display: 'flex', gap: '8px' }}>
-              <div style={{ width: '24px', height: '24px', borderRadius: '50% 0 0 50%', background: '#000' }}></div>
-              <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: '#d0d0d0' }}></div>
+          {/* Right Column (Cols 3-4): Aperture Icon, Heading, 4 Advantage Items, Source */}
+          <div className="advantages-section__list">
+            <div className="advantages-section__list-heading">
+              <span className="advantages-section__mark" aria-hidden="true">
+                <svg width="79" height="58" viewBox="0 0 79 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21.9438 29C21.9438 45.0163 34.7162 58 50.4719 58C66.2275 58 79 45.0163 79 29C79 12.9837 66.2275 0 50.4719 0C34.7162 0 21.9438 12.9837 21.9438 29Z" fill="#171717" />
+                  <path d="M18.9145 1.79855C7.89493 5.7584 4.18643e-06 16.4418 0 28.9998C0 41.5577 7.89493 52.2411 18.9145 56.201V1.79855Z" fill="#171717" />
+                </svg>
+              </span>
+              <h3>
+                <span>OUR ADVANTAGES </span>
+                <span className="advantages-section__list-heading-muted">include:</span>
+              </h3>
             </div>
 
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '1.5rem' }}>
-              OUR ADVANTAGES INCLUDE:
-            </h3>
-
-            <div className="why-pillars-list">
-              {pillars.map((pillar, idx) => (
-                <motion.div
-                  key={idx}
-                  className="why-pillar-item"
-                  initial={{ opacity: 0, x: -16 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <GridCrosshair style={{ left: '0px', top: '0px' }} />
-                  <span className="pillar-badge">{pillar.num}</span>
-                  <span>{pillar.text} <strong>{pillar.highlight}</strong></span>
-                </motion.div>
+            <div className="advantage-items">
+              {advantages.map((item, idx) => (
+                <article key={idx} className="advantage-item">
+                  <i className="corner-mark corner-mark--bottom-left" aria-hidden="true"></i>
+                  <span className="advantage-item__number">{item.num}</span>
+                  <div className="advantage-item__copy">
+                    <span className="advantage-item__line">{item.line1}</span>
+                    <span className="advantage-item__line">{item.line2}</span>
+                  </div>
+                </article>
               ))}
             </div>
 
-            <div style={{ marginTop: '2rem', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-dark-subtle)' }}>
-              <span>SOURCE: CLIENT FEEDBACK & PROJECT DATA</span>
+            <div className="stats-panel__source mono-label">
+              <span>Source:</span>
+              <span>CLIENT FEEDBACK &amp; PROJECT DATA</span>
+              <span className="stats-panel__source-date">
+                <img src="/calendar.png" alt="" width="16" height="16" />
+                <span>Apr 2025</span>
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Studio Metrics Row */}
-        <div className="metrics-row">
-          {[
-            { num: "85%", label: "CLIENT\nRETENTION" },
-            { num: "12+", label: "YEARS\nEXPERIENCE" },
-            { num: "5X", label: "FASTER\nDELIVERY" }
-          ].map((metric, idx) => (
-            <motion.div
-              key={idx}
-              className="metric-card"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -4 }}
-            >
-              <span className="metric-big-num">{metric.num}</span>
-              <span className="metric-label" style={{ whiteSpace: 'pre-line' }}>{metric.label}</span>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Partnership Callout Banner with Aurora */}
-        <motion.div
-          className="partnership-banner"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="partnership-aurora" aria-hidden="true"></div>
-          <div>
-            <div className="section-badge">
-              <span className="section-badge-dot"></span>
-              <span>PARTNERSHIP, NOT HANDOFFS</span>
-            </div>
-            <h3 className="section-title-huge" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', marginBottom: '1rem' }}>
-              YOUR TEAM WORKS WITH OUR TEAM
-            </h3>
-            <p className="section-subhead">
-              We don't vanish for weeks then drop finished work. You're involved at every step: workshops, reviews, testing.
-            </p>
+        {/* Stats & Partnership Panel Box */}
+        <div className="stats-panel">
+          <div className="page-grid-lines stats-panel__grid" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
           </div>
-        </motion.div>
 
+          <div className="stats-panel__top">
+            <div className="stat-card">
+              <strong>
+                <AnimatedCounter to={85} suffix="%" />
+              </strong>
+              <span className="mono-label">CLIENT RETENTION</span>
+            </div>
+            <div className="stat-card">
+              <strong>
+                <AnimatedCounter to={13} suffix="+" />
+              </strong>
+              <span className="mono-label">YEARS EXPERIENCE</span>
+            </div>
+            <div className="stat-card">
+              <strong>
+                <AnimatedCounter to={5} suffix="X" />
+              </strong>
+              <span className="mono-label">FASTER DELIVERY</span>
+            </div>
+          </div>
+
+          <div className="stats-panel__bottom">
+            <div className="partnership-panel">
+              <div className="partnership-panel__copy">
+                <div className="partnership-panel__heading">
+                  <p className="partnership-panel__eyebrow">PARTNERSHIP, NOT HANDOFFS</p>
+                  <h3>YOUR TEAM WORKS WITH OUR TEAM</h3>
+                </div>
+                <p>
+                  We don't vanish for weeks then drop finished work. You're involved at every step: workshops, reviews, testing.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <img
+            src="/stats-gradient.webp"
+            alt="Colored gradient background"
+            width="676"
+            height="563"
+            className="stats-panel__gradient"
+          />
+        </div>
       </div>
     </section>
   );

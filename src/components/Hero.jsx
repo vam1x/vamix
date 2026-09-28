@@ -6,7 +6,12 @@ export default function Hero({ navigate }) {
   const panelRef = useRef(null);
   const h1ContainerRef = useRef(null);
   const [splitX, setSplitX] = useState('calc(41vw - 40px)');
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(max-width: 809.98px)').matches;
+    }
+    return false;
+  });
 
   useEffect(() => {
     const updateSplit = () => {
@@ -43,6 +48,13 @@ export default function Hero({ navigate }) {
   // Repeat logos for smooth continuous infinite marquee
   const tickerLogos = [...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos];
 
+  const springConfig = {
+    type: "spring",
+    stiffness: 219,
+    damping: 27,
+    mass: 0.3
+  };
+
   return (
     <section className="webus-hero" id="hero" data-framer-name="Hero">
       {/* Background Blueprint Grid Guides (5 Lines / 4 Columns with Crosshairs) */}
@@ -55,9 +67,15 @@ export default function Hero({ navigate }) {
       <div className="hero-art-panel" ref={panelRef} aria-hidden="true" data-framer-name="Image container">
         <motion.div
           className="hero-art-img-wrapper"
-          initial={{ opacity: 0, scale: 1.04 }}
+          style={{ transformOrigin: 'center center' }}
+          initial={{ opacity: 0.001, scale: 1.4 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{
+            type: 'tween',
+            duration: 1.6,
+            delay: 0,
+            ease: [0.68, 0, 0, 1]
+          }}
         >
           <img
             src="https://framerusercontent.com/images/cx9DzPrXWjEIHDWlLpzDmBWYZI.png?width=1024&height=1536"
@@ -81,9 +99,12 @@ export default function Hero({ navigate }) {
             <motion.div
               className="hero-social-proof"
               data-framer-name="Container"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                ...springConfig,
+                delay: isMobile ? 0.4 : 0.2
+              }}
             >
               {/* Avatars */}
               <div className="hero-avatars" data-framer-name="Avatars">
@@ -113,15 +134,18 @@ export default function Hero({ navigate }) {
           <div className="hero-tier-h1" ref={h1ContainerRef} data-framer-name="H1">
             <motion.div
               className="hero-h1-dual-container"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 1, y: isMobile ? 120 : 250 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                ...springConfig,
+                delay: isMobile ? 0.2 : 0.1
+              }}
             >
               {/* Base Black Layer */}
               <svg 
                 className="hero-fit-text hero-fit-text-title" 
                 viewBox="0 0 1120 78" 
-                preserveAspectRatio="none"
+                preserveAspectRatio="none" 
                 aria-labelledby="hero-title"
               >
                 <foreignObject width="100%" height="100%">
@@ -161,9 +185,12 @@ export default function Hero({ navigate }) {
             <div className="hero-secondary-content" data-framer-name="Text">
               <motion.div
                 className="hero-code-ships-wrap"
-                initial={{ opacity: 0, y: 25 }}
+                initial={{ opacity: 1, y: -90 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.75, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                transition={{
+                  ...springConfig,
+                  delay: isMobile ? 0.3 : 0.1
+                }}
               >
                 <svg 
                   className="hero-fit-text hero-fit-text-code" 
@@ -183,7 +210,10 @@ export default function Hero({ navigate }) {
                 className="hero-statement"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                transition={{
+                  ...springConfig,
+                  delay: isMobile ? 0.5 : 0.25
+                }}
               >
                 One team designs your product and builds it. No handoffs, no lost intent.
               </motion.p>
@@ -209,7 +239,10 @@ export default function Hero({ navigate }) {
               data-framer-name="Desktop"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                ...springConfig,
+                delay: 0.6
+              }}
             >
               <div className="hero-btn-roll-track" data-framer-name="Container">
                 <span className="hero-btn-roll-text hero-btn-roll-top">
@@ -233,7 +266,10 @@ export default function Hero({ navigate }) {
               data-framer-name="Desktop"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.52, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                ...springConfig,
+                delay: isMobile ? 0.7 : 0.65
+              }}
             >
               <div className="hero-btn-roll-track" data-framer-name="Container">
                 <span className="hero-btn-roll-text hero-btn-roll-top">
@@ -252,9 +288,12 @@ export default function Hero({ navigate }) {
             <motion.div
               className="hero-ticker-container"
               data-framer-name="Ticker"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                ...springConfig,
+                delay: 0.5
+              }}
             >
               <div className="hero-ticker-mask">
                 <div className="hero-ticker-track">

@@ -1,81 +1,164 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import SectionGrid from './SectionGrid';
 import { RevealText } from '../hooks/useScrollReveal';
-import SectionGrid, { GridCrosshair } from './SectionGrid';
+import RollingLabel from './RollingLabel';
+import AnimatedCounter from './AnimatedCounter';
 
-export default function Results() {
+export default function Results({ navigate }) {
   return (
-    <section className="section results-section" id="results">
-      {/* Blueprint Grid Lines & Top Boundary with Crosshairs */}
+    <section className="case-section" id="results" aria-labelledby="case-title">
+      {/* 4-Column Blueprint Grid Lines */}
       <SectionGrid
         theme="light"
         showTopLine={true}
       />
 
-      {/* Left Editorial Column */}
-      <motion.div
-        className="results-left"
-        initial={{ opacity: 0, x: -24 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      {/* Featured Right-Side Image Backdrop with Split Mask */}
+      <motion.div 
+        className="case-section__backdrop" 
+        aria-hidden="true"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="results-editorial">
-        <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-            <div className="section-badge" style={{ marginBottom: 0 }}>
-              <span className="section-badge-dot"></span>
-              <span>05 RESULTS</span>
-            </div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', opacity: 0.4 }}>VAMIX®</span>
-          </div>
-
-          <h2 className="section-title-huge" style={{ marginBottom: '2rem' }}>
-            SUCCESS<br />STORY
-          </h2>
-          <p className="section-subhead" style={{ marginBottom: '4rem' }}>
-            Bitfront partnered with VAMIX to redesign its crypto exchange interface, removing intimidation from digital asset trading while preserving professional-grade capability. The platform was rebuilt to guide users from first transaction to advanced trading with clarity and confidence.
-          </p>
-        </div>
-
-        {/* Case Study Spec Table */}
-        <div className="results-spec-table" style={{ borderTop: '1px solid var(--border-hairline)', paddingTop: '1.5rem', fontFamily: 'var(--font-mono)', fontSize: '12px', textTransform: 'uppercase' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid var(--border-hairline)' }}>
-            <span style={{ color: 'var(--text-dark-subtle)' }}>DATE:</span>
-            <span>2020-2023</span>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid var(--border-hairline)' }}>
-            <span style={{ color: 'var(--text-dark-subtle)' }}>INDUSTRY:</span>
-            <span>FINTECH / WEB3</span>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0' }}>
-            <span style={{ color: 'var(--text-dark-subtle)' }}>CHALLENGE:</span>
-            <span style={{ textAlign: 'right', maxWidth: '350px' }}>INTIMIDATING, EXPERT-ONLY INTERFACE THAT BLOCKED RETAIL USER ADOPTION</span>
-          </div>
-        </div>
-        <a className="results-case-link" href="/case-studies/bitfront-crypto-exchange-ui">SEE HOW WE DID IT <span aria-hidden="true">↗</span></a>
-        </div>
-        <div className="results-metrics">
-          <div className="results-metric"><span>ONBOARDING<br />TIME CUT</span><strong>-71%</strong></div>
-          <div className="results-metric"><span>USER RETENTION<br />IMPROVED</span><strong>+43%</strong></div>
-        </div>
-      </motion.div>
-
-      {/* Right Immersive Photo Quote */}
-      <motion.div
-        className="results-right-quote"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="results-quote-overlay" aria-hidden="true"></div>
-        <RevealText
-          text="THEY DIDN'T JUST MAKE IT PRETTY. THEY MADE IT WORK. OUR USERS WENT FROM CONFUSED TO CONFIDENT IN WEEKS. BEST DESIGN INVESTMENT WE'VE MADE."
-          className="results-quote-text"
+        <img
+          src="/case/case-1.webp"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          width="1200"
+          height="977"
         />
-        <p className="results-quote-credit">JAMES RODRIGUEZ<br /><span>FOUNDER &amp; CEO DATAVIEW</span></p>
+        <div className="case-section__mask"></div>
       </motion.div>
+
+      <div className="case-section__inner">
+        {/* Left Column: Story, Specs, CTA & Proof Stats */}
+        <div className="case-section__copy">
+          <div className="case-section__story">
+            <div className="case-section__head">
+              <div className="case-section__head-row">
+                <div className="case-section__head-copy">
+                  <div className="section-kicker section-kicker--dark">
+                    <span>05</span>
+                    <span>Results</span>
+                  </div>
+                  <h2 id="case-title" className="case-section__eyebrow">
+                    SUCCESS STORY
+                  </h2>
+                </div>
+                <span className="case-section__logo-text" aria-hidden="true">
+                  VAMIX®
+                </span>
+              </div>
+              <p className="case-section__description">
+                Bitfront partnered with VAMIX to redesign its crypto exchange interface,
+                removing intimidation from digital asset trading while preserving
+                professional-grade capability. The platform was rebuilt to guide users from
+                first transaction to advanced trading with clarity and confidence.
+              </p>
+            </div>
+
+            <dl className="case-meta">
+              <div>
+                <dt>Date:</dt>
+                <dd>2020-2023</dd>
+              </div>
+              <div>
+                <dt>Industry:</dt>
+                <dd>Fintech / Web3</dd>
+              </div>
+              <div>
+                <dt>Challenge:</dt>
+                <dd>Intimidating, expert-only interface that blocked retail user adoption</dd>
+              </div>
+            </dl>
+          </div>
+
+          <a
+            className="cta-block case-section__cta"
+            href="/case-studies"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate?.('case-studies');
+            }}
+          >
+            <RollingLabel text="SEE HOW WE DID IT" />
+            <svg
+              className="cta-arrow"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M 0 0 L 8 8 L 0 16"
+                transform="translate(8 4)"
+                fill="transparent"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
+
+          <div className="case-section__proof">
+            <div>
+              <span>ONBOARDING TIME CUT</span>
+              <strong>
+                <AnimatedCounter to={71} prefix="-" suffix="%" />
+                <span className="case-section__proof-dots" aria-hidden="true">
+                  <i></i><i></i><i></i><i></i><i></i><i></i>
+                </span>
+              </strong>
+            </div>
+            <div>
+              <span>USER RETENTION IMPROVED</span>
+              <strong>
+                <AnimatedCounter to={43} prefix="+" suffix="%" />
+                <span className="case-section__proof-dots" aria-hidden="true">
+                  <i></i><i></i><i></i><i></i><i></i><i></i>
+                </span>
+              </strong>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Immersive Quote & Glyph */}
+        <figure className="case-section__quote">
+          <svg
+            className="case-section__quote-glyph"
+            width="88"
+            height="72"
+            viewBox="0 0 88 72"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M 24.856 31.462 C 24.856 16.75 41.784 15.891 41.784 15.891 L 41.784 0 C 6.443 0 0 24.178 0 35.715 L 0 72 L 41.788 72 L 41.788 31.462 Z M 71.068 31.462 C 71.068 16.75 88 15.891 88 15.891 L 88 0 C 52.654 0 46.212 24.178 46.212 35.715 L 46.212 72 L 88 72 L 88 31.462 Z"
+              fill="rgb(245, 245, 245)"
+            />
+          </svg>
+
+          <blockquote>
+            <RevealText
+              text="THEY DIDN'T JUST MAKE IT PRETTY. THEY MADE IT WORK. OUR USERS WENT FROM CONFUSED TO CONFIDENT IN WEEKS. BEST DESIGN INVESTMENT WE'VE MADE."
+              theme="dark"
+            />
+          </blockquote>
+
+          <figcaption>
+            <div className="case-section__quote-lines">
+              <span>JAMES RODRIGUEZ</span>
+              <span>FOUNDER &amp; CEO DATAVIEW</span>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
     </section>
   );
 }

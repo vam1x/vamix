@@ -81,6 +81,48 @@
   transition: opacity 0.2s ease;
 }
 
+.vamix-logo-brand {
+  display: inline-flex;
+  align-items: baseline;
+  font-family: 'Caveat', 'Brush Script MT', cursive;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.015em;
+  color: inherit;
+  user-select: none;
+  transform: rotate(-3.5deg);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  -webkit-text-stroke: 1px currentColor;
+  text-shadow: 0 0 0.8px currentColor;
+}
+
+.brand-logo-link:hover .vamix-logo-brand,
+.nav-card-logo-link:hover .vamix-logo-brand,
+.contact-col-1-logo-link:hover .vamix-logo-brand {
+  opacity: 0.82;
+  transform: rotate(-3.5deg) scale(1.03);
+}
+
+.vamix-logo-brand .vamix-logo-word {
+  display: inline-block;
+  color: inherit;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+.vamix-logo-brand .vamix-logo-reg {
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 13px;
+  font-weight: 700;
+  vertical-align: super;
+  margin-left: 3px;
+  line-height: 1;
+  color: inherit;
+  opacity: 0.85;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+
 .brand-logo-link:hover .webus-logo-svg {
   opacity: 0.8;
 }

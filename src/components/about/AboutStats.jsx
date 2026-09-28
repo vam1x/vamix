@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import VamixLogo from '../VamixLogo';
 
 export default function AboutStats() {
   const stats = [
@@ -14,7 +15,7 @@ export default function AboutStats() {
         
         {/* Left Side: Watermark / Studio Identity */}
         <div className="about-stats-side">
-          <span className="about-watermark-text">WEBUS®</span>
+          <VamixLogo style={{ fontSize: '32px', opacity: 0.4 }} />
         </div>
 
         {/* Right Side: Studio Showcase & Metrics Card */}
@@ -29,7 +30,7 @@ export default function AboutStats() {
           <div className="about-studio-photo-frame">
             <img 
               src="https://framerusercontent.com/images/c67C5n6mfhTUQv7UYjH3n7xbSvk.jpg?width=1184&height=864" 
-              alt="Webus Studio Open Plan Office" 
+              alt="VAMIX Studio Open Plan Office" 
               className="about-studio-img"
               loading="lazy"
             />

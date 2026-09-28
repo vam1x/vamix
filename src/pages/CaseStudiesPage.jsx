@@ -10,7 +10,7 @@ export default function CaseStudiesPage({ navigate }) {
   const [activeIdx, setActiveIdx] = useState(null);
 
   useEffect(() => {
-    document.title = 'Case Studies | Webus Product Studio';
+    document.title = 'Case Studies | VAMIX Product Studio';
     window.scrollTo(0, 0);
   }, []);
 

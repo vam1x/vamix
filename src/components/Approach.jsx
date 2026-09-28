@@ -98,7 +98,7 @@ export default function Approach({ navigate }) {
               <GridCrosshair style={{ right: '0px', bottom: '0px' }} />
               <img
                 src="https://framerusercontent.com/images/aSnx8r69QAkgwoNJwYhujjsNU0.png?width=1672&height=941"
-                alt="Webus Product Interface Dashboard Mockup"
+                alt="VAMIX Product Interface Dashboard Mockup"
                 className="approach-mockup-img"
               />
             </motion.div>

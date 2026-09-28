@@ -74,7 +74,7 @@ export default function ContactPage({ navigate }) {
         </div>
       </section>
 
-      {/* SECTION 2: INTERACTIVE CONVERSATIONAL FORM ("HI, WEBUS TEAM!") */}
+      {/* SECTION 2: INTERACTIVE CONVERSATIONAL FORM ("HI, VAMIX TEAM!") */}
       <section className="section contact-conversational-section" id="contact-form">
         <SectionGrid theme="light" showTopLine={false} />
 
@@ -87,7 +87,7 @@ export default function ContactPage({ navigate }) {
             <div className="contact-form-main-col">
               <form className="conversational-form" onSubmit={handleSubmit}>
                 <div className="conversational-header">
-                  <p className="conversational-greeting">HI, WEBUS TEAM!</p>
+                  <p className="conversational-greeting">HI, VAMIX TEAM!</p>
                 </div>
 
                 {/* Line 1: MY NAME IS [input] FROM [input] . */}
@@ -223,7 +223,7 @@ export default function ContactPage({ navigate }) {
               <div className="contact-studio-image-frame">
                 <img
                   src="https://framerusercontent.com/images/c67C5n6mfhTUQv7UYjH3n7xbSvk.jpg?width=1184&height=864"
-                  alt="Webus Studio Office Space"
+                  alt="VAMIX Studio Office Space"
                   className="contact-studio-img"
                   loading="lazy"
                 />
@@ -235,8 +235,8 @@ export default function ContactPage({ navigate }) {
                   <a href="tel:+919654730419" className="reach-phone-link">
                     +91 96547 30419
                   </a>
-                  <a href="mailto:hi@webus.in" className="reach-email-link">
-                    HI@WEBUS.IN
+                  <a href="mailto:hi@vamix.com" className="reach-email-link">
+                    HI@VAMIX.COM
                   </a>
                 </div>
 
@@ -244,7 +244,7 @@ export default function ContactPage({ navigate }) {
                   <a href="https://www.linkedin.com/in/jsrattey/" target="_blank" rel="noopener noreferrer" className="reach-social-pill">
                     LI
                   </a>
-                  <a href="https://www.instagram.com/webus.in/?hl=en" target="_blank" rel="noopener noreferrer" className="reach-social-pill">
+                  <a href="https://www.instagram.com/vamix/?hl=en" target="_blank" rel="noopener noreferrer" className="reach-social-pill">
                     IG
                   </a>
                 </div>

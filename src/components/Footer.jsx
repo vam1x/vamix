@@ -8,7 +8,7 @@ export default function Footer() {
         <a href="./terms-of-service">TERMS OF SERVICE</a>
       </div>
       <div>
-        <span>© 2025 WEBUS® ALL RIGHTS RESERVED.</span>
+        <span>© 2025 VAMIX® ALL RIGHTS RESERVED.</span>
       </div>
     </footer>
   );

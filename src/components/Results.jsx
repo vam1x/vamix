@@ -26,14 +26,14 @@ export default function Results() {
               <span className="section-badge-dot"></span>
               <span>05 RESULTS</span>
             </div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', opacity: 0.4 }}>WEBUS®</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', opacity: 0.4 }}>VAMIX®</span>
           </div>
 
           <h2 className="section-title-huge" style={{ marginBottom: '2rem' }}>
             SUCCESS<br />STORY
           </h2>
           <p className="section-subhead" style={{ marginBottom: '4rem' }}>
-            Bitfront partnered with Webus to redesign its crypto exchange interface, removing intimidation from digital asset trading while preserving professional-grade capability. The platform was rebuilt to guide users from first transaction to advanced trading with clarity and confidence.
+            Bitfront partnered with VAMIX to redesign its crypto exchange interface, removing intimidation from digital asset trading while preserving professional-grade capability. The platform was rebuilt to guide users from first transaction to advanced trading with clarity and confidence.
           </p>
         </div>
 

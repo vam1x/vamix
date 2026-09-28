@@ -10,7 +10,6 @@ import Results from './components/Results';
 import MoreProjects from './components/MoreProjects';
 import Team from './components/Team';
 import Timeline from './components/Timeline';
-import Insights from './components/Insights';
 import Faq from './components/Faq';
 import Contact from './components/Contact';
 import ContactPage from './components/ContactPage';
@@ -147,7 +146,7 @@ export default function App() {
               {/* Section 02: Our Approach & Services */}
               <Approach navigate={navigate} />
 
-              {/* Section 03: Why Companies Choose Webus */}
+              {/* Section 03: Why Companies Choose VAMIX */}
               <WhyUs navigate={navigate} />
 
               {/* Section 04: The Fast Track & Cost of Delay Matrix */}
@@ -165,10 +164,7 @@ export default function App() {
               {/* Section 08 & 09: Milestones & Studio Beliefs */}
               <Timeline navigate={navigate} />
 
-              {/* Section 10: Editorial Insights */}
-              <Insights navigate={navigate} />
-
-              {/* Section 11: Help & Info FAQ */}
+              {/* Section 10: Help & Info FAQ */}
               <Faq navigate={navigate} />
 
               {/* Section 12: Get In Touch */}

@@ -28,7 +28,7 @@ export default function WhyUs() {
               <span>03 WHY US?</span>
             </div>
             <RevealText
-              text="WHY COMPANIES CHOOSE WEBUS®"
+              text="WHY COMPANIES CHOOSE VAMIX®"
               className="section-title-huge"
               theme="light"
             />

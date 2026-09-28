@@ -81,7 +81,7 @@ const devServices = [
 
 export default function ServicesPage({ navigate }) {
   useEffect(() => {
-    document.title = "Services: Design & Development | Webus";
+    document.title = "Services: Design & Development | VAMIX";
     window.scrollTo(0, 0);
   }, []);
 

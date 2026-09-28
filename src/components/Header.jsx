@@ -62,12 +62,8 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
   const isLightText = isDarkSection && !isScrolled;
 
   return (
-    <>
-      {/* Top Progressive Blur Backdrop */}
-      <div className="header-progressive-blur" aria-hidden="true" />
-
-      <header 
-        ref={headerRef}
+    <header 
+      ref={headerRef}
         className={`site-header ${isScrolled ? 'is-scrolled' : ''} ${isHomeHero ? 'is-home-hero' : isLightText ? 'theme-light-text' : 'theme-dark-text'} ${isDrawerOpen ? 'menu-is-open' : ''}`}
         role="banner"
       >
@@ -137,6 +133,5 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
           </div>}
         </div>
       </header>
-    </>
   );
 }

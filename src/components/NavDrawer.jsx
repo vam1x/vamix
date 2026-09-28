@@ -16,7 +16,7 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
   const links = [
     { title: "HOME", href: "/" },
     { title: "ABOUT", href: "/about" },
-    { title: "SERVICES", href: "/#services" },
+    { title: "SERVICES", href: "/services" },
     { title: "CASE STUDIES", href: "/case-studies" },
     { title: "INSIGHTS", href: "/#insights" },
     { title: "CAREERS", href: "/#careers" },
@@ -24,7 +24,7 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
   ];
 
   const handleLinkClick = (e, href) => {
-    if (href === '/' || href === '/about' || href === '/contact' || href === '/case-studies') {
+    if (href === '/' || href === '/about' || href === '/services' || href === '/contact' || href === '/case-studies') {
       e.preventDefault();
       if (navigate) {
         navigate(href);

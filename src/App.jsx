@@ -17,6 +17,7 @@ import ContactPage from './components/ContactPage';
 import Footer from './components/Footer';
 import AboutPage from './pages/AboutPage';
 import CaseStudiesPage from './pages/CaseStudiesPage';
+import ServicesPage from './pages/ServicesPage';
 
 function LenisScrollLock({ isDrawerOpen }) {
   // Navigation is now a compact dropdown card (Image 2), so scroll lock is not needed
@@ -32,6 +33,9 @@ export default function App() {
     const hash = window.location.hash.toLowerCase();
     const search = window.location.search.toLowerCase();
     if (`${path}${hash}${search}`.includes('case-studies')) return 'case-studies';
+    if (path.includes('services') || hash.includes('services') || search.includes('services')) {
+      return 'services';
+    }
     if (path.includes('about') || hash.includes('about') || search.includes('about')) {
       return 'about';
     }
@@ -48,6 +52,10 @@ export default function App() {
     if (cleanRoute.includes('case-studies')) {
       setCurrentRoute('case-studies');
       window.history.pushState({ route: 'case-studies' }, '', '/case-studies');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    } else if (cleanRoute.includes('services')) {
+      setCurrentRoute('services');
+      window.history.pushState({ route: 'services' }, '', '/services');
       window.scrollTo({ top: 0, behavior: 'instant' });
     } else if (cleanRoute.includes('about')) {
       setCurrentRoute('about');
@@ -71,6 +79,8 @@ export default function App() {
       const hash = window.location.hash.toLowerCase();
       if (path.includes('case-studies') || hash.includes('case-studies')) {
         setCurrentRoute('case-studies');
+      } else if (path.includes('services') || hash.includes('services')) {
+        setCurrentRoute('services');
       } else if (path.includes('about') || hash.includes('about')) {
         setCurrentRoute('about');
       } else if (path.includes('contact') || hash.includes('contact')) {
@@ -123,6 +133,8 @@ export default function App() {
         <main>
           {currentRoute === 'case-studies' ? (
             <CaseStudiesPage navigate={navigate} />
+          ) : currentRoute === 'services' ? (
+            <ServicesPage navigate={navigate} />
           ) : currentRoute === 'about' ? (
             <AboutPage navigate={navigate} />
           ) : currentRoute === 'contact' ? (

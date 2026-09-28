@@ -4,7 +4,7 @@ import { RevealText } from '../hooks/useScrollReveal';
 import RollingText from './RollingText';
 import SectionGrid, { GridCrosshair } from './SectionGrid';
 
-export default function Approach() {
+export default function Approach({ navigate }) {
   const services = [
     {
       num: "/01",
@@ -159,7 +159,13 @@ export default function Approach() {
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <motion.a
-                href="#projects"
+                href="/case-studies"
+                onClick={(e) => {
+                  if (navigate) {
+                    e.preventDefault();
+                    navigate('/case-studies');
+                  }
+                }}
                 className="btn-pill btn-pill-light"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -167,7 +173,13 @@ export default function Approach() {
                 <RollingText text="OUR CASE STUDIES" />
               </motion.a>
               <motion.a
-                href="./services"
+                href="/services"
+                onClick={(e) => {
+                  if (navigate) {
+                    e.preventDefault();
+                    navigate('/services');
+                  }
+                }}
                 className="btn-pill btn-pill-white"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}

@@ -12,19 +12,19 @@ export default function Faq() {
     },
     {
       q: "How much does a project cost, and what's included?",
-      a: "OUR PRICING IS SCOPE-BASED RATHER THAN HOURLY, GIVING YOU COMPLETE COST PREDICTABILITY. TYPICAL PRODUCT DESIGN SPRINTS START AT $8,000, WITH FULL-STACK APPLICATION BUILDS SCOPED TRANSPARENTLY AFTER OUR DISCOVERY SESSION."
+      a: "PRICING DEPENDS ON PROJECT SCOPE AND COMPLEXITY. TYPICAL DELIVERABLES INCLUDE RESEARCH, DESIGN, PROTOTYPES, TESTING, AND A WORKING BUILD WITH HANDOFF DOCS. WE PROVIDE DETAILED QUOTES AFTER YOUR DISCOVERY CALL."
     },
     {
       q: "What if we don't have design specs or wireframes ready?",
-      a: "THAT'S EXACTLY WHAT PRODUCT DISCOVERY IS DESIGNED FOR. MOST CLIENTS COME TO US WITH A ROUGH IDEA OR FEATURE LIST; WE ORGANIZE AND TEST THE SPECS WITH ACTUAL USERS BEFORE A SINGLE LINE OF PRODUCTION CODE IS WRITTEN."
+      a: "NO PROBLEM. MOST OF OUR CLIENTS START WITH JUST AN IDEA OR A BUSINESS CHALLENGE. WE RUN DISCOVERY WORKSHOPS TO DEFINE YOUR REQUIREMENTS, MAP USER FLOWS, AND CREATE THE FOUNDATION BEFORE ANY DESIGN WORK BEGINS."
     },
     {
       q: "Do you build the product, or just design it?",
-      a: "WE ARE A DUAL-TRACK STUDIO: WE DESIGN AND SHIP THE CODE. OUR ENGINEERING LEADS WORK HAND-IN-HAND WITH PRODUCT DESIGNERS SO THERE ARE NO HANDOFF BOTTLENECKS OR LOSS OF DESIGN INTENT."
+      a: "WE BUILD, IN-HOUSE. OUR TEAM SHIPS PRODUCTION CODE FOR WEB, MOBILE, AND AI PRODUCTS. WE CAN ALSO WORK ALONGSIDE YOUR DEV TEAM WITH CLEAN HANDOFFS WHEN THAT FITS BETTER."
     },
     {
       q: "What if we're not satisfied with the initial work?",
-      a: "OUR SPRINT PROCESS INCLUDES DAILY ASYNC CHECK-INS AND WEEKLY REVIEW DEMOS. YOU ARE NEVER BLINDSIDED BY A BIG REVEAL; FEEDBACK IS INCORPORATED CONTINUOUSLY THROUGHOUT THE MILESTONE."
+      a: "WE BUILD IN REVISION ROUNDS AT EVERY STAGE. IF THE WORK MISSES THE MARK, WE ITERATE UNTIL IT'S RIGHT. REGULAR CHECK-INS AND FEEDBACK LOOPS ENSURE YOU'RE NEVER SURPRISED BY THE FINAL RESULT."
     }
   ];
 
@@ -93,6 +93,20 @@ export default function Faq() {
                 </div>
               );
             })}
+          </div>
+          <div className="faq-contact-prompt">
+            <span className="faq-contact-eyebrow">CONTACT US DIRECTLY</span>
+            <div className="faq-contact-action">
+              <h3>STILL UNSURE?</h3>
+              <a href="/contact" className="faq-contact-button">ASK A QUESTION <span aria-hidden="true">›</span></a>
+            </div>
+            <div className="faq-contact-person">
+              <p>My role is to make sure every client feels supported from day one.</p>
+              <div className="faq-contact-person-detail">
+                <img src="https://framerusercontent.com/images/awFufuyIlbDdk2me7dySF9Y3r8.png?scale-down-to=512&width=2048&height=2048" alt="Ruby Rattey" width="42" height="42" />
+                <span><strong>RUBY RATTEY</strong><small>CLIENT SUCCESS MANAGER</small></span>
+              </div>
+            </div>
           </div>
         </div>
 

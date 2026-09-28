@@ -6,13 +6,16 @@ export default function Hero() {
   const panelRef = useRef(null);
   const h1ContainerRef = useRef(null);
   const [splitX, setSplitX] = useState('calc(41vw - 40px)');
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const updateSplit = () => {
       if (panelRef.current && h1ContainerRef.current) {
         const pRect = panelRef.current.getBoundingClientRect();
         const hRect = h1ContainerRef.current.getBoundingClientRect();
-        const diff = pRect.right - hRect.left;
+        const mobile = window.matchMedia('(max-width: 809.98px)').matches;
+        setIsMobile(mobile);
+        const diff = (mobile ? pRect.left : pRect.right) - hRect.left;
         setSplitX(`${diff}px`);
       }
     };
@@ -118,8 +121,8 @@ export default function Hero() {
               <div 
                 className="hero-h1-split-layer hero-h1-layer-white"
                 style={{
-                  clipPath: `polygon(0 0, ${splitX} 0, ${splitX} 100%, 0 100%)`,
-                  WebkitClipPath: `polygon(0 0, ${splitX} 0, ${splitX} 100%, 0 100%)`
+                  clipPath: isMobile ? `polygon(${splitX} 0, 100% 0, 100% 100%, ${splitX} 100%)` : `polygon(0 0, ${splitX} 0, ${splitX} 100%, 0 100%)`,
+                  WebkitClipPath: isMobile ? `polygon(${splitX} 0, 100% 0, 100% 100%, ${splitX} 100%)` : `polygon(0 0, ${splitX} 0, ${splitX} 100%, 0 100%)`
                 }}
                 aria-hidden="true"
               >
@@ -132,8 +135,8 @@ export default function Hero() {
               <div 
                 className="hero-h1-split-layer hero-h1-layer-black"
                 style={{
-                  clipPath: `polygon(${splitX} 0, 100% 0, 100% 100%, ${splitX} 100%)`,
-                  WebkitClipPath: `polygon(${splitX} 0, 100% 0, 100% 100%, ${splitX} 100%)`
+                  clipPath: isMobile ? `polygon(0 0, ${splitX} 0, ${splitX} 100%, 0 100%)` : `polygon(${splitX} 0, 100% 0, 100% 100%, ${splitX} 100%)`,
+                  WebkitClipPath: isMobile ? `polygon(0 0, ${splitX} 0, ${splitX} 100%, 0 100%)` : `polygon(${splitX} 0, 100% 0, 100% 100%, ${splitX} 100%)`
                 }}
               >
                 <h1 className="hero-h1-title-text hero-h1-text-black">

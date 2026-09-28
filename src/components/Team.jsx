@@ -123,6 +123,14 @@ export default function Team() {
           ))}
         </div>
 
+        <div className="team-footer">
+          <p className="team-footer-statement">NO MIDDLEMEN. NO REPS. YOU WORK WITH DESIGNERS AND ENGINEERS.</p>
+          <div className="team-footer-action">
+            <a href="/contact">START YOUR PROJECT <span aria-hidden="true">↗</span></a>
+            <span>DEDICATED TO YOUR GROWTH&nbsp; WORLDWIDE</span>
+          </div>
+        </div>
+
       </div>
     </section>
   );

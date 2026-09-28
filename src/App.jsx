@@ -111,7 +111,7 @@ export default function App() {
     >
       <LenisScrollLock isDrawerOpen={isDrawerOpen} />
 
-      <div className={`app-root ${currentRoute === 'case-studies' ? 'case-studies-route' : ''}`}>
+      <div className={`app-root ${currentRoute === 'case-studies' ? 'case-studies-route' : ''} ${currentRoute === 'home' ? 'home-route' : ''}`}>
         {/* Sticky Adaptive Header */}
         <Header 
           isDrawerOpen={isDrawerOpen} 

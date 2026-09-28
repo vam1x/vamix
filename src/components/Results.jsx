@@ -20,6 +20,7 @@ export default function Results() {
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
+        <div className="results-editorial">
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
             <div className="section-badge" style={{ marginBottom: 0 }}>
@@ -38,7 +39,7 @@ export default function Results() {
         </div>
 
         {/* Case Study Spec Table */}
-        <div style={{ borderTop: '1px solid var(--border-hairline)', paddingTop: '1.5rem', fontFamily: 'var(--font-mono)', fontSize: '12px', textTransform: 'uppercase' }}>
+        <div className="results-spec-table" style={{ borderTop: '1px solid var(--border-hairline)', paddingTop: '1.5rem', fontFamily: 'var(--font-mono)', fontSize: '12px', textTransform: 'uppercase' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid var(--border-hairline)' }}>
             <span style={{ color: 'var(--text-dark-subtle)' }}>DATE:</span>
             <span>2020-2023</span>
@@ -51,6 +52,12 @@ export default function Results() {
             <span style={{ color: 'var(--text-dark-subtle)' }}>CHALLENGE:</span>
             <span style={{ textAlign: 'right', maxWidth: '350px' }}>INTIMIDATING, EXPERT-ONLY INTERFACE THAT BLOCKED RETAIL USER ADOPTION</span>
           </div>
+        </div>
+        <a className="results-case-link" href="/case-studies/bitfront-crypto-exchange-ui">SEE HOW WE DID IT <span aria-hidden="true">↗</span></a>
+        </div>
+        <div className="results-metrics">
+          <div className="results-metric"><span>ONBOARDING<br />TIME CUT</span><strong>-71%</strong></div>
+          <div className="results-metric"><span>USER RETENTION<br />IMPROVED</span><strong>+43%</strong></div>
         </div>
       </motion.div>
 
@@ -67,6 +74,7 @@ export default function Results() {
           text="THEY DIDN'T JUST MAKE IT PRETTY. THEY MADE IT WORK. OUR USERS WENT FROM CONFUSED TO CONFIDENT IN WEEKS. BEST DESIGN INVESTMENT WE'VE MADE."
           className="results-quote-text"
         />
+        <p className="results-quote-credit">JAMES RODRIGUEZ<br /><span>FOUNDER &amp; CEO DATAVIEW</span></p>
       </motion.div>
     </section>
   );

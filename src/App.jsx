@@ -9,7 +9,6 @@ import HowWeDoIt from './components/HowWeDoIt';
 import Results from './components/Results';
 import MoreProjects from './components/MoreProjects';
 import Timeline from './components/Timeline';
-import Insights from './components/Insights';
 import Faq from './components/Faq';
 import Contact from './components/Contact';
 import ContactPage from './components/ContactPage';
@@ -188,9 +187,6 @@ export default function App() {
 
               {/* Section 08 & 09: Milestones & Studio Beliefs */}
               <Timeline navigate={navigate} />
-
-              {/* Section 10: Latest Insights */}
-              <Insights navigate={navigate} />
 
               {/* Section 11: Help & Info FAQ */}
               <Faq navigate={navigate} />

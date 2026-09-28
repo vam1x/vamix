@@ -6,25 +6,25 @@ import { RevealText } from '../hooks/useScrollReveal';
 export default function Timeline() {
   const milestones = [
     {
-      year: "2013",
+      year: "2023",
       icon: "/beliefs/beliefs-2.webp",
       desc: "FOUNDED IN SURAT TO\nSOLVE REAL DESIGN PROBLEMS",
       gap: "120px"
     },
     {
-      year: "2017",
+      year: "2024",
       icon: "/beliefs/beliefs-3.webp",
-      desc: "EXPANDED OPERATIONS\nTO SERVE GLOBAL CLIENTS",
+      desc: "OPENED TENNESSEE OFFICE\nTO SERVE US CLIENTS",
       gap: "150px"
     },
     {
-      year: "2020",
+      year: "2025",
       icon: "/beliefs/beliefs-4.webp",
       desc: "CROSSED 50 SUCCESSFUL\nCLIENT PROJECTS MILESTONE",
       gap: "180px"
     },
     {
-      year: "2025",
+      year: "2026",
       icon: "/beliefs/beliefs-5.webp",
       desc: "OVER A DECADE BUILDING\nPRODUCTS USERS LOVE",
       gap: "210px"

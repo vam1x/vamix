@@ -67,7 +67,7 @@ export default function AboutHeading() {
       </div>
 
       <div className="about-heading-container">
-        {/* Column 1: 13+ Years of Excellence */}
+        {/* Column 1: 3+ Years of Excellence */}
         <motion.div 
           className="about-side-badge"
           initial={{ opacity: 0, y: 20 }}

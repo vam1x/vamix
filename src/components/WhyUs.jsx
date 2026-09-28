@@ -21,7 +21,7 @@ export default function WhyUs() {
     },
     {
       num: "04",
-      line1: "13+ YEARS OF",
+      line1: "3+ YEARS OF",
       line2: "DESIGN AND BUILD"
     }
   ];
@@ -110,7 +110,7 @@ export default function WhyUs() {
             </div>
             <div className="stat-card">
               <strong>
-                <AnimatedCounter to={13} suffix="+" />
+                <AnimatedCounter to={3} suffix="+" />
               </strong>
               <span className="mono-label">YEARS EXPERIENCE</span>
             </div>

@@ -4,28 +4,28 @@ import { motion } from 'framer-motion';
 export default function AboutTeam() {
   const members = [
     {
-      roleHeader: "FOUNDER & PRODUCT DIRECTOR",
+      roleHeader: "CO-FOUNDER & TECHNICAL DIRECTOR",
       badge: "*",
       img: "/team/mayur-unagar.png",
       gradient: "linear-gradient(90deg, #9333ea 0%, #f97316 100%)",
       name: "MAYUR UNAGAR",
-      sub: "FOUNDER & PRODUCT DIRECTOR"
+      sub: "CO-FOUNDER & TECHNICAL DIRECTOR"
     },
     {
-      roleHeader: "CO-FOUNDER & DESIGN HEAD",
+      roleHeader: "CO-FOUNDER & CREATIVE DIRECTOR",
       badge: "**",
       img: "/team/vinit-pansuriya.png",
       gradient: "linear-gradient(90deg, #ef4444 0%, #f97316 100%)",
       name: "VINIT PANSURIYA",
-      sub: "PRODUCT DESIGN HEAD & SYSTEMS"
+      sub: "CO-FOUNDER & CREATIVE DIRECTOR"
     },
     {
-      roleHeader: "CO-FOUNDER & TECH HEAD",
+      roleHeader: "CO-FOUNDER & STRATEGY DIRECTOR",
       badge: "***",
       img: "/team/vatsal-kalathiya.png",
       gradient: "linear-gradient(90deg, #9333ea 0%, #f97316 100%)",
       name: "VATSAL KALATHIYA",
-      sub: "HEAD OF ENGINEERING & SYSTEMS"
+      sub: "CO-FOUNDER & STRATEGY DIRECTOR"
     }
   ];
 

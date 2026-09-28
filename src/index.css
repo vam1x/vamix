@@ -708,14 +708,14 @@ img {
    BLUEPRINT GRID SYSTEM & SECTION GUIDES (webus.in architectural spec)
    ========================================================================== */
 
-/* Section Grid Backdrop Container */
+/* Section Grid Backdrop Container - Positioned at the backside of all content */
 .section-grid-backdrop {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
   overflow: visible;
   padding: 0 2rem;
 }
@@ -786,7 +786,7 @@ img {
   transform: translate(-50%, -50%);
   pointer-events: none;
   user-select: none;
-  z-index: 3;
+  z-index: 0;
 }
 
 .grid-crosshair .cross-v {
@@ -813,6 +813,81 @@ img {
 
 .grid-dark .grid-crosshair {
   color: rgba(245, 245, 245, 0.65);
+}
+
+/* --------------------------------------------------------------------------
+   GLOBAL BACKSIDE GRID STACKING SYSTEM (matching webus.in)
+   Guarantees all blueprint grids & guidelines sit behind every element
+   -------------------------------------------------------------------------- */
+.section-grid-backdrop,
+.hero-grid-lines,
+.legal-grid-lines,
+.page-grid-lines,
+.stats-panel__grid,
+.about-heading-grid-lines {
+  z-index: 0 !important;
+}
+
+.grid-crosshair {
+  z-index: 0 !important;
+}
+
+/* Sections establish clean isolated stacking contexts */
+.webus-hero,
+.company-section,
+.advantages-section,
+.process-section,
+.case-section,
+.more-projects,
+.belief-section,
+.faq-section,
+.contact-section,
+.footer-bottom-black,
+.about-booking-section,
+.not-found-hero,
+.legal-page__text,
+.cs-hero-section,
+.cs-projects-section,
+.about-heading-section,
+.about-team-section,
+.services-hero-section {
+  isolation: isolate;
+}
+
+/* Content wrappers, cards, images, badges, and layout blocks sit above grid */
+.hero-container,
+.hero-art-panel,
+.company-section__inner,
+.advantages-section__inner,
+.stats-panel__top,
+.stats-panel__bottom,
+.process-section__inner,
+.case-section__backdrop,
+.case-section__mask,
+.case-section__inner,
+.more-projects__inner,
+.belief-section__inner,
+.faq-section__inner,
+.faq-container,
+.contact-inner-container,
+.contact-inner,
+.footer-inner-container,
+.about-heading-container,
+.about-stats-container,
+.about-team-container,
+.about-steps-container,
+.about-belief-container,
+.about-faq-container,
+.about-booking-aurora,
+.about-booking-grid,
+.legal-page__container,
+.not-found-container,
+.services-hero-grid,
+.services-track-container,
+.services-block-inner,
+.case-studies-container {
+  position: relative;
+  z-index: 2;
 }
 
 /* Legacy corner-cross compatibility */
@@ -1317,7 +1392,7 @@ img {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
   padding: 0 40px;
 }
 
@@ -1337,7 +1412,7 @@ img {
   bottom: 0;
   left: 0;
   width: 40.55%;
-  z-index: 1;
+  z-index: 2;
   overflow: hidden;
   pointer-events: none;
   background-color: #0b0b0b;
@@ -2939,7 +3014,7 @@ a:hover .rolling-label__copy {
   display: flex;
   justify-content: space-between;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
   padding: 0;
   inset-inline: 0;
 }
@@ -3833,7 +3908,7 @@ a:hover .rolling-label__copy {
 }
 
 .case-section__backdrop {
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
   position: absolute;
   inset: 0px;

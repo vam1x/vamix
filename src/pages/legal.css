@@ -188,7 +188,7 @@
   pointer-events: none;
   display: flex;
   justify-content: space-between;
-  z-index: 1;
+  z-index: 0;
 }
 
 .legal-grid-lines span {

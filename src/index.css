@@ -7299,9 +7299,6 @@ a:hover .rolling-label__copy {
 }
 
 /* Shared Get in Touch section: measured against webus.in/case-studies. */
-html:has(.contact-section) { scrollbar-width: auto; }
-html:has(.contact-section)::-webkit-scrollbar { display: block; width: 15px; background: #fff; }
-html:has(.contact-section)::-webkit-scrollbar-thumb { background: #888; border: 3px solid #fff; border-radius: 10px; }
 .contact-section {
   box-sizing: border-box;
   min-height: 1222px;

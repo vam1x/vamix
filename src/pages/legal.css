@@ -11,8 +11,18 @@
   overflow-x: hidden;
 }
 
+.legal-page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');
+  opacity: .027;
+  pointer-events: none;
+}
+
 .legal-page__text {
-  padding: 240px 40px 140px;
+  padding: 300px max(40px, calc((100% - 1920px) / 2)) 140px;
   position: relative;
   box-sizing: border-box;
 }
@@ -21,8 +31,8 @@
   max-width: 1920px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, minmax(50px, 1fr));
-  column-gap: 40px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
   position: relative;
   z-index: 2;
 }
@@ -60,6 +70,7 @@
   gap: 48px;
   min-width: 0;
   max-width: 960px;
+  padding-left: 1px;
 }
 
 .legal-page-title {
@@ -182,19 +193,20 @@
 /* 5-Column Grid Lines */
 .legal-grid-lines {
   position: absolute;
-  inset: 0 40px;
+  inset: 0 max(40px, calc((100% - 1920px) / 2));
   max-width: 1920px;
   margin: 0 auto;
   pointer-events: none;
   display: flex;
   justify-content: space-between;
-  z-index: 0;
+  z-index: 1;
 }
 
 .legal-grid-lines span {
   width: 1px;
   height: 100%;
   background: rgba(0, 0, 0, 0.07);
+  flex: none;
 }
 
 /* Responsive Breakpoints */
@@ -215,6 +227,7 @@
   .legal-page__items {
     grid-column: 1 / -1;
     gap: 36px;
+    padding-left: 0;
   }
 
   .legal-grid-lines {
@@ -233,6 +246,7 @@
 
   .legal-page__items {
     gap: 28px;
+    padding-left: 0;
   }
 
   .legal-page-title {

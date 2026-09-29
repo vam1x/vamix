@@ -116,7 +116,7 @@ export default function AboutFaq() {
             </p>
             <div className="about-support-profile">
               <img 
-                src="https://framerusercontent.com/images/X9xLPsYSVWl1LlqQDsYTQiuwG5E.png?width=1696&height=2288" 
+                src="/images/ruby-avatar.webp" 
                 alt="Ruby Rattey" 
                 className="about-support-avatar"
                 loading="lazy"

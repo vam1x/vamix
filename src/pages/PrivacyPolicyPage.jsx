@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import AboutBooking from '../components/about/AboutBooking';
 import Contact from '../components/Contact';
 import './legal.css';
 
@@ -170,6 +171,9 @@ export default function PrivacyPolicyPage({ navigate }) {
           </div>
         </div>
       </section>
+
+      {/* Booking Section */}
+      <AboutBooking navigate={navigate} />
 
       {/* Global Interactive Contact Section */}
       <Contact navigate={navigate} />

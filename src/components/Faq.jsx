@@ -151,7 +151,7 @@ export default function Faq({ navigate }) {
             <p>My role is to make sure every client feels supported from day one.</p>
             <div>
               <img
-                src="/faq/faq-1.webp"
+                src="/images/ruby-avatar.webp"
                 alt="Ruby Rattey"
                 loading="lazy"
                 decoding="async"

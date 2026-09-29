@@ -108,8 +108,8 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
 
             {/* Social Footnote with 1px underline */}
             <div className="nav-card-socials">
-              <a href="https://linkedin.com/company/vamix" target="_blank" rel="noopener noreferrer" className="nav-card-social-link">LI</a>
-              <a href="https://instagram.com/vamix" target="_blank" rel="noopener noreferrer" className="nav-card-social-link">IG</a>
+              <span className="nav-card-social-link">LI</span>
+              <span className="nav-card-social-link">IG</span>
             </div>
           </motion.div>
         </>

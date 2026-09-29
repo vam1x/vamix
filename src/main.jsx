@@ -4,6 +4,7 @@ import App from './App';
 import './index.css';
 import './animations.css';
 import './about-reference.css';
+import './contact-reference.css';
 
 const rootElement = document.getElementById('root');
 if (rootElement) {

@@ -19,13 +19,19 @@ const DragDotsIcon = () => (
 export default function Contact({ navigate }) {
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
   const lenis = useLenis();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!isVerified) {
+      alert("Please verify that you're human before sending.");
+      return;
+    }
     setIsSubmitted(true);
     setTimeout(() => {
       setIsSubmitted(false);
+      setIsVerified(false);
       setFormData({ name: '', email: '' });
     }, 3500);
   };
@@ -50,23 +56,18 @@ export default function Contact({ navigate }) {
 
   return (
     <section className="section contact-section" id="contact">
-      {/* Blueprint Grid Lines & Top Boundary with Crosshairs */}
+      {/* Blueprint Grid Lines & Top Boundary with Corner Crosshairs */}
       <SectionGrid
         theme="light"
         showTopLine={true}
         showBottomLine={false}
-        crosshairPositions={[0, 1, 2, 3, 4]}
+        crosshairPositions={[0, 4]}
       />
 
       <div className="section-container contact-inner-container">
         <div className="contact-grid-4col">
-          {/* Column 1: Logo & Badge • 12 READY TO START? */}
+          {/* Column 1: Marker • 12 READY TO START? */}
           <div className="contact-col-1">
-            <div className="contact-col-1-header">
-              <a href="/" onClick={(e) => handleLinkClick(e, '/')} aria-label="VAMIX Home" className="contact-col-1-logo-link">
-                <VamixLogo />
-              </a>
-            </div>
             <div className="contact-num-badge">
               <span className="contact-badge-dot" />
               <span className="contact-badge-num">12</span>
@@ -130,7 +131,7 @@ export default function Contact({ navigate }) {
               </div>
             </div>
 
-            {/* Column 4: Nav Links, Submit Button, Legal Info */}
+            {/* Column 4: Nav Links, Captcha, Submit Button, Legal Info */}
             <div className="contact-col-4">
               <nav className="contact-mega-links">
                 <a href="/" onClick={(e) => handleLinkClick(e, '/')}><RollingText text="HOME" /></a>
@@ -139,6 +140,33 @@ export default function Contact({ navigate }) {
                 <a href="/case-studies" onClick={(e) => handleLinkClick(e, '/case-studies')}><RollingText text="CASE STUDIES" /></a>
                 <a href="/contact" onClick={(e) => handleLinkClick(e, '/contact')}><RollingText text="CONTACT" /></a>
               </nav>
+
+              {/* Human Verification Widget matching webus.in */}
+              <div className="contact-captcha-box">
+                <button
+                  type="button"
+                  className={`contact-captcha-btn ${isVerified ? 'verified' : ''}`}
+                  onClick={() => setIsVerified(!isVerified)}
+                  aria-label="Human verification"
+                >
+                  <span className="captcha-checkbox-indicator">
+                    {isVerified && (
+                      <svg viewBox="0 0 20 20" width="14" height="14" fill="none">
+                        <path d="m4 10 4 4 8-8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
+                  </span>
+                  <span className="captcha-checkbox-label">
+                    {isVerified ? "YOU ARE VERIFIED" : "VERIFY YOU'RE HUMAN"}
+                  </span>
+                </button>
+                <div className="contact-captcha-meta">
+                  <span className="contact-captcha-status">Select to verify before sending.</span>
+                  <span className="contact-captcha-disclosure">
+                    Protected by hCaptcha. <a href="https://www.hcaptcha.com/privacy" target="_blank" rel="noopener noreferrer">Privacy</a> · <a href="https://www.hcaptcha.com/terms" target="_blank" rel="noopener noreferrer">Terms</a>
+                  </span>
+                </div>
+              </div>
 
               <button
                 type="submit"
@@ -176,8 +204,8 @@ export default function Contact({ navigate }) {
             <a href="mailto:hi@vamix.com" style={{ fontWeight: 700, fontSize: '1.2rem' }}>HI@VAMIX.COM</a>
           </div>
           <div className="footer-social-links">
-            <a href="https://www.linkedin.com/in/jsrattey/" target="_blank" rel="noopener noreferrer" className="footer-social-link">LI</a>
-            <a href="https://www.instagram.com/vamix/?hl=en" target="_blank" rel="noopener noreferrer" className="footer-social-link">IG</a>
+            <span className="footer-social-link">LI</span>
+            <span className="footer-social-link">IG</span>
           </div>
           <button onClick={scrollToTop} className="back-to-top-btn" style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase' }}>
             BACK TO TOP

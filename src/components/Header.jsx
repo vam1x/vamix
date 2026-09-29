@@ -15,8 +15,8 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
       const scrollY = window.scrollY;
       setIsScrolled(scrollY > 20);
 
-      // On home page hero right column (where menu button sits at col 3), it's light (#e8e8e8)
-      if (currentRoute === 'home' && scrollY < 400) {
+      // On home page hero right column or dedicated light pages at top, it's light (#e8e8e8 / #f5f5f5)
+      if ((currentRoute === 'home' || currentRoute === 'contact' || currentRoute === 'about' || currentRoute === 'case-studies') && scrollY < 400) {
         setIsOverDark(false);
         return;
       }
@@ -46,8 +46,8 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
           curr.classList.contains('section-dark') ||
           curr.classList.contains('hero-dark-theme') ||
           curr.classList.contains('services-block') ||
-          curr.classList.contains('contact-section') ||
           curr.classList.contains('case-section__quote') ||
+          curr.classList.contains('contact-cta') ||
           curr.id === 'approach' ||
           curr.id === 'services' ||
           curr.id === 'contact' ||
@@ -150,39 +150,35 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
           </button>
         </div>
 
-          {/* Column 4 (Far Right Side): Quick Consult Banner */}
-          {!isScrolled && <div className="header-col-actions">
-            <a 
-              href="/contact" 
-              className="consult-banner"
-              onClick={handleConsultClick}
-              aria-label="Free 30-minute design consultation"
-            >
-              <div className="consult-text">
-                <span className="muted line-1">FREE 30-MIN DESIGN CONSULT.</span>
-                <span className="line-2">
-                  <span className="muted">NO PITCH.&nbsp;</span>
-                  <span className="highlight">JUST CLARITY.</span>
+          {/* Column 4 (Far Right Side): Quick Consult Slot */}
+          {!isScrolled && (
+            <div className="header-col-actions">
+              <a 
+                href="/contact" 
+                className="consult-slot"
+                onClick={handleConsultClick}
+                aria-label="Free 30-minute design consultation"
+              >
+                <p className="consult-slot__copy">
+                  <span>FREE 30-MIN DESIGN CONSULT.<br />NO PITCH. </span>JUST CLARITY.
+                </p>
+                <span className="consult-slot__mark">
+                  <span className="consult-slot__avatar-frame">
+                    <img 
+                      src="/images/ruby-avatar.webp" 
+                      alt="Ruby Rattey" 
+                      className="consult-slot__avatar" 
+                    />
+                  </span>
+                  <span className="consult-slot__disc" aria-hidden="true">
+                    <svg className="consult-slot__plus" width="26" height="26" viewBox="-1 -1 26 26" fill="none">
+                      <path d="M12.2792 0L12.2792 24M24 12.2792L0 12.2792" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  </span>
                 </span>
-              </div>
-              
-              <div className="consult-combo-btn">
-                <div className="consult-avatar-wrap">
-                  <img 
-                    src="https://framerusercontent.com/images/awFufuyIlbDdk2me7dySF9Y3r8.png?width=2048&height=2048" 
-                    alt="Ruby Rattey" 
-                    className="consult-avatar-img" 
-                  />
-                </div>
-                <div className="consult-plus-circle" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round">
-                    <line x1="12" y1="5" x2="12" y2="19" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
-                </div>
-              </div>
-            </a>
-          </div>}
+              </a>
+            </div>
+          )}
         </div>
       </header>
   );

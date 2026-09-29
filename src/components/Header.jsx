@@ -13,43 +13,86 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
   useEffect(() => {
     let ticking = false;
 
-    const isElementDark = (targetEl) => {
+    const isPointDark = (x, y) => {
+      // 1. Direct hit-test against floating dark panels:
+      // a) Hero material art panel (#0b0b0b / #151515 / #181818)
+      const heroPanel = document.querySelector('.hero-art-panel');
+      if (heroPanel) {
+        const rect = heroPanel.getBoundingClientRect();
+        if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+          return true;
+        }
+      }
+
+      // b) Case section dark quote card (#171717 / #181818)
+      const quotePanel = document.querySelector('.case-section__quote');
+      if (quotePanel) {
+        const rect = quotePanel.getBoundingClientRect();
+        if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+          return true;
+        }
+      }
+
+      // c) Black footer banner (#0e0e0e / #151515 / #181818)
+      const footerDark = document.querySelector('.footer-bottom-black, .site-footer');
+      if (footerDark) {
+        const rect = footerDark.getBoundingClientRect();
+        if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+          return true;
+        }
+      }
+
+      // 2. Hide site-header temporarily so document.elementFromPoint can sample the section underneath
+      const headerEl = headerRef.current;
+      const prevVisibility = headerEl ? headerEl.style.visibility : '';
+      if (headerEl) headerEl.style.visibility = 'hidden';
+
+      const targetEl = document.elementFromPoint(x, y);
+
+      if (headerEl) headerEl.style.visibility = prevVisibility;
+
       if (!targetEl) return false;
+
+      // 3. Walk up the DOM to verify section or computed background color
       let curr = targetEl;
       while (curr && curr !== document.body && curr !== document.documentElement) {
-        // Fast checks for explicit dark sections or elements
+        // Explicit dark section checks
         if (
           curr.classList.contains('company-section') ||
           curr.classList.contains('section-dark') ||
           curr.classList.contains('hero-dark-theme') ||
           curr.classList.contains('services-block') ||
-          curr.classList.contains('case-section__quote') ||
-          curr.classList.contains('contact-cta') ||
           curr.classList.contains('footer-bottom-black') ||
           curr.id === 'approach' ||
-          curr.id === 'services' ||
-          curr.id === 'contact' ||
           curr.getAttribute('data-theme') === 'dark'
         ) {
           return true;
         }
 
-        // Fast checks for explicit light sections or elements
+        // Explicit light section checks (Why Us, Process, Contact, FAQ, Projects, Beliefs, etc.)
         if (
           curr.classList.contains('advantages-section') ||
           curr.classList.contains('process-section') ||
           curr.classList.contains('case-section__copy') ||
-          curr.classList.contains('case-section__mask') ||
+          curr.classList.contains('more-projects') ||
           curr.classList.contains('more-projects-section') ||
+          curr.classList.contains('belief-section') ||
+          curr.classList.contains('faq-section') ||
+          curr.classList.contains('contact-section') ||
           curr.classList.contains('about-page-root') ||
           curr.classList.contains('contact-page-root') ||
           curr.id === 'why-us' ||
           curr.id === 'process' ||
+          curr.id === 'contact' ||
+          curr.id === 'faq' ||
+          curr.id === 'projects' ||
+          curr.id === 'beliefs' ||
           curr.getAttribute('data-theme') === 'light'
         ) {
           return false;
         }
 
+        // Computed background-color luminescence check
         const style = window.getComputedStyle(curr);
         const bg = style.backgroundColor;
         const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
@@ -60,6 +103,8 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
             const g = parseInt(match[2], 10);
             const b = parseInt(match[3], 10);
             const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+            // #181818, #171717, #0e0e0e lum < 30 (DARK)
+            // #f5f5f5, #ffffff, #e7e7e7, #e8e8e8 lum > 220 (LIGHT)
             return lum < 130;
           }
         }
@@ -72,20 +117,6 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
       const scrollY = window.scrollY;
       setIsScrolled(scrollY > 20);
 
-      // On home page hero: left rail is dark (#151515), right column is light (#e8e8e8)
-      if (currentRoute === 'home' && scrollY < 400) {
-        setIsLogoOverDark(true);
-        setIsMenuOverDark(false);
-        return;
-      }
-
-      // Dedicated light pages at top
-      if ((currentRoute === 'contact' || currentRoute === 'about' || currentRoute === 'case-studies') && scrollY < 400) {
-        setIsLogoOverDark(false);
-        setIsMenuOverDark(false);
-        return;
-      }
-
       const logoEl = logoRef.current;
       const btn = menuBtnRef.current;
       if (!logoEl && !btn) return;
@@ -96,18 +127,8 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
       const mx = btn ? btn.getBoundingClientRect().left + btn.getBoundingClientRect().width / 2 : window.innerWidth / 2;
       const my = btn ? btn.getBoundingClientRect().top + btn.getBoundingClientRect().height / 2 : 45;
 
-      // Temporarily hide site-header so elementFromPoint samples the content underneath
-      const headerEl = headerRef.current;
-      const prevVisibility = headerEl ? headerEl.style.visibility : '';
-      if (headerEl) headerEl.style.visibility = 'hidden';
-
-      const targetLogoEl = document.elementFromPoint(lx, ly);
-      const targetMenuEl = document.elementFromPoint(mx, my);
-
-      if (headerEl) headerEl.style.visibility = prevVisibility;
-
-      const logoDark = isElementDark(targetLogoEl);
-      const menuDark = isElementDark(targetMenuEl);
+      const logoDark = isPointDark(lx, ly);
+      const menuDark = isPointDark(mx, my);
 
       setIsLogoOverDark(logoDark);
       setIsMenuOverDark(menuDark);

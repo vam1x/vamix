@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ReactLenis, useLenis } from 'lenis/react';
+import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header';
 import NavDrawer from './components/NavDrawer';
 import Hero from './components/Hero';
@@ -218,6 +219,7 @@ export default function App() {
         {/* Sub-Footer Legal Bar */}
         <Footer navigate={navigate} />
       </div>
+      <Analytics />
     </ReactLenis>
   );
 }

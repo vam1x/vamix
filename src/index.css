@@ -23,24 +23,32 @@
 }
 
 .site-header.theme-dark-text {
-  color: #171717;
+  color: #111111;
 }
 
 .site-header.theme-light-text {
-  color: #f5f5f5;
+  color: #ffffff;
 }
 
-/* On split home hero: Logo on dark left (col 1), Menu and Consult on light right (col 3 & 4) */
-.site-header.is-home-hero .header-col-logo {
-  color: #f5f5f5;
+/* On split home hero: Desktop/tablet (col 1 is dark panel), Mobile (col 1 is light #e8e8e8) */
+@media (min-width: 810px) {
+  .site-header.is-home-hero .header-col-logo {
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 809.98px) {
+  .site-header.is-home-hero .header-col-logo {
+    color: #111111;
+  }
 }
 
 .site-header.is-home-hero .header-col-actions {
-  color: #171717;
+  color: #111111;
 }
 
 .site-header.is-home-hero .consult-plus-circle {
-  background: #171717;
+  background: #111111;
   color: #ffffff;
 }
 
@@ -82,11 +90,11 @@
 }
 
 .brand-logo-link.is-over-dark {
-  color: #f5f5f5 !important;
+  color: #ffffff !important;
 }
 
 .brand-logo-link.is-over-light {
-  color: #171717 !important;
+  color: #111111 !important;
 }
 
 .webus-logo-svg {
@@ -148,16 +156,17 @@
 .header-col-menu {
   grid-column: 3 / 4;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   pointer-events: auto;
   z-index: 101;
-  padding-left: 24px;
+  padding: 11px 0 0 0;
+  margin: 0;
 }
 
 .menu-toggle-btn {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 5px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -165,45 +174,48 @@
   position: relative;
   pointer-events: auto;
   font-family: var(--font-mono, 'IBM Plex Mono', monospace);
-  font-size: 17px;
-  font-weight: 800;
+  font-size: 15px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 6px 0;
+  letter-spacing: normal;
+  padding: 2px 0 0 0;
   margin: 0;
   outline: none;
+  line-height: 1;
   transition: color 0.25s ease, transform 0.2s ease;
-  -webkit-text-stroke: 0.4px currentColor;
-  text-shadow: 0 0 0.5px currentColor;
 }
 
 .menu-btn-icon {
   position: relative;
-  width: 15px;
-  height: 15px;
+  width: 10px;
+  height: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.32s cubic-bezier(0.96, -0.02, 0.38, 1.01);
   flex-shrink: 0;
 }
 
 .menu-btn-icon .bar-h {
   position: absolute;
-  width: 15px;
-  height: 2.5px;
+  width: 10px;
+  height: 2px;
+  top: 4px;
+  left: 0;
   background-color: currentColor !important;
-  transition: transform 0.35s ease, background-color 0.25s ease;
-  border-radius: 1.5px;
+  transition: transform 0.32s ease, background-color 0.25s ease;
+  border-radius: 0;
 }
 
 .menu-btn-icon .bar-v {
   position: absolute;
-  width: 2.5px;
-  height: 15px;
+  width: 2px;
+  height: 10px;
+  top: 0;
+  left: 4px;
   background-color: currentColor !important;
-  transition: transform 0.35s ease, background-color 0.25s ease;
-  border-radius: 1.5px;
+  transition: transform 0.32s ease, background-color 0.25s ease;
+  border-radius: 0;
 }
 
 .menu-toggle-btn.is-active .menu-btn-icon {
@@ -214,9 +226,9 @@
   display: inline-flex;
   align-items: center;
   font-family: var(--font-mono, 'IBM Plex Mono', monospace);
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: normal;
   text-transform: uppercase;
   color: currentColor !important;
   line-height: 1;
@@ -366,7 +378,7 @@
 @media (min-width: 810px) {
   .header-inner-grid { align-items: start; }
   .header-col-logo { margin-top: 2px; }
-  .header-col-menu { margin-top: 12px; }
+  .header-col-menu { margin-top: 0; }
 }
 
 .site-header.theme-light-text .consult-plus-circle {
@@ -580,7 +592,7 @@ button:hover .roll-text-container .roll-clone,
 @media (min-width: 810px) and (max-width: 1199px) {
   .header-inner-grid { padding-top: 30px; }
   .header-col-logo { margin-left: 0; }
-  .header-col-menu { grid-column: 4; justify-self: end; margin-top: 0; padding-left: 0; }
+  .header-col-menu { grid-column: 3 / span 2; justify-content: flex-end; justify-self: end; margin-top: 0; padding: 0; }
   .header-col-actions { display: none; }
 }
 
@@ -595,7 +607,9 @@ button:hover .roll-text-container .roll-clone,
   .header-col-menu {
     grid-column: 2 / 3;
     justify-self: end;
-    padding-left: 0;
+    justify-content: flex-end;
+    padding: 0;
+    margin: 0;
   }
   .nav-drawer-card {
     left: 16px;

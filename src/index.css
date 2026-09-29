@@ -78,6 +78,15 @@
   color: inherit;
   cursor: pointer;
   line-height: 0;
+  transition: color 0.25s ease;
+}
+
+.brand-logo-link.is-over-dark {
+  color: #f5f5f5 !important;
+}
+
+.brand-logo-link.is-over-light {
+  color: #171717 !important;
 }
 
 .webus-logo-svg {
@@ -142,6 +151,7 @@
   align-items: center;
   pointer-events: auto;
   z-index: 101;
+  padding-left: 24px;
 }
 
 .menu-toggle-btn {
@@ -570,7 +580,7 @@ button:hover .roll-text-container .roll-clone,
 @media (min-width: 810px) and (max-width: 1199px) {
   .header-inner-grid { padding-top: 30px; }
   .header-col-logo { margin-left: 0; }
-  .header-col-menu { grid-column: 4; justify-self: end; margin-top: 0; }
+  .header-col-menu { grid-column: 4; justify-self: end; margin-top: 0; padding-left: 0; }
   .header-col-actions { display: none; }
 }
 
@@ -585,6 +595,7 @@ button:hover .roll-text-container .roll-clone,
   .header-col-menu {
     grid-column: 2 / 3;
     justify-self: end;
+    padding-left: 0;
   }
   .nav-drawer-card {
     left: 16px;

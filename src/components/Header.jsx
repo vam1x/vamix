@@ -4,43 +4,20 @@ import VamixLogo from './VamixLogo';
 
 export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, navigate }) {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isOverDark, setIsOverDark] = useState(false);
+  const [isLogoOverDark, setIsLogoOverDark] = useState(false);
+  const [isMenuOverDark, setIsMenuOverDark] = useState(false);
   const headerRef = useRef(null);
+  const logoRef = useRef(null);
   const menuBtnRef = useRef(null);
 
   useEffect(() => {
     let ticking = false;
 
-    const checkBackground = () => {
-      const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 20);
-
-      // On home page hero right column or dedicated light pages at top, it's light (#e8e8e8 / #f5f5f5)
-      if ((currentRoute === 'home' || currentRoute === 'contact' || currentRoute === 'about' || currentRoute === 'case-studies') && scrollY < 400) {
-        setIsOverDark(false);
-        return;
-      }
-
-      const btn = menuBtnRef.current;
-      if (!btn) return;
-
-      const rect = btn.getBoundingClientRect();
-      const x = rect.left + rect.width / 2;
-      const y = rect.top + rect.height / 2;
-
-      // Temporarily hide site-header so elementFromPoint samples the content underneath
-      const headerEl = headerRef.current;
-      const prevDisplay = headerEl ? headerEl.style.display : '';
-      if (headerEl) headerEl.style.display = 'none';
-      const targetEl = document.elementFromPoint(x, y);
-      if (headerEl) headerEl.style.display = prevDisplay;
-
-      if (!targetEl) return;
-
-      let isDark = false;
+    const isElementDark = (targetEl) => {
+      if (!targetEl) return false;
       let curr = targetEl;
       while (curr && curr !== document.body && curr !== document.documentElement) {
-        // Fast class / id checks for known dark sections
+        // Fast checks for explicit dark sections or elements
         if (
           curr.classList.contains('company-section') ||
           curr.classList.contains('section-dark') ||
@@ -48,13 +25,29 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
           curr.classList.contains('services-block') ||
           curr.classList.contains('case-section__quote') ||
           curr.classList.contains('contact-cta') ||
+          curr.classList.contains('footer-bottom-black') ||
           curr.id === 'approach' ||
           curr.id === 'services' ||
           curr.id === 'contact' ||
           curr.getAttribute('data-theme') === 'dark'
         ) {
-          isDark = true;
-          break;
+          return true;
+        }
+
+        // Fast checks for explicit light sections or elements
+        if (
+          curr.classList.contains('advantages-section') ||
+          curr.classList.contains('process-section') ||
+          curr.classList.contains('case-section__copy') ||
+          curr.classList.contains('case-section__mask') ||
+          curr.classList.contains('more-projects-section') ||
+          curr.classList.contains('about-page-root') ||
+          curr.classList.contains('contact-page-root') ||
+          curr.id === 'why-us' ||
+          curr.id === 'process' ||
+          curr.getAttribute('data-theme') === 'light'
+        ) {
+          return false;
         }
 
         const style = window.getComputedStyle(curr);
@@ -67,14 +60,57 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
             const g = parseInt(match[2], 10);
             const b = parseInt(match[3], 10);
             const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-            isDark = lum < 130;
-            break;
+            return lum < 130;
           }
         }
         curr = curr.parentElement;
       }
+      return false;
+    };
 
-      setIsOverDark(isDark);
+    const checkBackground = () => {
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 20);
+
+      // On home page hero: left rail is dark (#151515), right column is light (#e8e8e8)
+      if (currentRoute === 'home' && scrollY < 400) {
+        setIsLogoOverDark(true);
+        setIsMenuOverDark(false);
+        return;
+      }
+
+      // Dedicated light pages at top
+      if ((currentRoute === 'contact' || currentRoute === 'about' || currentRoute === 'case-studies') && scrollY < 400) {
+        setIsLogoOverDark(false);
+        setIsMenuOverDark(false);
+        return;
+      }
+
+      const logoEl = logoRef.current;
+      const btn = menuBtnRef.current;
+      if (!logoEl && !btn) return;
+
+      const lx = logoEl ? logoEl.getBoundingClientRect().left + logoEl.getBoundingClientRect().width / 2 : 50;
+      const ly = logoEl ? logoEl.getBoundingClientRect().top + logoEl.getBoundingClientRect().height / 2 : 45;
+
+      const mx = btn ? btn.getBoundingClientRect().left + btn.getBoundingClientRect().width / 2 : window.innerWidth / 2;
+      const my = btn ? btn.getBoundingClientRect().top + btn.getBoundingClientRect().height / 2 : 45;
+
+      // Temporarily hide site-header so elementFromPoint samples the content underneath
+      const headerEl = headerRef.current;
+      const prevVisibility = headerEl ? headerEl.style.visibility : '';
+      if (headerEl) headerEl.style.visibility = 'hidden';
+
+      const targetLogoEl = document.elementFromPoint(lx, ly);
+      const targetMenuEl = document.elementFromPoint(mx, my);
+
+      if (headerEl) headerEl.style.visibility = prevVisibility;
+
+      const logoDark = isElementDark(targetLogoEl);
+      const menuDark = isElementDark(targetMenuEl);
+
+      setIsLogoOverDark(logoDark);
+      setIsMenuOverDark(menuDark);
     };
 
     const onScroll = () => {
@@ -120,22 +156,28 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
   return (
     <header 
       ref={headerRef}
-      className={`site-header ${isScrolled ? 'is-scrolled' : ''} ${isHomeHero ? 'is-home-hero' : isOverDark ? 'theme-light-text is-over-dark' : 'theme-dark-text is-over-light'} ${isDrawerOpen ? 'menu-is-open' : ''}`}
+      className={`site-header ${isScrolled ? 'is-scrolled' : ''} ${isHomeHero ? 'is-home-hero' : isMenuOverDark ? 'theme-light-text is-over-dark' : 'theme-dark-text is-over-light'} ${isDrawerOpen ? 'menu-is-open' : ''}`}
       role="banner"
     >
       <div className="header-inner-grid">
-        {/* Column 1: VAMIX Logo */}
+        {/* Column 1: VAMIX Logo with independent contrast detection */}
         <div className="header-col-logo">
-          <a href="/" onClick={handleLogoClick} className="brand-logo-link" aria-label="VAMIX Home">
+          <a 
+            ref={logoRef}
+            href="/" 
+            onClick={handleLogoClick} 
+            className={`brand-logo-link ${isLogoOverDark ? 'is-over-dark' : 'is-over-light'}`} 
+            aria-label="VAMIX Home"
+          >
             <VamixLogo />
           </a>
         </div>
 
-        {/* Column 3: + MENU Button (Positioned at 50% midpoint / Column 3 matching webus.in) */}
+        {/* Column 3: + MENU Button with independent contrast detection */}
         <div className="header-col-menu">
           <button 
             ref={menuBtnRef}
-            className={`menu-toggle-btn ${isDrawerOpen ? 'is-active' : ''} ${isOverDark ? 'is-over-dark' : 'is-over-light'}`} 
+            className={`menu-toggle-btn ${isDrawerOpen ? 'is-active' : ''} ${isMenuOverDark ? 'is-over-dark' : 'is-over-light'}`} 
             onClick={() => setIsDrawerOpen(!isDrawerOpen)}
             aria-label="Toggle Navigation Menu"
             aria-expanded={isDrawerOpen}

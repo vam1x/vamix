@@ -99,6 +99,8 @@ export default function Contact({ navigate }) {
                       placeholder="YOUR NAME"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      autoComplete="name"
+                      autoCapitalize="words"
                       required
                     />
                     <div className="contact-dots-wrap" aria-hidden="true">
@@ -121,6 +123,8 @@ export default function Contact({ navigate }) {
                     placeholder="EMAIL@ADDRESS.COM"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    autoComplete="email"
+                    autoCapitalize="none"
                     required
                   />
                   <div className="contact-dots-wrap" aria-hidden="true">
@@ -171,6 +175,7 @@ export default function Contact({ navigate }) {
               <button
                 type="submit"
                 className="contact-submit-card"
+                aria-label="Send contact inquiry"
                 style={isSubmitted ? { backgroundColor: '#171717', color: '#ffffff' } : {}}
               >
                 <span className="contact-submit-text">
@@ -194,22 +199,26 @@ export default function Contact({ navigate }) {
 
         {/* Direct Contact Info Meta Row */}
         <div className="footer-meta-row">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div className="footer-meta-col footer-meta-logo">
             <a href="/" onClick={(e) => handleLinkClick(e, '/')} aria-label="VAMIX Home">
               <VamixLogo />
             </a>
           </div>
-          <div>
-            <a href="tel:+916359198825" style={{ display: 'block', fontSize: '11px', color: 'var(--text-dark-subtle)', textDecoration: 'none' }}>+91 63591 98825</a>
-            <a href="mailto:hi@vamix.com" style={{ fontWeight: 700, fontSize: '1.2rem' }}>HI@VAMIX.COM</a>
+          <div className="footer-meta-col footer-meta-direct">
+            <a href="tel:+916359198825" className="footer-phone-link">+91 63591 98825</a>
+            <a href="mailto:hi@vamix.com" className="footer-email-link">HI@VAMIX.COM</a>
           </div>
-          <div className="footer-social-links">
-            <span className="footer-social-link">LI</span>
-            <span className="footer-social-link">IG</span>
+          <div className="footer-meta-bottom-row">
+            <div className="footer-meta-col footer-social-links">
+              <span className="footer-social-link">LI</span>
+              <span className="footer-social-link">IG</span>
+            </div>
+            <div className="footer-meta-col footer-meta-action">
+              <button onClick={scrollToTop} className="back-to-top-btn" type="button" aria-label="Back to top">
+                BACK TO TOP ↑
+              </button>
+            </div>
           </div>
-          <button onClick={scrollToTop} className="back-to-top-btn" style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase' }}>
-            BACK TO TOP
-          </button>
         </div>
       </div>
     </section>

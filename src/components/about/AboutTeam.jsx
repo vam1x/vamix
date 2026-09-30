@@ -28,6 +28,7 @@ export default function AboutTeam() {
       sub: "CO-FOUNDER & STRATEGY DIRECTOR"
     }
   ];
+  
 
   return (
     <section className="about-team-section" id="about-team">

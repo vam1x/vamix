@@ -604,13 +604,6 @@ button:hover .roll-text-container .roll-clone,
     transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
   }
 
-@media (min-width: 810px) and (max-width: 1199px) {
-  .header-inner-grid { padding-top: 30px; }
-  .header-col-logo { margin-left: 0; }
-  .header-col-menu { grid-column: 3 / span 2; justify-content: flex-end; justify-self: end; margin-top: 0; padding: 0; }
-  .header-col-actions { display: none; }
-}
-
   .site-header.is-scrolled,
   .home-route .site-header.is-scrolled {
     background: rgba(10, 10, 10, 0.92) !important;

@@ -18,7 +18,7 @@ export default function ContactPage({ navigate }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
-    document.title = "Contact Webus | Start Your Next Product";
+    document.title = "Contact VAMIX | Start Your Next Product";
     window.scrollTo(0, 0);
   }, []);
 
@@ -113,7 +113,7 @@ export default function ContactPage({ navigate }) {
           {/* Columns 2-4: Madlib Interactive Form */}
           <div className="contact-form-wrap">
             <form className="madlib-form" onSubmit={handleSubmit}>
-              <p className="form-heading">HI, WEBUS TEAM!</p>
+              <p className="form-heading">HI, VAMIX TEAM!</p>
 
               {/* Line 1: My name is [NAME] from [COMPANY] . */}
               <div className="madlib-line madlib-line--pair">
@@ -306,7 +306,7 @@ export default function ContactPage({ navigate }) {
 
             <img
               src="https://framerusercontent.com/images/c67C5n6mfhTUQv7UYjH3n7xbSvk.jpg?width=1184&height=864"
-              alt="Webus office space"
+              alt="VAMIX office space"
               loading="lazy"
               className="office-image"
             />
@@ -316,8 +316,8 @@ export default function ContactPage({ navigate }) {
                 <a className="contact-phone" href="tel:+916359198825">
                   +91 63591 98825
                 </a>
-                <a className="contact-email" href="mailto:hi@webus.in">
-                  HI@WEBUS.IN
+                <a className="contact-email" href="mailto:hi@vamix.com">
+                  HI@VAMIX.COM
                 </a>
               </div>
 

@@ -46,7 +46,7 @@ export default function Contact({ navigate }) {
   };
 
   const handleLinkClick = (e, href) => {
-    if (href === '/' || href === '/about' || href === '/contact' || href === '/case-studies') {
+    if (href === '/' || href === '/about' || href === '/contact' || href === '/case-studies' || href === '/services' || href === '/terms-of-service' || href === '/privacy-policy') {
       e.preventDefault();
       if (navigate) {
         navigate(href);

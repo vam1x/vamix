@@ -21,10 +21,6 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
 import NotFoundPage from './pages/NotFoundPage';
 
-function LenisScrollLock({ isDrawerOpen }) {
-  // Navigation is now a compact dropdown card (Image 2), so scroll lock is not needed
-  return null;
-}
 
 export default function App() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -148,7 +144,7 @@ export default function App() {
         touchMultiplier: 1.8 
       }}
     >
-      <LenisScrollLock isDrawerOpen={isDrawerOpen} />
+
 
       <div className={`app-root ${currentRoute === 'case-studies' ? 'case-studies-route' : ''} ${currentRoute === 'home' ? 'home-route' : ''} ${currentRoute === 'not-found' ? 'not-found-route' : ''} ${currentRoute === 'contact' ? 'contact-route' : ''}`}>
         {/* Sticky Adaptive Header */}

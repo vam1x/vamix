@@ -12,7 +12,7 @@ export default function AboutTeam() {
       sub: "CO-FOUNDER & TECHNICAL DIRECTOR"
     },
     {
-      roleHeader: "CO-FOUNDER & CREATIVE DIRECTOR",
+      roleHeader: " & CREATIVE DIRECTOR",
       badge: "**",
       img: "/team/vinit-pansuriya.png",
       gradient: "linear-gradient(90deg, #ef4444 0%, #f97316 100%)",

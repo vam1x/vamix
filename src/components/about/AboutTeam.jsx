@@ -9,7 +9,7 @@ export default function AboutTeam() {
       img: "/team/mayur-unagar.png",
       gradient: "linear-gradient(90deg, #9333ea 0%, #f97316 100%)",
       name: "MAYUR UNAGAR",
-      sub: "CO-FOUNDER & TECHNICAL DIRECTOR"
+      sub: " & TECHNICAL DIRECTOR"
     },
     {
       roleHeader: "CO-FOUNDER & CREATIVE DIRECTOR",

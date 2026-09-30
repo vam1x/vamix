@@ -16,7 +16,7 @@ export default function AboutTeam() {
       badge: "**",
       img: "/team/vinit-pansuriya.png",
       gradient: "linear-gradient(90deg, #ef4444 0%, #f97316 100%)",
-      name: "VINIT PANSURIYA",
+      name: "Pratham PANSURIYA",
       sub: "CO-FOUNDER & CREATIVE DIRECTOR"
     },
     {

@@ -225,7 +225,7 @@ export default function Contact({ navigate }) {
           <div className="contact-meta__empty" aria-hidden="true" />
           <div className="contact-meta__direct">
             <a href="tel:+916359198825" className="contact-meta__phone">+91 63591 98825</a>
-            <a href="mailto:hi@vamix.com" className="contact-meta__email">HI@VAMIX.COM</a>
+            <a href="mailto:vamixlabs@gmail.com" className="contact-meta__email">HI@VAMIX.COM</a>
           </div>
           <div className="contact-meta__col4">
             <div className="contact-meta__social">

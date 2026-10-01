@@ -3,7 +3,17 @@ import SectionGrid from './SectionGrid';
 import projects from '../pages/caseStudiesData.json';
 
 export default function MoreProjects({ navigate }) {
-  const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  const handleRowHover = (idx) => {
+    if (typeof window !== 'undefined' && window.innerWidth >= 1200) {
+      setActiveIdx(idx);
+    }
+  };
+
+  const toggleProject = (idx) => {
+    setActiveIdx((prev) => (prev === idx ? null : idx));
+  };
 
   return (
     <section className="more-projects" id="projects">
@@ -23,34 +33,75 @@ export default function MoreProjects({ navigate }) {
         {/* Columns 2-4: Case Rows */}
         <div className="case-rows">
           {projects.map((project, idx) => {
-            const isHovered = hoveredIdx === idx;
+            const isActive = activeIdx === idx;
             return (
               <article
                 key={idx}
-                className={`case-row ${isHovered ? 'is-active' : ''}`}
-                onMouseEnter={() => setHoveredIdx(idx)}
-                onMouseLeave={() => setHoveredIdx(null)}
+                className={`case-row ${isActive ? 'is-active' : ''}`}
+                onMouseEnter={() => handleRowHover(idx)}
+                onClick={() => {
+                  if (typeof window !== 'undefined' && window.innerWidth < 1200) {
+                    toggleProject(idx);
+                  }
+                }}
               >
-                <div className="case-row__heading">
+                <div 
+                  className="case-row__heading"
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isActive}
+                  onClick={(e) => {
+                    if (typeof window !== 'undefined' && window.innerWidth < 1200) {
+                      e.stopPropagation();
+                      toggleProject(idx);
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      toggleProject(idx);
+                    }
+                  }}
+                >
                   <h3>{project.title}</h3>
+                  <span className={`case-row__chevron ${isActive ? 'is-open' : ''}`} aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </span>
                 </div>
 
                 <div
                   className="case-row__reveal"
                   style={{
-                    height: isHovered ? 'auto' : undefined
+                    height: isActive ? 'auto' : undefined
                   }}
                 >
-                  <p style={{ opacity: isHovered ? 1 : undefined }}>
+                  <p style={{ opacity: isActive ? 1 : undefined }}>
                     {project.desc}
                   </p>
+
+                  <div className="case-row__mobile-actions">
+                    <a
+                      href="/case-studies"
+                      className="case-row__mobile-link"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        navigate?.('case-studies');
+                      }}
+                    >
+                      VIEW CASE STUDY <span className="case-row__arrow" aria-hidden="true">↗</span>
+                    </a>
+                  </div>
+
                   <span className="case-row__tags"></span>
                 </div>
 
                 <div
                   className="case-row__visual"
                   style={{
-                    opacity: isHovered ? 1 : 0,
+                    opacity: isActive ? 1 : 0,
                     transition: 'opacity 0.3s ease'
                   }}
                 >
@@ -61,7 +112,7 @@ export default function MoreProjects({ navigate }) {
                       loading="lazy"
                       data-case-hover-photo="true"
                       style={{
-                        transform: isHovered ? 'scale(1.04)' : 'scale(1)',
+                        transform: isActive ? 'scale(1.04)' : 'scale(1)',
                         transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
                       }}
                     />
@@ -78,7 +129,7 @@ export default function MoreProjects({ navigate }) {
 
                 <span
                   className="case-row__hover-label"
-                  style={{ opacity: isHovered ? 1 : 0 }}
+                  style={{ opacity: isActive ? 1 : 0 }}
                   aria-hidden="true"
                 >
                   VIEW CASE STUDY ↗

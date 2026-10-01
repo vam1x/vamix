@@ -7,18 +7,32 @@ import projects from './caseStudiesData.json';
 import './case-studies.css';
 
 export default function CaseStudiesPage({ navigate }) {
-  const [activeIdx, setActiveIdx] = useState(null);
+  const [activeIdx, setActiveIdx] = useState(0);
 
   useEffect(() => {
     document.title = 'Case Studies | VAMIX Product Studio';
     window.scrollTo(0, 0);
   }, []);
 
+  const isFinePointer = () => {
+    return typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  };
+
   const handleLink = (e, href) => {
     if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
     if (['/', '/about', '/case-studies', '/contact'].includes(href)) {
       e.preventDefault();
       if (navigate) navigate(href);
+    }
+  };
+
+  const toggleProject = (idx) => {
+    setActiveIdx((prev) => (prev === idx ? null : idx));
+  };
+
+  const handleRowHover = (idx) => {
+    if (typeof window !== 'undefined' && window.innerWidth >= 1200) {
+      setActiveIdx(idx);
     }
   };
 
@@ -76,16 +90,24 @@ export default function CaseStudiesPage({ navigate }) {
                   <div 
                     key={project.title}
                     className={`cs-project-row ${isActive ? 'is-active' : ''}`}
-                    onMouseEnter={() => setActiveIdx(idx)}
-                    onMouseLeave={() => setActiveIdx(null)}
-                    onClick={() => setActiveIdx(idx)}
+                    onMouseEnter={() => handleRowHover(idx)}
+                    onClick={() => toggleProject(idx)}
                   >
                     <button 
                       className="cs-row-title-btn"
                       aria-expanded={isActive}
                       type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleProject(idx);
+                      }}
                     >
                       <span className="cs-row-title-text">{project.title}</span>
+                      <span className={`cs-row-chevron ${isActive ? 'is-open' : ''}`} aria-hidden="true">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                      </span>
                     </button>
 
                     <AnimatePresence initial={false}>
@@ -106,6 +128,7 @@ export default function CaseStudiesPage({ navigate }) {
                               className="cs-read-more-btn"
                               aria-label={`View live project for ${project.title}`}
                               onClick={(e) => {
+                                e.stopPropagation();
                                 if (project.href.startsWith('/')) {
                                   handleLink(e, project.href);
                                 }
@@ -115,7 +138,7 @@ export default function CaseStudiesPage({ navigate }) {
                             </a>
                           </div>
 
-                          {/* Mobile inline preview card (visible only on screens <= 810px) */}
+                          {/* Mobile inline preview card (visible on screens <= 1199px) */}
                           <div className="cs-mobile-preview-card">
                             <img src={project.images[1]} alt={project.title} className="cs-mobile-preview-img" loading="lazy" />
                             <div className="cs-mobile-logo-wrap">

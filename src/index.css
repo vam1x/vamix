@@ -1,6 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 @import "lenis/dist/lenis.css";
 
+/* Accessibility: Skip-to-content Link */
+.skip-to-content {
+  position: absolute;
+  top: -9999px;
+  left: 20px;
+  background: #171717;
+  color: #ffffff;
+  padding: 12px 20px;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  z-index: 99999;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+.skip-to-content:focus {
+  top: 20px;
+  outline: 2px solid #59bbd5;
+}
+
 /* ==========================================================================
    SITE HEADER & NAVIGATION (1:1 Webus.in Exact Reproduction)
    ========================================================================== */
@@ -3501,7 +3524,8 @@ a:hover .rolling-label__copy {
   left: 0;
 }
 
-.process-step h2 {
+.process-step h2,
+.process-step h3 {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: -0.02em;

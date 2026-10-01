@@ -20,7 +20,7 @@ import ServicesPage from './pages/ServicesPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
 import NotFoundPage from './pages/NotFoundPage';
-
+import useSeo from './hooks/useSeo';
 
 export default function App() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -93,13 +93,8 @@ export default function App() {
     setIsDrawerOpen(false);
   }, []);
 
-  useEffect(() => {
-    if (currentRoute === 'home') {
-      document.title = "Design & Development Agency India - Product Studio | VAMIX";
-    } else if (currentRoute === 'not-found') {
-      document.title = "Page Not Found (404) - VAMIX Digital Product Studio";
-    }
-  }, [currentRoute]);
+  // Manage all SEO metadata, canonicals, OG, Twitter, and breadcrumbs dynamically
+  useSeo(currentRoute);
 
   useEffect(() => {
     const handleLocationChange = () => {
@@ -147,6 +142,11 @@ export default function App() {
 
 
       <div className={`app-root ${currentRoute === 'case-studies' ? 'case-studies-route' : ''} ${currentRoute === 'home' ? 'home-route' : ''} ${currentRoute === 'not-found' ? 'not-found-route' : ''} ${currentRoute === 'contact' ? 'contact-route' : ''}`}>
+        {/* Skip to Main Content Link for Accessibility (SEO & A11y) */}
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
+
         {/* Sticky Adaptive Header */}
         <Header 
           isDrawerOpen={isDrawerOpen} 
@@ -164,7 +164,7 @@ export default function App() {
         />
 
         {/* Main Content Area */}
-        <main>
+        <main id="main-content" tabIndex={-1}>
           {currentRoute === 'privacy-policy' ? (
             <PrivacyPolicyPage navigate={navigate} />
           ) : currentRoute === 'terms-of-service' ? (

@@ -108,8 +108,9 @@ export default function MoreProjects({ navigate }) {
                   <div className="case-row__visual-group">
                     <img
                       src={project.images[1]}
-                      alt={project.title}
+                      alt={`${project.title} portfolio preview`}
                       loading="lazy"
+                      decoding="async"
                       data-case-hover-photo="true"
                       style={{
                         transform: isActive ? 'scale(1.04)' : 'scale(1)',
@@ -119,8 +120,9 @@ export default function MoreProjects({ navigate }) {
                     {project.images[0] && (
                       <img
                         src={project.images[0]}
-                        alt=""
+                        alt={`${project.title} brand logo`}
                         loading="lazy"
+                        decoding="async"
                         className="case-row__visual-logo"
                       />
                     )}

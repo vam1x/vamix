@@ -306,8 +306,11 @@ export default function ContactPage({ navigate }) {
 
             <img
               src="https://framerusercontent.com/images/c67C5n6mfhTUQv7UYjH3n7xbSvk.jpg?width=1184&height=864"
-              alt="VAMIX office space"
+              alt="VAMIX office space and design studio environment"
               loading="lazy"
+              decoding="async"
+              width="1184"
+              height="864"
               className="office-image"
             />
 

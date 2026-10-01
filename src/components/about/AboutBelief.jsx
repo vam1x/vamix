@@ -49,6 +49,9 @@ export default function AboutBelief() {
                 alt="VAMIX Design Studio & Craft" 
                 className="about-founder-img"
                 loading="lazy"
+                decoding="async"
+                width="480"
+                height="721"
               />
             </div>
           </div>

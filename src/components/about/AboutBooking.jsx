@@ -55,7 +55,7 @@ export default function AboutBooking({ navigate }) {
                 <p>RUBY RATTEY</p>
                 <p>CLIENT SUCCESS MANAGER</p>
               </div>
-              <img src={rubyImage} alt="Ruby Rattey" />
+              <img src={rubyImage} alt="Ruby Rattey - Client Success Manager" width="48" height="48" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>

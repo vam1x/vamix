@@ -116,7 +116,7 @@ export default function HowWeDoIt({ navigate }) {
                   <div className="process-step__line" aria-hidden="true">
                     <span></span>
                   </div>
-                  <h2>{step.text}</h2>
+                  <h3>{step.text}</h3>
                 </article>
               ))}
             </div>

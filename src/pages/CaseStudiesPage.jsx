@@ -104,13 +104,14 @@ export default function CaseStudiesPage({ navigate }) {
                               target="_blank" 
                               rel="noopener noreferrer"
                               className="cs-read-more-btn"
+                              aria-label={`View live project for ${project.title}`}
                               onClick={(e) => {
                                 if (project.href.startsWith('/')) {
                                   handleLink(e, project.href);
                                 }
                               }}
                             >
-                              TEXT
+                              View Live <span className="cs-arrow-icon" aria-hidden="true">↗</span>
                             </a>
                           </div>
 

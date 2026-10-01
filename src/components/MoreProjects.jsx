@@ -1,47 +1,9 @@
 import React, { useState } from 'react';
 import SectionGrid from './SectionGrid';
+import projects from '../pages/caseStudiesData.json';
 
 export default function MoreProjects({ navigate }) {
   const [hoveredIdx, setHoveredIdx] = useState(null);
-
-  const projects = [
-    {
-      title: "Formfunction",
-      desc: "Most NFT platforms looked like stock tickers, so we designed Formfunction to look like a gallery. A minimalist interface that put 1/1 art back in the spotlight.",
-      img: "/projects/projects-1.webp",
-      logo: "/projects/projects-2.webp"
-    },
-    {
-      title: "RBC Data Fabric Portal",
-      desc: "We transformed fragmented, global data into a unified \"Data Fabric,\" giving teams a single source of truth. The result was a dramatic reduction in data discovery time and a massive boost in governance compliance.",
-      img: "/projects/projects-3.webp",
-      logo: "/projects/projects-4.webp"
-    },
-    {
-      title: "CoRide",
-      desc: "Ride-sharing apps had become cluttered and transactional. We stripped the experience back to its essentials to prioritize user safety and booking speed.",
-      img: "/projects/projects-5.webp",
-      logo: "/projects/projects-6.webp"
-    },
-    {
-      title: "Bitfront",
-      desc: "Crypto interfaces are notoriously intimidating; we made this one inviting. By swapping the industry-standard \"dark mode\" for a clean, illustrative aesthetic, we bridged the gap between casual buyers and professional traders.",
-      img: "/projects/projects-7.webp",
-      logo: "/projects/projects-8.webp"
-    },
-    {
-      title: "USpeak Inc",
-      desc: "Public speaking is terrifying. We designed an AI interface that turns high-stakes anxiety into a safe, guided conversation.",
-      img: "/projects/projects-9.webp",
-      logo: "/projects/projects-10.webp"
-    },
-    {
-      title: "TSCx",
-      desc: "TSCx had the engineering chops but a digital presence that didn't match their innovation. We brought their visual language up to their technical depth and built a site that finally looks the part.",
-      img: "/projects/projects-11.webp",
-      logo: "/projects/projects-12.webp"
-    }
-  ];
 
   return (
     <section className="more-projects" id="projects">
@@ -94,7 +56,7 @@ export default function MoreProjects({ navigate }) {
                 >
                   <div className="case-row__visual-group">
                     <img
-                      src={project.img}
+                      src={project.images[1]}
                       alt={project.title}
                       loading="lazy"
                       data-case-hover-photo="true"
@@ -103,9 +65,9 @@ export default function MoreProjects({ navigate }) {
                         transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
                       }}
                     />
-                    {project.logo && (
+                    {project.images[0] && (
                       <img
-                        src={project.logo}
+                        src={project.images[0]}
                         alt=""
                         loading="lazy"
                         className="case-row__visual-logo"

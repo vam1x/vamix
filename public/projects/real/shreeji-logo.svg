@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" width="340" height="80" fill="none">
+  <!-- Gold circular monogram -->
+  <circle cx="40" cy="40" r="28" stroke="#D4AF37" stroke-width="2" fill="#800020" />
+  <circle cx="40" cy="40" r="25" stroke="#D4AF37" stroke-width="1" stroke-dasharray="2 3" fill="none" />
+  <text x="40" y="47" text-anchor="middle" fill="#D4AF37" font-family="'Playfair Display', Georgia, serif" font-size="20" font-weight="700">SH</text>
+  <!-- Brand text -->
+  <text x="82" y="40" fill="#800020" font-family="'Playfair Display', Georgia, serif" font-size="24" font-weight="800" letter-spacing="0.08em">SHREEJI</text>
+  <text x="83" y="56" fill="#D4AF37" font-family="'Montserrat', sans-serif" font-size="11" font-weight="700" letter-spacing="0.25em">FASHION SURAT</text>
+</svg>

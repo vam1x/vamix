@@ -117,9 +117,12 @@ export default function AboutFaq() {
             <div className="about-support-profile">
               <img 
                 src="/images/ruby-avatar.webp" 
-                alt="Ruby Rattey" 
+                alt="Ruby Rattey - Client Success Manager" 
                 className="about-support-avatar"
                 loading="lazy"
+                decoding="async"
+                width="42"
+                height="42"
               />
               <div className="about-support-meta">
                 <span className="support-name">RUBY RATTEY</span>

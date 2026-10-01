@@ -84,7 +84,7 @@ export default function WhyUs() {
               <span>Source:</span>
               <span>CLIENT FEEDBACK &amp; PROJECT DATA</span>
               <span className="stats-panel__source-date">
-                <img src="/calendar.png" alt="" width="16" height="16" />
+                <img src="/calendar.png" alt="Calendar date icon" width="16" height="16" loading="lazy" decoding="async" />
                 <span>Apr 2025</span>
               </span>
             </div>

@@ -140,9 +140,9 @@ export default function CaseStudiesPage({ navigate }) {
 
                           {/* Mobile inline preview card (visible on screens <= 1199px) */}
                           <div className="cs-mobile-preview-card">
-                            <img src={project.images[1]} alt={project.title} className="cs-mobile-preview-img" loading="lazy" />
+                            <img src={project.images[1]} alt={`${project.title} project preview`} className="cs-mobile-preview-img" loading="lazy" decoding="async" />
                             <div className="cs-mobile-logo-wrap">
-                              <img src={project.images[0]} alt="" className="cs-mobile-logo-img" loading="lazy" />
+                              <img src={project.images[0]} alt={`${project.title} brand logo`} className="cs-mobile-logo-img" loading="lazy" decoding="async" />
                             </div>
                           </div>
                         </motion.div>
@@ -169,16 +169,18 @@ export default function CaseStudiesPage({ navigate }) {
                   <div className="cs-preview-mockup-frame">
                     <img 
                       src={currentProject.images[1]} 
-                      alt={currentProject.title} 
+                      alt={`${currentProject.title} featured showcase`} 
                       className="cs-featured-bg-img"
                       loading="eager"
+                      decoding="async"
                     />
                     <div className="cs-logo-center-badge">
                       <img 
                         src={currentProject.images[0]} 
-                        alt="" 
+                        alt={`${currentProject.title} client logo`} 
                         className="cs-client-logo-img"
                         loading="eager"
+                        decoding="async"
                       />
                     </div>
                   </div>

@@ -1,0 +1,10 @@
+# User-agent configuration for VAMIX Digital Product Studio
+User-agent: *
+Allow: /
+Disallow: /404
+
+# Host
+Host: https://vamix.vercel.app
+
+# XML Sitemap
+Sitemap: https://vamix.vercel.app/sitemap.xml

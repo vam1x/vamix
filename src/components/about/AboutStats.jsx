@@ -33,6 +33,9 @@ export default function AboutStats() {
               alt="VAMIX Studio Open Plan Office" 
               className="about-studio-img"
               loading="lazy"
+              decoding="async"
+              width="1184"
+              height="864"
             />
           </div>
 

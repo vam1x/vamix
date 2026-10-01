@@ -83,6 +83,8 @@ export default function Hero({ navigate }) {
             className="hero-art-img"
             loading="eager"
             fetchpriority="high"
+            width="1024"
+            height="1536"
           />
         </motion.div>
       </div>

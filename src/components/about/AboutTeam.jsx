@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 export default function AboutTeam() {
   const members = [
     {
-      roleHeader: "CO-FOUNDER & TECHNICAL DIRECTOR",
+      roleHeader: " & TECHNICAL DIRECTOR",
       badge: "*",
       img: "/team/mayur-unagar.png",
       gradient: "linear-gradient(90deg, #9333ea 0%, #f97316 100%)",

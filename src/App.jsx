@@ -193,7 +193,7 @@ export default function App() {
               {/* Section 04: The Fast Track & Cost of Delay Matrix */}
               <HowWeDoIt navigate={navigate} />
 
-              {/* Section 05: Results & Bitfront Success Story */}
+              {/* Section 05: Results & DV Jewellery Designer Success Story */}
               <Results navigate={navigate} />
 
               {/* Section 06: More Projects Showcase */}

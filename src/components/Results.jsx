@@ -24,12 +24,12 @@ export default function Results({ navigate }) {
         transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
       >
         <img
-          src="/case/case-1.webp"
-          alt=""
+          src="/projects/real/dv-hero.jpg"
+          alt="DV Jewellery Designer Luxury Boutique"
           loading="lazy"
           decoding="async"
-          width="1200"
-          height="977"
+          width="1440"
+          height="960"
         />
         <div className="case-section__mask"></div>
       </motion.div>
@@ -54,25 +54,25 @@ export default function Results({ navigate }) {
                 </span>
               </div>
               <p className="case-section__description">
-                Bitfront partnered with VAMIX to redesign its crypto exchange interface,
-                removing intimidation from digital asset trading while preserving
-                professional-grade capability. The platform was rebuilt to guide users from
-                first transaction to advanced trading with clarity and confidence.
+                DV Jewellery Designer partnered with VAMIX to architect a digital flagship
+                boutique worthy of fine craftsmanship. By blending high-fashion editorial storytelling
+                with intuitive jewelry filtering, tactile piece inspection, and a seamless checkout,
+                the bespoke atelier transformed high-ticket online browsing into confident luxury purchases.
               </p>
             </div>
 
             <dl className="case-meta">
               <div>
                 <dt>Date:</dt>
-                <dd>2020-2023</dd>
+                <dd>2023–2024</dd>
               </div>
               <div>
                 <dt>Industry:</dt>
-                <dd>Fintech / Web3</dd>
+                <dd>Luxury E-Commerce / Fine Jewellery</dd>
               </div>
               <div>
                 <dt>Challenge:</dt>
-                <dd>Intimidating, expert-only interface that blocked retail user adoption</dd>
+                <dd>Standard digital catalog lacked tactile prestige, suppressing high-ticket custom conversions</dd>
               </div>
             </dl>
           </div>
@@ -108,18 +108,18 @@ export default function Results({ navigate }) {
 
           <div className="case-section__proof">
             <div>
-              <span>ONBOARDING TIME CUT</span>
+              <span>CHECKOUT DROPOFF CUT</span>
               <strong>
-                <AnimatedCounter to={71} prefix="-" suffix="%" />
+                <AnimatedCounter to={58} prefix="-" suffix="%" />
                 <span className="case-section__proof-dots" aria-hidden="true">
                   <i></i><i></i><i></i><i></i><i></i><i></i>
                 </span>
               </strong>
             </div>
             <div>
-              <span>USER RETENTION IMPROVED</span>
+              <span>SALES CONVERSION</span>
               <strong>
-                <AnimatedCounter to={43} prefix="+" suffix="%" />
+                <AnimatedCounter to={76} prefix="+" suffix="%" />
                 <span className="case-section__proof-dots" aria-hidden="true">
                   <i></i><i></i><i></i><i></i><i></i><i></i>
                 </span>
@@ -146,14 +146,15 @@ export default function Results({ navigate }) {
 
           <blockquote>
             <RevealText
-              text="THEY DIDN'T JUST MAKE IT PRETTY. THEY MADE IT WORK. OUR USERS WENT FROM CONFUSED TO CONFIDENT IN WEEKS. BEST DESIGN INVESTMENT WE'VE MADE."
+              text="THEY DIDN'T JUST MAKE IT PRETTY. THEY MADE IT SELL. OUR BUYERS WENT FROM BROWSING TO BUYING WITH COMPLETE CONFIDENCE. BEST DESIGN INVESTMENT WE'VE MADE."
               theme="dark"
             />
           </blockquote>
 
           <figcaption>
             <div className="case-section__quote-lines">
-              <span>VAMIX STUDIO</span>
+              <span>DV JEWELLERY DESIGNER</span>
+              <span>CRAFTING TIMELESS ELEGANCE</span>
             </div>
           </figcaption>
         </figure>

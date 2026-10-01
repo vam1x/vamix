@@ -4138,15 +4138,27 @@ a:hover .rolling-label__copy {
 }
 
 .case-section__backdrop img {
-  aspect-ratio: 1152 / 1607;
   object-fit: cover;
-  width: 60%;
-  height: auto;
+  object-position: center 25%;
+  width: 55%;
+  height: 100%;
   display: block;
   position: absolute;
-  top: -134px;
-  left: 45%;
-  min-height: calc(100% + 134px);
+  top: 0;
+  left: 47%;
+  min-height: 100%;
+}
+
+.case-section__backdrop::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 50%;
+  background: linear-gradient(135deg, rgba(20, 16, 12, 0.72) 0%, rgba(12, 10, 8, 0.88) 100%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .case-section__mask {
@@ -5160,7 +5172,8 @@ a:hover .rolling-label__copy {
   .case-section__inner {
     grid-template-columns: 1fr;
   }
-  .case-section__backdrop img {
+  .case-section__backdrop img,
+  .case-section__backdrop::after {
     display: none;
   }
   .case-section__mask {

@@ -20,13 +20,13 @@ export default function Timeline() {
     {
       year: "2025",
       icon: "/beliefs/beliefs-4.webp",
-      desc: "CROSSED 50 SUCCESSFUL\nCLIENT PROJECTS MILESTONE",
+      desc: "CROSSED 21+ SUCCESSFUL\nCLIENT PROJECTS MILESTONE",
       gap: "180px"
     },
     {
       year: "2026",
       icon: "/beliefs/beliefs-5.webp",
-      desc: "OVER A DECADE BUILDING\nPRODUCTS USERS LOVE",
+      desc: "SCALING GLOBAL IMPACT &\nNEXT-GEN DIGITAL PRODUCTS",
       gap: "210px"
     }
   ];

@@ -22,11 +22,11 @@ export default function AboutBelief() {
     },
     {
       year: "2025",
-      desc: "CROSSED 50 SUCCESSFUL CLIENT PROJECTS MILESTONE"
+      desc: "CROSSED 21+ SUCCESSFUL CLIENT PROJECTS MILESTONE"
     },
     {
       year: "2026",
-      desc: "OVER A DECADE BUILDING PRODUCTS USERS LOVE"
+      desc: "SCALING GLOBAL IMPACT & NEXT-GEN DIGITAL PRODUCTS"
     }
   ];
 

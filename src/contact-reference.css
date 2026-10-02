@@ -67,6 +67,19 @@
   height: 100%;
 }
 
+/* Ensure SectionGrid in bottom #contact matches the 4-column 1920px blueprint */
+.contact-page-root .section-grid-backdrop {
+  padding-left: 40px;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+.contact-page-root .section-grid-container {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
 .contact-page-root .page-container {
   max-width: var(--container-max);
   width: 100%;
@@ -269,8 +282,8 @@
   font-family: var(--font-mono);
 }
 
-/* Form Action Area: Submit, Captcha & Legal Alignment */
-.contact-page-root .contact-submit-area {
+/* Form Action Area: Submit, Captcha & Legal Alignment (Scoped to madlib-form) */
+.contact-page-root .madlib-form .contact-submit-area {
   row-gap: 28px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   width: 100%;
@@ -280,11 +293,11 @@
   box-sizing: border-box;
 }
 
-.contact-page-root .contact-submit-area .webus-captcha {
+.contact-page-root .madlib-form .contact-submit-area .webus-captcha {
   grid-area: 1 / 1 / auto / 2;
 }
 
-.contact-page-root .contact-submit {
+.contact-page-root .madlib-form .contact-submit {
   color: var(--color-ink);
   cursor: pointer;
   font-family: var(--font-secondary);
@@ -308,11 +321,11 @@
   transition: background-color 0.2s ease;
 }
 
-.contact-page-root .contact-submit:hover {
+.contact-page-root .madlib-form .contact-submit:hover {
   background: rgba(0, 0, 0, 0.02);
 }
 
-.contact-page-root .contact-submit:before {
+.contact-page-root .madlib-form .contact-submit:before {
   border-top: 1px solid var(--black-07);
   content: "";
   pointer-events: none;
@@ -320,7 +333,7 @@
   inset: 0;
 }
 
-.contact-page-root .contact-submit:after {
+.contact-page-root .madlib-form .contact-submit:after {
   background: var(--gradient-brand);
   content: "";
   height: 2px;
@@ -330,30 +343,30 @@
   right: 0;
 }
 
-.contact-page-root .contact-submit:focus-visible {
+.contact-page-root .madlib-form .contact-submit:focus-visible {
   outline: 1px solid var(--color-ink);
   outline-offset: 5px;
 }
 
-.contact-page-root .contact-submit-arrow {
+.contact-page-root .madlib-form .contact-submit-arrow {
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.contact-page-root .contact-submit:hover .contact-submit-arrow {
+.contact-page-root .madlib-form .contact-submit:hover .contact-submit-arrow {
   transform: translateX(4px);
 }
 
-.contact-page-root .contact-legal {
+.contact-page-root .madlib-form .contact-legal {
   padding-left: 40px;
   grid-area: 2 / 2 / auto / 4;
   align-items: center;
   display: flex;
 }
 
-.contact-page-root .form-legal {
+.contact-page-root .madlib-form .form-legal {
   color: var(--ink-60);
   font-family: var(--font-mono);
   font-size: 11px;
@@ -365,13 +378,13 @@
   margin: 0;
 }
 
-.contact-page-root .form-legal a {
+.contact-page-root .madlib-form .form-legal a {
   color: var(--color-ink);
   text-decoration: none;
   transition: all 0.15s ease;
 }
 
-.contact-page-root .form-legal a:hover {
+.contact-page-root .madlib-form .form-legal a:hover {
   background: var(--color-ink);
   color: var(--color-paper);
 }
@@ -697,19 +710,23 @@
     width: 100%;
     min-width: 0;
   }
-  .contact-page-root .contact-submit-area {
+  .contact-page-root .madlib-form .contact-submit-area {
     padding-top: 60px;
   }
-  .contact-page-root .contact-submit-area .webus-captcha {
+  .contact-page-root .madlib-form .contact-submit-area .webus-captcha {
     grid-column: 1 / 3;
   }
-  .contact-page-root .contact-submit {
+  .contact-page-root .madlib-form .contact-submit {
     font-size: 14px;
     grid-column: 1 / 3;
   }
-  .contact-page-root .contact-legal {
+  .contact-page-root .madlib-form .contact-legal {
     padding-left: 20px;
     grid-column: 3 / 4;
+  }
+  .contact-page-root .section-grid-backdrop {
+    padding-left: 30px;
+    padding-right: 30px;
   }
   .contact-page-root .contact-info-content {
     gap: 70px;
@@ -780,31 +797,35 @@
   .contact-page-root .madlib-line input {
     font-size: 16px;
   }
-  .contact-page-root .contact-submit-area {
+  .contact-page-root .madlib-form .contact-submit-area {
     flex-direction: column;
     align-items: flex-start;
     gap: 18px;
     padding-top: 20px;
     display: flex;
   }
-  .contact-page-root .contact-submit-area .webus-captcha {
+  .contact-page-root .madlib-form .contact-submit-area .webus-captcha {
     order: 0;
     max-width: 100%;
   }
-  .contact-page-root .contact-submit {
+  .contact-page-root .madlib-form .contact-submit {
     font-size: 13px;
     height: 70px;
     order: 1;
     width: 100%;
   }
-  .contact-page-root .contact-legal {
+  .contact-page-root .madlib-form .contact-legal {
     order: -1;
     width: 100%;
     padding-left: 0;
   }
-  .contact-page-root .form-legal {
+  .contact-page-root .madlib-form .form-legal {
     font-size: 10px;
     max-width: 100%;
+  }
+  .contact-page-root .section-grid-backdrop {
+    padding-left: 20px;
+    padding-right: 20px;
   }
   .contact-page-root .contact-info-content {
     gap: 40px;

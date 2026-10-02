@@ -48,7 +48,7 @@ export default function PrivacyPolicyPage({ navigate }) {
                 </p>
                 <p className="legal-paragraph">
                   For any privacy questions or requests, please email{' '}
-                  <a href="mailto:hi@vamix.com" className="legal-link">hi@vamix.com</a> or call us at{' '}
+                  <a href="mailto:vamixlabs@gmail.com" className="legal-link">vamixlabs@gmail.com</a> or call us at{' '}
                   <a href="tel:+916359198825" className="legal-link">+91 63591 98825</a>.
                 </p>
               </div>
@@ -127,7 +127,7 @@ export default function PrivacyPolicyPage({ navigate }) {
               <div className="legal-section-block">
                 <h2 className="legal-section-title">6. YOUR REQUESTS</h2>
                 <p className="legal-paragraph">
-                  You may at any time email <a href="mailto:hi@vamix.com" className="legal-link">hi@vamix.com</a> to inquire what personal data you have shared with us, request corrections, or request deletion of your information from our communications channels.
+                  You may at any time email <a href="mailto:vamixlabs@gmail.com" className="legal-link">vamixlabs@gmail.com</a> to inquire what personal data you have shared with us, request corrections, or request deletion of your information from our communications channels.
                 </p>
                 <p className="legal-paragraph">
                   We will promptly verify your identity and address your request in good faith, subject to applicable statutory or contractual retention duties.
@@ -163,7 +163,7 @@ export default function PrivacyPolicyPage({ navigate }) {
                     Phone: <a href="tel:+916359198825">+91 63591 98825</a>
                   </div>
                   <div className="legal-contact-detail">
-                    Email: <a href="mailto:hi@vamix.com">hi@vamix.com</a>
+                    Email: <a href="mailto:vamixlabs@gmail.com">vamixlabs@gmail.com</a>
                   </div>
                 </div>
               </div>

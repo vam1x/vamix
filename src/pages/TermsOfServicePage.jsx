@@ -142,7 +142,7 @@ export default function TermsOfServicePage({ navigate }) {
                     Phone: <a href="tel:+916359198825">+91 63591 98825</a>
                   </div>
                   <div className="legal-contact-detail">
-                    Email: <a href="mailto:hi@vamix.com">hi@vamix.com</a>
+                    Email: <a href="mailto:vamixlabs@gmail.com">vamixlabs@gmail.com</a>
                   </div>
                 </div>
               </div>

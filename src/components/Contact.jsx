@@ -65,157 +65,145 @@ export default function Contact({ navigate }) {
       <div className="contact-aurora" aria-hidden="true" />
 
       <div className="section-container contact-inner">
-        {/* ===== 4-Column Contact Grid ===== */}
-        <div className="contact-grid">
-
-          {/* ── Col 1: Section Badge ── */}
-          <div className="contact-col contact-col--badge">
-            <div className="contact-badge">
-              <span className="contact-badge__dot" />
-              <span className="contact-badge__num">12</span>
-              <span className="contact-badge__label">READY TO START?</span>
-            </div>
+        {/* ROW 1: Header Row (4-column grid) */}
+        <div className="contact-head-row">
+          {/* Col 1: Section Badge */}
+          <div className="contact-marker">
+            <span className="contact-badge__dot" />
+            <span className="contact-badge__num">12</span>
+            <span className="contact-badge__label">READY TO START?</span>
           </div>
 
-          {/* ── Col 2–4: Form ── */}
+          {/* Col 2–3: Title & Subtitle */}
+          <div className="contact-heading">
+            <h2 className="contact-title">GET IN TOUCH</h2>
+            <p className="contact-sub">
+              Whether you have questions or just want to explore options, we're here.
+            </p>
+          </div>
+
+          {/* Col 4: Navigation Links */}
+          <nav className="contact-nav" aria-label="Footer navigation">
+            <a href="/" onClick={(e) => handleNav(e, '/')}><RollingText text="HOME" /></a>
+            <a href="/about" onClick={(e) => handleNav(e, '/about')}><RollingText text="ABOUT" /></a>
+            <a href="/case-studies" onClick={(e) => handleNav(e, '/case-studies')}><RollingText text="CASE STUDIES" /></a>
+            <a href="/services" onClick={(e) => handleNav(e, '/services')}><RollingText text="SERVICES" /></a>
+            <a href="/contact" onClick={(e) => handleNav(e, '/contact')}><RollingText text="CONTACT" /></a>
+          </nav>
+        </div>
+
+        {/* ROW 2: Form Area (4-column grid: Col 1 empty, Col 2-4 form) */}
+        <div className="contact-form-area">
           <form className="contact-form" onSubmit={handleSubmit}>
-
-            {/* Col 2: Title + Subhead + NAME */}
-            <div className="contact-col contact-col--title">
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <h2 className="contact-title">GET IN TOUCH</h2>
-                <p className="contact-sub">
-                  Whether you have questions or just want to explore options, we're here.
-                </p>
-
-                {/* NAME field */}
-                <div className="contact-field">
-                  <label className="contact-field__label">NAME</label>
-                  <div className="contact-field__row">
-                    <input
-                      type="text"
-                      className="contact-field__input"
-                      placeholder="YOUR NAME"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      autoComplete="name"
-                      autoCapitalize="words"
-                      required
-                    />
-                    <DragDotsIcon />
-                  </div>
-                  <span className="contact-field__cross contact-field__cross--left" aria-hidden="true">+</span>
+            {/* Step 1: NAME (Col 1 of 3 = Col 2 of 4) */}
+            <div className="contact-row contact-row--name">
+              <div className="contact-field">
+                <label className="contact-field__label" htmlFor="contact-name">NAME</label>
+                <div className="contact-field__row">
+                  <input
+                    id="contact-name"
+                    type="text"
+                    className="contact-field__input"
+                    placeholder="YOUR NAME"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    autoComplete="name"
+                    autoCapitalize="words"
+                    required
+                  />
+                  <DragDotsIcon />
                 </div>
-              </motion.div>
+                <span className="contact-field__cross contact-field__cross--left" aria-hidden="true">+</span>
+              </div>
             </div>
 
-            {/* Col 3: EMAIL */}
-            <div className="contact-col contact-col--email">
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <div className="contact-field">
-                  <label className="contact-field__label">EMAIL ADDRESS</label>
-                  <div className="contact-field__row">
-                    <input
-                      type="email"
-                      className="contact-field__input"
-                      placeholder="EMAIL@ADDRESS.COM"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      autoComplete="email"
-                      autoCapitalize="none"
-                      required
-                    />
-                    <DragDotsIcon />
-                  </div>
-                  <span className="contact-field__cross contact-field__cross--left" aria-hidden="true">+</span>
-                  <span className="contact-field__cross contact-field__cross--right" aria-hidden="true">+</span>
+            {/* Step 2: EMAIL (Col 2 of 3 = Col 3 of 4) */}
+            <div className="contact-row contact-row--email">
+              <div className="contact-field">
+                <label className="contact-field__label" htmlFor="contact-email">EMAIL ADDRESS</label>
+                <div className="contact-field__row">
+                  <input
+                    id="contact-email"
+                    type="email"
+                    className="contact-field__input"
+                    placeholder="EMAIL@ADDRESS.COM"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    autoComplete="email"
+                    autoCapitalize="none"
+                    required
+                  />
+                  <DragDotsIcon />
                 </div>
-              </motion.div>
+                <span className="contact-field__cross contact-field__cross--left" aria-hidden="true">+</span>
+                <span className="contact-field__cross contact-field__cross--right" aria-hidden="true">+</span>
+              </div>
             </div>
 
-            {/* Col 4: Nav + Captcha + Submit + Legal */}
-            <div className="contact-col contact-col--action">
+            {/* Step 3: SUBMIT / CAPTCHA (Col 3 of 3 = Col 4 of 4) */}
+            <div className="contact-row contact-row--submit">
+              <div className="contact-submit-area">
+                {/* Captcha */}
+                <div className="contact-captcha">
+                  <button
+                    type="button"
+                    className={`contact-captcha__btn ${isVerified ? 'is-verified' : ''}`}
+                    onClick={() => setIsVerified(!isVerified)}
+                    aria-label="Human verification"
+                  >
+                    <span className="contact-captcha__check">
+                      {isVerified && (
+                        <svg viewBox="0 0 20 20" width="14" height="14" fill="none">
+                          <path d="m4 10 4 4 8-8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      )}
+                    </span>
+                    <span className="contact-captcha__text">
+                      {isVerified ? "YOU ARE VERIFIED" : "VERIFY YOU'RE HUMAN"}
+                    </span>
+                  </button>
+                  <div className="contact-captcha__meta">
+                    <span>SELECT TO VERIFY BEFORE SENDING.</span>
+                    <span>
+                      PROTECTED BY hCaptcha.{' '}
+                      <a href="https://www.hcaptcha.com/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>
+                      {' · '}
+                      <a href="https://www.hcaptcha.com/terms" target="_blank" rel="noopener noreferrer">Terms</a>
+                    </span>
+                  </div>
+                </div>
 
-              {/* Navigation Links */}
-              <nav className="contact-nav" aria-label="Footer navigation">
-                <a href="/" onClick={(e) => handleNav(e, '/')}><RollingText text="HOME" /></a>
-                <a href="/about" onClick={(e) => handleNav(e, '/about')}><RollingText text="ABOUT" /></a>
-                <a href="/case-studies" onClick={(e) => handleNav(e, '/case-studies')}><RollingText text="CASE STUDIES" /></a>
-                <a href="/services" onClick={(e) => handleNav(e, '/services')}><RollingText text="SERVICES" /></a>
-                <a href="/contact" onClick={(e) => handleNav(e, '/contact')}><RollingText text="CONTACT" /></a>
-              </nav>
-
-              {/* Captcha */}
-              <div className="contact-captcha">
+                {/* Submit button */}
                 <button
-                  type="button"
-                  className={`contact-captcha__btn ${isVerified ? 'is-verified' : ''}`}
-                  onClick={() => setIsVerified(!isVerified)}
-                  aria-label="Human verification"
+                  type="submit"
+                  className={`contact-submit ${isSubmitted ? 'is-sent' : ''}`}
+                  aria-label="Send contact inquiry"
                 >
-                  <span className="contact-captcha__check">
-                    {isVerified && (
-                      <svg viewBox="0 0 20 20" width="14" height="14" fill="none">
-                        <path d="m4 10 4 4 8-8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    )}
+                  <span className="contact-submit__text">
+                    {isSubmitted ? 'REQUEST SENT! WE WILL REPLY SHORTLY' : <RollingText text="LET'S TALK" />}
                   </span>
-                  <span className="contact-captcha__text">
-                    {isVerified ? "YOU ARE VERIFIED" : "VERIFY YOU'RE HUMAN"}
-                  </span>
+                  <span className="contact-submit__arrow" aria-hidden="true">›</span>
+                  <div className="contact-submit__rainbow" aria-hidden="true" />
                 </button>
-                <div className="contact-captcha__meta">
-                  <span>SELECT TO VERIFY BEFORE SENDING.</span>
-                  <span>
-                    PROTECTED BY hCaptcha.{' '}
-                    <a href="https://www.hcaptcha.com/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>
-                    {' · '}
-                    <a href="https://www.hcaptcha.com/terms" target="_blank" rel="noopener noreferrer">Terms</a>
+
+                {/* Legal & Location */}
+                <div className="contact-legal">
+                  <span className="contact-legal__left">
+                    BY SUBMITTING, YOU AGREE TO OUR{' '}
+                    <a href="/terms-of-service" onClick={(e) => handleNav(e, '/terms-of-service')}><strong>TERMS</strong></a>
+                    {' '}AND{' '}
+                    <a href="/privacy-policy" onClick={(e) => handleNav(e, '/privacy-policy')}><strong>PRIVACY POLICY</strong></a>.
+                  </span>
+                  <span className="contact-legal__right">
+                    WE ARE BASED IN <strong>SURAT</strong>
                   </span>
                 </div>
               </div>
-
-              {/* Submit */}
-              <button
-                type="submit"
-                className={`contact-submit ${isSubmitted ? 'is-sent' : ''}`}
-                aria-label="Send contact inquiry"
-              >
-                <span className="contact-submit__text">
-                  {isSubmitted ? 'REQUEST SENT! WE WILL REPLY SHORTLY' : <RollingText text="LET'S TALK" />}
-                </span>
-                <span className="contact-submit__arrow" aria-hidden="true">›</span>
-                <div className="contact-submit__rainbow" aria-hidden="true" />
-              </button>
-
-              {/* Legal */}
-              <div className="contact-legal">
-                <span className="contact-legal__left">
-                  BY SUBMITTING, YOU AGREE TO OUR{' '}
-                  <a href="/terms-of-service" onClick={(e) => handleNav(e, '/terms-of-service')}><strong>TERMS</strong></a>
-                  {' '}AND{' '}
-                  <a href="/privacy-policy" onClick={(e) => handleNav(e, '/privacy-policy')}><strong>PRIVACY POLICY</strong></a>.
-                </span>
-                <span className="contact-legal__right">
-                  WE ARE BASED IN <strong>SURAT</strong>
-                </span>
-              </div>
             </div>
-
           </form>
         </div>
 
-        {/* ===== Footer Meta Row (1:1 Webus Reference) ===== */}
+        {/* ROW 3: Footer Meta Row */}
         <div className="contact-meta">
           <div className="contact-meta__logo">
             <a href="/" onClick={(e) => handleNav(e, '/')} aria-label="VAMIX Home">
@@ -225,7 +213,7 @@ export default function Contact({ navigate }) {
           <div className="contact-meta__empty" aria-hidden="true" />
           <div className="contact-meta__direct">
             <a href="tel:+916359198825" className="contact-meta__phone">+91 63591 98825</a>
-            <a href="mailto:vamixlabs@gmail.com" className="contact-meta__email">HI@VAMIX.COM</a>
+            <a href="mailto:vamixlabs@gmail.com" className="contact-meta__email">VAMIXLABS@GMAIL.COM</a>
           </div>
           <div className="contact-meta__col4">
             <div className="contact-meta__social">

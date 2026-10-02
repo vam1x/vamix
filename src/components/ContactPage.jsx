@@ -319,8 +319,8 @@ export default function ContactPage({ navigate }) {
                 <a className="contact-phone" href="tel:+916359198825">
                   +91 63591 98825
                 </a>
-                <a className="contact-email" href="mailto:hi@vamix.com">
-                  HI@VAMIX.COM
+                <a className="contact-email" href="mailto:vamixlabs@gmail.com">
+                  VAMIXLABS@GMAIL.COM
                 </a>
               </div>
 

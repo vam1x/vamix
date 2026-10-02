@@ -488,11 +488,12 @@ button:hover .roll-text-container .roll-clone,
   position: fixed;
   top: 88px;
   left: calc(40px + (min(100vw, 1920px) - 80px) * 0.5);
-  width: 340px;
+  width: 360px;
+  max-width: calc(100vw - 80px);
   background: #171717;
   color: #f5f5f5;
   border-radius: 0px;
-  padding: 34px 34px 30px 34px;
+  padding: 34px 30px 30px 30px;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08);
   z-index: 1001;
   pointer-events: auto;
@@ -559,13 +560,17 @@ button:hover .roll-text-container .roll-clone,
 
 .nav-card-email {
   font-family: var(--font-heading, 'Sora', sans-serif);
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 700;
   color: #ffffff;
   text-decoration: none;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
   transition: opacity 0.2s ease;
+  white-space: nowrap;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nav-card-email:hover {
@@ -784,6 +789,10 @@ button:hover .roll-text-container .roll-clone,
     width: calc(100vw - 32px) !important;
     top: 68px !important;
     padding: 24px 20px 20px 20px !important;
+  }
+
+  .nav-card-email {
+    font-size: clamp(16px, 4.5vw, 20px) !important;
   }
 }
 

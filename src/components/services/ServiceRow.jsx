@@ -1,111 +1,43 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import RollingText from '../RollingText';
 
 export default function ServiceRow({ service, index, navigate }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isToggled, setIsToggled] = useState(false);
-
-  const isActive = isHovered || isToggled;
-
-  const handleClick = (e) => {
-    // If clicking on mobile or tapping, toggle active state
-    if (window.innerWidth <= 809) {
-      setIsToggled(prev => !prev);
-      return;
-    }
-
-    if (e.target.closest('.service-read-more') || e.target.closest('a')) {
-      e.preventDefault();
-      if (navigate) {
-        navigate('/contact');
-      } else {
-        window.location.href = '/contact';
-      }
-    }
-  };
-
-  const handleActionClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (navigate) {
-      navigate('/contact');
-    } else {
-      window.location.href = '/contact';
-    }
-  };
-
+  const [hovered, setHovered] = useState(false);
+  const [toggled, setToggled] = useState(false);
+  const reducedMotion = useReducedMotion();
+  const active = hovered || toggled;
   return (
-    <article
-      className={`service-row ${isActive ? 'is-expanded' : ''}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={handleClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          handleActionClick(e);
-        }
-      }}
-      aria-label={`${service.title} - Read more and contact`}
-    >
-      {/* Left Column Area: Title, Expanded Detail & Action Link */}
+    <motion.article className={`service-row ${active ? 'is-expanded' : ''}`}
+      initial={{ opacity: reducedMotion ? 1 : 0, y: reducedMotion ? 0 : 24 }}
+      whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: reducedMotion ? 0 : 0.7, delay: reducedMotion ? 0 : index * 0.045, ease: [0.16, 1, 0.3, 1] }}
+      onPointerMove={(event) => { if (event.pointerType === 'mouse' && window.matchMedia('(hover: hover)').matches) setHovered(true); }}
+      onPointerLeave={(event) => { if (event.pointerType === 'mouse') setHovered(false); }}
+      onPointerUp={(event) => { if (event.pointerType === 'touch' || event.pointerType === 'pen') setToggled(value => !value); }}>
       <div className="service-row-copy">
-        <h3 className="service-row-title">{service.title}</h3>
-
-        <motion.div
-          className="service-row-detail"
-          initial={false}
-          animate={{
-            height: isActive ? 'auto' : 0,
-            opacity: isActive ? 1 : 0
-          }}
-          transition={{
-            duration: 0.35,
-            ease: [0.16, 1, 0.3, 1]
-          }}
-        >
-          <p className="service-row-desc">{service.desc}</p>
-          {service.tags && (
-            <p className="service-row-tags">{service.tags}</p>
-          )}
+        <h3 className="service-row-title"><button type="button" className="service-row-toggle" aria-expanded={active} aria-controls={`${service.id}-detail`} onClick={(event) => { if (event.detail === 0) setToggled(value => !value); }}>{service.title}</button></h3>
+        <motion.div id={`${service.id}-detail`} className="service-row-detail" aria-hidden={!active} initial={false}
+          animate={{ height: active ? 'auto' : 1, opacity: 1 }}
+          transition={{ duration: reducedMotion ? 0 : 0.5, ease: [0.16, 1, 0.3, 1] }}>
+          <motion.p className="service-row-desc" initial={false}
+            animate={{ opacity: active ? 1 : 0, y: active ? 0 : 8 }}
+            transition={{ duration: reducedMotion ? 0 : 0.35, delay: active && !reducedMotion ? 0.12 : 0, ease: [0.16, 1, 0.3, 1] }}>{service.desc}</motion.p>
+          <motion.p className="service-row-tags" initial={false}
+            animate={{ opacity: active ? 1 : 0, y: active ? 0 : 8 }}
+            transition={{ duration: reducedMotion ? 0 : 0.35, delay: active && !reducedMotion ? 0.18 : 0, ease: [0.16, 1, 0.3, 1] }}>{service.tags}</motion.p>
         </motion.div>
-
-        <span
-          className={`service-read-more ${isActive ? 'is-visible' : ''}`}
-          onClick={handleActionClick}
-        >
-          <span><RollingText text="Read more" /></span>
-          <svg
-            className="arrow-container"
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            aria-hidden="true"
-          >
-            <rect width="14" height="14" rx="2" fill="#D7D7D7"></rect>
-            <path
-              d="M9.96873 4.5V8.5625C9.96873 8.68682 9.91935 8.80605 9.83144 8.89396C9.74353 8.98186 9.6243 9.03125 9.49998 9.03125C9.37566 9.03125 9.25643 8.98186 9.16853 8.89396C9.08062 8.80605 9.03123 8.68682 9.03123 8.5625V5.63281L4.83162 9.83164C4.74356 9.9197 4.62413 9.96917 4.49959 9.96917C4.37506 9.96917 4.25562 9.9197 4.16756 9.83164C4.0795 9.74358 4.03003 9.62415 4.03003 9.49961C4.03003 9.37507 4.0795 9.25564 4.16756 9.16758L8.36717 4.96875H5.43748C5.31316 4.96875 5.19393 4.91936 5.10603 4.83146C5.01812 4.74355 4.96873 4.62432 4.96873 4.5C4.96873 4.37568 5.01812 4.25645 5.10603 4.16854C5.19393 4.08064 5.31316 4.03125 5.43748 4.03125H9.49998C9.6243 4.03125 9.74353 4.08064 9.83144 4.16854C9.91935 4.25645 9.96873 4.37568 9.96873 4.5Z"
-              fill="#171717"
-            ></path>
-          </svg>
-        </span>
       </div>
-
-      {/* Right Column Area: Visual Art Card with Hatch Overlay */}
-      <div className={`service-visual ${isActive ? 'is-visible' : ''}`} aria-hidden="true">
-        <div className="service-visual-group">
-          <span className="service-visual-logo" />
-          <img
-            src={service.img}
-            alt=""
-            loading="lazy"
-            className="service-visual-photo"
-          />
-        </div>
+      <a className={`service-read-more ${active ? 'is-visible' : ''}`} href="/contact" tabIndex={active ? 0 : -1} aria-label={`Discuss ${service.title}`} onClick={(event) => {
+        if (navigate && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) { event.preventDefault(); navigate('/contact'); }
+      }}><RollingText text="Read more" /><span className="arrow-container" aria-hidden="true">↗</span></a>
+      <div className={`service-visual ${active ? 'is-visible' : ''}`} aria-hidden="true">
+        <motion.div className="service-visual-group" initial={false}
+          animate={{ opacity: active ? 1 : 0, scale: active ? 1 : 1.04 }}
+          transition={{ duration: reducedMotion ? 0 : 0.58, delay: active && !reducedMotion ? 0.08 : 0, ease: [0.16, 1, 0.3, 1] }}>
+          <span className="service-visual-logo" /><img src={service.img} alt="" loading="lazy" decoding="async" className="service-visual-photo" />
+        </motion.div>
       </div>
-    </article>
+    </motion.article>
   );
 }

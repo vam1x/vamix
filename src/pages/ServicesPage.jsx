@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import SectionGrid from '../components/SectionGrid';
 import RollingText from '../components/RollingText';
 import ServiceRow from '../components/services/ServiceRow';
@@ -20,7 +20,7 @@ const designServices = [
     title: 'Design System',
     desc: 'We build reusable components, tokens and patterns that stay in step across design and code. Clear usage guidelines help designers and engineers create consistent screens as your product grows.',
     tags: '#COMPONENTLIBRARY #TOKENS #PATTERNS',
-    img: '/images/services/design-system.webp'
+    img: '/images/services/design-system.avif'
   },
   {
     id: 'web-mobile-apps-design',
@@ -86,7 +86,7 @@ const devServices = [
     title: 'Websites & Landing Pages',
     desc: 'We build websites and landing pages with a job to do: explain, convince, convert. Fast, responsive, and easy to update, with the motion and polish that make a brand look right online.',
     tags: '#NEXTJS #GSAP #SEO',
-    img: '/images/services/websites.webp'
+    img: '/images/services/websites.avif'
   },
   {
     id: 'internal-tools',
@@ -97,7 +97,15 @@ const devServices = [
   }
 ];
 
+function RevealHeading({ text, className = '' }) {
+  const reducedMotion = useReducedMotion();
+  return <motion.span className={`services-reveal ${className}`} aria-label={text} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} transition={{ staggerChildren: reducedMotion ? 0 : 0.018 }}>
+    {text.split(' ').map((word, i) => <span className="services-reveal-word" aria-hidden="true" key={i}>{[...word].map((char, j) => <motion.span key={j} variants={{ hidden: { opacity: reducedMotion ? 1 : 0, y: reducedMotion ? 0 : '105%' }, visible: { opacity: 1, y: 0 } }} transition={{ duration: reducedMotion ? 0 : 0.65, ease: [0.16, 1, 0.3, 1] }}>{char}</motion.span>)}{'\u00a0'}</span>)}
+  </motion.span>;
+}
+
 export default function ServicesPage({ navigate }) {
+  const reducedMotion = useReducedMotion();
   useEffect(() => {
     document.title = "Services: Design & Development | VAMIX";
     window.scrollTo(0, 0);
@@ -126,13 +134,13 @@ export default function ServicesPage({ navigate }) {
 
           <div className="hero-copy section-span-three">
             <h1 id="services-title" className="display-heading">
-              <span>WE DESIGN IT, </span>
-              <span className="display-heading__muted">THEN WE<br />BUILD IT</span>
+              <RevealHeading text="WE DESIGN IT," />
+              <span className="display-heading__muted"><RevealHeading text="THEN WE" /><br /><RevealHeading text="BUILD IT" /></span>
             </h1>
 
-            <p className="hero-description">
+            <motion.p className="hero-description" initial={{ opacity: reducedMotion ? 1 : 0, y: reducedMotion ? 0 : 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: reducedMotion ? 0 : 0.7, delay: reducedMotion ? 0 : 0.3 }}>
               Two tracks under one roof. Design works out what to make. Development ships it as working software. One team runs both.
-            </p>
+            </motion.p>
           </div>
         </div>
       </section>
@@ -148,7 +156,7 @@ export default function ServicesPage({ navigate }) {
           </aside>
 
           <div className="track-copy section-span-three">
-            <h2 id="design-services-title" className="track-title">DESIGN</h2>
+            <h2 id="design-services-title" className="track-title"><RevealHeading text="DESIGN" /></h2>
             <p className="track-description">
               We decide what to build and shape how it works, from first research to final screen.
             </p>
@@ -178,7 +186,7 @@ export default function ServicesPage({ navigate }) {
           </aside>
 
           <div className="track-copy section-span-three">
-            <h2 id="dev-services-title" className="track-title">DEVELOPMENT</h2>
+            <h2 id="dev-services-title" className="track-title"><RevealHeading text="DEVELOPMENT" /></h2>
             <p className="track-description">
               We write the production code that turns the design into a product people can use. AI leads the way we build.
             </p>

@@ -52,16 +52,13 @@ export default function Hero({ navigate }) {
   ];
 
   const clientLogos = [
-    { src: "/projects/real/dv-logo.png", alt: "DV Jewellery Designer", height: 46, filter: "brightness(0)" },
-    { src: "/projects/real/seogram-logo-black.svg", alt: "SEOGram", height: 40 },
-    { src: "/projects/real/konsept-logo-black.svg", alt: "Konsept", height: 32 },
-    { src: "/projects/real/fintecc-logo-black.svg", alt: "Fintecc", height: 42 },
-    { src: "/projects/real/shreeji-logo-black.svg", alt: "Shreeji Fashion", height: 46 },
-    { src: "/projects/real/nexode-logo-black.svg", alt: "Nexode", height: 34 }
+    { src: "/projects/real/dv-logo.png", alt: "DV Jewellery Designer", height: 38, filter: "brightness(0)" },
+    { src: "/projects/real/seogram-logo-black.svg", alt: "SEOGram", height: 34 },
+    { src: "/projects/real/konsept-logo-black.svg", alt: "Konsept", height: 26 },
+    { src: "/projects/real/fintecc-logo-black.svg", alt: "Fintecc", height: 36 },
+    { src: "/projects/real/shreeji-logo-black.svg", alt: "Shreeji Fashion", height: 38 },
+    { src: "/projects/real/nexode-logo-black.svg", alt: "Nexode", height: 26 }
   ];
-
-  // Repeat logos for smooth continuous infinite marquee
-  const tickerLogos = [...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos];
 
   const springConfig = {
     type: "spring",
@@ -317,16 +314,30 @@ export default function Hero({ navigate }) {
             >
               <div className="hero-ticker-mask">
                 <div className="hero-ticker-track">
-                  {tickerLogos.map((logo, idx) => (
-                    <div key={idx} className="hero-ticker-item">
-                      <img
-                        src={logo.src}
-                        alt={logo.alt}
-                        className="hero-ticker-img"
-                        style={{ height: `${logo.height}px`, width: 'auto', filter: logo.filter || 'none' }}
-                      />
-                    </div>
-                  ))}
+                  <div className="hero-ticker-group">
+                    {clientLogos.map((logo, idx) => (
+                      <div key={`logo-a-${idx}`} className="hero-ticker-item">
+                        <img
+                          src={logo.src}
+                          alt={logo.alt}
+                          className="hero-ticker-img"
+                          style={{ height: `${logo.height}px`, width: 'auto', filter: logo.filter || 'none' }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="hero-ticker-group" aria-hidden="true">
+                    {clientLogos.map((logo, idx) => (
+                      <div key={`logo-b-${idx}`} className="hero-ticker-item">
+                        <img
+                          src={logo.src}
+                          alt={logo.alt}
+                          className="hero-ticker-img"
+                          style={{ height: `${logo.height}px`, width: 'auto', filter: logo.filter || 'none' }}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>

@@ -2,12 +2,12 @@ import React from 'react';
 
 export default function LogoMarquee() {
   const logos = [
-    { src: "/projects/real/dv-logo.png", alt: "DV Jewellery Designer", height: 46, filter: "brightness(0)" },
-    { src: "/projects/real/seogram-logo-black.svg", alt: "SEOGram", height: 40 },
-    { src: "/projects/real/konsept-logo-black.svg", alt: "Konsept", height: 32 },
-    { src: "/projects/real/fintecc-logo-black.svg", alt: "Fintecc", height: 42 },
-    { src: "/projects/real/shreeji-logo-black.svg", alt: "Shreeji Fashion", height: 46 },
-    { src: "/projects/real/nexode-logo-black.svg", alt: "Nexode", height: 34 }
+    { src: "/projects/real/dv-logo.png", alt: "DV Jewellery Designer", height: 38, filter: "brightness(0)" },
+    { src: "/projects/real/seogram-logo-black.svg", alt: "SEOGram", height: 34 },
+    { src: "/projects/real/konsept-logo-black.svg", alt: "Konsept", height: 26 },
+    { src: "/projects/real/fintecc-logo-black.svg", alt: "Fintecc", height: 36 },
+    { src: "/projects/real/shreeji-logo-black.svg", alt: "Shreeji Fashion", height: 38 },
+    { src: "/projects/real/nexode-logo-black.svg", alt: "Nexode", height: 26 }
   ];
 
   // Repeat twice for seamless infinite scrolling

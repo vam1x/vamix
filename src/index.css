@@ -2088,7 +2088,7 @@ img {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 48px;
+  height: 64px;
   position: relative;
   z-index: 2;
 }
@@ -2111,9 +2111,9 @@ img {
 .hero-ticker-track {
   display: flex;
   align-items: center;
-  gap: 120px;
+  gap: 80px;
   width: max-content;
-  animation: heroTickerScroll 30s linear infinite;
+  animation: heroTickerScroll 28s linear infinite;
 }
 
 .hero-ticker-track:hover {
@@ -2128,8 +2128,12 @@ img {
 
 .hero-ticker-img {
   display: block;
-  object-fit: cover;
-  filter: none;
+  object-fit: contain;
+  opacity: 0.88;
+  transition: opacity 0.2s ease;
+}
+
+.hero-ticker-item:hover .hero-ticker-img {
   opacity: 1;
 }
 
@@ -2278,6 +2282,7 @@ img {
 
   .hero-tier-ticker {
     justify-content: flex-start;
+    height: 56px;
   }
 
   .hero-ticker-container {
@@ -2286,7 +2291,7 @@ img {
   }
 
   .hero-ticker-track {
-    gap: 60px;
+    gap: 50px;
   }
 }
 

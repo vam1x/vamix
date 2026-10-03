@@ -52,11 +52,12 @@ export default function Hero({ navigate }) {
   ];
 
   const clientLogos = [
-    { src: "https://framerusercontent.com/images/m5HT2ppV4zfDQ2RIEnbrqzcTbTI.png?width=314&height=63", alt: "Client Partner 1", width: 118, height: 24 },
-    { src: "https://framerusercontent.com/images/ZTkFsn8sQMWf7fJpW4OcY7czpO4.png?width=1644&height=546", alt: "Client Partner 2", width: 70, height: 26 },
-    { src: "https://framerusercontent.com/images/JO3wXdZKZ1thatZAQ9b18Zyds.png?width=229&height=58", alt: "Client Partner 3", width: 104, height: 26 },
-    { src: "https://framerusercontent.com/images/LSWkiD8W5wCmRusdoafvq97Wg50.webp?width=960&height=388", alt: "Client Partner 4", width: 69, height: 28 },
-    { src: "https://framerusercontent.com/images/pb8djO63KL3oEQ6SBbIiNIZqEE.png?width=2569&height=1088", alt: "Client Partner 5", width: 72, height: 25 }
+    { src: "/projects/real/dv-logo.png", alt: "DV Jewellery Designer", height: 46, filter: "brightness(0)" },
+    { src: "/projects/real/seogram-logo-black.svg", alt: "SEOGram", height: 40 },
+    { src: "/projects/real/konsept-logo-black.svg", alt: "Konsept", height: 32 },
+    { src: "/projects/real/fintecc-logo-black.svg", alt: "Fintecc", height: 42 },
+    { src: "/projects/real/shreeji-logo-black.svg", alt: "Shreeji Fashion", height: 46 },
+    { src: "/projects/real/nexode-logo-black.svg", alt: "Nexode", height: 34 }
   ];
 
   // Repeat logos for smooth continuous infinite marquee
@@ -322,7 +323,7 @@ export default function Hero({ navigate }) {
                         src={logo.src}
                         alt={logo.alt}
                         className="hero-ticker-img"
-                        style={{ height: `${logo.height}px`, width: 'auto' }}
+                        style={{ height: `${logo.height}px`, width: 'auto', filter: logo.filter || 'none' }}
                       />
                     </div>
                   ))}

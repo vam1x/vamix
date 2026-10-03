@@ -164,20 +164,20 @@ export default function Hero({ navigate }) {
             >
               <svg 
                 className="hero-fit-text hero-fit-text-title" 
-                viewBox="0 0 1120 78" 
+                viewBox="0 0 1120 84" 
                 preserveAspectRatio="none" 
                 aria-hidden="true"
               >
                 <defs>
                   <clipPath id="hero-title-split-clip">
-                    <rect x={clipX} y="0" width={clipWidth} height="78" />
+                    <rect x={clipX} y="-20" width={clipWidth} height="120" />
                   </clipPath>
                 </defs>
 
                 {/* Base Black Layer */}
                 <text
                   x="0"
-                  y="66"
+                  y="70"
                   className="hero-svg-title hero-svg-black"
                 >
                   DESIGN THAT CONVERTS
@@ -186,7 +186,7 @@ export default function Hero({ navigate }) {
                 {/* White Overlay Layer Clipped to Art Panel */}
                 <text
                   x="0"
-                  y="66"
+                  y="70"
                   className="hero-svg-title hero-svg-white"
                   clipPath="url(#hero-title-split-clip)"
                 >

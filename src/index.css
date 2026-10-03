@@ -1845,7 +1845,7 @@ img {
   justify-content: flex-start;
   align-items: center;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   margin: 0;
 }
 
@@ -1853,7 +1853,7 @@ img {
   position: relative;
   width: 100%;
   display: block;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .sr-only {
@@ -1877,13 +1877,13 @@ img {
 
 .hero-fit-text-title {
   width: 100%;
-  aspect-ratio: 1120 / 78;
+  aspect-ratio: 1120 / 84;
 }
 
 /* Native SVG Headline Typography (100% scalable & WebKit/iOS proof) */
 .hero-svg-title {
   font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 91.85px;
+  font-size: 89.9992px;
   font-weight: 800;
   letter-spacing: -0.05em;
   text-transform: uppercase;

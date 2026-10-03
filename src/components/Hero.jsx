@@ -5,12 +5,19 @@ import SectionGrid from './SectionGrid';
 export default function Hero({ navigate }) {
   const panelRef = useRef(null);
   const h1ContainerRef = useRef(null);
-  const [splitX, setSplitX] = useState('calc(41vw - 40px)');
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.matchMedia('(max-width: 809.98px)').matches;
     }
     return false;
+  });
+
+  const [splitRatio, setSplitRatio] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const mobile = window.matchMedia('(max-width: 809.98px)').matches;
+      return mobile ? 0.715 : 0.40;
+    }
+    return 0.40;
   });
 
   useEffect(() => {
@@ -20,13 +27,20 @@ export default function Hero({ navigate }) {
         const hRect = h1ContainerRef.current.getBoundingClientRect();
         const mobile = window.matchMedia('(max-width: 809.98px)').matches;
         setIsMobile(mobile);
-        const diff = (mobile ? pRect.left : pRect.right) - hRect.left;
-        setSplitX(`${diff}px`);
+        if (hRect.width > 0) {
+          const pxDiff = (mobile ? pRect.left : pRect.right) - hRect.left;
+          const ratio = Math.max(0, Math.min(1, pxDiff / hRect.width));
+          setSplitRatio(ratio);
+        }
       }
     };
     updateSplit();
     window.addEventListener('resize', updateSplit);
-    return () => window.removeEventListener('resize', updateSplit);
+    window.addEventListener('orientationchange', updateSplit);
+    return () => {
+      window.removeEventListener('resize', updateSplit);
+      window.removeEventListener('orientationchange', updateSplit);
+    };
   }, []);
 
   const avatars = [
@@ -54,6 +68,10 @@ export default function Hero({ navigate }) {
     damping: 27,
     mass: 0.3
   };
+
+  const svgSplitX = splitRatio * 1120;
+  const clipX = isMobile ? svgSplitX : 0;
+  const clipWidth = isMobile ? Math.max(0, 1120 - svgSplitX) : svgSplitX;
 
   return (
     <section className="webus-hero" id="hero" data-framer-name="Hero">
@@ -132,51 +150,48 @@ export default function Hero({ navigate }) {
             </motion.div>
           </div>
 
-          {/* Tier 2: H1 Full-Width Headline (with Dual Split Clip-Path matching Reference) */}
+          {/* Tier 2: H1 Full-Width Headline (Native SVG Text - Universally Scalable & Split across Viewports) */}
           <div className="hero-tier-h1" ref={h1ContainerRef} data-framer-name="H1">
+            <h1 className="sr-only">DESIGN THAT CONVERTS</h1>
             <motion.div
               className="hero-h1-dual-container"
-              initial={{ opacity: 1, y: isMobile ? 120 : 250 }}
+              initial={{ opacity: 0, y: isMobile ? 25 : 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 ...springConfig,
                 delay: isMobile ? 0.2 : 0.1
               }}
             >
-              {/* Base Black Layer */}
               <svg 
                 className="hero-fit-text hero-fit-text-title" 
                 viewBox="0 0 1120 78" 
                 preserveAspectRatio="none" 
-                aria-labelledby="hero-title"
-              >
-                <foreignObject width="100%" height="100%">
-                  <h1 id="hero-title" className="hero-h1-title-text hero-h1-text-black">
-                    DESIGN THAT CONVERTS
-                  </h1>
-                </foreignObject>
-              </svg>
-
-              {/* White Overlay Layer with dynamic clip-path */}
-              <svg 
-                className="hero-fit-text hero-fit-text-title hero-fit-text-fill" 
-                viewBox="0 0 1120 78" 
-                preserveAspectRatio="none" 
                 aria-hidden="true"
-                style={{
-                  clipPath: isMobile 
-                    ? `polygon(${splitX} 0, 100% 0, 100% 100%, ${splitX} 100%)` 
-                    : `polygon(0 0, ${splitX} 0, ${splitX} 100%, 0 100%)`,
-                  WebkitClipPath: isMobile 
-                    ? `polygon(${splitX} 0, 100% 0, 100% 100%, ${splitX} 100%)` 
-                    : `polygon(0 0, ${splitX} 0, ${splitX} 100%, 0 100%)`
-                }}
               >
-                <foreignObject width="100%" height="100%">
-                  <span className="hero-h1-title-text hero-h1-text-white">
-                    DESIGN THAT CONVERTS
-                  </span>
-                </foreignObject>
+                <defs>
+                  <clipPath id="hero-title-split-clip">
+                    <rect x={clipX} y="0" width={clipWidth} height="78" />
+                  </clipPath>
+                </defs>
+
+                {/* Base Black Layer */}
+                <text
+                  x="0"
+                  y="66"
+                  className="hero-svg-title hero-svg-black"
+                >
+                  DESIGN THAT CONVERTS
+                </text>
+
+                {/* White Overlay Layer Clipped to Art Panel */}
+                <text
+                  x="0"
+                  y="66"
+                  className="hero-svg-title hero-svg-white"
+                  clipPath="url(#hero-title-split-clip)"
+                >
+                  DESIGN THAT CONVERTS
+                </text>
               </svg>
             </motion.div>
           </div>
@@ -187,7 +202,7 @@ export default function Hero({ navigate }) {
             <div className="hero-secondary-content" data-framer-name="Text">
               <motion.div
                 className="hero-code-ships-wrap"
-                initial={{ opacity: 1, y: -90 }}
+                initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
                   ...springConfig,
@@ -200,11 +215,13 @@ export default function Hero({ navigate }) {
                   preserveAspectRatio="none" 
                   aria-hidden="true"
                 >
-                  <foreignObject width="100%" height="100%">
-                    <p className="hero-code-ships-title">
-                      CODE THAT SHIPS
-                    </p>
-                  </foreignObject>
+                  <text
+                    x="0"
+                    y="45"
+                    className="hero-svg-code-text"
+                  >
+                    CODE THAT SHIPS
+                  </text>
                 </svg>
               </motion.div>
 

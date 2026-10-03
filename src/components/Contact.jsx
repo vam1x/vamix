@@ -21,12 +21,13 @@ export default function Contact({ navigate }) {
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [activationNotice, setActivationNotice] = useState(false);
   const [submitError, setSubmitError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const lenis = useLenis();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
     if (!formData.name.trim() || !formData.email.trim()) {
       return;
     }
@@ -36,6 +37,7 @@ export default function Contact({ navigate }) {
     }
     setIsSubmitting(true);
     setSubmitError(null);
+    setActivationNotice(false);
 
     try {
       const response = await fetch("https://formsubmit.co/ajax/vamixlabs@gmail.com", {
@@ -56,17 +58,26 @@ export default function Contact({ navigate }) {
       const data = await response.json();
       if (response.ok && (data.success === "true" || data.success === true)) {
         setIsSubmitted(true);
+        setActivationNotice(false);
         setFormData({ name: '', email: '' });
         setIsVerified(false);
         setTimeout(() => {
           setIsSubmitted(false);
         }, 6000);
+      } else if (data.message && data.message.toLowerCase().includes("activation")) {
+        setActivationNotice(true);
+        setSubmitError(null);
       } else {
         throw new Error(data.message || "Failed to deliver inquiry");
       }
     } catch (err) {
       console.error("Form submission error:", err);
-      setSubmitError("Could not send automatically. Click here to open email directly.");
+      if (err.message && err.message.toLowerCase().includes("activation")) {
+        setActivationNotice(true);
+        setSubmitError(null);
+      } else {
+        setSubmitError(err.message || "Could not send automatically. Click here to open email directly.");
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -227,6 +238,27 @@ export default function Contact({ navigate }) {
                   <span className="contact-submit__arrow" aria-hidden="true">›</span>
                   <div className="contact-submit__rainbow" aria-hidden="true" />
                 </button>
+
+                {activationNotice && (
+                  <div className="contact-activation-notice">
+                    <div className="contact-activation-header">
+                      <strong>⚠️ ONE-TIME ACTIVATION REQUIRED</strong>
+                    </div>
+                    <p>
+                      FormSubmit has sent a confirmation email to <strong>vamixlabs@gmail.com</strong>.
+                    </p>
+                    <p>
+                      Please check your inbox (or Spam folder) and click <strong>"Activate Form"</strong> to permanently enable live inquiries.
+                    </p>
+                    <button
+                      type="button"
+                      className="contact-activation-retry"
+                      onClick={(e) => handleSubmit(e)}
+                    >
+                      I have clicked Activate — verify now
+                    </button>
+                  </div>
+                )}
 
                 {submitError && (
                   <div className="contact-error-notice">

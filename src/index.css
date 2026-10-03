@@ -7357,6 +7357,56 @@ a:hover .rolling-label__copy {
   text-decoration: underline;
 }
 
+.contact-activation-notice {
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-left: 3px solid #f59e0b;
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 11px;
+  line-height: 1.5;
+  color: #78350f;
+  text-align: left;
+}
+
+.contact-activation-header {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #92400e;
+  margin-bottom: 4px;
+}
+
+.contact-activation-notice p {
+  margin: 4px 0 0 0;
+  color: rgba(23, 23, 23, 0.85);
+}
+
+.contact-activation-notice strong {
+  color: #171717;
+}
+
+.contact-activation-retry {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 14px;
+  background: #171717;
+  color: #ffffff;
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.contact-activation-retry:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
 .contact-submit__text {
   font-family: 'Geist', 'Inter', -apple-system, sans-serif;
   font-size: 15px;

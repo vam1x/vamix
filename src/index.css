@@ -7338,6 +7338,25 @@ a:hover .rolling-label__copy {
   color: #ffffff;
 }
 
+.contact-submit.is-loading {
+  opacity: 0.75;
+  cursor: wait;
+}
+
+.contact-error-notice {
+  margin-top: 12px;
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 11px;
+  color: #ef4444;
+  line-height: 1.4;
+}
+
+.contact-error-link {
+  color: #171717;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
 .contact-submit__text {
   font-family: 'Geist', 'Inter', -apple-system, sans-serif;
   font-size: 15px;

@@ -19,22 +19,57 @@ const DragDotsIcon = () => (
 
 export default function Contact({ navigate }) {
   const [formData, setFormData] = useState({ name: '', email: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const lenis = useLenis();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.name.trim() || !formData.email.trim()) {
+      return;
+    }
     if (!isVerified) {
       alert("Please verify that you're human before sending.");
       return;
     }
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setIsVerified(false);
-      setFormData({ name: '', email: '' });
-    }, 3500);
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/vamixlabs@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          _subject: `New Project Inquiry from ${formData.name.trim()} (VAMIX Website)`,
+          _template: "table",
+          _captcha: "false"
+        })
+      });
+
+      const data = await response.json();
+      if (response.ok && (data.success === "true" || data.success === true)) {
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '' });
+        setIsVerified(false);
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 6000);
+      } else {
+        throw new Error(data.message || "Failed to deliver inquiry");
+      }
+    } catch (err) {
+      console.error("Form submission error:", err);
+      setSubmitError("Could not send automatically. Click here to open email directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const scrollToTop = (e) => {
@@ -176,15 +211,38 @@ export default function Contact({ navigate }) {
                 {/* Submit button */}
                 <button
                   type="submit"
-                  className={`contact-submit ${isSubmitted ? 'is-sent' : ''}`}
+                  className={`contact-submit ${isSubmitted ? 'is-sent' : ''} ${isSubmitting ? 'is-loading' : ''}`}
+                  disabled={isSubmitting || isSubmitted}
                   aria-label="Send contact inquiry"
                 >
                   <span className="contact-submit__text">
-                    {isSubmitted ? 'REQUEST SENT! WE WILL REPLY SHORTLY' : <RollingText text="LET'S TALK" />}
+                    {isSubmitting ? (
+                      'SENDING INQUIRY...'
+                    ) : isSubmitted ? (
+                      'REQUEST SENT! WE WILL REPLY SHORTLY'
+                    ) : (
+                      <RollingText text="LET'S TALK" />
+                    )}
                   </span>
                   <span className="contact-submit__arrow" aria-hidden="true">›</span>
                   <div className="contact-submit__rainbow" aria-hidden="true" />
                 </button>
+
+                {submitError && (
+                  <div className="contact-error-notice">
+                    <span>{submitError} </span>
+                    <a
+                      href={`mailto:vamixlabs@gmail.com?subject=${encodeURIComponent(
+                        'Project Inquiry from ' + (formData.name || 'Website Visitor')
+                      )}&body=${encodeURIComponent(
+                        `Name: ${formData.name}\nEmail: ${formData.email}\n\nHi VAMIX Team,\n`
+                      )}`}
+                      className="contact-error-link"
+                    >
+                      Email directly: vamixlabs@gmail.com
+                    </a>
+                  </div>
+                )}
 
                 {/* Legal & Location */}
                 <div className="contact-legal">

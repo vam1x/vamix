@@ -144,6 +144,15 @@
       ]
     },
     {
+      "source": "/(.*)\\.(ico|png|svg|webp|jpg|jpeg|gif)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
       "source": "/sitemap.xml",
       "headers": [
         {
@@ -174,7 +183,7 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=86400"
+          "value": "public, max-age=604800, s-maxage=604800"
         },
         {
           "key": "Content-Type",

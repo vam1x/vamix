@@ -94,7 +94,7 @@ export default function Hero({ navigate }) {
           }}
         >
           <img
-            src="https://framerusercontent.com/images/cx9DzPrXWjEIHDWlLpzDmBWYZI.png?width=1024&height=1536"
+            src="/images/hero-art.webp"
             alt="Macro material abstraction"
             className="hero-art-img"
             loading="eager"

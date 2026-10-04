@@ -51,19 +51,44 @@ export default function Approach({ navigate }) {
   ];
 
   return (
-    <section className="company-section" id="approach" aria-labelledby="who-title">
+    <section className="company-section" id="approach" aria-labelledby="approach-heading">
       {/* 4-Column Blueprint Grid Lines */}
       <SectionGrid
         theme="dark"
         showTopLine={true}
       />
 
+      {/* JSON-LD Structured Data for Services */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": services.map((svc, index) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "item": {
+                "@type": "Service",
+                "name": svc.title,
+                "description": svc.desc,
+                "provider": {
+                  "@id": "https://vamix.vercel.app/#organization"
+                },
+                "areaServed": "Worldwide",
+                "serviceType": svc.title
+              }
+            }))
+          })
+        }}
+      />
+
       <div className="company-section__inner">
         {/* Row 1: Left Approach Rail (Col 1) & Right Manifesto Statement (Col 3-4) */}
         <div className="company-row">
           {/* Column 1: Approach Rail */}
-          <div className="company-rail">
-            <motion.div 
+          <article className="company-rail" aria-labelledby="approach-title">
+            <motion.div
               className="approach-card"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -88,7 +113,7 @@ export default function Approach({ navigate }) {
               <div className="approach-section__visual">
                 <img
                   src="/services/approach-dashboard.webp"
-                  alt="Dashboard visual preview"
+                  alt="VAMIX approach dashboard showing product development workflow"
                   loading="lazy"
                   decoding="async"
                   width="1672"
@@ -100,10 +125,10 @@ export default function Approach({ navigate }) {
             <p className="approach-section__description">
               WE SOLVE HARD PRODUCT PROBLEMS THROUGH DESIGN, ENGINEERING, AND TESTING WITH USERS. WE DESIGN AND SHIP PRODUCTS PEOPLE KEEP USING.
             </p>
-          </div>
+          </article>
 
           {/* Columns 3 & 4: Who We Are Manifesto */}
-          <div className="company-statement">
+          <article className="company-statement" aria-labelledby="who-title">
             <div className="section-kicker">
               <span>01</span>
               <span>Who we are</span>
@@ -120,7 +145,7 @@ export default function Approach({ navigate }) {
               <div className="who-section__credit">
                 <img
                   src="/favicon.svg"
-                  alt="VAMIX"
+                  alt="VAMIX Logo"
                   loading="lazy"
                   decoding="async"
                   width="42"
@@ -133,11 +158,11 @@ export default function Approach({ navigate }) {
                 </span>
               </div>
             </div>
-          </div>
+          </article>
         </div>
 
         {/* Row 2: Services Track 02 (Intro & 6 Service Cards) */}
-        <div className="services-block" id="services">
+        <section className="services-block" id="services" aria-labelledby="services-title">
           <div className="services-section__intro">
             <div className="services-section__lead">
               <div className="section-kicker">
@@ -184,11 +209,12 @@ export default function Approach({ navigate }) {
           </div>
 
           {/* 6 Services Grid Items */}
-          <div className="services-grid">
+          <div className="services-grid" role="list">
             {services.map((svc) => (
-              <motion.article 
-                className="service-card" 
+              <motion.article
+                className="service-card"
                 key={svc.num}
+                role="listitem"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
@@ -204,7 +230,7 @@ export default function Approach({ navigate }) {
                   <div className="service-card__media">
                     <img
                       src={svc.img}
-                      alt={svc.title}
+                      alt={`${svc.title} service illustration`}
                       loading="lazy"
                       decoding="async"
                       width="640"
@@ -226,7 +252,7 @@ export default function Approach({ navigate }) {
               </motion.article>
             ))}
           </div>
-        </div>
+        </section>
       </div>
     </section>
   );

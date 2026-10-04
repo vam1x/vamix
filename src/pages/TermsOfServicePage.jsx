@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import AboutBooking from '../components/about/AboutBooking';
 import Contact from '../components/Contact';
+import useSeo from '../hooks/useSeo';
 import './legal.css';
 
 export default function TermsOfServicePage({ navigate }) {
+  useSeo('terms-of-service');
+
   useEffect(() => {
-    document.title = "Terms of Service - VAMIX Digital Product Studio";
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 

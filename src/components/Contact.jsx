@@ -52,13 +52,61 @@ export default function Contact({ navigate }) {
   };
 
   return (
-    <section className="section contact-section" id="contact">
+    <section className="section contact-section" id="contact" aria-labelledby="contact-title">
       {/* Blueprint Grid Lines & Top Boundary with Corner Crosshairs */}
       <SectionGrid
         theme="light"
         showTopLine={true}
         showBottomLine={false}
         crosshairPositions={[0, 4]}
+      />
+
+      {/* JSON-LD Structured Data for Contact Page */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "name": "Contact VAMIX",
+            "description": "Get in touch with VAMIX Digital Product Studio for your next project. Free 30-minute consultation available.",
+            "mainEntity": {
+              "@type": "Organization",
+              "@id": "https://vamix.vercel.app/#organization",
+              "name": "VAMIX",
+              "url": "https://vamix.vercel.app/",
+              "telephone": "+916359198825",
+              "email": "hi@vamix.com",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Surat",
+                "addressRegion": "Gujarat",
+                "addressCountry": "IN"
+              },
+              "contactPoint": [
+                {
+                  "@type": "ContactPoint",
+                  "telephone": "+916359198825",
+                  "contactType": "customer service",
+                  "availableLanguage": ["English", "Hindi", "Gujarati"],
+                  "hoursAvailable": {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                    "opens": "09:00",
+                    "closes": "18:00",
+                    "timeZone": "Asia/Kolkata"
+                  }
+                },
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "sales",
+                  "email": "hi@vamix.com",
+                  "availableLanguage": ["English", "Hindi", "Gujarati"]
+                }
+              ]
+            }
+          })
+        }}
       />
 
       {/* Aurora Gradient Blob — bottom-left */}
@@ -71,14 +119,14 @@ export default function Contact({ navigate }) {
           {/* ── Col 1: Section Badge ── */}
           <div className="contact-col contact-col--badge">
             <div className="contact-badge">
-              <span className="contact-badge__dot" />
+              <span className="contact-badge__dot" aria-hidden="true" />
               <span className="contact-badge__num">12</span>
               <span className="contact-badge__label">READY TO START?</span>
             </div>
           </div>
 
           {/* ── Col 2–4: Form ── */}
-          <form className="contact-form" onSubmit={handleSubmit}>
+          <form className="contact-form" onSubmit={handleSubmit} noValidate>
 
             {/* Col 2: Title + Subhead + NAME */}
             <div className="contact-col contact-col--title">
@@ -88,17 +136,18 @@ export default function Contact({ navigate }) {
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               >
-                <h2 className="contact-title">GET IN TOUCH</h2>
+                <h2 id="contact-title" className="contact-title">GET IN TOUCH</h2>
                 <p className="contact-sub">
                   Whether you have questions or just want to explore options, we're here.
                 </p>
 
                 {/* NAME field */}
                 <div className="contact-field">
-                  <label className="contact-field__label">NAME</label>
+                  <label htmlFor="contact-name" className="contact-field__label">NAME</label>
                   <div className="contact-field__row">
                     <input
                       type="text"
+                      id="contact-name"
                       className="contact-field__input"
                       placeholder="YOUR NAME"
                       value={formData.name}
@@ -106,6 +155,7 @@ export default function Contact({ navigate }) {
                       autoComplete="name"
                       autoCapitalize="words"
                       required
+                      aria-required="true"
                     />
                     <DragDotsIcon />
                   </div>
@@ -123,10 +173,11 @@ export default function Contact({ navigate }) {
                 transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div className="contact-field">
-                  <label className="contact-field__label">EMAIL ADDRESS</label>
+                  <label htmlFor="contact-email" className="contact-field__label">EMAIL ADDRESS</label>
                   <div className="contact-field__row">
                     <input
                       type="email"
+                      id="contact-email"
                       className="contact-field__input"
                       placeholder="EMAIL@ADDRESS.COM"
                       value={formData.email}
@@ -134,6 +185,7 @@ export default function Contact({ navigate }) {
                       autoComplete="email"
                       autoCapitalize="none"
                       required
+                      aria-required="true"
                     />
                     <DragDotsIcon />
                   </div>
@@ -162,8 +214,9 @@ export default function Contact({ navigate }) {
                   className={`contact-captcha__btn ${isVerified ? 'is-verified' : ''}`}
                   onClick={() => setIsVerified(!isVerified)}
                   aria-label="Human verification"
+                  aria-pressed={isVerified}
                 >
-                  <span className="contact-captcha__check">
+                  <span className="contact-captcha__check" aria-hidden="true">
                     {isVerified && (
                       <svg viewBox="0 0 20 20" width="14" height="14" fill="none">
                         <path d="m4 10 4 4 8-8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -189,7 +242,8 @@ export default function Contact({ navigate }) {
               <button
                 type="submit"
                 className={`contact-submit ${isSubmitted ? 'is-sent' : ''}`}
-                aria-label="Send contact inquiry"
+                aria-label={isSubmitted ? 'Request sent successfully' : 'Send contact inquiry'}
+                disabled={isSubmitted}
               >
                 <span className="contact-submit__text">
                   {isSubmitted ? 'REQUEST SENT! WE WILL REPLY SHORTLY' : <RollingText text="LET'S TALK" />}
@@ -202,9 +256,9 @@ export default function Contact({ navigate }) {
               <div className="contact-legal">
                 <span className="contact-legal__left">
                   BY SUBMITTING, YOU AGREE TO OUR{' '}
-                  <a href="/terms-of-service" onClick={(e) => handleNav(e, '/terms-of-service')}><strong>TERMS</strong></a>
+                  <a href="/terms-of-service" onClick={(e) => handleNav(e, '/terms-of-service')}>TERMS</a>
                   {' '}AND{' '}
-                  <a href="/privacy-policy" onClick={(e) => handleNav(e, '/privacy-policy')}><strong>PRIVACY POLICY</strong></a>.
+                  <a href="/privacy-policy" onClick={(e) => handleNav(e, '/privacy-policy')}>PRIVACY POLICY</a>.
                 </span>
                 <span className="contact-legal__right">
                   WE ARE BASED IN <strong>SURAT</strong>
@@ -225,12 +279,12 @@ export default function Contact({ navigate }) {
           <div className="contact-meta__empty" aria-hidden="true" />
           <div className="contact-meta__direct">
             <a href="tel:+916359198825" className="contact-meta__phone">+91 63591 98825</a>
-            <a href="mailto:vamixlabs@gmail.com" className="contact-meta__email">HI@VAMIX.COM</a>
+            <a href="mailto:hi@vamix.com" className="contact-meta__email">HI@VAMIX.COM</a>
           </div>
           <div className="contact-meta__col4">
-            <div className="contact-meta__social">
-              <span className="contact-meta__social-link">LI</span>
-              <span className="contact-meta__social-link">IG</span>
+            <div className="contact-meta__social" role="list" aria-label="Social media links">
+              <a href="https://www.linkedin.com/company/vamix" target="_blank" rel="noopener noreferrer" className="contact-meta__social-link" role="listitem">LI</a>
+              <a href="https://www.instagram.com/vamix" target="_blank" rel="noopener noreferrer" className="contact-meta__social-link" role="listitem">IG</a>
             </div>
             <button onClick={scrollToTop} className="contact-meta__top-btn" type="button" aria-label="Back to top">
               BACK TO TOP

@@ -4,6 +4,33 @@
   color: #171717;
 }
 
+/* Ensure SectionGrid in bottom #contact matches the 4-column 1920px blueprint */
+.about-page-wrapper .section-grid-backdrop {
+  padding-left: 40px;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+.about-page-wrapper .section-grid-container {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .about-page-wrapper .section-grid-backdrop {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media (max-width: 809px) {
+  .about-page-wrapper .section-grid-backdrop {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
 .about-page-wrapper > section:not(.about-booking-section):not(.contact-section) {
   position: relative;
   box-sizing: border-box;

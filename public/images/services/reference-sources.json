@@ -1,0 +1,57 @@
+{
+  "reference": "https://www.webus.in/services",
+  "assets": [
+    {
+      "name": "rR6HYXBrMmX4cRpXfXUOvpvpB0.B0WG-dy-.png",
+      "url": "https://www.webus.in/_astro/rR6HYXBrMmX4cRpXfXUOvpvpB0.B0WG-dy-.png"
+    },
+    {
+      "name": "ibm-plex-mono-500-latin.woff2",
+      "url": "https://www.webus.in/fonts/ibm-plex-mono-500-latin.woff2"
+    },
+    {
+      "name": "sora-700-latin.woff2",
+      "url": "https://www.webus.in/fonts/sora-700-latin.woff2"
+    },
+    {
+      "name": "geist-var-latin.woff2",
+      "url": "https://www.webus.in/fonts/geist-var-latin.woff2"
+    },
+    {
+      "name": "sora-600.woff2",
+      "url": "https://www.webus.in/fonts/sora-600.woff2"
+    },
+    {
+      "name": "1n017Nw7klYDOxtWkqWThK3IU.BKrz69A8_2rKxkm.webp",
+      "url": "https://www.webus.in/_astro/1n017Nw7klYDOxtWkqWThK3IU.BKrz69A8_2rKxkm.webp"
+    },
+    {
+      "name": "onouhI7nQsdDZNMzMwSUzjk38E.ZusPXssG_ZhUauY.webp",
+      "url": "https://www.webus.in/_astro/onouhI7nQsdDZNMzMwSUzjk38E.ZusPXssG_ZhUauY.webp"
+    },
+    {
+      "name": "design-system-modules.B1fwBUg9_Z2gSE2o.avif",
+      "url": "https://www.webus.in/_astro/design-system-modules.B1fwBUg9_Z2gSE2o.avif"
+    },
+    {
+      "name": "TMa4zQ9noB7CTdSRY5llmGbTHqA.Gka1pYGR_VGkYO.webp",
+      "url": "https://www.webus.in/_astro/TMa4zQ9noB7CTdSRY5llmGbTHqA.Gka1pYGR_VGkYO.webp"
+    },
+    {
+      "name": "gwfs19LLlB5F81PvV88KIFk20.B9upLDqL_Z1fJ3bN.webp",
+      "url": "https://www.webus.in/_astro/gwfs19LLlB5F81PvV88KIFk20.B9upLDqL_Z1fJ3bN.webp"
+    },
+    {
+      "name": "WfHHdXPn4GvbF7Vd3nSsMCM2FU.CPiUf3Oh_1ucKHc.webp",
+      "url": "https://www.webus.in/_astro/WfHHdXPn4GvbF7Vd3nSsMCM2FU.CPiUf3Oh_1ucKHc.webp"
+    },
+    {
+      "name": "NvSyy0R1XnyRLLT96uqiOIBtIB8.C3uOL4G3_Z24wDXi.avif",
+      "url": "https://www.webus.in/_astro/NvSyy0R1XnyRLLT96uqiOIBtIB8.C3uOL4G3_Z24wDXi.avif"
+    },
+    {
+      "name": "oPdh211tjtsXYDyQLT90FtLeU.BiVDY6WJ_ZjNKJB.webp",
+      "url": "https://www.webus.in/_astro/oPdh211tjtsXYDyQLT90FtLeU.BiVDY6WJ_ZjNKJB.webp"
+    }
+  ]
+}

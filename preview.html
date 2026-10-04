@@ -827,7 +827,7 @@
               </div>
               <div>
                 <span style={{ display: 'block', fontSize: '11px', color: 'var(--text-dark-subtle)' }}>+91 63591 98825</span>
-                <a href="mailto:hi@vamix.com" style={{ fontWeight: 700, fontSize: '1.2rem' }}>HI@VAMIX.COM</a>
+                <a href="mailto:vamixlabs@gmail.com" style={{ fontWeight: 700, fontSize: '1.2rem' }}>VAMIXLABS@GMAIL.COM</a>
               </div>
               <div className="footer-social-links">
                 <span className="footer-social-link">LI</span>
@@ -1134,11 +1134,21 @@
     function Footer() {
       return (
         <footer className="footer-bottom-black">
-          <div className="footer-legal-links">
-            <a href="./privacy-policy">PRIVACY POLICY</a>
-            <a href="./terms-of-service">TERMS OF SERVICE</a>
+          <SectionGrid theme="dark" showTopLine={true} showBottomLine={false} crosshairPositions={[0, 1, 2, 3, 4]} />
+          <div className="footer-inner-container">
+            <div className="footer-grid-4col">
+              <div className="footer-col footer-col-1">
+                <a href="./privacy-policy" className="footer-legal-link">PRIVACY POLICY</a>
+              </div>
+              <div className="footer-col footer-col-2">
+                <a href="./terms-of-service" className="footer-legal-link">TERMS OF SERVICE</a>
+              </div>
+              <div className="footer-col footer-col-3" aria-hidden="true" />
+              <div className="footer-col footer-col-4 footer-copyright-wrap">
+                <span className="footer-copyright-text">© 2023 VAMIX® ALL RIGHTS RESERVED.</span>
+              </div>
+            </div>
           </div>
-          <div><span>© 2023 VAMIX® ALL RIGHTS RESERVED.</span></div>
         </footer>
       );
     }

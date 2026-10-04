@@ -33,24 +33,74 @@ export default function ContactPage({ navigate }) {
     }, 600);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activationNotice, setActivationNotice] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+
+  const handleSubmit = async (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!formData.name.trim() || !formData.email.trim()) {
+      return;
+    }
     if (!isCaptchaVerified) {
       alert("Please verify that you are human before sending.");
       return;
     }
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        company: '',
-        toImprove: '',
-        budget: '',
-        email: ''
+    setIsSubmitting(true);
+    setSubmitError(null);
+    setActivationNotice(false);
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/vamixlabs@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          company: formData.company?.trim() || "Not specified",
+          projectScope: formData.toImprove?.trim() || "Not specified",
+          budget: formData.budget?.trim() || "Not specified",
+          _subject: `New Detailed Project Inquiry from ${formData.name.trim()} (VAMIX Contact Page)`,
+          _template: "table",
+          _captcha: "false"
+        })
       });
-      setIsCaptchaVerified(false);
-    }, 4000);
+
+      const data = await response.json();
+      if (response.ok && (data.success === "true" || data.success === true)) {
+        setIsSubmitted(true);
+        setActivationNotice(false);
+        setFormData({
+          name: '',
+          company: '',
+          toImprove: '',
+          budget: '',
+          email: ''
+        });
+        setIsCaptchaVerified(false);
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 6000);
+      } else if (data.message && data.message.toLowerCase().includes("activation")) {
+        setActivationNotice(true);
+        setSubmitError(null);
+      } else {
+        throw new Error(data.message || "Failed to deliver inquiry");
+      }
+    } catch (err) {
+      console.error("Contact page form error:", err);
+      if (err.message && err.message.toLowerCase().includes("activation")) {
+        setActivationNotice(true);
+        setSubmitError(null);
+      } else {
+        setSubmitError(err.message || "Could not send automatically. Click here to open email directly.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleLegalClick = (e, path) => {
@@ -309,13 +359,20 @@ export default function ContactPage({ navigate }) {
 
                 {/* Send Request Button */}
                 <button
-                  className="contact-submit"
+                  className={`contact-submit ${isSubmitted ? 'is-sent' : ''} ${isSubmitting ? 'is-loading' : ''}`}
+                  disabled={isSubmitting || isSubmitted}
                   type="submit"
                   aria-label={isSubmitted ? "Request sent successfully" : "Send Request"}
                   disabled={isSubmitted}
                 >
                   <span>
-                    {isSubmitted ? "REQUEST SENT! WE WILL REPLY SHORTLY" : <RollingText text="Send Request" />}
+                    {isSubmitting ? (
+                      "SENDING INQUIRY..."
+                    ) : isSubmitted ? (
+                      "REQUEST SENT! WE WILL REPLY SHORTLY"
+                    ) : (
+                      <RollingText text="Send Request" />
+                    )}
                   </span>
                   <span className="contact-submit-arrow" aria-hidden="true">
                     <svg className="cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -323,6 +380,43 @@ export default function ContactPage({ navigate }) {
                     </svg>
                   </span>
                 </button>
+
+                {activationNotice && (
+                  <div className="contact-activation-notice">
+                    <div className="contact-activation-header">
+                      <strong>⚠️ ONE-TIME ACTIVATION REQUIRED</strong>
+                    </div>
+                    <p>
+                      FormSubmit has sent a confirmation email to <strong>vamixlabs@gmail.com</strong>.
+                    </p>
+                    <p>
+                      Please check your inbox (or Spam folder) and click <strong>"Activate Form"</strong> to permanently enable live inquiries.
+                    </p>
+                    <button
+                      type="button"
+                      className="contact-activation-retry"
+                      onClick={(e) => handleSubmit(e)}
+                    >
+                      I have clicked Activate — verify now
+                    </button>
+                  </div>
+                )}
+
+                {submitError && (
+                  <div className="contact-error-notice">
+                    <span>{submitError} </span>
+                    <a
+                      href={`mailto:vamixlabs@gmail.com?subject=${encodeURIComponent(
+                        'Project Inquiry from ' + (formData.name || 'Website Visitor')
+                      )}&body=${encodeURIComponent(
+                        `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\nScope: ${formData.toImprove}\nBudget: ${formData.budget}\n`
+                      )}`}
+                      className="contact-error-link"
+                    >
+                      Email directly: vamixlabs@gmail.com
+                    </a>
+                  </div>
+                )}
 
                 {/* Legal Policy Text */}
                 <div className="contact-legal">
@@ -387,8 +481,8 @@ export default function ContactPage({ navigate }) {
                 <a className="contact-phone" href="tel:+916359198825">
                   +91 63591 98825
                 </a>
-                <a className="contact-email" href="mailto:hi@vamix.com">
-                  HI@VAMIX.COM
+                <a className="contact-email" href="mailto:vamixlabs@gmail.com">
+                  VAMIXLABS@GMAIL.COM
                 </a>
               </div>
 

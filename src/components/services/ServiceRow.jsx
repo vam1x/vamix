@@ -1,112 +1,46 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import RollingText from '../RollingText';
 
 export default function ServiceRow({ service, index, navigate }) {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    if (navigate) {
-      navigate('/contact');
-    } else {
-      window.location.href = '/contact';
-    }
-  };
-
+  const [hovered, setHovered] = useState(false);
+  const [toggled, setToggled] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const reducedMotion = useReducedMotion();
+  const active = hovered || toggled || focused;
   return (
-    <div
-      className={`service-row ${isHovered ? 'is-expanded' : ''}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={handleClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          handleClick(e);
-        }
-      }}
-      aria-label={`${service.title} - Click to book consultation`}
-    >
-      <div className="service-row-inner">
-        {/* Left Column: Title, Description, and Read More Action */}
-        <div className="service-row-content">
-          <div className="service-row-title-wrap">
-            <h3 className="service-row-title">
-              {service.title}
-            </h3>
-          </div>
-
-          <motion.div
-            className="service-row-details"
-            initial={false}
-            animate={{
-              height: isHovered ? 'auto' : 0,
-              opacity: isHovered ? 1 : 0
-            }}
-            transition={{
-              duration: 0.38,
-              ease: [0.16, 1, 0.3, 1]
-            }}
-          >
-            <p className="service-row-desc">
-              {service.desc}
-            </p>
-
-            <div className="service-row-action">
-              <span className="service-read-more-btn">
-                <span className="service-btn-text">
-                  <RollingText text="Read more" />
-                </span>
-                <span className="service-btn-arrow" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path
-                      d="M3 11L11 3M11 3H5M11 3V9"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-              </span>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Right Column: Visual Mockup Art with Pattern Background */}
-        <div className="service-row-visual-wrap">
-          <motion.div
-            className="service-row-visual"
-            initial={false}
-            animate={{
-              opacity: isHovered ? 1 : 0,
-              scale: isHovered ? 1 : 0.96,
-              y: isHovered ? 0 : 8
-            }}
-            transition={{
-              duration: 0.35,
-              ease: [0.16, 1, 0.3, 1]
-            }}
-            aria-hidden="true"
-          >
-            {/* Diagonal Hatch Overlay Pattern */}
-            <div className="service-visual-hatch-pattern" />
-
-            {/* Mockup Screen Image */}
-            <img
-              src={service.img}
-              alt=""
-              className="service-visual-img"
-              loading="lazy"
-            />
-          </motion.div>
-        </div>
+    <motion.article className={`service-row ${active ? 'is-expanded' : ''}`}
+      initial={{ opacity: reducedMotion ? 1 : 0, y: reducedMotion ? 0 : 24 }}
+      whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: reducedMotion ? 0 : 0.7, delay: reducedMotion ? 0 : index * 0.045, ease: [0.16, 1, 0.3, 1] }}
+      onFocus={(event) => { if (event.target.matches(':focus-visible')) setFocused(true); }}
+      onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) { setFocused(false); setToggled(false); } }}
+      onPointerEnter={(event) => { if (event.pointerType === 'mouse' && window.matchMedia('(hover: hover)').matches) setHovered(true); }}
+      onPointerLeave={(event) => { if (event.pointerType === 'mouse') setHovered(false); }}
+      >
+      <div className="service-row-copy">
+        <h3 className="service-row-title"><button type="button" className="service-row-toggle" aria-expanded={active} aria-controls={`${service.id}-detail`} onClick={(event) => { if (event.detail === 0 || !window.matchMedia('(hover: hover)').matches) setToggled(value => !value); }}>{service.title}</button></h3>
+        <motion.div id={`${service.id}-detail`} className="service-row-detail" aria-hidden={!active} initial={false}
+          animate={{ height: active ? 'auto' : 1, opacity: 1 }}
+          transition={{ duration: reducedMotion ? 0 : 0.5, ease: [0.16, 1, 0.3, 1] }}>
+          <motion.p className="service-row-desc" initial={false}
+            animate={{ opacity: active ? 1 : 0 }}
+            transition={{ duration: reducedMotion ? 0 : 0.35, delay: active && !reducedMotion ? 0.12 : 0, ease: [0.16, 1, 0.3, 1] }}>{service.desc}</motion.p>
+          <motion.p className="service-row-tags" initial={false}
+            animate={{ opacity: active ? 1 : 0 }}
+            transition={{ duration: reducedMotion ? 0 : 0.35, delay: active && !reducedMotion ? 0.18 : 0, ease: [0.16, 1, 0.3, 1] }}>{service.tags}</motion.p>
+        </motion.div>
       </div>
-
-      {/* Row Separator Hairline */}
-      <div className="service-row-separator" />
-    </div>
+      <a className={`service-read-more ${active ? 'is-visible' : ''}`} href="/contact" tabIndex={active ? 0 : -1} aria-label={`Discuss ${service.title}`} onClick={(event) => {
+        if (navigate && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) { event.preventDefault(); navigate('/contact'); }
+      }}><RollingText text="Read more" /><span className="arrow-container" aria-hidden="true">↗</span></a>
+      <div className={`service-visual ${active ? 'is-visible' : ''}`} aria-hidden="true">
+        <motion.div className="service-visual-group" initial={false}
+          animate={{ opacity: active ? 1 : 0, scale: 1 }}
+          transition={{ duration: reducedMotion ? 0 : 0.58, delay: active && !reducedMotion ? 0.08 : 0, ease: [0.16, 1, 0.3, 1] }}>
+          <span className="service-visual-logo" /><img src={service.img} alt="" loading="lazy" decoding="async" className="service-visual-photo" />
+        </motion.div>
+      </div>
+    </motion.article>
   );
 }

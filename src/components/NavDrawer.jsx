@@ -141,8 +141,8 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
 
             {/* Direct Contact & Studio Email */}
             <div className="nav-card-contact">
-              <a href="mailto:hi@vamix.com" className="nav-card-email">
-                HI@VAMIX.COM
+              <a href="mailto:vamixlabs@gmail.com" className="nav-card-email">
+                VAMIXLABS@GMAIL.COM
               </a>
             </div>
 

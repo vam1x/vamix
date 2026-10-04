@@ -250,7 +250,7 @@ Homepage (https://www.webus.in/)
 ### 5.2. About Page (`/about`)
 - **Hero:**
   - Tag: `13+ YEARS OF EXCELLENCE`
-  - H1 Headline: `WHO WE ARE: A DECADE OF PRODUCT WORK`
+  - H1 Headline: `WHO WE ARE: BUILDING DIGITAL PRODUCTS THAT SCALE`
   - Copy: Focused on user utility, business outcomes, and clean execution over transient design fads.
 - **Key Studio Metrics:**
   - Client Retention Rate: `85%`

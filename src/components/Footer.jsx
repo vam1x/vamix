@@ -12,69 +12,47 @@ export default function Footer({ navigate }) {
   };
 
   return (
-    <footer className="footer-bottom-black" role="contentinfo">
-      {/* 5-Line Blueprint Grid matching exactly upper section */}
-      <SectionGrid
-        theme="dark"
-        showTopLine={false}
-        showBottomLine={false}
-        crosshairPositions={[]}
-      />
-
-      {/* JSON-LD Structured Data for Organization in Footer */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "@id": "https://vamix.vercel.app/#organization",
-            "name": "VAMIX",
-            "legalName": "VAMIX Digital Product Studio",
-            "url": "https://vamix.vercel.app/",
-            "logo": {
-              "@type": "ImageObject",
-              "@id": "https://vamix.vercel.app/#logo",
-              "url": "https://vamix.vercel.app/favicon.svg",
-              "width": 85,
-              "height": 26
-            },
-            "email": "hi@vamix.com",
-            "telephone": "+916359198825",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Surat",
-              "addressRegion": "Gujarat",
-              "addressCountry": "IN",
-              "postalCode": "395006"
-            },
-            "sameAs": [
-              "https://www.linkedin.com/company/vamix",
-              "https://www.instagram.com/vamix"
-            ],
-            "foundingDate": "2023"
-          })
-        }}
+    <footer className="footer-bottom-black">
+      {/* 5-Line Blueprint Grid matching upper section exactly */}
+      <SectionGrid 
+        theme="dark" 
+        showTopLine={true} 
+        showBottomLine={false} 
+        crosshairPositions={[0, 1, 2, 3, 4]} 
       />
 
       <div className="footer-inner-container">
         <div className="footer-grid-4col">
-          <nav className="footer-legal-links" aria-label="Legal links">
-            <a
-              href="/privacy-policy"
+          {/* Column 1: Privacy Policy */}
+          <div className="footer-col footer-col-1">
+            <a 
+              href="/privacy-policy" 
               onClick={(e) => handleLegalClick(e, '/privacy-policy')}
+              className="footer-legal-link"
             >
               PRIVACY POLICY
             </a>
-            <a
-              href="/terms-of-service"
+          </div>
+
+          {/* Column 2: Terms of Service */}
+          <div className="footer-col footer-col-2">
+            <a 
+              href="/terms-of-service" 
               onClick={(e) => handleLegalClick(e, '/terms-of-service')}
+              className="footer-legal-link"
             >
               TERMS OF SERVICE
             </a>
-          </nav>
-          <div className="footer-copyright-wrap">
-            <p>&copy; 2023 VAMIX&reg; ALL RIGHTS RESERVED.</p>
+          </div>
+
+          {/* Column 3: Spacer */}
+          <div className="footer-col footer-col-3" aria-hidden="true" />
+
+          {/* Column 4: Copyright Notice */}
+          <div className="footer-col footer-col-4 footer-copyright-wrap">
+            <span className="footer-copyright-text">
+              © 2023 VAMIX® ALL RIGHTS RESERVED.
+            </span>
           </div>
         </div>
       </div>

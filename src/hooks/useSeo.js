@@ -27,8 +27,8 @@ const SEO_MAP = {
     ]
   },
   services: {
-    title: 'Services: UI/UX Strategy & Full-Stack Development | VAMIX',
-    description: 'Comprehensive digital product studio services. UI/UX design, full-stack web and mobile development, design systems, and AI integration.',
+    title: 'Services: Design & Development | VAMIX',
+    description: 'Two tracks under one roof. Design works out what to make. Development ships it as working software. One team runs both.',
     canonical: `${BASE_URL}/services`,
     robots: 'index, follow, max-image-preview:large',
     ogImage: `${BASE_URL}/og-image.jpg`,

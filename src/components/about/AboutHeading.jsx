@@ -11,7 +11,7 @@ export default function AboutHeading() {
   ];
 
   const line1Words = ["WHO", "WE", "ARE:"];
-  const line2Words = ["A", "DECADE", "OF", "PRODUCT", "WORK"];
+  const line2Words = ["BUILDING", "DIGITAL", "PRODUCTS", "THAT", "SCALE"];
 
   const containerVariants = {
     hidden: { opacity: 0 },

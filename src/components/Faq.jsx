@@ -45,78 +45,103 @@ export default function Faq({ navigate }) {
         showTopLine={true}
       />
 
+      {/* JSON-LD Structured Data for FAQPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map((item, idx) => ({
+              "@type": "Question",
+              "position": idx + 1,
+              "name": item.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.a
+              }
+            }))
+          })
+        }}
+      />
+
       <div className="faq-section__inner">
         {/* Column 1: Kicker & Big Section Heading */}
         <div className="faq-section__heading">
           <div className="section-kicker section-kicker--dark">
             <span>11</span>
-            <span>Help &amp; Info</span>
+            <span>Help & Info</span>
           </div>
           <h2 id="faq-title">FAQ</h2>
         </div>
 
         {/* Columns 2-4: FAQ Accordion List */}
         <div className="faq-section__main">
-          <div className="faq-list">
+          <dl className="faq-list">
             {faqs.map((item, idx) => {
               const isOpen = openIndex === idx;
               return (
-                <details
-                  key={idx}
-                  className="faq-item"
-                  open={isOpen}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggle(idx);
-                  }}
-                >
-                  <summary>
-                    <span className="faq-item__number mono-label">{item.num}</span>
-                    <span className="faq-item__question">{item.q}</span>
-                    <svg
-                      className="faq-item__icon"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
+                <div key={idx} className="faq-item">
+                  <dt>
+                    <details
+                      className="faq-details"
+                      open={isOpen}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        toggle(idx);
+                      }}
                     >
-                      <path
-                        d="M 0 0 L 16.5 0"
-                        fill="transparent"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        stroke="#171717"
-                        transform="translate(3.75 12)"
-                      />
-                      {!isOpen && (
-                        <path
-                          className="faq-item__icon-bar"
-                          d="M 0 0 L 0 16.5"
-                          fill="transparent"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="1.5"
-                          stroke="#171717"
-                          transform="translate(12 3.75)"
-                        />
-                      )}
-                    </svg>
-                  </summary>
-                  {isOpen && <p>{item.a}</p>}
-                </details>
+                      <summary aria-expanded={isOpen} aria-controls={`faq-answer-${idx}`}>
+                        <span className="faq-item__number mono-label">{item.num}</span>
+                        <span className="faq-item__question">{item.q}</span>
+                        <svg
+                          className="faq-item__icon"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M 0 0 L 16.5 0"
+                            fill="transparent"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="1.5"
+                            stroke="#171717"
+                            transform="translate(3.75 12)"
+                          />
+                          {!isOpen && (
+                            <path
+                              className="faq-item__icon-bar"
+                              d="M 0 0 L 0 16.5"
+                              fill="transparent"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="1.5"
+                              stroke="#171717"
+                              transform="translate(12 3.75)"
+                            />
+                          )}
+                        </svg>
+                      </summary>
+                      <dd id={`faq-answer-${idx}`} className="faq-answer">
+                        {isOpen && <p>{item.a}</p>}
+                      </dd>
+                    </details>
+                  </dt>
+                </div>
               );
             })}
-          </div>
+          </dl>
         </div>
 
         {/* FAQ Contact Us Directly Footer Block */}
-        <div className="faq-contact">
+        <aside className="faq-contact" aria-labelledby="faq-contact-heading">
           <div className="faq-contact__kicker">
             <span className="faq-contact__dot" aria-hidden="true"></span>
             <span className="mono-label">Contact us directly</span>
           </div>
 
           <div className="faq-contact__heading">
-            <h3>Still unsure?</h3>
+            <h3 id="faq-contact-heading">Still unsure?</h3>
             <a
               className="cta-block"
               href="/contact"
@@ -148,21 +173,27 @@ export default function Faq({ navigate }) {
           </div>
 
           <div className="faq-contact__quote">
-            <p>My role is to make sure every client feels supported from day one.</p>
-            <div>
-              <img
-                src="/images/ruby-avatar.webp"
-                alt="Ruby Rattey"
-                loading="lazy"
-                decoding="async"
-                width="42"
-                height="42"
-              />
-              <span className="mono-label">RUBY RATTEY</span>
-              <span className="mono-label">Client Success Manager</span>
-            </div>
+            <blockquote>
+              <p>My role is to make sure every client feels supported from day one.</p>
+              <footer>
+                <div>
+                  <img
+                    src="/images/ruby-avatar.webp"
+                    alt="Ruby Rattey"
+                    loading="lazy"
+                    decoding="async"
+                    width="42"
+                    height="42"
+                  />
+                  <div>
+                    <span className="mono-label">RUBY RATTEY</span>
+                    <span className="mono-label">Client Success Manager</span>
+                  </div>
+                </div>
+              </footer>
+            </blockquote>
           </div>
-        </div>
+        </aside>
       </div>
     </section>
   );

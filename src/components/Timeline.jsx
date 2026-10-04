@@ -39,30 +39,80 @@ export default function Timeline() {
         showTopLine={true}
       />
 
+      {/* JSON-LD Structured Data for Company Milestones */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "@id": "https://vamix.vercel.app/#organization",
+            "name": "VAMIX",
+            "foundingDate": "2023",
+            "location": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Surat",
+                "addressRegion": "Gujarat",
+                "addressCountry": "IN"
+              }
+            },
+            "hasHistory": [
+              {
+                "@type": "Event",
+                "name": "Founded in Surat",
+                "startDate": "2023",
+                "description": "Founded in Surat to solve real design problems"
+              },
+              {
+                "@type": "Event",
+                "name": "Opened Tennessee Office",
+                "startDate": "2024",
+                "description": "Opened Tennessee office to serve US clients"
+              },
+              {
+                "@type": "Event",
+                "name": "21+ Successful Client Projects",
+                "startDate": "2025",
+                "description": "Crossed 21+ successful client projects milestone"
+              },
+              {
+                "@type": "Event",
+                "name": "Scaling Global Impact",
+                "startDate": "2026",
+                "description": "Scaling global impact and next-gen digital products"
+              }
+            ]
+          })
+        }}
+      />
+
       <div className="belief-section__inner">
         {/* Upper 4-Column Row: Founder Profile, Quote Glyph & Manifesto Statement */}
         <div className="belief-section__quote">
           {/* Column 1: Founder Portrait & Title */}
-          <motion.div 
-            className="belief-section__profile"
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <img
-              src="/images/architectural-studio-corner.jpg"
-              alt="VAMIX Studio"
-              loading="lazy"
-              decoding="async"
-              width="480"
-              height="721"
-            />
-            <div className="belief-section__profile-copy mono-label">
-              <span>VAMIX</span>
-              <span>CORE DEVELOPERS</span>
-            </div>
-          </motion.div>
+          <figure className="belief-section__profile" aria-labelledby="studio-title">
+            <motion.div
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <img
+                src="/images/architectural-studio-corner.jpg"
+                alt="VAMIX studio workspace interior showing design team collaboration area"
+                loading="lazy"
+                decoding="async"
+                width="480"
+                height="721"
+              />
+              <figcaption className="belief-section__profile-copy mono-label">
+                <span>VAMIX</span>
+                <span id="studio-title">CORE DEVELOPERS</span>
+              </figcaption>
+            </motion.div>
+          </figure>
 
           {/* Columns 2-4: Quote Mark & Illuminated Manifesto Headline */}
           <div className="belief-section__body">
@@ -96,19 +146,21 @@ export default function Timeline() {
         </div>
 
         {/* Lower Row: Bottom-Aligned Staircase Timeline Milestones */}
-        <div className="milestones">
+        <nav className="milestones" aria-labelledby="milestones-heading" role="list">
+          <h2 id="milestones-heading" className="visually-hidden">Company Milestones</h2>
           {milestones.map((m, idx) => (
-            <div
+            <article
               key={idx}
               className="milestone"
               style={{ '--milestone-gap': m.gap }}
+              role="listitem"
             >
               <i className="corner-mark corner-mark--bottom-left" aria-hidden="true"></i>
               {idx === milestones.length - 1 && (
                 <i className="corner-mark corner-mark--bottom-right" aria-hidden="true"></i>
               )}
-              <div className="milestone__top">
-                <strong>{m.year}</strong>
+              <header className="milestone__top">
+                <time dateTime={m.year}><strong>{m.year}</strong></time>
                 <img
                   src={m.icon}
                   alt=""
@@ -119,13 +171,13 @@ export default function Timeline() {
                   height="82"
                   className="milestone__icon"
                 />
-              </div>
-              <span className="mono-label" style={{ whiteSpace: 'pre-line' }}>
+              </header>
+              <p className="mono-label" style={{ whiteSpace: 'pre-line' }}>
                 {m.desc}
-              </span>
-            </div>
+              </p>
+            </article>
           ))}
-        </div>
+        </nav>
       </div>
     </section>
   );

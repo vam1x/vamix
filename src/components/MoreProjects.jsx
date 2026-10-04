@@ -16,12 +16,45 @@ export default function MoreProjects({ navigate }) {
   };
 
   return (
-    <section className="more-projects" id="projects">
+    <section className="more-projects" id="projects" aria-labelledby="more-projects-heading">
       {/* 4-Column Blueprint Grid Lines */}
       <SectionGrid
         theme="light"
         showTopLine={true}
       />
+
+      {/* JSON-LD Structured Data for Project Portfolio */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "VAMIX Project Portfolio",
+            "description": "Selected client projects showcasing VAMIX's digital product design and development work across industries.",
+            "itemListElement": projects.map((project, index) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "item": {
+                "@type": "CreativeWork",
+                "name": project.title,
+                "description": project.desc,
+                "category": project.category,
+                "url": project.href,
+                "image": `https://vamix.vercel.app${project.images[1]}`,
+                "creator": {
+                  "@id": "https://vamix.vercel.app/#organization"
+                },
+                "publisher": {
+                  "@id": "https://vamix.vercel.app/#organization"
+                }
+              }
+            }))
+          })
+        }}
+      />
+
+      <h2 id="more-projects-heading" className="visually-hidden">More Projects</h2>
 
       <div className="more-projects__inner">
         {/* Column 1: Section Label */}
@@ -31,13 +64,14 @@ export default function MoreProjects({ navigate }) {
         </div>
 
         {/* Columns 2-4: Case Rows */}
-        <div className="case-rows">
+        <div className="case-rows" role="list" aria-label="Project case studies">
           {projects.map((project, idx) => {
             const isActive = activeIdx === idx;
             return (
               <article
                 key={idx}
                 className={`case-row ${isActive ? 'is-active' : ''}`}
+                role="listitem"
                 onMouseEnter={() => handleRowHover(idx)}
                 onClick={() => {
                   if (typeof window !== 'undefined' && window.innerWidth < 1200) {
@@ -45,7 +79,7 @@ export default function MoreProjects({ navigate }) {
                   }
                 }}
               >
-                <div 
+                <header
                   className="case-row__heading"
                   role="button"
                   tabIndex={0}
@@ -69,10 +103,12 @@ export default function MoreProjects({ navigate }) {
                       <polyline points="6 9 12 15 18 9" />
                     </svg>
                   </span>
-                </div>
+                </header>
 
                 <div
                   className="case-row__reveal"
+                  role="region"
+                  aria-label={`${project.title} details`}
                   style={{
                     height: isActive ? 'auto' : undefined
                   }}
@@ -82,6 +118,17 @@ export default function MoreProjects({ navigate }) {
                   </p>
 
                   <div className="case-row__mobile-actions">
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="case-row__mobile-link"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      VIEW LIVE PROJECT <span className="case-row__arrow" aria-hidden="true">↗</span>
+                    </a>
                     <a
                       href="/case-studies"
                       className="case-row__mobile-link"
@@ -104,11 +151,12 @@ export default function MoreProjects({ navigate }) {
                     opacity: isActive ? 1 : 0,
                     transition: 'opacity 0.3s ease'
                   }}
+                  aria-hidden={!isActive}
                 >
                   <div className="case-row__visual-group">
                     <img
                       src={project.images[1]}
-                      alt={`${project.title} portfolio preview`}
+                      alt={`${project.title} project showcase`}
                       loading="lazy"
                       decoding="async"
                       data-case-hover-photo="true"

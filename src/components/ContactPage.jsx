@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import RollingText from './RollingText';
 import AboutBooking from './about/AboutBooking';
 import Contact from './Contact';
+import useSeo from '../hooks/useSeo';
 import '../contact-reference.css';
 
 export default function ContactPage({ navigate }) {
@@ -17,8 +18,9 @@ export default function ContactPage({ navigate }) {
   const [isVerifying, setIsVerifying] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  useSeo('contact');
+
   useEffect(() => {
-    document.title = "Contact VAMIX | Start Your Next Product";
     window.scrollTo(0, 0);
   }, []);
 
@@ -69,10 +71,58 @@ export default function ContactPage({ navigate }) {
         </div>
       </div>
 
+      {/* JSON-LD Structured Data for Contact Page */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "name": "Contact VAMIX",
+            "description": "Get in touch with VAMIX Digital Product Studio. Start with a simple step - schedule a free 30-minute product consultation.",
+            "mainEntity": {
+              "@type": "Organization",
+              "@id": "https://vamix.vercel.app/#organization",
+              "name": "VAMIX",
+              "url": "https://vamix.vercel.app/",
+              "telephone": "+916359198825",
+              "email": "hi@vamix.com",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Surat",
+                "addressRegion": "Gujarat",
+                "addressCountry": "IN"
+              },
+              "contactPoint": [
+                {
+                  "@type": "ContactPoint",
+                  "telephone": "+916359198825",
+                  "contactType": "customer service",
+                  "availableLanguage": ["English", "Hindi", "Gujarati"],
+                  "hoursAvailable": {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                    "opens": "09:00",
+                    "closes": "18:00",
+                    "timeZone": "Asia/Kolkata"
+                  }
+                },
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "sales",
+                  "email": "hi@vamix.com",
+                  "availableLanguage": ["English", "Hindi", "Gujarati"]
+                }
+              ]
+            }
+          })
+        }}
+      />
+
       {/* ==========================================================================
           01. HERO / HEADING SECTION
           ========================================================================== */}
-      <section className="contact-section contact-hero" id="contact-hero">
+      <section className="contact-section contact-hero" id="contact-hero" aria-labelledby="contact-hero-heading">
         {/* Continuous 5-Line Blueprint Grid */}
         <div className="page-grid-lines contact-grid-lines" aria-hidden="true">
           <span /><span /><span /><span /><span />
@@ -87,13 +137,15 @@ export default function ContactPage({ navigate }) {
 
           {/* Columns 2-4: Main Headline */}
           <div className="contact-hero-copy">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-            >
-              LET’S BUILD YOUR NEXT PRODUCT
-            </motion.h1>
+            <h1 id="contact-hero-heading">
+              <motion.span
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+              >
+                LET&rsquo;S BUILD YOUR NEXT PRODUCT
+              </motion.span>
+            </h1>
           </div>
         </div>
       </section>
@@ -101,7 +153,7 @@ export default function ContactPage({ navigate }) {
       {/* ==========================================================================
           02. INTERACTIVE CONVERSATIONAL MADLIB FORM SECTION ("HI, WEBUS TEAM!")
           ========================================================================== */}
-      <section className="contact-section contact-form-section" id="contact-form">
+      <section className="contact-section contact-form-section" id="contact-form" aria-labelledby="contact-form-heading">
         <div className="page-grid-lines contact-grid-lines" aria-hidden="true">
           <span /><span /><span /><span /><span />
         </div>
@@ -112,21 +164,24 @@ export default function ContactPage({ navigate }) {
 
           {/* Columns 2-4: Madlib Interactive Form */}
           <div className="contact-form-wrap">
-            <form className="madlib-form" onSubmit={handleSubmit}>
-              <p className="form-heading">HI, VAMIX TEAM!</p>
+            <form className="madlib-form" onSubmit={handleSubmit} noValidate>
+              <h2 id="contact-form-heading" className="form-heading visually-hidden">Contact Form</h2>
+              <p className="form-heading" aria-hidden="true">HI, VAMIX TEAM!</p>
 
               {/* Line 1: My name is [NAME] from [COMPANY] . */}
               <div className="madlib-line madlib-line--pair">
                 <div className="madlib-group">
                   <span>My name is</span>
                   <div className="madlib-field madlib-field--name">
+                    <label htmlFor="madlib-name" className="visually-hidden">My name is</label>
                     <input
                       type="text"
+                      id="madlib-name"
                       required
                       name="Name"
                       placeholder="YOUR NAME"
                       autoComplete="name"
-                      aria-label="My name is"
+                      aria-label="Your name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     />
@@ -136,12 +191,14 @@ export default function ContactPage({ navigate }) {
                 <div className="madlib-group">
                   <span>from</span>
                   <div className="madlib-field madlib-field--company">
+                    <label htmlFor="madlib-company" className="visually-hidden">Company name (optional)</label>
                     <input
                       type="text"
+                      id="madlib-company"
                       name="Company name"
                       placeholder="COMPANY NAME/ OPTIONAL"
                       autoComplete="organization"
-                      aria-label="from"
+                      aria-label="Company name"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     />
@@ -155,12 +212,14 @@ export default function ContactPage({ navigate }) {
                 <span>I want to improve:</span>
                 <div className="madlib-group madlib-group--fill">
                   <div className="madlib-field madlib-field--improve">
+                    <label htmlFor="madlib-improve" className="visually-hidden">What you want to improve</label>
                     <input
                       type="text"
+                      id="madlib-improve"
                       required
                       name="To improve"
                       placeholder="DESCRIBE YOUR WORKFLOW CHALLENGE"
-                      aria-label="I want to improve"
+                      aria-label="Workflow challenge description"
                       value={formData.toImprove}
                       onChange={(e) => setFormData({ ...formData, toImprove: e.target.value })}
                     />
@@ -174,11 +233,13 @@ export default function ContactPage({ navigate }) {
                 <span>Budget:</span>
                 <div className="madlib-group">
                   <div className="madlib-field madlib-field--budget">
+                    <label htmlFor="madlib-budget" className="visually-hidden">Budget</label>
                     <input
                       type="text"
+                      id="madlib-budget"
                       name="Budget"
                       placeholder="ENTER BUDGET"
-                      aria-label="Budget"
+                      aria-label="Project budget"
                       value={formData.budget}
                       onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                     />
@@ -192,13 +253,15 @@ export default function ContactPage({ navigate }) {
                 <span>Contact me at:</span>
                 <div className="madlib-group">
                   <div className="madlib-field madlib-field--email">
+                    <label htmlFor="madlib-email" className="visually-hidden">Contact email</label>
                     <input
                       type="email"
+                      id="madlib-email"
                       required
                       name="Email"
                       placeholder="YOUR EMAIL"
                       autoComplete="email"
-                      aria-label="Contact me at"
+                      aria-label="Contact email address"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     />
@@ -210,8 +273,8 @@ export default function ContactPage({ navigate }) {
               {/* Action Area: Captcha, Send Request button & Terms note */}
               <div className="contact-submit-area">
                 {/* 1:1 Webus Human Verification Captcha Box */}
-                <div 
-                  className="webus-captcha" 
+                <div
+                  className="webus-captcha"
                   data-hcaptcha-phase={isCaptchaVerified ? "verified" : isVerifying ? "verifying" : "ready"}
                 >
                   <button
@@ -219,6 +282,7 @@ export default function ContactPage({ navigate }) {
                     type="button"
                     onClick={handleCaptchaClick}
                     aria-label="Verify you're human"
+                    aria-pressed={isCaptchaVerified}
                   >
                     <i className="corner-mark corner-mark--top-left" aria-hidden="true" />
                     <span className="webus-captcha__indicator" aria-hidden="true">
@@ -227,18 +291,18 @@ export default function ContactPage({ navigate }) {
                       </svg>
                     </span>
                     <span>
-                      {isCaptchaVerified ? "VERIFIED" : isVerifying ? "VERIFYING..." : "Verify you’re human"}
+                      {isCaptchaVerified ? "VERIFIED" : isVerifying ? "VERIFYING..." : "Verify you&rsquo;re human"}
                     </span>
                   </button>
 
                   <div className="webus-captcha__details">
-                    <p className="webus-captcha__status" role="status">
-                      {isCaptchaVerified 
-                        ? "Verification complete." 
+                    <p className="webus-captcha__status" role="status" aria-live="polite">
+                      {isCaptchaVerified
+                        ? "Verification complete."
                         : "Select to verify before sending."}
                     </p>
                     <p className="webus-captcha__disclosure">
-                      Protected by hCaptcha. <a href="https://www.hcaptcha.com/privacy" target="_blank" rel="noopener noreferrer">Privacy</a> · <a href="https://www.hcaptcha.com/terms" target="_blank" rel="noopener noreferrer">Terms</a>
+                      Protected by hCaptcha. <a href="https://www.hcaptcha.com/privacy" target="_blank" rel="noopener noreferrer">Privacy</a> &middot; <a href="https://www.hcaptcha.com/terms" target="_blank" rel="noopener noreferrer">Terms</a>
                     </p>
                   </div>
                 </div>
@@ -247,7 +311,8 @@ export default function ContactPage({ navigate }) {
                 <button
                   className="contact-submit"
                   type="submit"
-                  aria-label="Send Request"
+                  aria-label={isSubmitted ? "Request sent successfully" : "Send Request"}
+                  disabled={isSubmitted}
                 >
                   <span>
                     {isSubmitted ? "REQUEST SENT! WE WILL REPLY SHORTLY" : <RollingText text="Send Request" />}
@@ -279,9 +344,9 @@ export default function ContactPage({ navigate }) {
       </section>
 
       {/* ==========================================================================
-          03. "LET’S KEEP IT SIMPLE" & STUDIO PHOTO SECTION
+          03. "LET&rsquo;S KEEP IT SIMPLE" & STUDIO PHOTO SECTION
           ========================================================================== */}
-      <section className="contact-section contact-info-section" id="contact-info">
+      <section className="contact-section contact-info-section" id="contact-info" aria-labelledby="contact-info-heading">
         <div className="page-grid-lines contact-grid-lines" aria-hidden="true">
           <span /><span /><span /><span /><span />
         </div>
@@ -290,29 +355,32 @@ export default function ContactPage({ navigate }) {
           {/* Column 1: Eyebrow Badge */}
           <div className="page-eyebrow contact-eyebrow">
             <span className="page-eyebrow__dot" aria-hidden="true" />
-            <span>Let’s keep it simple</span>
+            <span>Let&rsquo;s keep it simple</span>
           </div>
 
           {/* Columns 2-4: Lead Statement, Studio Image & Contacts */}
           <div className="contact-info-content">
             <div className="contact-info-copy">
               <p className="contact-lead">
-                You don’t need to prepare slides or technical notes, just share what’s on your mind. Whether it’s a quick question or a bigger project idea, we’ll get back to you with a clear next step.
+                You don&rsquo;t need to prepare slides or technical notes, just share what&rsquo;s on your mind. Whether it&rsquo;s a quick question or a bigger project idea, we&rsquo;ll get back to you with a clear next step.
               </p>
               <p className="contact-detail-copy">
-                Every message that comes through this form is read by a real person on our team. No chatbots, no outsourced support. Most of the time, it’s Ruby or Jaspal who will see it first and make sure it reaches the right designer or engineer.
+                Every message that comes through this form is read by a real person on our team. No chatbots, no outsourced support. Most of the time, it&rsquo;s Ruby or Jaspal who will see it first and make sure it reaches the right designer or engineer.
               </p>
             </div>
 
-            <img
-              src="https://framerusercontent.com/images/c67C5n6mfhTUQv7UYjH3n7xbSvk.jpg?width=1184&height=864"
-              alt="VAMIX office space and design studio environment"
-              loading="lazy"
-              decoding="async"
-              width="1184"
-              height="864"
-              className="office-image"
-            />
+            <figure>
+              <img
+                src="https://framerusercontent.com/images/c67C5n6mfhTUQv7UYjH3n7xbSvk.jpg?width=1184&height=864"
+                alt="VAMIX studio workspace showing design team collaboration area"
+                loading="lazy"
+                decoding="async"
+                width="1184"
+                height="864"
+                className="office-image"
+              />
+              <figcaption className="visually-hidden">VAMIX studio workspace</figcaption>
+            </figure>
 
             <div className="contact-info-details">
               <div className="contact-phone-email">
@@ -324,10 +392,10 @@ export default function ContactPage({ navigate }) {
                 </a>
               </div>
 
-              <div className="contact-socials">
-                <span>LI</span>
-                <span>ig</span>
-              </div>
+              <nav className="contact-socials" aria-label="Social media links" role="list">
+                <a href="https://www.linkedin.com/company/vamix" target="_blank" rel="noopener noreferrer" role="listitem">LI</a>
+                <a href="https://www.instagram.com/vamix" target="_blank" rel="noopener noreferrer" role="listitem">IG</a>
+              </nav>
             </div>
           </div>
         </div>

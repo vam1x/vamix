@@ -94,7 +94,10 @@ export default function App() {
   }, []);
 
   // Manage all SEO metadata, canonicals, OG, Twitter, and breadcrumbs dynamically
-  useSeo(currentRoute);
+  // Only for home route since other pages handle their own SEO
+  if (currentRoute === 'home') {
+    useSeo(currentRoute);
+  }
 
   useEffect(() => {
     const handleLocationChange = () => {

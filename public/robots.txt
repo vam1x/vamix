@@ -1,7 +1,16 @@
-# User-agent configuration for VAMIX Digital Product Studio
+# VAMIX Digital Product Studio - Robots.txt
 User-agent: *
 Allow: /
+
+# Disallow private/admin paths
 Disallow: /404
+Disallow: /api/
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /*.json$
+
+# Crawl-delay for polite crawling
+Crawl-delay: 10
 
 # Host
 Host: https://vamix.vercel.app

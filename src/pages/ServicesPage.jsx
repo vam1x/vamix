@@ -5,6 +5,7 @@ import RollingText from '../components/RollingText';
 import ServiceRow from '../components/services/ServiceRow';
 import AboutBooking from '../components/about/AboutBooking';
 import Contact from '../components/Contact';
+import useSeo from '../hooks/useSeo';
 import './services.css';
 
 const designServices = [
@@ -80,8 +81,9 @@ const devServices = [
 ];
 
 export default function ServicesPage({ navigate }) {
+  useSeo('services');
+
   useEffect(() => {
-    document.title = "Services: Design & Development | VAMIX";
     window.scrollTo(0, 0);
   }, []);
 
@@ -96,6 +98,54 @@ export default function ServicesPage({ navigate }) {
 
   return (
     <div className="services-page-wrapper">
+      {/* JSON-LD Structured Data for Services Page */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ServiceCatalog",
+            "name": "VAMIX Design & Engineering Services",
+            "description": "Comprehensive digital product studio services including UI/UX design, full-stack web and mobile development, design systems, and AI integration.",
+            "provider": {
+              "@id": "https://vamix.vercel.app/#organization"
+            },
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Design & Engineering Services",
+              "itemListElement": [
+                ...designServices.map((service, idx) => ({
+                  "@type": "Offer",
+                  "position": idx + 1,
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": service.title,
+                    "description": service.desc,
+                    "provider": { "@id": "https://vamix.vercel.app/#organization" },
+                    "areaServed": "Worldwide",
+                    "serviceType": "Design",
+                    "category": "Design"
+                  }
+                })),
+                ...devServices.map((service, idx) => ({
+                  "@type": "Offer",
+                  "position": designServices.length + idx + 1,
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": service.title,
+                    "description": service.desc,
+                    "provider": { "@id": "https://vamix.vercel.app/#organization" },
+                    "areaServed": "Worldwide",
+                    "serviceType": "Development",
+                    "category": "Development"
+                  }
+                }))
+              ]
+            }
+          })
+        }}
+      />
+
       {/* 01: HERO SECTION */}
       <section className="services-hero" aria-label="Services overview">
         <SectionGrid theme="light" showTopLine={false} showBottomLine={true} />
@@ -124,14 +174,15 @@ export default function ServicesPage({ navigate }) {
 
           {/* Right Column: Main H1 Headline & Statement */}
           <div className="services-hero-col-content">
-            <motion.h1
-              className="services-hero-title"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            >
-              WE DESIGN IT,<br />THEN WE BUILD IT
-            </motion.h1>
+            <h1 className="services-hero-title">
+              <motion.span
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              >
+                WE DESIGN IT,<br />THEN WE BUILD IT
+              </motion.span>
+            </h1>
 
             <motion.p
               className="services-hero-sub"
@@ -174,7 +225,7 @@ export default function ServicesPage({ navigate }) {
           </div>
 
           {/* Expandable Rows for Design Track */}
-          <div className="services-rows-list">
+          <div className="services-rows-list" role="list">
             {designServices.map((service, idx) => (
               <ServiceRow
                 key={service.id}
@@ -216,7 +267,7 @@ export default function ServicesPage({ navigate }) {
           </div>
 
           {/* Expandable Rows for Development Track */}
-          <div className="services-rows-list">
+          <div className="services-rows-list" role="list">
             {devServices.map((service, idx) => (
               <ServiceRow
                 key={service.id}

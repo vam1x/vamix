@@ -4,11 +4,13 @@ import SectionGrid from '../components/SectionGrid';
 import RollingText from '../components/RollingText';
 import AboutBooking from '../components/about/AboutBooking';
 import Contact from '../components/Contact';
+import useSeo from '../hooks/useSeo';
 import './not-found.css';
 
 export default function NotFoundPage({ navigate }) {
+  useSeo('not-found');
+
   useEffect(() => {
-    document.title = "Page Not Found (404) - VAMIX Digital Product Studio";
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 

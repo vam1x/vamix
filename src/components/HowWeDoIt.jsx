@@ -76,7 +76,7 @@ export default function HowWeDoIt({ navigate }) {
       line2: "CLIMB OVER TIME",
       numVal: 45,
       val: "+45%",
-      metric: "/cost"
+      metric: "/COST"
     }
   ];
 
@@ -86,6 +86,32 @@ export default function HowWeDoIt({ navigate }) {
       <SectionGrid
         theme="light"
         showTopLine={true}
+      />
+
+      {/* JSON-LD Structured Data for Process */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "The Fast Track to Live Products",
+            "description": "VAMIX's proven 4-step process for delivering digital products that work.",
+            "step": steps.map((step, index) => ({
+              "@type": "HowToStep",
+              "position": index + 1,
+              "name": step.text,
+              "text": step.text
+            })),
+            "totalTime": "PT4S",
+            "tool": [
+              { "@type": "HowToTool", "name": "Field Research" },
+              { "@type": "HowToTool", "name": "Rapid Prototyping" },
+              { "@type": "HowToTool", "name": "User Testing" },
+              { "@type": "HowToTool", "name": "Production Deployment" }
+            ]
+          })
+        }}
       />
 
       <div className="process-section__inner">
@@ -109,7 +135,7 @@ export default function HowWeDoIt({ navigate }) {
             </div>
 
             {/* Right Column (Cols 3-4): 2x2 Steps Grid */}
-            <div className="process-steps">
+            <nav className="process-steps" aria-label="Process steps">
               {steps.map((step, idx) => (
                 <article key={idx} className="process-step">
                   <div className="process-step__number">{step.num}</div>
@@ -119,7 +145,7 @@ export default function HowWeDoIt({ navigate }) {
                   <h3>{step.text}</h3>
                 </article>
               ))}
-            </div>
+            </nav>
           </div>
 
           {/* Footer Row: Left CTA Block, Right Segmented Circle Chart */}
@@ -155,12 +181,12 @@ export default function HowWeDoIt({ navigate }) {
               </a>
             </div>
 
-            <div className="process-chart">
+            <figure className="process-chart" aria-labelledby="process-chart-copy">
               <svg
                 className="process-segmented-circle"
                 viewBox="0 0 200 200"
                 role="img"
-                aria-label="Progress: 98 percent"
+                aria-label="Progress circle showing 98 percent completion"
               >
                 <circle cx="100" cy="100" r="100" fill="rgb(23, 23, 23)" />
                 <path
@@ -168,10 +194,10 @@ export default function HowWeDoIt({ navigate }) {
                   fill="rgb(245, 245, 245)"
                 />
               </svg>
-              <p id="process-chart-copy">
+              <figcaption id="process-chart-copy">
                 Our work has improved task completion by up to 98% in the first month.
-              </p>
-            </div>
+              </figcaption>
+            </figure>
           </div>
         </div>
 
@@ -187,9 +213,9 @@ export default function HowWeDoIt({ navigate }) {
             </h2>
           </div>
 
-          <div ref={delayRef} className="delay-cards">
+          <div ref={delayRef} className="delay-cards" role="list">
             {delayCards.map((card, idx) => (
-              <article key={idx} className="delay-card">
+              <article key={idx} className="delay-card" role="listitem">
                 <div
                   className="delay-card__fill"
                   style={{
@@ -202,7 +228,7 @@ export default function HowWeDoIt({ navigate }) {
                     <span className="delay-card__line">{card.line2}</span>
                   </div>
                   <strong className="delay-card__value">
-                    <AnimatedCounter to={card.numVal} prefix="+" suffix="%" />
+                    <AnimatedCounter to={card.numVal} prefix="+" suffix="%" aria-label={`${card.numVal} percent ${card.metric.replace('/', '')}`} />
                   </strong>
                 </div>
                 <div className="delay-card__metric">

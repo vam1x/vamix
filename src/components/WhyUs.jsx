@@ -34,6 +34,33 @@ export default function WhyUs() {
         showTopLine={true}
       />
 
+      {/* JSON-LD Structured Data for Advantages/Stats */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "mainEntity": {
+              "@type": "Organization",
+              "@id": "https://vamix.vercel.app/#organization",
+              "name": "VAMIX",
+              "description": "We turn messy product problems into tools people trust.",
+              "knowAbout": advantages.map(a => `${a.line1.trim()} ${a.line2}`),
+              "numberOfEmployees": 10,
+              "foundingDate": "2023",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "15",
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            }
+          })
+        }}
+      />
+
       <div className="advantages-section__inner">
         <div className="advantages-row">
           {/* Left Column (Cols 1-2): Kicker, Heading, Description */}
@@ -67,9 +94,9 @@ export default function WhyUs() {
               </h3>
             </div>
 
-            <div className="advantage-items">
+            <div className="advantage-items" role="list">
               {advantages.map((item, idx) => (
-                <article key={idx} className="advantage-item">
+                <article key={idx} className="advantage-item" role="listitem">
                   <i className="corner-mark corner-mark--bottom-left" aria-hidden="true"></i>
                   <span className="advantage-item__number">{item.num}</span>
                   <div className="advantage-item__copy">
@@ -82,7 +109,7 @@ export default function WhyUs() {
 
             <div className="stats-panel__source mono-label">
               <span>Source:</span>
-              <span>CLIENT FEEDBACK &amp; PROJECT DATA</span>
+              <span>CLIENT FEEDBACK & PROJECT DATA</span>
               <span className="stats-panel__source-date">
                 <img src="/calendar.png" alt="Calendar date icon" width="16" height="16" loading="lazy" decoding="async" />
                 <span>Apr 2025</span>
@@ -92,7 +119,7 @@ export default function WhyUs() {
         </div>
 
         {/* Stats & Partnership Panel Box */}
-        <div className="stats-panel">
+        <aside className="stats-panel" aria-labelledby="stats-heading">
           <div className="page-grid-lines stats-panel__grid" aria-hidden="true">
             <span></span>
             <span></span>
@@ -101,22 +128,24 @@ export default function WhyUs() {
             <span></span>
           </div>
 
-          <div className="stats-panel__top">
-            <div className="stat-card">
+          <h2 id="stats-heading" className="visually-hidden">Key Statistics</h2>
+
+          <div className="stats-panel__top" role="list">
+            <div className="stat-card" role="listitem">
               <strong>
-                <AnimatedCounter to={85} suffix="%" />
+                <AnimatedCounter to={85} suffix="%" aria-label="85 percent client retention" />
               </strong>
               <span className="mono-label">CLIENT RETENTION</span>
             </div>
-            <div className="stat-card">
+            <div className="stat-card" role="listitem">
               <strong>
-                <AnimatedCounter to={3} suffix="+" />
+                <AnimatedCounter to={3} suffix="+" aria-label="3 plus years experience" />
               </strong>
               <span className="mono-label">YEARS EXPERIENCE</span>
             </div>
-            <div className="stat-card">
+            <div className="stat-card" role="listitem">
               <strong>
-                <AnimatedCounter to={5} suffix="X" />
+                <AnimatedCounter to={5} suffix="X" aria-label="5 times faster delivery" />
               </strong>
               <span className="mono-label">FASTER DELIVERY</span>
             </div>
@@ -138,12 +167,13 @@ export default function WhyUs() {
 
           <img
             src="/stats-gradient.webp"
-            alt="Colored gradient background"
+            alt=""
+            aria-hidden="true"
             width="676"
             height="563"
             className="stats-panel__gradient"
           />
-        </div>
+        </aside>
       </div>
     </section>
   );

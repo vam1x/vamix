@@ -363,7 +363,6 @@ export default function ContactPage({ navigate }) {
                   disabled={isSubmitting || isSubmitted}
                   type="submit"
                   aria-label={isSubmitted ? "Request sent successfully" : "Send Request"}
-                  disabled={isSubmitted}
                 >
                   <span>
                     {isSubmitting ? (

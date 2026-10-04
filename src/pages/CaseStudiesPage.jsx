@@ -4,13 +4,15 @@ import SectionGrid from '../components/SectionGrid';
 import Contact from '../components/Contact';
 import AboutBooking from '../components/about/AboutBooking';
 import projects from './caseStudiesData.json';
+import useSeo from '../hooks/useSeo';
 import './case-studies.css';
 
 export default function CaseStudiesPage({ navigate }) {
   const [activeIdx, setActiveIdx] = useState(0);
 
+  useSeo('case-studies');
+
   useEffect(() => {
-    document.title = 'Case Studies | VAMIX Product Studio';
     window.scrollTo(0, 0);
   }, []);
 
@@ -40,35 +42,69 @@ export default function CaseStudiesPage({ navigate }) {
 
   return (
     <div className="case-studies-page">
+      {/* JSON-LD Structured Data for Case Studies Page */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "VAMIX Case Studies",
+            "description": "Explore how VAMIX designs and builds high-performing digital products for clients across industries.",
+            "itemListElement": projects.map((project, idx) => ({
+              "@type": "ListItem",
+              "position": idx + 1,
+              "item": {
+                "@type": "CaseStudy",
+                "name": project.title,
+                "description": project.desc,
+                "category": project.category,
+                "url": project.href,
+                "image": `https://vamix.vercel.app${project.images[1]}`,
+                "provider": {
+                  "@id": "https://vamix.vercel.app/#organization"
+                },
+                "about": {
+                  "@type": "Organization",
+                  "name": project.title
+                }
+              }
+            }))
+          })
+        }}
+      />
+
       {/* 01. Case Studies Heading / Hero Section */}
-      <section className="cs-hero-section" id="cs-hero">
+      <section className="cs-hero-section" id="cs-hero" aria-labelledby="cs-main-title">
         <SectionGrid theme="light" showTopLine={false} showBottomLine={false} crosshairPositions={[0, 1, 2, 3, 4]} />
         <div className="cs-content-grid">
           {/* Column 1: Client Stories Tag */}
           <div className="cs-tag-col">
             <div className="cs-pill-badge">
-              <span className="cs-badge-dot" />
+              <span className="cs-badge-dot" aria-hidden="true" />
               <span>CLIENT STORIES</span>
             </div>
           </div>
 
           {/* Column 2-4: Title and Subtitle */}
           <div className="cs-heading-col">
-            <motion.h1 
-              className="cs-main-title"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            >
-              CASE STUDIES
-            </motion.h1>
-            <motion.p 
+            <h1 id="cs-main-title" className="cs-main-title">
+              <motion.span
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              >
+                CASE STUDIES
+              </motion.span>
+            </h1>
+            <motion.p
               className="cs-subtitle"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
-              Real projects where design solved actual business<br className="cs-desktop-break" />{' '}problems, not just made things look prettier.
+              Real projects where design solved actual business<br className="cs-desktop-break" />{' '}
+              problems, not just made things look prettier.
             </motion.p>
           </div>
         </div>
@@ -83,17 +119,18 @@ export default function CaseStudiesPage({ navigate }) {
 
           {/* Column 2 & 3: Projects List */}
           <div className="cs-accordion-col">
-            <div className="cs-projects-list">
+            <div className="cs-projects-list" role="list" aria-label="Case studies">
               {projects.map((project, idx) => {
                 const isActive = activeIdx === idx;
                 return (
-                  <div 
+                  <article
                     key={project.title}
                     className={`cs-project-row ${isActive ? 'is-active' : ''}`}
+                    role="listitem"
                     onMouseEnter={() => handleRowHover(idx)}
                     onClick={() => toggleProject(idx)}
                   >
-                    <button 
+                    <button
                       className="cs-row-title-btn"
                       aria-expanded={isActive}
                       type="button"
@@ -112,18 +149,20 @@ export default function CaseStudiesPage({ navigate }) {
 
                     <AnimatePresence initial={false}>
                       {isActive && (
-                        <motion.div 
+                        <motion.div
                           className="cs-row-body"
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                          role="region"
+                          aria-label={`${project.title} details`}
                         >
                           <p className="cs-row-desc">{project.desc}</p>
                           <div className="cs-row-actions">
-                            <a 
-                              href={project.href} 
-                              target="_blank" 
+                            <a
+                              href={project.href}
+                              target="_blank"
                               rel="noopener noreferrer"
                               className="cs-read-more-btn"
                               aria-label={`View live project for ${project.title}`}
@@ -148,7 +187,7 @@ export default function CaseStudiesPage({ navigate }) {
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </div>
+                  </article>
                 );
               })}
             </div>
@@ -167,17 +206,17 @@ export default function CaseStudiesPage({ navigate }) {
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="cs-preview-mockup-frame">
-                    <img 
-                      src={currentProject.images[1]} 
-                      alt={`${currentProject.title} featured showcase`} 
+                    <img
+                      src={currentProject.images[1]}
+                      alt={`${currentProject.title} featured showcase`}
                       className="cs-featured-bg-img"
                       loading="eager"
                       decoding="async"
                     />
                     <div className="cs-logo-center-badge">
-                      <img 
-                        src={currentProject.images[0]} 
-                        alt={`${currentProject.title} client logo`} 
+                      <img
+                        src={currentProject.images[0]}
+                        alt={`${currentProject.title} client logo`}
                         className="cs-client-logo-img"
                         loading="eager"
                         decoding="async"

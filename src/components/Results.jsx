@@ -14,9 +14,53 @@ export default function Results({ navigate }) {
         showTopLine={true}
       />
 
+      {/* JSON-LD Structured Data for Case Study */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CaseStudy",
+            "name": "DV Jewellery Designer - Digital Flagship Boutique",
+            "description": "DV Jewellery Designer partnered with VAMIX to architect a digital flagship boutique worthy of fine craftsmanship. By blending high-fashion editorial storytelling with intuitive jewelry filtering, tactile piece inspection, and a seamless checkout, the bespoke atelier transformed high-ticket online browsing into confident luxury purchases.",
+            "about": {
+              "@type": "Organization",
+              "name": "DV Jewellery Designer",
+              "industry": "Luxury E-Commerce / Fine Jewellery"
+            },
+            "provider": {
+              "@id": "https://vamix.vercel.app/#organization"
+            },
+            "datePublished": "2024",
+            "dateModified": "2024",
+            "image": "https://vamix.vercel.app/projects/real/dv-hero.jpg",
+            "result": [
+              {
+                "@type": "QuantitativeValue",
+                "name": "Checkout Dropoff Reduction",
+                "value": 58,
+                "unitText": "PERCENT"
+              },
+              {
+                "@type": "QuantitativeValue",
+                "name": "Sales Conversion Increase",
+                "value": 76,
+                "unitText": "PERCENT"
+              }
+            ],
+            "mentions": [
+              "High-fashion editorial storytelling",
+              "Intuitive jewelry filtering",
+              "Tactile piece inspection",
+              "Seamless checkout"
+            ]
+          })
+        }}
+      />
+
       {/* Featured Right-Side Image Backdrop with Split Mask */}
-      <motion.div 
-        className="case-section__backdrop" 
+      <motion.div
+        className="case-section__backdrop"
         aria-hidden="true"
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -25,8 +69,9 @@ export default function Results({ navigate }) {
       >
         <img
           src="/projects/real/dv-hero.jpg"
-          alt="DV Jewellery Designer Luxury Boutique"
-          loading="lazy"
+          alt="DV Jewellery Designer luxury digital boutique homepage showing fine jewelry collections"
+          loading="eager"
+          fetchpriority="high"
           decoding="async"
           width="1440"
           height="960"
@@ -36,7 +81,7 @@ export default function Results({ navigate }) {
 
       <div className="case-section__inner">
         {/* Left Column: Story, Specs, CTA & Proof Stats */}
-        <div className="case-section__copy">
+        <article className="case-section__copy">
           <div className="case-section__story">
             <div className="case-section__head">
               <div className="case-section__head-row">
@@ -75,61 +120,61 @@ export default function Results({ navigate }) {
                 <dd>Standard digital catalog lacked tactile prestige, suppressing high-ticket custom conversions</dd>
               </div>
             </dl>
-          </div>
 
-          <a
-            className="cta-block case-section__cta"
-            href="/case-studies"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate?.('case-studies');
-            }}
-          >
-            <RollingLabel text="SEE HOW WE DID IT" />
-            <svg
-              className="cta-arrow"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
+            <a
+              className="cta-block case-section__cta"
+              href="/case-studies"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate?.('case-studies');
+              }}
             >
-              <path
-                d="M 0 0 L 8 8 L 0 16"
-                transform="translate(8 4)"
-                fill="transparent"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </a>
+              <RollingLabel text="SEE HOW WE DID IT" />
+              <svg
+                className="cta-arrow"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M 0 0 L 8 8 L 0 16"
+                  transform="translate(8 4)"
+                  fill="transparent"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
 
-          <div className="case-section__proof">
-            <div>
-              <span>CHECKOUT DROPOFF CUT</span>
-              <strong>
-                <AnimatedCounter to={58} prefix="-" suffix="%" />
-                <span className="case-section__proof-dots" aria-hidden="true">
-                  <i></i><i></i><i></i><i></i><i></i><i></i>
-                </span>
-              </strong>
-            </div>
-            <div>
-              <span>SALES CONVERSION</span>
-              <strong>
-                <AnimatedCounter to={76} prefix="+" suffix="%" />
-                <span className="case-section__proof-dots" aria-hidden="true">
-                  <i></i><i></i><i></i><i></i><i></i><i></i>
-                </span>
-              </strong>
+            <div className="case-section__proof" role="list" aria-label="Key results">
+              <div role="listitem">
+                <span>CHECKOUT DROPOFF CUT</span>
+                <strong>
+                  <AnimatedCounter to={58} prefix="-" suffix="%" aria-label="58 percent reduction in checkout dropoff" />
+                  <span className="case-section__proof-dots" aria-hidden="true">
+                    <i></i><i></i><i></i><i></i><i></i><i></i>
+                  </span>
+                </strong>
+              </div>
+              <div role="listitem">
+                <span>SALES CONVERSION</span>
+                <strong>
+                  <AnimatedCounter to={76} prefix="+" suffix="%" aria-label="76 percent increase in sales conversion" />
+                  <span className="case-section__proof-dots" aria-hidden="true">
+                    <i></i><i></i><i></i><i></i><i></i><i></i>
+                  </span>
+                </strong>
+              </div>
             </div>
           </div>
-        </div>
+        </article>
 
         {/* Right Column: Immersive Quote & Glyph */}
-        <figure className="case-section__quote">
+        <figure className="case-section__quote" aria-labelledby="quote-text">
           <svg
             className="case-section__quote-glyph"
             width="88"
@@ -144,7 +189,7 @@ export default function Results({ navigate }) {
             />
           </svg>
 
-          <blockquote>
+          <blockquote id="quote-text">
             <RevealText
               text="THEY DIDN'T JUST MAKE IT PRETTY. THEY MADE IT SELL. OUR BUYERS WENT FROM BROWSING TO BUYING WITH COMPLETE CONFIDENCE. BEST DESIGN INVESTMENT WE'VE MADE."
               theme="dark"

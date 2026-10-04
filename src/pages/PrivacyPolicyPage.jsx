@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import AboutBooking from '../components/about/AboutBooking';
 import Contact from '../components/Contact';
+import useSeo from '../hooks/useSeo';
 import './legal.css';
 
 export default function PrivacyPolicyPage({ navigate }) {
+  useSeo('privacy-policy');
+
   useEffect(() => {
-    document.title = "Privacy Policy - VAMIX Digital Product Studio";
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 

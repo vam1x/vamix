@@ -5,6 +5,7 @@ import RollingText from '../components/RollingText';
 import ServiceRow from '../components/services/ServiceRow';
 import AboutBooking from '../components/about/AboutBooking';
 import Contact from '../components/Contact';
+import useSeo from '../hooks/useSeo';
 import './services.css';
 
 const designServices = [
@@ -107,7 +108,6 @@ function RevealHeading({ text, className = '' }) {
 export default function ServicesPage({ navigate }) {
   const reducedMotion = useReducedMotion();
   useEffect(() => {
-    document.title = "Services: Design & Development | VAMIX";
     window.scrollTo(0, 0);
   }, []);
 

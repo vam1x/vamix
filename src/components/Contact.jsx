@@ -98,13 +98,61 @@ export default function Contact({ navigate }) {
   };
 
   return (
-    <section className="section contact-section" id="contact">
+    <section className="section contact-section" id="contact" aria-labelledby="contact-title">
       {/* Blueprint Grid Lines & Top Boundary with Corner Crosshairs */}
       <SectionGrid
         theme="light"
         showTopLine={true}
         showBottomLine={false}
         crosshairPositions={[0, 4]}
+      />
+
+      {/* JSON-LD Structured Data for Contact Page */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "name": "Contact VAMIX",
+            "description": "Get in touch with VAMIX Digital Product Studio for your next project. Free 30-minute consultation available.",
+            "mainEntity": {
+              "@type": "Organization",
+              "@id": "https://vamix.vercel.app/#organization",
+              "name": "VAMIX",
+              "url": "https://vamix.vercel.app/",
+              "telephone": "+916359198825",
+              "email": "hi@vamix.com",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Surat",
+                "addressRegion": "Gujarat",
+                "addressCountry": "IN"
+              },
+              "contactPoint": [
+                {
+                  "@type": "ContactPoint",
+                  "telephone": "+916359198825",
+                  "contactType": "customer service",
+                  "availableLanguage": ["English", "Hindi", "Gujarati"],
+                  "hoursAvailable": {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                    "opens": "09:00",
+                    "closes": "18:00",
+                    "timeZone": "Asia/Kolkata"
+                  }
+                },
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "sales",
+                  "email": "hi@vamix.com",
+                  "availableLanguage": ["English", "Hindi", "Gujarati"]
+                }
+              ]
+            }
+          })
+        }}
       />
 
       {/* Aurora Gradient Blob — bottom-left */}
@@ -306,9 +354,9 @@ export default function Contact({ navigate }) {
             <a href="mailto:vamixlabs@gmail.com" className="contact-meta__email">VAMIXLABS@GMAIL.COM</a>
           </div>
           <div className="contact-meta__col4">
-            <div className="contact-meta__social">
-              <span className="contact-meta__social-link">LI</span>
-              <span className="contact-meta__social-link">IG</span>
+            <div className="contact-meta__social" role="list" aria-label="Social media links">
+              <a href="https://www.linkedin.com/company/vamix" target="_blank" rel="noopener noreferrer" className="contact-meta__social-link" role="listitem">LI</a>
+              <a href="https://www.instagram.com/vamix" target="_blank" rel="noopener noreferrer" className="contact-meta__social-link" role="listitem">IG</a>
             </div>
             <button onClick={scrollToTop} className="contact-meta__top-btn" type="button" aria-label="Back to top">
               BACK TO TOP

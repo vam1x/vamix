@@ -1,13 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import RollingText from './RollingText';
 import VamixLogo from './VamixLogo';
 
 export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
+  const dialogRef = useRef(null);
+  const previousActiveElement = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      // Store the previously focused element
+      previousActiveElement.current = document.activeElement;
+      // Trap focus within the dialog
+      const focusableElements = dialogRef.current?.querySelectorAll(
+        'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusableElements?.length) {
+        focusableElements[0].focus();
+      }
+    } else if (previousActiveElement.current) {
+      // Restore focus to the trigger element
+      previousActiveElement.current.focus();
+    }
+  }, [isOpen]);
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && isOpen) {
         onClose();
+      }
+      // Trap focus within dialog
+      if (e.key === 'Tab' && isOpen && dialogRef.current) {
+        const focusableElements = dialogRef.current.querySelectorAll(
+          'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements.length === 0) return;
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -50,8 +88,8 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
       {isOpen && (
         <>
           {/* Subtle click-outside backdrop overlay */}
-          <motion.div 
-            className="nav-drawer-backdrop" 
+          <motion.div
+            className="nav-drawer-backdrop"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -61,7 +99,8 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
           />
 
           {/* Floating Dropdown Navigation Card (Positioned under Column 3) */}
-          <motion.div 
+          <motion.div
+            ref={dialogRef}
             className="nav-drawer-card"
             role="dialog"
             aria-modal="true"
@@ -81,17 +120,18 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
             {/* Navigation Links with downward split-flap mechanical roll */}
             <nav className="nav-card-links" aria-label="Main Navigation">
               {links.map((link) => {
-                const isActive = (link.href === '/about' && currentRoute === 'about') || 
+                const isActive = (link.href === '/about' && currentRoute === 'about') ||
                                  (link.href === '/services' && currentRoute === 'services') ||
-                                 (link.href === '/contact' && currentRoute === 'contact') || 
+                                 (link.href === '/contact' && currentRoute === 'contact') ||
                                  (link.href === '/case-studies' && currentRoute === 'case-studies') ||
                                  (link.href === '/' && currentRoute === 'home');
                 return (
-                  <a 
+                  <a
                     key={link.title}
-                    href={link.href} 
-                    className={`nav-card-link ${isActive ? 'is-active' : ''}`} 
+                    href={link.href}
+                    className={`nav-card-link ${isActive ? 'is-active' : ''}`}
                     onClick={(e) => handleLinkClick(e, link.href)}
+                    aria-current={isActive ? 'page' : undefined}
                   >
                     <RollingText text={link.title} />
                   </a>
@@ -107,9 +147,9 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
             </div>
 
             {/* Social Footnote with 1px underline */}
-            <div className="nav-card-socials">
-              <span className="nav-card-social-link">LI</span>
-              <span className="nav-card-social-link">IG</span>
+            <div className="nav-card-socials" role="list" aria-label="Social media links">
+              <a href="https://www.linkedin.com/company/vamix" target="_blank" rel="noopener noreferrer" className="nav-card-social-link" role="listitem">LI</a>
+              <a href="https://www.instagram.com/vamix" target="_blank" rel="noopener noreferrer" className="nav-card-social-link" role="listitem">IG</a>
             </div>
           </motion.div>
         </>

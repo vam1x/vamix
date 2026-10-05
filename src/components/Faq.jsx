@@ -35,6 +35,25 @@ export default function Faq({ navigate }) {
         theme="light"
         showTopLine={true}
       />
+      {/* JSON-LD Structured Data for FAQPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map((item, idx) => ({
+              "@type": "Question",
+              "position": idx + 1,
+              "name": item.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.a
+              }
+            }))
+          })
+        }}
+      />
 
 <<<<<<< HEAD
       {/* JSON-LD Structured Data for FAQPage */}

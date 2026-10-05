@@ -7709,109 +7709,6 @@ a:hover .rolling-label__copy {
   height: auto;
   padding: 220px 40px 0;
 }
-<<<<<<< HEAD
-.home-route .faq-section > .section-container { max-width: none; }
-.home-route .faq-container {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0;
-}
-.home-route .faq-container > div:first-child {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-.home-route .faq-container .section-badge {
-  grid-column: 1;
-  grid-row: 1;
-  align-self: start;
-  margin: 0;
-  padding-left: 12px;
-}
-.home-route .faq-container .section-title-huge {
-  grid-column: 2 / -1;
-  grid-row: 1;
-  margin: 0;
-  font-size: 96px;
-  line-height: .9;
-  letter-spacing: -.05em;
-}
-.home-route .faq-list {
-  grid-column: 2 / -1;
-  margin-top: 114px;
-}
-.home-route .faq-item {
-  border: 0;
-  border-top: 1px solid rgba(23,23,23,.13);
-}
-.home-route .faq-item:last-child { border-bottom: 1px solid rgba(23,23,23,.13); }
-.home-route .faq-question-btn {
-  height: 80px;
-  padding: 0 12px 0 32px;
-  font-size: 23px;
-  font-weight: 400;
-  letter-spacing: -.05em;
-}
-.home-route .faq-question-btn > span:first-child { gap: 24px !important; }
-.home-route .faq-num-pill {
-  padding: 3px 5px;
-  font-size: 11px;
-  font-weight: 400;
-}
-.home-route .faq-icon { font-size: 22px; font-weight: 300; }
-.home-route .faq-answer-text {
-  padding: 4px 56px 74px 72px;
-  font-size: 11px;
-  line-height: 1.6;
-  letter-spacing: -.02em;
-}
-.home-route .faq-contact-prompt {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-top: 129px;
-}
-.home-route .faq-contact-eyebrow {
-  grid-column: 1;
-  padding-left: 12px;
-  font: 11px var(--font-mono);
-}
-.home-route .faq-contact-action { grid-column: 2 / 4; }
-.home-route .faq-contact-action h3 {
-  margin: 0 0 62px;
-  font-family: var(--font-heading);
-  font-size: 48px;
-  line-height: 1;
-  letter-spacing: -.05em;
-}
-.home-route .faq-contact-button {
-  display: flex;
-  width: 297px;
-  height: 80px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 28px;
-  border: 1px solid rgba(23,23,23,.13);
-  border-bottom: 2px solid #df3447;
-  color: #171717;
-  font-size: 14px;
-  font-weight: 600;
-}
-.home-route .faq-contact-button span { font-size: 28px; font-weight: 300; }
-.home-route .faq-contact-person { grid-column: 4; }
-.home-route .faq-contact-person > p {
-  margin: 0 0 40px;
-  font-size: 24px;
-  line-height: 1.35;
-  letter-spacing: -.05em;
-}
-.home-route .faq-contact-person-detail { display: flex; align-items: center; gap: 14px; }
-.home-route .faq-contact-person-detail img { width: 42px; height: 42px; object-fit: cover; border-radius: 50%; }
-.home-route .faq-contact-person-detail span { display: flex; flex-direction: column; gap: 4px; }
-.home-route .faq-contact-person-detail strong,
-.home-route .faq-contact-person-detail small { font: 11px var(--font-mono); }
-=======
-
 @media (min-width: 1200px) {
   .home-route .contact-section { min-height: auto; }
   .home-route .contact-section .contact-main-title {
@@ -7824,7 +7721,6 @@ a:hover .rolling-label__copy {
   .home-route .contact-section .contact-col-3 { padding-top: 320px; }
   .home-route .contact-section .contact-mega-links { margin-bottom: 120px; }
 }
->>>>>>> d4c4c1b (refactor: redesign Faq component layout and animations with framer-motion)
 
 @media (max-width: 809px) {
   .home-route .faq-section { height: auto; min-height: 1123px; padding: 70px 20px 0; }

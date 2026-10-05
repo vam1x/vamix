@@ -35,6 +35,7 @@ export default function Faq({ navigate }) {
         theme="light"
         showTopLine={true}
       />
+
       {/* JSON-LD Structured Data for FAQPage */}
       <script
         type="application/ld+json"
@@ -55,34 +56,6 @@ export default function Faq({ navigate }) {
         }}
       />
 
-<<<<<<< HEAD
-      {/* JSON-LD Structured Data for FAQPage */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": faqs.map((item, idx) => ({
-              "@type": "Question",
-              "position": idx + 1,
-              "name": item.q,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": item.a
-              }
-            }))
-          })
-        }}
-      />
-
-      <div className="faq-section__inner">
-        {/* Column 1: Kicker & Big Section Heading */}
-        <div className="faq-section__heading">
-          <div className="section-kicker section-kicker--dark">
-            <span>11</span>
-            <span>Help & Info</span>
-=======
       <div className="about-faq-container">
         {/* Header: Column 1 Badge & Columns 2-4 Heading */}
         <motion.div
@@ -94,80 +67,10 @@ export default function Faq({ navigate }) {
           <div className="section-badge">
             <span className="section-badge-dot"></span>
             <span>11 HELP &amp; INFO</span>
->>>>>>> d4c4c1b (refactor: redesign Faq component layout and animations with framer-motion)
           </div>
           <h2 id="faq-title" className="about-faq-title">FAQ</h2>
         </motion.div>
 
-<<<<<<< HEAD
-        {/* Columns 2-4: FAQ Accordion List */}
-        <div className="faq-section__main">
-          <dl className="faq-list">
-            {faqs.map((item, idx) => {
-              const isOpen = openIndex === idx;
-              return (
-                <div key={idx} className="faq-item">
-                  <dt>
-                    <details
-                      className="faq-details"
-                      open={isOpen}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        toggle(idx);
-                      }}
-                    >
-                      <summary aria-expanded={isOpen} aria-controls={`faq-answer-${idx}`}>
-                        <span className="faq-item__number mono-label">{item.num}</span>
-                        <span className="faq-item__question">{item.q}</span>
-                        <svg
-                          className="faq-item__icon"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M 0 0 L 16.5 0"
-                            fill="transparent"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1.5"
-                            stroke="#171717"
-                            transform="translate(3.75 12)"
-                          />
-                          {!isOpen && (
-                            <path
-                              className="faq-item__icon-bar"
-                              d="M 0 0 L 0 16.5"
-                              fill="transparent"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="1.5"
-                              stroke="#171717"
-                              transform="translate(12 3.75)"
-                            />
-                          )}
-                        </svg>
-                      </summary>
-                      <dd id={`faq-answer-${idx}`} className="faq-answer">
-                        {isOpen && <p>{item.a}</p>}
-                      </dd>
-                    </details>
-                  </dt>
-                </div>
-              );
-            })}
-          </dl>
-        </div>
-
-        {/* FAQ Contact Us Directly Footer Block */}
-        <aside className="faq-contact" aria-labelledby="faq-contact-heading">
-          <div className="faq-contact__kicker">
-            <span className="faq-contact__dot" aria-hidden="true"></span>
-            <span className="mono-label">Contact us directly</span>
-          </div>
-
-          <div className="faq-contact__heading">
-            <h3 id="faq-contact-heading">Still unsure?</h3>
-=======
         {/* FAQ Accordion List (Columns 2-4) */}
         <div className="about-faq-accordion">
           {faqs.map((faq, idx) => {
@@ -219,7 +122,6 @@ export default function Faq({ navigate }) {
               <span>CONTACT US DIRECTLY</span>
             </div>
             <h3 className="about-unsure-heading">STILL UNSURE?</h3>
->>>>>>> d4c4c1b (refactor: redesign Faq component layout and animations with framer-motion)
             <a
               href="/contact"
               className="about-ask-question-btn"
@@ -233,34 +135,6 @@ export default function Faq({ navigate }) {
             </a>
           </motion.div>
 
-<<<<<<< HEAD
-          <div className="faq-contact__quote">
-            <blockquote>
-              <p>My role is to make sure every client feels supported from day one.</p>
-              <footer>
-                <div>
-                  <img
-                    src="/images/ruby-avatar.webp"
-                    alt="Ruby Rattey"
-                    loading="lazy"
-                    decoding="async"
-                    width="42"
-                    height="42"
-                  />
-                  <div>
-                    <span className="mono-label">RUBY RATTEY</span>
-                    <span className="mono-label">Client Success Manager</span>
-                  </div>
-                </div>
-              </footer>
-            </blockquote>
-          </div>
-        </aside>
-      </div>
-    </section>
-  );
-}
-=======
           {/* Right Card: Ruby Rattey Quote & Role */}
           <motion.div 
             className="about-support-card"
@@ -294,4 +168,3 @@ export default function Faq({ navigate }) {
   );
 }
 
->>>>>>> d4c4c1b (refactor: redesign Faq component layout and animations with framer-motion)

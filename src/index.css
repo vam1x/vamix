@@ -88,10 +88,103 @@
   outline: 2px solid #59bbd5;
 }
 
-/* Focus Visible for Better Keyboard Navigation */
+/* ==========================================================================
+   GLOBAL TOUCH & INTERACTION RESETS (Mobile & Tablet Experience)
+   ========================================================================== */
+
+/* 1. Eliminate mobile browser tap highlight overlay on all elements */
+*,
+*::before,
+*::after {
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* 2. Brand-aligned subtle text selection across site (no jarring OS blue blocks) */
+::selection {
+  background: rgba(89, 187, 213, 0.3);
+  color: inherit;
+}
+::-moz-selection {
+  background: rgba(89, 187, 213, 0.3);
+  color: inherit;
+}
+
+/* 3. Prevent accidental text selection and iOS touch-callouts on interactive elements, controls, metrics, and cards */
+a,
+button,
+[role="button"],
+[tabindex],
+.vamix-logo-brand,
+.brand-logo-link,
+.header-logo,
+.nav-card-logo-link,
+.menu-toggle-btn,
+.case-row,
+.case-row__heading,
+.case-row__mobile-link,
+.cs-project-row,
+.cs-row-title-btn,
+.cs-read-more-btn,
+.case-section__proof,
+.case-section__proof strong,
+.case-section__proof span,
+.case-section__proof-dots,
+.counter-number,
+.case-section__cta,
+.rolling-label,
+.roll-text-container {
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* 4. On touch and tablet screens, ensure all project accordion cards and metric stats cannot be accidentally selected or highlighted */
+@media (pointer: coarse), (hover: none), (max-width: 1199px) {
+  .case-row,
+  .case-row *,
+  .cs-project-row,
+  .cs-project-row *,
+  .case-section__proof,
+  .case-section__proof *,
+  .more-projects,
+  .more-projects *,
+  .cs-projects-section,
+  .cs-projects-section * {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+  }
+}
+
+/* 5. Focus Management:
+   - Suppress blue/cyan outlines on mouse clicks, touch taps, and mobile/tablet devices
+   - Only display focus indicator for physical keyboard navigation (Tab key) on desktop */
+:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 :focus-visible {
   outline: 2px solid #59bbd5;
   outline-offset: 2px;
+}
+
+@media (pointer: coarse), (hover: none), (max-width: 1199px) {
+  *:focus,
+  *:focus-visible,
+  a:focus,
+  a:focus-visible,
+  button:focus,
+  button:focus-visible,
+  [role="button"]:focus,
+  [role="button"]:focus-visible,
+  [tabindex]:focus,
+  [tabindex]:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
 }
 
 /* Reduced Motion Support */
@@ -192,6 +285,16 @@
   cursor: pointer;
   line-height: 0;
   transition: color 0.25s ease;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+.brand-logo-link:focus,
+.brand-logo-link:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .brand-logo-link.is-over-dark {
@@ -640,6 +743,16 @@ button:hover .roll-text-container .roll-clone,
   align-items: center;
   text-decoration: none;
   line-height: 0;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+.nav-card-logo-link:focus,
+.nav-card-logo-link:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .nav-card-logo-link .vamix-logo-brand {
@@ -650,7 +763,7 @@ button:hover .roll-text-container .roll-clone,
 .nav-card-links {
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 10px;
 }
 
 .nav-card-link {
@@ -1346,11 +1459,12 @@ img {
     align-items: flex-start;
   }
 
-  /* 1. Backdrop on desktop is completely transparent - no blur or darkening over page */
+  /* 1. Light blurry backdrop on desktop while navbar is open */
   .nav-drawer-backdrop {
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+    background: rgba(0, 0, 0, 0.35) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    cursor: pointer !important;
   }
 
   /* 2. Menu Shell matches 4-column desktop header grid exactly */
@@ -1407,7 +1521,7 @@ img {
   .nav-card-links {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 11px;
   }
 
   .nav-card-link {
@@ -4711,6 +4825,16 @@ a:hover .rolling-label__copy {
   width: 50%;
   margin-left: auto;
   background-color: #ffffff;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+.case-section__cta:focus,
+.case-section__cta:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .case-section__proof {
@@ -4722,6 +4846,9 @@ a:hover .rolling-label__copy {
   margin-top: auto;
   display: grid;
   position: relative;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
 }
 
 .case-section__proof div {
@@ -4746,6 +4873,9 @@ a:hover .rolling-label__copy {
   text-transform: uppercase;
   font-weight: 500;
   line-height: 140%;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
 }
 
 .case-section__proof strong {
@@ -4758,6 +4888,9 @@ a:hover .rolling-label__copy {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
 }
 
 .case-section__proof strong .counter-number {
@@ -4767,6 +4900,9 @@ a:hover .rolling-label__copy {
   color: #ffffff;
   letter-spacing: -0.05em;
   line-height: 90%;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
 }
 
 .case-section__proof-dots {
@@ -4917,6 +5053,17 @@ a:hover .rolling-label__copy {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  cursor: pointer;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+.case-row__heading:focus,
+.case-row__heading:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .case-row__chevron {
@@ -5493,6 +5640,15 @@ a:hover .rolling-label__copy {
     color: #171717;
     text-decoration: none;
     letter-spacing: -0.01em;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+  }
+  .case-row__mobile-link:focus,
+  .case-row__mobile-link:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
   }
   .case-row__mobile-link:hover {
     color: #000;

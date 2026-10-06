@@ -137,6 +137,7 @@ export default function CaseStudiesPage({ navigate }) {
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleProject(idx);
+                        e.currentTarget.blur();
                       }}
                     >
                       <span className="cs-row-title-text">{project.title}</span>
@@ -168,6 +169,7 @@ export default function CaseStudiesPage({ navigate }) {
                               aria-label={`View live project for ${project.title}`}
                               onClick={(e) => {
                                 e.stopPropagation();
+                                e.currentTarget.blur();
                                 if (project.href.startsWith('/')) {
                                   handleLink(e, project.href);
                                 }

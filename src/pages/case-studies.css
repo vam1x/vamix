@@ -153,7 +153,16 @@
   padding: 0;
   margin: 0;
   cursor: pointer;
-  outline: none;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+.cs-row-title-btn:focus,
+.cs-row-title-btn:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .cs-row-chevron {
@@ -231,6 +240,16 @@
   letter-spacing: -0.03em;
   cursor: pointer;
   transition: color 0.2s ease;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+.cs-read-more-btn:focus,
+.cs-read-more-btn:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .cs-arrow-icon {

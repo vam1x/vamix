@@ -88,6 +88,7 @@ export default function MoreProjects({ navigate }) {
                     if (typeof window !== 'undefined' && window.innerWidth < 1200) {
                       e.stopPropagation();
                       toggleProject(idx);
+                      e.currentTarget.blur();
                     }
                   }}
                   onKeyDown={(e) => {
@@ -125,6 +126,7 @@ export default function MoreProjects({ navigate }) {
                       className="case-row__mobile-link"
                       onClick={(e) => {
                         e.stopPropagation();
+                        e.currentTarget.blur();
                       }}
                     >
                       VIEW LIVE PROJECT <span className="case-row__arrow" aria-hidden="true">↗</span>
@@ -135,6 +137,7 @@ export default function MoreProjects({ navigate }) {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
+                        e.currentTarget.blur();
                         navigate?.('case-studies');
                       }}
                     >

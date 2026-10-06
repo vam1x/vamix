@@ -208,6 +208,7 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
 
   const handleLogoClick = (e) => {
     e.preventDefault();
+    e.currentTarget?.blur();
 
     // 1. Close nav drawer if open
     if (isDrawerOpen) {
@@ -277,7 +278,10 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
           <button 
             ref={menuBtnRef}
             className={`menu-toggle-btn ${isDrawerOpen ? 'is-active' : ''} ${isMenuOverDark ? 'is-over-dark' : 'is-over-light'}`} 
-            onClick={() => setIsDrawerOpen(!isDrawerOpen)}
+            onClick={(e) => {
+              setIsDrawerOpen(!isDrawerOpen);
+              e.currentTarget?.blur();
+            }}
             aria-label="Toggle Navigation Menu"
             aria-expanded={isDrawerOpen}
           >

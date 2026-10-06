@@ -126,6 +126,7 @@ export default function Results({ navigate }) {
               href="/case-studies"
               onClick={(e) => {
                 e.preventDefault();
+                e.currentTarget?.blur();
                 navigate?.('case-studies');
               }}
             >

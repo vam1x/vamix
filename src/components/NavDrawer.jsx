@@ -61,6 +61,7 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
   ];
 
   const handleLinkClick = (e, href) => {
+    e.currentTarget?.blur();
     if (href === '/') {
       e.preventDefault();
       onClose();

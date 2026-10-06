@@ -94,6 +94,18 @@ export default function Contact({ navigate }) {
 
   const handleNav = (e, href) => {
     e.preventDefault();
+    if (href === '/') {
+      window.dispatchEvent(new CustomEvent('vamix:hero-activate'));
+      const activeLenis = lenis || window.__vamixLenis;
+      const heroEl = document.getElementById('hero');
+      if (activeLenis) {
+        activeLenis.scrollTo(heroEl || 0, { duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      if (navigate) navigate('/');
+      return;
+    }
     if (navigate) navigate(href);
   };
 
@@ -344,7 +356,12 @@ export default function Contact({ navigate }) {
         {/* ROW 3: Footer Meta Row */}
         <div className="contact-meta">
           <div className="contact-meta__logo">
-            <a href="/" onClick={(e) => handleNav(e, '/')} aria-label="VAMIX Home">
+            <a 
+              href="/" 
+              onClick={(e) => handleNav(e, '/')} 
+              className="contact-footer-logo-link"
+              aria-label="VAMIX Home"
+            >
               <VamixLogo />
             </a>
           </div>

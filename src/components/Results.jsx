@@ -29,11 +29,11 @@ export default function Results({ navigate }) {
               "industry": "Luxury E-Commerce / Fine Jewellery"
             },
             "provider": {
-              "@id": "https://vamix.vercel.app/#organization"
+              "@id": "https://vamix.in/#organization"
             },
             "datePublished": "2024",
             "dateModified": "2024",
-            "image": "https://vamix.vercel.app/projects/real/dv-hero.jpg",
+            "image": "https://vamix.in/projects/real/dv-hero.jpg",
             "result": [
               {
                 "@type": "QuantitativeValue",

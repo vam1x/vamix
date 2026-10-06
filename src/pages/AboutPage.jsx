@@ -29,10 +29,10 @@ export default function AboutPage({ navigate }) {
             "description": "Meet VAMIX, a digital product studio in Surat, India. We partner with founders and enterprise teams to design and engineer intuitive digital products.",
             "mainEntity": {
               "@type": "Organization",
-              "@id": "https://vamix.vercel.app/#organization",
+              "@id": "https://vamix.in/#organization",
               "name": "VAMIX",
               "legalName": "VAMIX Digital Product Studio",
-              "url": "https://vamix.vercel.app/",
+              "url": "https://vamix.in/",
               "foundingDate": "2023",
               "numberOfEmployees": 10,
               "address": {

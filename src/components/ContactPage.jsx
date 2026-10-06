@@ -132,9 +132,9 @@ export default function ContactPage({ navigate }) {
             "description": "Get in touch with VAMIX Digital Product Studio. Start with a simple step - schedule a free 30-minute product consultation.",
             "mainEntity": {
               "@type": "Organization",
-              "@id": "https://vamix.vercel.app/#organization",
+              "@id": "https://vamix.in/#organization",
               "name": "VAMIX",
-              "url": "https://vamix.vercel.app/",
+              "url": "https://vamix.in/",
               "telephone": "+916359198825",
               "email": "hi@vamix.com",
               "address": {

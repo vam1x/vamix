@@ -73,7 +73,7 @@ export default function Approach({ navigate }) {
                 "name": svc.title,
                 "description": svc.desc,
                 "provider": {
-                  "@id": "https://vamix.vercel.app/#organization"
+                  "@id": "https://vamix.in/#organization"
                 },
                 "areaServed": "Worldwide",
                 "serviceType": svc.title

@@ -13,7 +13,7 @@ Disallow: /*.json$
 Crawl-delay: 10
 
 # Host
-Host: https://vamix.vercel.app
+Host: https://vamix.in
 
 # XML Sitemap
-Sitemap: https://vamix.vercel.app/sitemap.xml
+Sitemap: https://vamix.in/sitemap.xml

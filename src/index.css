@@ -144,7 +144,7 @@
 
 @media (max-width: 809.98px) {
   .site-header.is-home-hero .header-col-logo {
-    color: #111111;
+    color: #ffffff;
   }
 }
 
@@ -703,12 +703,12 @@ button:hover .roll-text-container .roll-clone,
     height: auto !important;
     z-index: 1002 !important;
     display: block !important;
-    background: rgba(14, 14, 14, 0.82) !important;
-    backdrop-filter: blur(16px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    background: rgba(12, 12, 12, 0.94) !important;
+    backdrop-filter: blur(20px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
     border: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45) !important;
     pointer-events: auto !important;
     color: #ffffff !important;
     transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
@@ -716,9 +716,9 @@ button:hover .roll-text-container .roll-clone,
 
   .site-header.is-scrolled,
   .home-route .site-header.is-scrolled {
-    background: rgba(10, 10, 10, 0.92) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+    background: rgba(8, 8, 8, 0.98) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65) !important;
   }
 
   /* 2. Flex Inner Layout */
@@ -2285,7 +2285,7 @@ img {
 
   .webus-hero {
     min-height: unset;
-    padding: 110px 0px 50px;
+    padding: 140px 0px 50px;
   }
 
   /* Material art panel shifts to the right on mobile (exact webus.in behavior) */
@@ -7686,6 +7686,10 @@ a:hover .rolling-label__copy {
    SMALL MOBILE BREAKPOINT: <= 480px
    -------------------------------------------------------------------------- */
 @media (max-width: 480px) {
+  .webus-hero {
+    padding: 130px 0px 40px !important;
+  }
+
   .contact-section {
     padding: 60px 20px 32px 20px !important;
   }

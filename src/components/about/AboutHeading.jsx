@@ -3,11 +3,11 @@ import { motion } from 'framer-motion';
 
 export default function AboutHeading() {
   const reviewAvatars = [
-    "https://framerusercontent.com/images/G3S93NVRBOPBVRHvuiD7v8mUec.jpg?width=75&height=75",
-    "https://framerusercontent.com/images/AxkRNnDGOBIp7ssXlvfLRssOBsI.jpg?width=75&height=75",
-    "https://framerusercontent.com/images/rIoYytoloWw5l32qBj1FRQtOUI.jpg?width=75&height=75",
-    "https://framerusercontent.com/images/KWxDguvOOnQPeXxMf68OhIFwLY.jpg?width=75&height=75",
-    "https://framerusercontent.com/images/AZyCsbeyJ3cYlMEBl91DwbIRc.jpg?width=75&height=75"
+    "/images/avatars/client-avatar-1.jpg",
+    "/images/avatars/client-avatar-2.jpg",
+    "/images/avatars/client-avatar-3.jpg",
+    "/images/avatars/client-avatar-4.jpg",
+    "/images/avatars/client-avatar-5.jpg"
   ];
 
   const line1Words = ["WHO", "WE", "ARE:"];

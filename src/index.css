@@ -222,16 +222,8 @@
   color: inherit;
   user-select: none;
   transform: rotate(-3.5deg);
-  transition: opacity 0.2s ease, transform 0.2s ease;
   -webkit-text-stroke: 1px currentColor;
   text-shadow: 0 0 0.8px currentColor;
-}
-
-.brand-logo-link:hover .vamix-logo-brand,
-.nav-card-logo-link:hover .vamix-logo-brand,
-.contact-col-1-logo-link:hover .vamix-logo-brand {
-  opacity: 0.82;
-  transform: rotate(-3.5deg) scale(1.03);
 }
 
 .vamix-logo-brand .vamix-logo-word {
@@ -253,8 +245,19 @@
   text-shadow: none;
 }
 
-.brand-logo-link:hover .webus-logo-svg {
-  opacity: 0.8;
+.brand-logo-link:hover,
+.nav-card-logo-link:hover,
+.contact-meta__logo a:hover {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+.brand-logo-link:hover .vamix-logo-brand,
+.nav-card-logo-link:hover .vamix-logo-brand,
+.contact-meta__logo a:hover .vamix-logo-brand {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: rotate(-3.5deg) !important;
 }
 
 /* Header Column 3: + MENU Button (Positioned at 50% midpoint / Column 3 matching webus.in) */
@@ -349,10 +352,28 @@
   color: #ffffff !important;
 }
 
+.menu-toggle-btn.is-over-dark .menu-btn-icon .bar-h,
+.menu-toggle-btn.is-over-dark .menu-btn-icon .bar-v,
+.site-header.is-over-dark .menu-btn-icon .bar-h,
+.site-header.is-over-dark .menu-btn-icon .bar-v,
+.site-header.theme-light-text .menu-btn-icon .bar-h,
+.site-header.theme-light-text .menu-btn-icon .bar-v {
+  background-color: #ffffff !important;
+}
+
 .menu-toggle-btn.is-over-light,
 .site-header.is-over-light .menu-toggle-btn,
 .site-header.theme-dark-text .menu-toggle-btn {
   color: #111111 !important;
+}
+
+.menu-toggle-btn.is-over-light .menu-btn-icon .bar-h,
+.menu-toggle-btn.is-over-light .menu-btn-icon .bar-v,
+.site-header.is-over-light .menu-btn-icon .bar-h,
+.site-header.is-over-light .menu-btn-icon .bar-v,
+.site-header.theme-dark-text .menu-btn-icon .bar-h,
+.site-header.theme-dark-text .menu-btn-icon .bar-v {
+  background-color: #111111 !important;
 }
 
 /* When navigation drawer is open, keep menu button white */
@@ -361,14 +382,35 @@
   color: #ffffff !important;
 }
 
-/* Header Column 4: Quick Consult Banner */
-.header-col-actions {
-  grid-column: 4 / 5;
+.site-header.menu-is-open .menu-btn-icon .bar-h,
+.site-header.menu-is-open .menu-btn-icon .bar-v,
+.menu-toggle-btn.is-active .menu-btn-icon .bar-h,
+.menu-toggle-btn.is-active .menu-btn-icon .bar-v {
+  background-color: #ffffff !important;
+}
+
+/* Quick Consult Region: Exactly matching webus.in (flows naturally with page scroll) */
+.consult-region {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  height: 60px;
+  z-index: 99;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  justify-self: end;
   pointer-events: auto;
+}
+
+@media (min-width: 1920px) {
+  .consult-region {
+    right: calc((100vw - 1920px) / 2 + 40px);
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .consult-region {
+    display: none !important;
+  }
 }
 
 .consult-banner,
@@ -380,7 +422,7 @@
   display: inline-flex;
   cursor: pointer;
   pointer-events: auto;
-  color: inherit;
+  color: var(--text-dark, #171717);
   transition: opacity 0.2s ease;
 }
 
@@ -390,7 +432,7 @@
 }
 
 .consult-slot__copy {
-  color: inherit;
+  color: #171717;
   font-family: var(--font-mono, 'IBM Plex Mono', monospace);
   font-size: 11px;
   letter-spacing: -0.22px;
@@ -399,15 +441,8 @@
   margin: 0;
   font-weight: 500;
   line-height: 15.4px;
-}
-
-.site-header.theme-dark-text .consult-slot__copy,
-.site-header.is-home-hero .consult-slot__copy {
-  color: #171717;
-}
-
-.site-header.theme-light-text .consult-slot__copy {
-  color: #f5f5f5;
+  white-space: pre-wrap;
+  width: 220px;
 }
 
 .consult-slot__copy span {
@@ -459,14 +494,6 @@
   margin-left: -9px;
   display: flex;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
-}
-
-.site-header.theme-light-text .consult-slot__disc {
-  background: #ffffff;
-}
-
-.site-header.theme-light-text .consult-slot__disc svg path {
-  stroke: #171717;
 }
 
 .consult-slot:hover .consult-slot__disc {
@@ -553,43 +580,65 @@ button:hover .roll-text-container .roll-clone,
 }
 
 /* ==========================================================================
-   FLOATING NAVIGATION DRAWER CARD (Webus.in Dropdown Replica)
+   FLOATING 3D NAVIGATION DRAWER CARD (Webus.in 1:1 Exact Reproduction)
    ========================================================================== */
 
 .nav-drawer-backdrop {
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   cursor: pointer;
 }
 
-.nav-drawer-card {
+.menu-shell-container {
+  perspective: 1000px;
   position: fixed;
-  top: 88px;
-  left: calc(40px + (min(100vw, 1920px) - 80px) * 0.5);
-  width: 360px;
-  max-width: calc(100vw - 80px);
+  top: 90px;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  pointer-events: none;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+.menu-filler {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.nav-drawer-card {
+  position: relative;
+  width: 320px;
+  margin-left: 50%;
   background: #171717;
   color: #f5f5f5;
   border-radius: 0px;
-  padding: 34px 30px 30px 30px;
+  padding: 34px;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08);
-  z-index: 1001;
   pointer-events: auto;
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 46px;
   box-sizing: border-box;
+  max-height: calc(100dvh - 90px);
+  overflow-y: auto;
+  transform-origin: top center;
 }
 
 .nav-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 4px;
+  margin-bottom: 0px;
 }
 
 .nav-card-logo-link {
@@ -599,17 +648,15 @@ button:hover .roll-text-container .roll-clone,
   line-height: 0;
 }
 
-.nav-card-logo-svg {
-  width: 72px;
-  height: 22px;
-  fill: #ffffff;
-  display: block;
+.nav-card-logo-link .vamix-logo-brand {
+  font-size: 34px;
+  color: #ffffff !important;
 }
 
 .nav-card-links {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 18px;
 }
 
 .nav-card-link {
@@ -619,10 +666,10 @@ button:hover .roll-text-container .roll-clone,
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0;
+  color: #ffffff;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: opacity 0.2s ease;
   cursor: pointer;
   width: fit-content;
 }
@@ -630,14 +677,18 @@ button:hover .roll-text-container .roll-clone,
 .nav-card-link:hover,
 .nav-card-link.is-active {
   color: #ffffff;
+  opacity: 0.7;
 }
 
 .nav-card-contact {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding-top: 22px;
+  gap: 4px;
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.4;
+  width: 100%;
 }
 
 .nav-card-email {
@@ -646,14 +697,17 @@ button:hover .roll-text-container .roll-clone,
   font-weight: 700;
   color: #ffffff;
   text-decoration: none;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
+  letter-spacing: -0.04em;
+  line-height: 1;
   transition: opacity 0.2s ease;
   white-space: nowrap;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: right;
+  align-self: flex-end;
 }
+
 
 .nav-card-email:hover {
   opacity: 0.8;
@@ -662,13 +716,12 @@ button:hover .roll-text-container .roll-clone,
 .nav-card-socials {
   display: flex;
   gap: 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 16px;
+  margin-top: auto;
 }
 
 .nav-card-social-link {
   font-family: var(--font-mono, 'IBM Plex Mono', monospace);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   color: #ffffff;
   text-decoration: underline;
@@ -682,8 +735,43 @@ button:hover .roll-text-container .roll-clone,
   opacity: 0.75;
 }
 
+/* Responsive Menu Shell & Drawer Card */
+@media (min-width: 810px) and (max-width: 1199.98px) {
+  .menu-shell-container {
+    padding: 0 30px;
+    top: 70px;
+    justify-content: flex-end;
+  }
+  .nav-drawer-card {
+    gap: 40px;
+    max-height: calc(100dvh - 70px);
+    width: 50%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 809.98px) {
+  .menu-shell-container {
+    z-index: 1000;
+    justify-content: stretch;
+    padding: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+  }
+  .nav-drawer-card {
+    gap: 40px;
+    max-height: 100dvh;
+    padding: 90px 20px 30px;
+    flex: 1 0 0px;
+    width: 100%;
+    margin-left: 0;
+    box-shadow: none;
+  }
+}
+
 /* ==========================================================================
-   NAVBAR RESPONSIVE BREAKPOINTS: MOBILE & TABLET BLACK GLASS HEADER (< 1200px)
+   NAVBAR RESPONSIVE BREAKPOINTS (Preserving Adaptive Color Contrast System)
    ========================================================================== */
 
 @media (max-width: 1199.98px) {
@@ -730,6 +818,7 @@ button:hover .roll-text-container .roll-clone,
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 auto !important;
+    padding: 20px 30px 0 30px !important;
     box-sizing: border-box !important;
     pointer-events: auto !important;
   }
@@ -738,10 +827,7 @@ button:hover .roll-text-container .roll-clone,
     display: flex !important;
     align-items: center !important;
     margin: 0 !important;
-    margin-top: 0 !important;
-    margin-left: 0 !important;
     pointer-events: auto !important;
-    grid-column: auto !important;
   }
 
   .header-col-menu {
@@ -749,81 +835,12 @@ button:hover .roll-text-container .roll-clone,
     align-items: center !important;
     justify-self: end !important;
     margin: 0 !important;
-    margin-top: 0 !important;
+    padding: 0 !important;
     pointer-events: auto !important;
-    grid-column: auto !important;
   }
 
   .header-col-actions {
     display: none !important;
-  }
-
-  /* 3. Pure White Logo on EVERY Page & Section in Mobile & Tablet View */
-  .site-header .header-col-logo,
-  .home-route .site-header .header-col-logo,
-  .site-header.is-home-hero .header-col-logo,
-  .site-header.theme-dark-text .header-col-logo,
-  .site-header.theme-light-text .header-col-logo,
-  .site-header.is-over-light .header-col-logo,
-  .site-header.is-over-dark .header-col-logo,
-  .site-header .brand-logo-link,
-  .site-header .brand-link,
-  .site-header .vamix-logo-brand,
-  .site-header .vamix-logo-brand .vamix-logo-word,
-  .site-header .vamix-logo-brand .vamix-logo-reg,
-  .site-header .webus-logo-svg,
-  .site-header .logo-svg {
-    color: #ffffff !important;
-    fill: #ffffff !important;
-    -webkit-text-stroke-color: #ffffff !important;
-    text-shadow: 0 0 1px rgba(255, 255, 255, 0.4) !important;
-  }
-
-  .site-header .brand-logo-link:hover .vamix-logo-brand {
-    opacity: 0.85 !important;
-    color: #ffffff !important;
-  }
-
-  /* 4. Pure White Menu Button on EVERY Page & Section in Mobile & Tablet View */
-  .site-header .menu-toggle-btn,
-  .home-route .site-header .menu-toggle-btn,
-  .site-header.theme-dark-text .menu-toggle-btn,
-  .site-header.theme-light-text .menu-toggle-btn,
-  .site-header.is-over-light .menu-toggle-btn,
-  .site-header.is-over-dark .menu-toggle-btn,
-  .site-header.is-home-hero .menu-toggle-btn,
-  .site-header.menu-is-open .menu-toggle-btn,
-  .menu-toggle-btn.is-over-light,
-  .menu-toggle-btn.is-over-dark,
-  .menu-toggle-btn.is-active,
-  .site-header .menu-btn-text,
-  .site-header.is-home-hero .menu-btn-text,
-  .site-header .menu-btn-text .roll-char,
-  .site-header .menu-btn-text .roll-slot {
-    color: #ffffff !important;
-    -webkit-text-stroke-color: #ffffff !important;
-    text-shadow: 0 0 0.5px rgba(255, 255, 255, 0.5) !important;
-  }
-
-  .site-header .menu-btn-icon .bar-h,
-  .site-header .menu-btn-icon .bar-v,
-  .site-header.is-home-hero .menu-btn-icon .bar-h,
-  .site-header.is-home-hero .menu-btn-icon .bar-v,
-  .site-header.theme-dark-text .menu-btn-icon .bar-h,
-  .site-header.theme-dark-text .menu-btn-icon .bar-v,
-  .site-header.is-over-light .menu-btn-icon .bar-h,
-  .site-header.is-over-light .menu-btn-icon .bar-v {
-    background-color: #ffffff !important;
-  }
-
-  .site-header .menu-toggle-btn:hover {
-    opacity: 0.85 !important;
-    color: #ffffff !important;
-  }
-
-  .site-header .menu-toggle-btn:hover .menu-btn-icon .bar-h,
-  .site-header .menu-toggle-btn:hover .menu-btn-icon .bar-v {
-    background-color: #ffffff !important;
   }
 }
 
@@ -842,11 +859,6 @@ button:hover .roll-text-container .roll-clone,
   .site-header .menu-btn-text {
     font-size: 16px !important;
   }
-
-  .nav-drawer-card {
-    top: 72px !important;
-    left: calc(32px + (100vw - 64px) * 0.5) !important;
-  }
 }
 
 /* Mobile View Header Sizing (<= 809.98px) */
@@ -863,14 +875,6 @@ button:hover .roll-text-container .roll-clone,
 
   .site-header .menu-btn-text {
     font-size: 15px !important;
-  }
-
-  .nav-drawer-card {
-    left: 16px !important;
-    right: 16px !important;
-    width: calc(100vw - 32px) !important;
-    top: 68px !important;
-    padding: 24px 20px 20px 20px !important;
   }
 
   .nav-card-email {
@@ -892,13 +896,6 @@ button:hover .roll-text-container .roll-clone,
 
   .site-header .menu-btn-text {
     font-size: 14px !important;
-  }
-
-  .nav-drawer-card {
-    left: 12px !important;
-    right: 12px !important;
-    width: calc(100vw - 24px) !important;
-    top: 64px !important;
   }
 }
 
@@ -1783,6 +1780,79 @@ img {
   display: block;
   object-fit: cover;
   object-position: left center;
+}
+
+/* ==========================================================================
+   HERO ACTIVATION / ARRIVAL ANIMATIONS (Triggered upon clicking logo)
+   ========================================================================== */
+.webus-hero.hero-is-activating .hero-art-img-wrapper {
+  animation: heroArtRevealPulse 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes heroArtRevealPulse {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  35% {
+    transform: scale(1.035);
+    filter: brightness(1.1);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+.webus-hero.hero-is-activating .hero-h1-dual-container {
+  animation: heroTitleSpring 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes heroTitleSpring {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-6px);
+  }
+  70% {
+    transform: translateY(2px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.webus-hero.hero-is-activating .hero-social-proof {
+  animation: heroProofNudge 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes heroProofNudge {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.webus-hero.hero-is-activating .hero-code-ships-wrap {
+  animation: heroCodeNudge 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes heroCodeNudge {
+  0% {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 /* Hero Content Frame */

@@ -3,6 +3,7 @@ import { ReactLenis, useLenis } from 'lenis/react';
 import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header';
 import NavDrawer from './components/NavDrawer';
+import ConsultSlot from './components/ConsultSlot';
 import Hero from './components/Hero';
 import Approach from './components/Approach';
 import WhyUs from './components/WhyUs';
@@ -78,9 +79,13 @@ export default function App() {
       window.history.pushState({ route: 'contact' }, '', '/contact');
       window.scrollTo({ top: 0, behavior: 'instant' });
     } else if (cleanRoute === '' || cleanRoute === 'home' || cleanRoute === '/') {
-      setCurrentRoute('home');
+      setCurrentRoute((prev) => {
+        if (prev !== 'home') {
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+        return 'home';
+      });
       window.history.pushState({ route: 'home' }, '', '/');
-      window.scrollTo({ top: 0, behavior: 'instant' });
     } else if (cleanRoute.includes('404') || cleanRoute === 'not-found') {
       setCurrentRoute('not-found');
       window.history.pushState({ route: 'not-found' }, '', '/404');
@@ -154,6 +159,9 @@ export default function App() {
           currentRoute={currentRoute}
           navigate={navigate}
         />
+
+        {/* Quick Consult Slot (Flows naturally with page scroll on all routes) */}
+        <ConsultSlot navigate={navigate} />
 
         {/* Fullscreen Navigation Modal Drawer */}
         <NavDrawer 

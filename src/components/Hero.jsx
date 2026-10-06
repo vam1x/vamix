@@ -5,12 +5,30 @@ import SectionGrid from './SectionGrid';
 export default function Hero({ navigate }) {
   const panelRef = useRef(null);
   const h1ContainerRef = useRef(null);
+  const [isHeroPulsing, setIsHeroPulsing] = useState(false);
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.matchMedia('(max-width: 809.98px)').matches;
     }
     return false;
   });
+
+  useEffect(() => {
+    let timeoutId;
+    const handleHeroActivate = () => {
+      setIsHeroPulsing(true);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setIsHeroPulsing(false);
+      }, 1200);
+    };
+
+    window.addEventListener('vamix:hero-activate', handleHeroActivate);
+    return () => {
+      window.removeEventListener('vamix:hero-activate', handleHeroActivate);
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   const [splitRatio, setSplitRatio] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -72,7 +90,7 @@ export default function Hero({ navigate }) {
   const clipWidth = isMobile ? Math.max(0, 1120 - svgSplitX) : svgSplitX;
 
   return (
-    <section className="webus-hero" id="hero" data-framer-name="Hero">
+    <section className={`webus-hero ${isHeroPulsing ? 'hero-is-activating' : ''}`} id="hero" data-framer-name="Hero">
       {/* Background Blueprint Grid Guides (5 Lines / 4 Columns with Crosshairs) */}
       <SectionGrid
         theme="light"

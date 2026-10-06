@@ -61,7 +61,34 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
   ];
 
   const handleLinkClick = (e, href) => {
-    if (href === '/' || href === '/about' || href === '/services' || href === '/contact' || href === '/case-studies') {
+    if (href === '/') {
+      e.preventDefault();
+      onClose();
+      window.dispatchEvent(new CustomEvent('vamix:hero-activate'));
+      const activeLenis = window.__vamixLenis;
+      if (currentRoute === 'home') {
+        const heroEl = document.getElementById('hero');
+        if (activeLenis) {
+          activeLenis.scrollTo(heroEl || 0, { duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      } else {
+        if (navigate) navigate('/');
+        setTimeout(() => {
+          const freshLenis = window.__vamixLenis;
+          const freshHero = document.getElementById('hero');
+          if (freshLenis) {
+            freshLenis.scrollTo(freshHero || 0, { duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+          window.dispatchEvent(new CustomEvent('vamix:hero-activate'));
+        }, 60);
+      }
+      return;
+    }
+    if (href === '/about' || href === '/services' || href === '/contact' || href === '/case-studies') {
       e.preventDefault();
       if (navigate) {
         navigate(href);
@@ -83,6 +110,8 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
     }
   };
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 809;
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -94,64 +123,102 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.3 }}
             aria-hidden="true"
           />
 
-          {/* Floating Dropdown Navigation Card (Positioned under Column 3) */}
-          <motion.div
-            ref={dialogRef}
-            className="nav-drawer-card"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Site Navigation"
-            initial={{ opacity: 0, y: -12, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.98 }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {/* Card Brand Logo */}
-            <div className="nav-card-header">
-              <a href="/" onClick={(e) => handleLinkClick(e, '/')} className="nav-card-logo-link" aria-label="VAMIX Home">
-                <VamixLogo />
-              </a>
-            </div>
+          {/* 3D Perspective Shell matching webus.in exactly */}
+          <div className="menu-shell-container" aria-hidden={!isOpen}>
+            <button 
+              className="menu-filler" 
+              type="button" 
+              aria-label="Close menu" 
+              onClick={onClose}
+              tabIndex={-1}
+            />
 
-            {/* Navigation Links with downward split-flap mechanical roll */}
-            <nav className="nav-card-links" aria-label="Main Navigation">
-              {links.map((link) => {
-                const isActive = (link.href === '/about' && currentRoute === 'about') ||
-                                 (link.href === '/services' && currentRoute === 'services') ||
-                                 (link.href === '/contact' && currentRoute === 'contact') ||
-                                 (link.href === '/case-studies' && currentRoute === 'case-studies') ||
-                                 (link.href === '/' && currentRoute === 'home');
-                return (
-                  <a
-                    key={link.title}
-                    href={link.href}
-                    className={`nav-card-link ${isActive ? 'is-active' : ''}`}
-                    onClick={(e) => handleLinkClick(e, link.href)}
-                    aria-current={isActive ? 'page' : undefined}
-                  >
-                    <RollingText text={link.title} />
-                  </a>
-                );
-              })}
-            </nav>
+            {/* 3D Folding Navigation Panel with signature 3D cubic-bezier animation */}
+            <motion.div
+              ref={dialogRef}
+              className="nav-drawer-card"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Site Navigation"
+              initial={{ 
+                y: isMobile ? -600 : -730, 
+                rotateX: 30, 
+                rotateY: isMobile ? 60 : 40,
+                opacity: 0.2
+              }}
+              animate={{ 
+                y: 0, 
+                rotateX: 0, 
+                rotateY: 0,
+                opacity: 1
+              }}
+              exit={{ 
+                y: isMobile ? -600 : -730, 
+                rotateX: 30, 
+                rotateY: isMobile ? 60 : 40,
+                opacity: 0.2
+              }}
+              transition={{ 
+                duration: 0.4, 
+                ease: [0.85, 0.06, 0.38, 1.01] 
+              }}
+              style={{
+                transformStyle: 'preserve-3d',
+                willChange: 'transform'
+              }}
+            >
+              {/* Card Brand Logo */}
+              <div className="nav-card-header">
+                <a 
+                  href="/" 
+                  onClick={(e) => handleLinkClick(e, '/')} 
+                  className="nav-card-logo-link" 
+                  aria-label="VAMIX Home"
+                >
+                  <VamixLogo />
+                </a>
+              </div>
 
-            {/* Direct Contact & Studio Email */}
-            <div className="nav-card-contact">
-              <a href="mailto:vamixlabs@gmail.com" className="nav-card-email">
-                VAMIXLABS@GMAIL.COM
-              </a>
-            </div>
+              {/* Navigation Links with downward split-flap mechanical roll */}
+              <nav className="nav-card-links" aria-label="Main Navigation">
+                {links.map((link) => {
+                  const isActive = (link.href === '/about' && currentRoute === 'about') ||
+                                   (link.href === '/services' && currentRoute === 'services') ||
+                                   (link.href === '/contact' && currentRoute === 'contact') ||
+                                   (link.href === '/case-studies' && currentRoute === 'case-studies') ||
+                                   (link.href === '/' && currentRoute === 'home');
+                  return (
+                    <a
+                      key={link.title}
+                      href={link.href}
+                      className={`nav-card-link ${isActive ? 'is-active' : ''}`}
+                      onClick={(e) => handleLinkClick(e, link.href)}
+                      aria-current={isActive ? 'page' : undefined}
+                    >
+                      <RollingText text={link.title} />
+                    </a>
+                  );
+                })}
+              </nav>
 
-            {/* Social Footnote with 1px underline */}
-            <div className="nav-card-socials" role="list" aria-label="Social media links">
-              <a href="https://www.linkedin.com/company/vamix" target="_blank" rel="noopener noreferrer" className="nav-card-social-link" role="listitem">LI</a>
-              <a href="https://www.instagram.com/vamix" target="_blank" rel="noopener noreferrer" className="nav-card-social-link" role="listitem">IG</a>
-            </div>
-          </motion.div>
+              {/* Direct Contact & Studio Email */}
+              <div className="nav-card-contact">
+                <a href="mailto:vamixlabs@gmail.com" className="nav-card-email">
+                  VAMIXLABS@GMAIL.COM
+                </a>
+              </div>
+
+              {/* Social Footnote with 1px underline */}
+              <div className="nav-card-socials" role="list" aria-label="Social media links">
+                <a href="https://www.linkedin.com/company/vamix" target="_blank" rel="noopener noreferrer" className="nav-card-social-link" role="listitem">LI</a>
+                <a href="https://www.instagram.com/vamix" target="_blank" rel="noopener noreferrer" className="nav-card-social-link" role="listitem">IG</a>
+              </div>
+            </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>

@@ -1,14 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLenis } from 'lenis/react';
 import RollingText from './RollingText';
 import VamixLogo from './VamixLogo';
 
 export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, navigate }) {
+  const lenis = useLenis();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLogoOverDark, setIsLogoOverDark] = useState(false);
   const [isMenuOverDark, setIsMenuOverDark] = useState(false);
   const headerRef = useRef(null);
   const logoRef = useRef(null);
   const menuBtnRef = useRef(null);
+
+  useEffect(() => {
+    if (lenis) {
+      window.__vamixLenis = lenis;
+    }
+  }, [lenis]);
 
   useEffect(() => {
     let ticking = false;
@@ -42,13 +50,23 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
         }
       }
 
-      // 2. Hide site-header temporarily so document.elementFromPoint can sample the section underneath
+      // 2. Hide site-header and any menu overlays temporarily so document.elementFromPoint can sample the section underneath
       const headerEl = headerRef.current;
       const prevVisibility = headerEl ? headerEl.style.visibility : '';
       if (headerEl) headerEl.style.visibility = 'hidden';
 
+      const drawerEls = document.querySelectorAll('.menu-shell-container, .nav-drawer-backdrop, .nav-drawer-card');
+      const prevDrawerDisplays = [];
+      drawerEls.forEach(el => {
+        prevDrawerDisplays.push(el.style.display);
+        el.style.display = 'none';
+      });
+
       const targetEl = document.elementFromPoint(x, y);
 
+      drawerEls.forEach((el, idx) => {
+        el.style.display = prevDrawerDisplays[idx];
+      });
       if (headerEl) headerEl.style.visibility = prevVisibility;
 
       if (!targetEl) return false;
@@ -69,7 +87,7 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
           return true;
         }
 
-        // Explicit light section checks (Why Us, Process, Contact, FAQ, Projects, Beliefs, etc.)
+        // Explicit light section checks (Why Us, Process, Contact, FAQ, Projects, Beliefs, Services, Case Studies, Legal, etc.)
         if (
           curr.classList.contains('advantages-section') ||
           curr.classList.contains('process-section') ||
@@ -80,7 +98,12 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
           curr.classList.contains('faq-section') ||
           curr.classList.contains('contact-section') ||
           curr.classList.contains('about-page-root') ||
+          curr.classList.contains('about-page-wrapper') ||
           curr.classList.contains('contact-page-root') ||
+          curr.classList.contains('services-page-wrapper') ||
+          curr.classList.contains('services-hero') ||
+          curr.classList.contains('case-studies-page-wrapper') ||
+          curr.classList.contains('legal-page') ||
           curr.id === 'why-us' ||
           curr.id === 'process' ||
           curr.id === 'contact' ||
@@ -110,6 +133,23 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
         }
         curr = curr.parentElement;
       }
+
+      // Check document.body background as fallback
+      if (document.body) {
+        const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+        const match = bodyBg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+        if (match) {
+          const a = match[4] !== undefined ? parseFloat(match[4]) : 1;
+          if (a > 0.1) {
+            const r = parseInt(match[1], 10);
+            const g = parseInt(match[2], 10);
+            const b = parseInt(match[3], 10);
+            const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+            return lum < 130;
+          }
+        }
+      }
+
       return false;
     };
 
@@ -147,28 +187,58 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
     checkBackground();
+    const frameId = window.requestAnimationFrame(checkBackground);
+    const timerId = window.setTimeout(checkBackground, 80);
 
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
+      window.cancelAnimationFrame(frameId);
+      window.clearTimeout(timerId);
     };
-  }, [currentRoute]);
+  }, [currentRoute, isDrawerOpen]);
 
   const handleLogoClick = (e) => {
     e.preventDefault();
-    if (navigate) {
-      navigate('/');
-    } else {
-      window.location.href = '/';
-    }
-  };
 
-  const handleConsultClick = (e) => {
-    e.preventDefault();
-    if (navigate) {
-      navigate('/contact');
+    // 1. Close nav drawer if open
+    if (isDrawerOpen) {
+      setIsDrawerOpen(false);
+    }
+
+    // 2. Dispatch hero activation event for in-place or arrival animations
+    window.dispatchEvent(new CustomEvent('vamix:hero-activate'));
+
+    // 3. Smooth glide to Hero section
+    const activeLenis = lenis || window.__vamixLenis;
+    const heroEl = document.getElementById('hero');
+
+    if (currentRoute === 'home') {
+      if (activeLenis) {
+        activeLenis.scrollTo(heroEl || 0, {
+          duration: 1.4,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     } else {
-      window.location.href = '/contact';
+      if (navigate) {
+        navigate('/');
+      }
+      setTimeout(() => {
+        const freshLenis = lenis || window.__vamixLenis;
+        const freshHero = document.getElementById('hero');
+        if (freshLenis) {
+          freshLenis.scrollTo(freshHero || 0, {
+            duration: 1.4,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+          });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.dispatchEvent(new CustomEvent('vamix:hero-activate'));
+      }, 60);
     }
   };
 
@@ -212,37 +282,7 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
             </span>
           </button>
         </div>
-
-          {/* Column 4 (Far Right Side): Quick Consult Slot */}
-          {!isScrolled && (
-            <div className="header-col-actions">
-              <a 
-                href="/contact" 
-                className="consult-slot"
-                onClick={handleConsultClick}
-                aria-label="Free 30-minute design consultation"
-              >
-                <p className="consult-slot__copy">
-                  <span>FREE 30-MIN DESIGN CONSULT.<br />NO PITCH. </span>JUST CLARITY.
-                </p>
-                <span className="consult-slot__mark">
-                  <span className="consult-slot__avatar-frame">
-                    <img 
-                      src="/images/ruby-avatar.webp" 
-                      alt="Ruby Rattey" 
-                      className="consult-slot__avatar" 
-                    />
-                  </span>
-                  <span className="consult-slot__disc" aria-hidden="true">
-                    <svg className="consult-slot__plus" width="26" height="26" viewBox="-1 -1 26 26" fill="none">
-                      <path d="M12.2792 0L12.2792 24M24 12.2792L0 12.2792" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-                    </svg>
-                  </span>
-                </span>
-              </a>
-            </div>
-          )}
-        </div>
-      </header>
+      </div>
+    </header>
   );
 }

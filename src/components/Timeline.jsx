@@ -46,7 +46,7 @@ export default function Timeline() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            "@id": "https://vamix.vercel.app/#organization",
+            "@id": "https://vamix.in/#organization",
             "name": "VAMIX",
             "foundingDate": "2023",
             "location": {

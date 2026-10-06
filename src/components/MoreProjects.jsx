@@ -41,12 +41,12 @@ export default function MoreProjects({ navigate }) {
                 "description": project.desc,
                 "category": project.category,
                 "url": project.href,
-                "image": `https://vamix.vercel.app${project.images[1]}`,
+                "image": `https://vamix.in${project.images[1]}`,
                 "creator": {
-                  "@id": "https://vamix.vercel.app/#organization"
+                  "@id": "https://vamix.in/#organization"
                 },
                 "publisher": {
-                  "@id": "https://vamix.vercel.app/#organization"
+                  "@id": "https://vamix.in/#organization"
                 }
               }
             }))

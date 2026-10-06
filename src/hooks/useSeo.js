@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const BASE_URL = 'https://vamix.vercel.app';
+const BASE_URL = 'https://vamix.in';
 
 const SEO_MAP = {
   home: {

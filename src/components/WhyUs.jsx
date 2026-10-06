@@ -43,7 +43,7 @@ export default function WhyUs() {
             "@type": "AboutPage",
             "mainEntity": {
               "@type": "Organization",
-              "@id": "https://vamix.vercel.app/#organization",
+              "@id": "https://vamix.in/#organization",
               "name": "VAMIX",
               "description": "We turn messy product problems into tools people trust.",
               "knowAbout": advantages.map(a => `${a.line1.trim()} ${a.line2}`),

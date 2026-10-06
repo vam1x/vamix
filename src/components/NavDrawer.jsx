@@ -145,30 +145,26 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
               aria-modal="true"
               aria-label="Site Navigation"
               initial={{ 
-                y: isMobile ? -600 : -730, 
-                rotateX: 30, 
-                rotateY: isMobile ? 60 : 40,
-                opacity: 0.2
+                y: -18, 
+                opacity: 0,
+                scale: 0.98
               }}
               animate={{ 
                 y: 0, 
-                rotateX: 0, 
-                rotateY: 0,
-                opacity: 1
+                opacity: 1,
+                scale: 1
               }}
               exit={{ 
-                y: isMobile ? -600 : -730, 
-                rotateX: 30, 
-                rotateY: isMobile ? 60 : 40,
-                opacity: 0.2
+                y: -14, 
+                opacity: 0,
+                scale: 0.98
               }}
               transition={{ 
-                duration: 0.4, 
-                ease: [0.85, 0.06, 0.38, 1.01] 
+                duration: 0.26, 
+                ease: [0.16, 1, 0.3, 1] 
               }}
               style={{
-                transformStyle: 'preserve-3d',
-                willChange: 'transform'
+                willChange: 'transform, opacity'
               }}
             >
               {/* Card Brand Logo */}

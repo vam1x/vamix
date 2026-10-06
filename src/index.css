@@ -376,7 +376,17 @@
   background-color: #111111 !important;
 }
 
-/* When navigation drawer is open, keep menu button white */
+/* When navigation drawer is open, keep menu button and logo pure white */
+.site-header.menu-is-open,
+.site-header.menu-is-open .brand-logo-link,
+.site-header.menu-is-open .vamix-logo-brand,
+.site-header.menu-is-open .vamix-logo-brand .vamix-logo-word,
+.site-header.menu-is-open .vamix-logo-brand .vamix-logo-reg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  -webkit-text-stroke-color: #ffffff !important;
+}
+
 .site-header.menu-is-open .menu-toggle-btn,
 .menu-toggle-btn.is-active {
   color: #ffffff !important;
@@ -587,23 +597,24 @@ button:hover .roll-text-container .roll-clone,
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   cursor: pointer;
 }
 
 .menu-shell-container {
-  perspective: 1000px;
   position: fixed;
-  top: 90px;
+  top: 76px;
   left: 0;
   right: 0;
+  bottom: 0;
   z-index: 1001;
   pointer-events: none;
   display: flex;
   justify-content: flex-start;
-  padding: 0;
+  align-items: flex-start;
+  padding: 12px 20px;
 }
 
 .menu-filler {
@@ -617,28 +628,32 @@ button:hover .roll-text-container .roll-clone,
 
 .nav-drawer-card {
   position: relative;
-  width: 320px;
-  margin-left: 50%;
+  width: min(324px, calc(100vw - 32px));
+  max-width: 330px;
+  height: auto;
+  align-self: flex-start;
+  margin-left: 0;
   background: #171717;
   color: #f5f5f5;
   border-radius: 0px;
-  padding: 34px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  padding: 30px 24px 26px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
   pointer-events: auto;
   display: flex;
   flex-direction: column;
-  gap: 46px;
+  gap: 22px;
   box-sizing: border-box;
   max-height: calc(100dvh - 90px);
   overflow-y: auto;
-  transform-origin: top center;
+  transform-origin: top left;
 }
 
 .nav-card-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0px;
+  justify-content: flex-start;
+  margin-bottom: 2px;
 }
 
 .nav-card-logo-link {
@@ -649,65 +664,63 @@ button:hover .roll-text-container .roll-clone,
 }
 
 .nav-card-logo-link .vamix-logo-brand {
-  font-size: 34px;
+  font-size: 38px;
   color: #ffffff !important;
 }
 
 .nav-card-links {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 13px;
 }
 
 .nav-card-link {
   display: inline-flex;
   align-items: center;
   font-family: var(--font-mono, 'IBM Plex Mono', monospace);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13.5px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0;
-  color: #ffffff;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
-  transition: opacity 0.2s ease;
+  transition: color 0.2s ease, opacity 0.2s ease;
   cursor: pointer;
   width: fit-content;
 }
 
 .nav-card-link:hover,
 .nav-card-link.is-active {
-  color: #ffffff;
-  opacity: 0.7;
+  color: #ffffff !important;
+  opacity: 1 !important;
 }
 
 .nav-card-contact {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
-  font-size: 12px;
-  font-style: normal;
-  line-height: 1.4;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 18px 0;
+  margin: 4px 0;
   width: 100%;
 }
 
 .nav-card-email {
   font-family: var(--font-heading, 'Sora', sans-serif);
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 700;
-  color: #ffffff;
+  color: #ffffff !important;
   text-decoration: none;
-  letter-spacing: -0.04em;
-  line-height: 1;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
   transition: opacity 0.2s ease;
   white-space: nowrap;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: right;
-  align-self: flex-end;
+  text-align: left !important;
+  align-self: flex-start !important;
 }
-
 
 .nav-card-email:hover {
   opacity: 0.8;
@@ -716,19 +729,20 @@ button:hover .roll-text-container .roll-clone,
 .nav-card-socials {
   display: flex;
   gap: 18px;
-  margin-top: auto;
+  margin-top: 0;
 }
 
 .nav-card-social-link {
   font-family: var(--font-mono, 'IBM Plex Mono', monospace);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13.5px;
+  font-weight: 600;
   color: #ffffff;
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-thickness: 1px;
+  letter-spacing: 0.03em;
   transition: opacity 0.2s ease;
-  cursor: default;
+  cursor: pointer;
 }
 
 .nav-card-social-link:hover {
@@ -738,35 +752,32 @@ button:hover .roll-text-container .roll-clone,
 /* Responsive Menu Shell & Drawer Card */
 @media (min-width: 810px) and (max-width: 1199.98px) {
   .menu-shell-container {
-    padding: 0 30px;
-    top: 70px;
-    justify-content: flex-end;
+    padding: 14px 28px;
+    top: 68px;
+    justify-content: flex-start;
   }
   .nav-drawer-card {
-    gap: 40px;
-    max-height: calc(100dvh - 70px);
-    width: 50%;
+    width: 320px;
+    max-height: calc(100dvh - 84px);
     margin-left: 0;
   }
 }
 
 @media (max-width: 809.98px) {
   .menu-shell-container {
-    z-index: 1000;
-    justify-content: stretch;
-    padding: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
+    top: 62px;
+    padding: 8px 14px;
+    justify-content: flex-start;
   }
   .nav-drawer-card {
-    gap: 40px;
-    max-height: 100dvh;
-    padding: 90px 20px 30px;
-    flex: 1 0 0px;
-    width: 100%;
+    width: min(324px, calc(100vw - 28px));
+    max-height: calc(100dvh - 74px);
+    padding: 26px 20px 22px 20px;
     margin-left: 0;
-    box-shadow: none;
+    gap: 18px;
+  }
+  .nav-card-email {
+    font-size: 16px !important;
   }
 }
 
@@ -841,6 +852,60 @@ button:hover .roll-text-container .roll-clone,
 
   .header-col-actions {
     display: none !important;
+  }
+
+  /* 3. Pure White Logo on EVERY Page in Mobile & Tablet View */
+  .site-header .header-col-logo,
+  .site-header .brand-logo-link,
+  .site-header .brand-logo-link.is-over-light,
+  .site-header .brand-logo-link.is-over-dark,
+  .site-header .brand-link,
+  .site-header .vamix-logo-brand,
+  .site-header .vamix-logo-brand .vamix-logo-word,
+  .site-header .vamix-logo-brand .vamix-logo-reg,
+  .site-header .webus-logo-svg,
+  .site-header .logo-svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    -webkit-text-stroke-color: #ffffff !important;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.4) !important;
+  }
+
+  .site-header .brand-logo-link:hover .vamix-logo-brand {
+    opacity: 0.85 !important;
+    color: #ffffff !important;
+  }
+
+  /* 4. Pure White Menu Button on EVERY Page in Mobile & Tablet View */
+  .site-header .menu-toggle-btn,
+  .site-header .menu-toggle-btn.is-over-light,
+  .site-header .menu-toggle-btn.is-over-dark,
+  .site-header .menu-toggle-btn.is-active,
+  .site-header .menu-btn-text,
+  .site-header .menu-btn-text .roll-char,
+  .site-header .menu-btn-text .roll-slot {
+    color: #ffffff !important;
+    -webkit-text-stroke-color: #ffffff !important;
+    text-shadow: 0 0 0.5px rgba(255, 255, 255, 0.5) !important;
+  }
+
+  .site-header .menu-btn-icon .bar-h,
+  .site-header .menu-btn-icon .bar-v,
+  .site-header .menu-toggle-btn.is-over-light .menu-btn-icon .bar-h,
+  .site-header .menu-toggle-btn.is-over-light .menu-btn-icon .bar-v,
+  .site-header .menu-toggle-btn.is-over-dark .menu-btn-icon .bar-h,
+  .site-header .menu-toggle-btn.is-over-dark .menu-btn-icon .bar-v {
+    background-color: #ffffff !important;
+  }
+
+  .site-header .menu-toggle-btn:hover {
+    opacity: 0.85 !important;
+    color: #ffffff !important;
+  }
+
+  .site-header .menu-toggle-btn:hover .menu-btn-icon .bar-h,
+  .site-header .menu-toggle-btn:hover .menu-btn-icon .bar-v {
+    background-color: #ffffff !important;
   }
 }
 

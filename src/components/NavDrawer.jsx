@@ -111,6 +111,47 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
   };
 
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 809;
+  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1200;
+
+  const cardVariants = {
+    initial: (desktop) => ({
+      opacity: 0,
+      y: desktop ? -56 : -18,
+      rotateX: desktop ? -18 : 0,
+      scale: desktop ? 0.95 : 0.98,
+    }),
+    animate: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      scale: 1,
+      transition: {
+        duration: isDesktop ? 0.42 : 0.28,
+        ease: [0.16, 1, 0.3, 1],
+        staggerChildren: isDesktop ? 0.04 : 0,
+        delayChildren: isDesktop ? 0.05 : 0
+      }
+    },
+    exit: (desktop) => ({
+      opacity: 0,
+      y: desktop ? -36 : -14,
+      rotateX: desktop ? -12 : 0,
+      scale: desktop ? 0.96 : 0.98,
+      transition: {
+        duration: isDesktop ? 0.28 : 0.22,
+        ease: [0.25, 0.1, 0.25, 1]
+      }
+    })
+  };
+
+  const itemVariants = {
+    initial: { opacity: 0, y: isDesktop ? -8 : 0 },
+    animate: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } 
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -123,7 +164,7 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
             aria-hidden="true"
           />
 
@@ -144,31 +185,19 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
               role="dialog"
               aria-modal="true"
               aria-label="Site Navigation"
-              initial={{ 
-                y: -18, 
-                opacity: 0,
-                scale: 0.98
-              }}
-              animate={{ 
-                y: 0, 
-                opacity: 1,
-                scale: 1
-              }}
-              exit={{ 
-                y: -14, 
-                opacity: 0,
-                scale: 0.98
-              }}
-              transition={{ 
-                duration: 0.26, 
-                ease: [0.16, 1, 0.3, 1] 
-              }}
+              custom={isDesktop}
+              variants={cardVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
               style={{
+                transformStyle: 'preserve-3d',
+                transformOrigin: 'top center',
                 willChange: 'transform, opacity'
               }}
             >
               {/* Card Brand Logo */}
-              <div className="nav-card-header">
+              <motion.div className="nav-card-header" variants={itemVariants}>
                 <a 
                   href="/" 
                   onClick={(e) => handleLinkClick(e, '/')} 
@@ -177,7 +206,7 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
                 >
                   <VamixLogo />
                 </a>
-              </div>
+              </motion.div>
 
               {/* Navigation Links with downward split-flap mechanical roll */}
               <nav className="nav-card-links" aria-label="Main Navigation">
@@ -188,34 +217,35 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
                                    (link.href === '/case-studies' && currentRoute === 'case-studies') ||
                                    (link.href === '/' && currentRoute === 'home');
                   return (
-                    <a
-                      key={link.title}
-                      href={link.href}
-                      className={`nav-card-link ${isActive ? 'is-active' : ''}`}
-                      onClick={(e) => handleLinkClick(e, link.href)}
-                      aria-current={isActive ? 'page' : undefined}
-                    >
-                      <RollingText text={link.title} />
-                    </a>
+                    <motion.div key={link.title} variants={itemVariants}>
+                      <a
+                        href={link.href}
+                        className={`nav-card-link ${isActive ? 'is-active' : ''}`}
+                        onClick={(e) => handleLinkClick(e, link.href)}
+                        aria-current={isActive ? 'page' : undefined}
+                      >
+                        <RollingText text={link.title} />
+                      </a>
+                    </motion.div>
                   );
                 })}
               </nav>
 
               {/* Direct Contact & Studio Email */}
-              <div className="nav-card-contact">
+              <motion.div className="nav-card-contact" variants={itemVariants}>
                 <a href="mailto:vamixlabs@gmail.com" className="nav-card-email">
                   VAMIXLABS@GMAIL.COM
                 </a>
                 <a href="tel:+916359198825" className="nav-card-phone">
                   +91 63591 98825
                 </a>
-              </div>
+              </motion.div>
 
               {/* Social Footnote with 1px underline */}
-              <div className="nav-card-socials" role="list" aria-label="Social media links">
+              <motion.div className="nav-card-socials" role="list" aria-label="Social media links" variants={itemVariants}>
                 <a href="https://www.linkedin.com/company/vamix" target="_blank" rel="noopener noreferrer" className="nav-card-social-link" role="listitem">LI</a>
                 <a href="https://www.instagram.com/vamix" target="_blank" rel="noopener noreferrer" className="nav-card-social-link" role="listitem">IG</a>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </>

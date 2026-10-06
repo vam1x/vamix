@@ -157,9 +157,9 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
       const scrollY = window.scrollY;
       setIsScrolled(scrollY > 20);
 
-      // On mobile & tablet (< 1200px) or whenever the menu drawer is open,
+      // On mobile & tablet (< 1200px),
       // the fixed header bar is always dark glass, so logo and menu are always pure white.
-      if (window.innerWidth < 1200 || isDrawerOpen) {
+      if (window.innerWidth < 1200) {
         setIsLogoOverDark(true);
         setIsMenuOverDark(true);
         return;

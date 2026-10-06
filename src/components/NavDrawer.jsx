@@ -206,6 +206,9 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
                 <a href="mailto:vamixlabs@gmail.com" className="nav-card-email">
                   VAMIXLABS@GMAIL.COM
                 </a>
+                <a href="tel:+916359198825" className="nav-card-phone">
+                  +91 63591 98825
+                </a>
               </div>
 
               {/* Social Footnote with 1px underline */}

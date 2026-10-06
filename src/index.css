@@ -376,28 +376,7 @@
   background-color: #111111 !important;
 }
 
-/* When navigation drawer is open, keep menu button and logo pure white */
-.site-header.menu-is-open,
-.site-header.menu-is-open .brand-logo-link,
-.site-header.menu-is-open .vamix-logo-brand,
-.site-header.menu-is-open .vamix-logo-brand .vamix-logo-word,
-.site-header.menu-is-open .vamix-logo-brand .vamix-logo-reg {
-  color: #ffffff !important;
-  fill: #ffffff !important;
-  -webkit-text-stroke-color: #ffffff !important;
-}
 
-.site-header.menu-is-open .menu-toggle-btn,
-.menu-toggle-btn.is-active {
-  color: #ffffff !important;
-}
-
-.site-header.menu-is-open .menu-btn-icon .bar-h,
-.site-header.menu-is-open .menu-btn-icon .bar-v,
-.menu-toggle-btn.is-active .menu-btn-icon .bar-h,
-.menu-toggle-btn.is-active .menu-btn-icon .bar-v {
-  background-color: #ffffff !important;
-}
 
 /* Quick Consult Region: Exactly matching webus.in (flows naturally with page scroll) */
 .consult-region {
@@ -1365,6 +1344,158 @@ img {
     height: auto;
     padding: 0;
     align-items: flex-start;
+  }
+
+  /* 1. Backdrop on desktop is completely transparent - no blur or darkening over page */
+  .nav-drawer-backdrop {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* 2. Menu Shell matches 4-column desktop header grid exactly */
+  .menu-shell-container {
+    perspective: 1000px;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    pointer-events: none;
+    z-index: 1001;
+  }
+
+  /* 3. Card aligns precisely in Column 3 (50% midpoint directly below +/× MENU) */
+  .nav-drawer-card {
+    position: relative;
+    width: 320px !important;
+    max-width: 320px !important;
+    margin-left: 50% !important;
+    background: #171717 !important;
+    color: #f5f5f5 !important;
+    border-radius: 0px !important;
+    padding: 34px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+    pointer-events: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 36px !important;
+    box-sizing: border-box !important;
+    max-height: calc(100dvh - 90px) !important;
+    overflow-y: auto !important;
+    transform-origin: top center;
+  }
+
+  .nav-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 0px;
+  }
+
+  .nav-card-logo-link .vamix-logo-brand {
+    font-size: 34px;
+    color: #ffffff !important;
+  }
+
+  .nav-card-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .nav-card-link {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: #ffffff;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+    width: fit-content;
+  }
+
+  .nav-card-link:hover,
+  .nav-card-link.is-active {
+    color: #ffffff !important;
+    opacity: 0.7 !important;
+  }
+
+  /* No horizontal divider lines on desktop card; contact is right-aligned */
+  .nav-card-contact {
+    display: flex !important;
+    flex-direction: column !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    text-align: right !important;
+    align-items: flex-end !important;
+    gap: 4px !important;
+  }
+
+  .nav-card-email {
+    font-family: var(--font-heading, 'Sora', sans-serif);
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    letter-spacing: -0.04em !important;
+    line-height: 1 !important;
+    text-align: right !important;
+    align-self: flex-end !important;
+    white-space: nowrap !important;
+    display: block !important;
+  }
+
+  .nav-card-email:hover {
+    opacity: 0.8 !important;
+  }
+
+  .nav-card-phone {
+    font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    text-align: right;
+    display: block;
+    letter-spacing: normal;
+  }
+
+  .nav-card-phone:hover {
+    color: #ffffff;
+  }
+
+  .nav-card-socials {
+    display: flex;
+    gap: 18px;
+    margin-top: auto;
+  }
+
+  .nav-card-social-link {
+    font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+  }
+
+  .nav-card-social-link:hover {
+    opacity: 0.75;
   }
 }
 

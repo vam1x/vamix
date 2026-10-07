@@ -1,0 +1,22 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "VAMIX",
+    "identifier": "did:web:vamix.in",
+    "documentationUrl": "https://vamix.in/about",
+    "logoUrl": "https://vamix.in/images/vamix-logo.svg"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:vamix:studio:assistant",
+      "displayName": "VAMIX AI Studio Assistant",
+      "type": "application/agent-card+json",
+      "url": "https://vamix.in/llms.txt",
+      "description": "Official AI agent integration for VAMIX design and development studio.",
+      "representativeQueries": [
+        "VAMIX design engineering services",
+        "VAMIX digital development capabilities"
+      ]
+    }
+  ]
+}

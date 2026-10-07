@@ -262,6 +262,66 @@
   transform: translate(3px, -3px);
 }
 
+.cs-project-details {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 650px;
+}
+
+.cs-detail-block {
+  font-family: var(--font-body, 'Geist', 'Inter', sans-serif);
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(23, 23, 23, 0.7);
+}
+
+.cs-detail-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dark, #171717);
+  display: block;
+  margin-bottom: 3px;
+}
+
+.cs-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.cs-tech-pill {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: rgba(23, 23, 23, 0.05);
+  border: 1px solid rgba(23, 23, 23, 0.1);
+  color: #171717;
+}
+
+.cs-service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body, 'Geist', 'Inter', sans-serif);
+  font-size: 13px;
+  font-weight: 500;
+  color: #171717;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+
+.cs-service-link:hover {
+  opacity: 0.7;
+}
+
 .cs-mobile-preview-card {
   display: none;
 }

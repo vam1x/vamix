@@ -88,32 +88,6 @@ export default function HowWeDoIt({ navigate }) {
         showTopLine={true}
       />
 
-      {/* JSON-LD Structured Data for Process */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "HowTo",
-            "name": "The Fast Track to Live Products",
-            "description": "VAMIX's proven 4-step process for delivering digital products that work.",
-            "step": steps.map((step, index) => ({
-              "@type": "HowToStep",
-              "position": index + 1,
-              "name": step.text,
-              "text": step.text
-            })),
-            "totalTime": "PT4S",
-            "tool": [
-              { "@type": "HowToTool", "name": "Field Research" },
-              { "@type": "HowToTool", "name": "Rapid Prototyping" },
-              { "@type": "HowToTool", "name": "User Testing" },
-              { "@type": "HowToTool", "name": "Production Deployment" }
-            ]
-          })
-        }}
-      />
-
       <div className="process-section__inner">
         {/* Top Part: Process Group (Heading + Steps + Footer CTA/Chart) */}
         <div className="process-group">

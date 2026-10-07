@@ -273,6 +273,16 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
           </a>
         </div>
 
+        {/* Semantic crawler navigation for search engines and accessibility */}
+        <nav className="sr-only" aria-label="Main Navigation">
+          <a href="/">Home</a>
+          <a href="/services">Services</a>
+          <a href="/case-studies">Case Studies</a>
+          <a href="/insights">Insights</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+        </nav>
+
         {/* Column 3: + MENU Button with independent contrast detection */}
         <div className="header-col-menu">
           <button 

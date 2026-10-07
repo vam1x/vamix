@@ -1,0 +1,266 @@
+/* ==========================================================================
+   VAMIX INSIGHTS / BLOG PAGE STYLES
+   ========================================================================== */
+
+.insights-page-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-light, #f4f4f4);
+  color: var(--text-dark, #171717);
+  overflow-x: hidden;
+}
+
+.insights-hero-section {
+  position: relative;
+  padding: 140px 0 60px 0;
+  border-bottom: 1px solid rgba(23, 23, 23, 0.08);
+}
+
+.insights-hero-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+}
+
+.insights-hero-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #171717;
+  height: fit-content;
+}
+
+.insights-hero-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #171717;
+}
+
+.insights-hero-content h1 {
+  font-family: 'Geist', var(--font-heading, 'Sora', sans-serif);
+  font-size: clamp(32px, 4.5vw, 64px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+}
+
+.insights-hero-subhead {
+  font-family: var(--font-body, 'Geist', 'Inter', sans-serif);
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.5;
+  color: rgba(23, 23, 23, 0.7);
+  max-width: 720px;
+  margin: 0;
+}
+
+/* Category Filter Bar */
+.insights-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.insights-filter-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(23, 23, 23, 0.15);
+  background: transparent;
+  color: #171717;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.insights-filter-btn:hover,
+.insights-filter-btn.is-active {
+  background: #171717;
+  color: #ffffff;
+  border-color: #171717;
+}
+
+/* Articles List / Grid Section */
+.insights-feed-section {
+  position: relative;
+  padding: 60px 0 100px 0;
+}
+
+.insights-feed-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+}
+
+.insights-feed-sidebar {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: rgba(23, 23, 23, 0.6);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.insights-feed-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.insights-article-card {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 36px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid rgba(23, 23, 23, 0.1);
+  align-items: start;
+}
+
+.insights-article-card:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.insights-card-media {
+  position: relative;
+  aspect-ratio: 1.45;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+
+.insights-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.insights-article-card:hover .insights-card-img {
+  transform: scale(1.03);
+}
+
+.insights-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.insights-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: rgba(23, 23, 23, 0.6);
+  margin-bottom: 10px;
+}
+
+.insights-card-cat {
+  color: #171717;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.insights-card-title {
+  font-family: 'Geist', var(--font-heading, 'Sora', sans-serif);
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  margin: 0 0 14px 0;
+  color: #171717;
+}
+
+.insights-card-excerpt {
+  font-family: var(--font-body, 'Geist', 'Inter', sans-serif);
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(23, 23, 23, 0.7);
+  margin: 0 0 16px 0;
+}
+
+.insights-card-takeaways {
+  margin: 0 0 20px 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.insights-card-takeaways li {
+  font-family: var(--font-body, 'Geist', 'Inter', sans-serif);
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgba(23, 23, 23, 0.75);
+}
+
+.insights-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.insights-service-ref {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body, 'Geist', 'Inter', sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  color: #171717;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.insights-service-ref:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 1024px) {
+  .insights-hero-container,
+  .insights-feed-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 0 24px;
+  }
+
+  .insights-article-card {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .insights-card-media {
+    max-width: 440px;
+  }
+}
+
+@media (max-width: 768px) {
+  .insights-hero-section {
+    padding: 100px 0 40px 0;
+  }
+
+  .insights-hero-container,
+  .insights-feed-container {
+    padding: 0 16px;
+  }
+}

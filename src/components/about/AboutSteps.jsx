@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import RollingText from '../RollingText';
 
-export default function AboutSteps() {
+export default function AboutSteps({ navigate }) {
   const diffPillars = [
     {
       num: "01",
@@ -53,13 +53,29 @@ export default function AboutSteps() {
             </p>
           </motion.div>
 
-          <motion.a
-            href="#contact"
-            className="about-contact-sales-btn"
-            whileHover={{ x: 3 }}
-          >
-            <RollingText text="Contact sales ↗" />
-          </motion.a>
+          <div className="about-steps-cta-group" style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+            <motion.a
+              href="/services"
+              className="about-contact-sales-btn"
+              whileHover={{ x: 3 }}
+              onClick={(e) => {
+                if (navigate) {
+                  e.preventDefault();
+                  navigate('/services');
+                }
+              }}
+            >
+              <RollingText text="Explore our services ↗" />
+            </motion.a>
+            <motion.a
+              href="#contact"
+              className="about-contact-sales-btn"
+              style={{ background: 'transparent', color: 'inherit', border: '1px solid rgba(23, 23, 23, 0.25)' }}
+              whileHover={{ x: 3 }}
+            >
+              <RollingText text="Contact sales ↗" />
+            </motion.a>
+          </div>
 
           {/* Bottom "What Makes Us Different" Block */}
           <div className="about-diff-block">

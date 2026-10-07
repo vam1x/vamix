@@ -224,7 +224,20 @@ export default function Approach({ navigate }) {
                 <i className="corner-mark corner-mark--top-right" aria-hidden="true" />
 
                 <div className="service-card__number">{svc.num}</div>
-                <h3 className="service-card__title">{svc.title}</h3>
+                <h3 className="service-card__title">
+                  <a
+                    href="/services"
+                    onClick={(e) => {
+                      if (navigate) {
+                        e.preventDefault();
+                        navigate('services');
+                      }
+                    }}
+                    style={{ color: 'inherit', textDecoration: 'none' }}
+                  >
+                    {svc.title}
+                  </a>
+                </h3>
 
                 <div className="service-card__work">
                   <div className="service-card__media">

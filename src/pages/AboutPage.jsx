@@ -66,7 +66,7 @@ export default function AboutPage({ navigate }) {
       <AboutTeam />
 
       {/* 04: Why Us & What Makes Us Different */}
-      <AboutSteps />
+      <AboutSteps navigate={navigate} />
 
       {/* 05: What We Believe (Founder Quote & Milestones) */}
       <AboutBelief />

@@ -1,31 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import SectionGrid from './SectionGrid';
+import articles from '../pages/insightsData.json';
 
 export default function Insights({ navigate }) {
-  const articles = [
-    {
-      date: "07 MAR 2025",
-      img: "/insights/insights-1.webp",
-      title: "5 Signs Your Product Needs a UX Overhaul"
-    },
-    {
-      date: "28 FEB 2025",
-      img: "/insights/insights-2.webp",
-      title: "Design Systems in 2025: Beyond the Component Library"
-    },
-    {
-      date: "14 FEB 2025",
-      img: "/insights/insights-3.webp",
-      title: "Why Speed is the Ultimate Feature in Product Design"
-    },
-    {
-      date: "02 FEB 2025",
-      img: "/insights/insights-4.webp",
-      title: "Building Tools People Actually Trust: A Practical Guide"
-    }
-  ];
-
   return (
     <section className="insights-section" id="insights" aria-labelledby="insights-title">
       {/* 4-Column Blueprint Grid Lines */}
@@ -47,8 +25,11 @@ export default function Insights({ navigate }) {
 
           <a
             className="text-link"
-            href="#insights"
-            onClick={(e) => e.preventDefault()}
+            href="/insights"
+            onClick={(e) => {
+              e.preventDefault();
+              if (navigate) navigate('/insights');
+            }}
           >
             <span>All articles</span>
             <svg
@@ -81,15 +62,18 @@ export default function Insights({ navigate }) {
             >
               <a
                 className="insight-card__link"
-                href="#insights"
-                onClick={(e) => e.preventDefault()}
+                href={`/insights#${item.slug}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (navigate) navigate('/insights');
+                }}
               >
                 <div className="insight-card__body">
                   <span className="insight-card__date mono-label">{item.date}</span>
                 </div>
                 <div className="insight-card__image">
                   <img
-                    src={item.img}
+                    src={item.image || item.img}
                     alt={item.title}
                     loading="lazy"
                     decoding="async"

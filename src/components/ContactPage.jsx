@@ -136,7 +136,7 @@ export default function ContactPage({ navigate }) {
               "name": "VAMIX",
               "url": "https://vamix.in/",
               "telephone": "+916359198825",
-              "email": "hi@vamix.com",
+              "email": "vamixlabs@gmail.com",
               "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Surat",
@@ -160,7 +160,7 @@ export default function ContactPage({ navigate }) {
                 {
                   "@type": "ContactPoint",
                   "contactType": "sales",
-                  "email": "hi@vamix.com",
+                  "email": "vamixlabs@gmail.com",
                   "availableLanguage": ["English", "Hindi", "Gujarati"]
                 }
               ]

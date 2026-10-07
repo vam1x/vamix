@@ -27,12 +27,12 @@ const SEO_MAP = {
     ]
   },
   services: {
-    title: 'Services: Design & Development | VAMIX',
-    description: 'Two tracks under one roof. Design works out what to make. Development ships it as working software. One team runs both.',
+    title: 'Services: Digital Product Design & Engineering | VAMIX',
+    description: 'Explore VAMIX services across Product Discovery, UI/UX Design Systems, AI Product Engineering, Web & Mobile Applications, and Internal Tools. Designed and built under one roof.',
     canonical: `${BASE_URL}/services`,
     robots: 'index, follow, max-image-preview:large',
     ogImage: `${BASE_URL}/og-image.jpg`,
-    ogImageAlt: 'VAMIX Services - Design & Development',
+    ogImageAlt: 'VAMIX Services - Digital Product Design & Engineering',
     breadcrumb: [
       { name: 'Home', item: `${BASE_URL}/` },
       { name: 'Services', item: `${BASE_URL}/services` }
@@ -60,6 +60,18 @@ const SEO_MAP = {
     breadcrumb: [
       { name: 'Home', item: `${BASE_URL}/` },
       { name: 'Contact', item: `${BASE_URL}/contact` }
+    ]
+  },
+  insights: {
+    title: 'Insights & Tech Perspectives | VAMIX Product Studio',
+    description: 'Practical insights on digital product design, web engineering, UI/UX systems, and AI development from VAMIX.',
+    canonical: `${BASE_URL}/insights`,
+    robots: 'index, follow, max-image-preview:large',
+    ogImage: `${BASE_URL}/og-image.jpg`,
+    ogImageAlt: 'VAMIX Insights - Tech & Design Perspectives',
+    breadcrumb: [
+      { name: 'Home', item: `${BASE_URL}/` },
+      { name: 'Insights', item: `${BASE_URL}/insights` }
     ]
   },
   'privacy-policy': {

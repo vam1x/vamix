@@ -14,46 +14,26 @@ export default function Results({ navigate }) {
         showTopLine={true}
       />
 
-      {/* JSON-LD Structured Data for Case Study */}
+      {/* JSON-LD Structured Data for Featured Project */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "CaseStudy",
+            "@type": "CreativeWork",
             "name": "DV Jewellery Designer - Digital Flagship Boutique",
-            "description": "DV Jewellery Designer partnered with VAMIX to architect a digital flagship boutique worthy of fine craftsmanship. By blending high-fashion editorial storytelling with intuitive jewelry filtering, tactile piece inspection, and a seamless checkout, the bespoke atelier transformed high-ticket online browsing into confident luxury purchases.",
-            "about": {
-              "@type": "Organization",
-              "name": "DV Jewellery Designer",
-              "industry": "Luxury E-Commerce / Fine Jewellery"
-            },
-            "provider": {
+            "headline": "DV Jewellery Designer - Digital Flagship Boutique",
+            "description": "DV Jewellery Designer partnered with VAMIX to architect a digital flagship boutique. Blending editorial storytelling with intuitive jewelry filtering, tactile piece inspection, and a seamless checkout.",
+            "creator": {
               "@id": "https://vamix.in/#organization"
             },
-            "datePublished": "2024",
-            "dateModified": "2024",
+            "publisher": {
+              "@id": "https://vamix.in/#organization"
+            },
+            "url": "https://vamix.in/case-studies",
             "image": "https://vamix.in/projects/real/dv-hero.jpg",
-            "result": [
-              {
-                "@type": "QuantitativeValue",
-                "name": "Checkout Dropoff Reduction",
-                "value": 58,
-                "unitText": "PERCENT"
-              },
-              {
-                "@type": "QuantitativeValue",
-                "name": "Sales Conversion Increase",
-                "value": 76,
-                "unitText": "PERCENT"
-              }
-            ],
-            "mentions": [
-              "High-fashion editorial storytelling",
-              "Intuitive jewelry filtering",
-              "Tactile piece inspection",
-              "Seamless checkout"
-            ]
+            "genre": "Luxury E-Commerce / Fine Jewellery",
+            "inLanguage": "en-US"
           })
         }}
       />

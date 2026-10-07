@@ -5,6 +5,7 @@ import Contact from '../components/Contact';
 import AboutBooking from '../components/about/AboutBooking';
 import projects from './caseStudiesData.json';
 import useSeo from '../hooks/useSeo';
+import RollingText from '../components/RollingText';
 import './case-studies.css';
 
 export default function CaseStudiesPage({ navigate }) {
@@ -22,7 +23,7 @@ export default function CaseStudiesPage({ navigate }) {
 
   const handleLink = (e, href) => {
     if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
-    if (['/', '/about', '/case-studies', '/contact'].includes(href)) {
+    if (['/', '/about', '/case-studies', '/services', '/contact', '/insights'].includes(href)) {
       e.preventDefault();
       if (navigate) navigate(href);
     }
@@ -55,18 +56,18 @@ export default function CaseStudiesPage({ navigate }) {
               "@type": "ListItem",
               "position": idx + 1,
               "item": {
-                "@type": "CaseStudy",
+                "@type": "CreativeWork",
                 "name": project.title,
+                "headline": `${project.title} - ${project.category}`,
                 "description": project.desc,
-                "category": project.category,
+                "genre": project.category,
                 "url": project.href,
                 "image": `https://vamix.in${project.images[1]}`,
-                "provider": {
+                "creator": {
                   "@id": "https://vamix.in/#organization"
                 },
-                "about": {
-                  "@type": "Organization",
-                  "name": project.title
+                "publisher": {
+                  "@id": "https://vamix.in/#organization"
                 }
               }
             }))
@@ -160,6 +161,56 @@ export default function CaseStudiesPage({ navigate }) {
                           aria-label={`${project.title} details`}
                         >
                           <p className="cs-row-desc">{project.desc}</p>
+                          
+                          <div className="cs-project-details">
+                            {project.challenge && (
+                              <div className="cs-detail-block">
+                                <span className="cs-detail-label">The Challenge</span>
+                                <p>{project.challenge}</p>
+                              </div>
+                            )}
+                            {project.approach && (
+                              <div className="cs-detail-block">
+                                <span className="cs-detail-label">Our Approach</span>
+                                <p>{project.approach}</p>
+                              </div>
+                            )}
+                            {project.technology && project.technology.length > 0 && (
+                              <div className="cs-detail-block">
+                                <span className="cs-detail-label">Technology & Architecture</span>
+                                <div className="cs-tech-tags">
+                                  {project.technology.map((tech, tIdx) => (
+                                    <span key={tIdx} className="cs-tech-pill">{tech}</span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                            {project.results && (
+                              <div className="cs-detail-block">
+                                <span className="cs-detail-label">Key Outcomes</span>
+                                <p>{project.results}</p>
+                              </div>
+                            )}
+                            {project.serviceLink && project.serviceName && (
+                              <div className="cs-detail-block">
+                                <span className="cs-detail-label">Related Service</span>
+                                <a
+                                  href={project.serviceLink}
+                                  className="cs-service-link"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (navigate) {
+                                      e.preventDefault();
+                                      navigate(project.serviceLink);
+                                    }
+                                  }}
+                                >
+                                  {project.serviceName} ↗
+                                </a>
+                              </div>
+                            )}
+                          </div>
+
                           <div className="cs-row-actions">
                             <a
                               href={project.href}
@@ -232,7 +283,32 @@ export default function CaseStudiesPage({ navigate }) {
         </div>
       </section>
 
-      {/* 03. Shared booking callout, matched to the reference section. */}
+      {/* 03. Services Bridge Callout */}
+      <section className="products-bridge page-section" aria-labelledby="cs-services-bridge-title">
+        <SectionGrid theme="dark" showTopLine={false} showBottomLine={false} />
+        <div className="content-grid section-content bridge-inner">
+          <div className="bridge-copy section-span-three">
+            <h2 id="cs-services-bridge-title">
+              READY TO BUILD? EXPLORE OUR COMPLETE SERVICE OFFERINGS.
+            </h2>
+            <a
+              className="bridge-link"
+              href="/services"
+              onClick={(e) => {
+                if (navigate) {
+                  e.preventDefault();
+                  navigate('/services');
+                }
+              }}
+              aria-label="View all services"
+            >
+              <span><RollingText text="VIEW ALL SERVICES" /></span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 04. Shared booking callout, matched to the reference section. */}
       <AboutBooking navigate={navigate} />
 
       {/* 04. Standard Contact / Get In Touch Form Section */}

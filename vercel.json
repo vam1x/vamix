@@ -3,7 +3,32 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "cleanUrls": true,
   "rewrites": [
+    {
+      "source": "/services",
+      "destination": "/services/index.html"
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/case-studies/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact/index.html"
+    },
+    {
+      "source": "/insights",
+      "destination": "/insights/index.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/insights/index.html"
+    },
     {
       "source": "/((?!.*\\.).*)",
       "destination": "/index.html"

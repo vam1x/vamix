@@ -20,7 +20,7 @@ export default function ServiceRow({ service, index, navigate }) {
       >
       <div className="service-row-copy">
         <h3 className="service-row-title"><button type="button" className="service-row-toggle" aria-expanded={active} aria-controls={`${service.id}-detail`} onClick={(event) => { if (event.detail === 0 || !window.matchMedia('(hover: hover)').matches) setToggled(value => !value); }}>{service.title}</button></h3>
-        <motion.div id={`${service.id}-detail`} className="service-row-detail" aria-hidden={!active} initial={false}
+        <motion.div id={`${service.id}-detail`} className="service-row-detail" initial={false}
           animate={{ height: active ? 'auto' : 1, opacity: 1 }}
           transition={{ duration: reducedMotion ? 0 : 0.5, ease: [0.16, 1, 0.3, 1] }}>
           <motion.p className="service-row-desc" initial={false}

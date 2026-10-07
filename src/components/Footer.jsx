@@ -45,8 +45,23 @@ export default function Footer({ navigate }) {
             </a>
           </div>
 
-          {/* Column 3: Spacer */}
-          <div className="footer-col footer-col-3" aria-hidden="true" />
+          {/* Column 3: Services & Insights */}
+          <div className="footer-col footer-col-3" style={{ display: 'flex', gap: '16px' }}>
+            <a 
+              href="/services" 
+              onClick={(e) => handleLegalClick(e, '/services')}
+              className="footer-legal-link"
+            >
+              SERVICES
+            </a>
+            <a 
+              href="/insights" 
+              onClick={(e) => handleLegalClick(e, '/insights')}
+              className="footer-legal-link"
+            >
+              INSIGHTS
+            </a>
+          </div>
 
           {/* Column 4: Copyright Notice */}
           <div className="footer-col footer-col-4 footer-copyright-wrap">

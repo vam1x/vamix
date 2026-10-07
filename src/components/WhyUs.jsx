@@ -34,33 +34,6 @@ export default function WhyUs() {
         showTopLine={true}
       />
 
-      {/* JSON-LD Structured Data for Advantages/Stats */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "AboutPage",
-            "mainEntity": {
-              "@type": "Organization",
-              "@id": "https://vamix.in/#organization",
-              "name": "VAMIX",
-              "description": "We turn messy product problems into tools people trust.",
-              "knowAbout": advantages.map(a => `${a.line1.trim()} ${a.line2}`),
-              "numberOfEmployees": 10,
-              "foundingDate": "2023",
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "reviewCount": "15",
-                "bestRating": "5",
-                "worstRating": "1"
-              }
-            }
-          })
-        }}
-      />
-
       <div className="advantages-section__inner">
         <div className="advantages-row">
           {/* Left Column (Cols 1-2): Kicker, Heading, Description */}

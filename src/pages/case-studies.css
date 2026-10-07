@@ -50,14 +50,14 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  color: rgba(23, 23, 23, 0.6);
+  color: rgba(23, 23, 23, 0.72);
 }
 
 .cs-badge-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: rgba(23, 23, 23, 0.6);
+  background-color: rgba(23, 23, 23, 0.72);
   display: inline-block;
   flex-shrink: 0;
 }
@@ -86,7 +86,7 @@
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: -0.02em;
-  color: rgba(23, 23, 23, 0.6);
+  color: rgba(23, 23, 23, 0.72);
   max-width: 480px;
   margin-top: 40px;
   margin-bottom: 0;
@@ -218,7 +218,7 @@
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: -0.02em;
-  color: rgba(23, 23, 23, 0.6);
+  color: rgba(23, 23, 23, 0.72);
   margin-top: 14px;
   margin-bottom: 0;
   max-width: 650px;
@@ -549,7 +549,7 @@
   font-size: 13px;
   font-weight: 500;
   text-transform: uppercase;
-  color: rgba(23, 23, 23, 0.6);
+  color: rgba(23, 23, 23, 0.72);
 }
 
 .cs-author-avatar {
@@ -887,7 +887,7 @@
     line-height: 1.45;
     margin-top: 16px;
     max-width: 650px;
-    color: rgba(23, 23, 23, 0.65);
+    color: rgba(23, 23, 23, 0.72);
   }
 
   .cs-row-title-text {
@@ -1030,7 +1030,7 @@
     font-size: 15px;
     line-height: 1.45;
     margin-top: 14px;
-    color: rgba(23, 23, 23, 0.65);
+    color: rgba(23, 23, 23, 0.72);
     max-width: 100%;
   }
 

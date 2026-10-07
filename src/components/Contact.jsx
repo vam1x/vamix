@@ -207,7 +207,7 @@ export default function Contact({ navigate }) {
                     type="button"
                     className={`contact-captcha__btn ${isVerified ? 'is-verified' : ''}`}
                     onClick={() => setIsVerified(!isVerified)}
-                    aria-label="Human verification"
+                    aria-label={isVerified ? "You are verified" : "Verify you're human"}
                   >
                     <span className="contact-captcha__check">
                       {isVerified && (
@@ -236,7 +236,6 @@ export default function Contact({ navigate }) {
                   type="submit"
                   className={`contact-submit ${isSubmitted ? 'is-sent' : ''} ${isSubmitting ? 'is-loading' : ''}`}
                   disabled={isSubmitting || isSubmitted}
-                  aria-label="Send contact inquiry"
                 >
                   <span className="contact-submit__text">
                     {isSubmitting ? (
@@ -323,9 +322,9 @@ export default function Contact({ navigate }) {
             <a href="mailto:vamixlabs@gmail.com" className="contact-meta__email">VAMIXLABS@GMAIL.COM</a>
           </div>
           <div className="contact-meta__col4">
-            <div className="contact-meta__social" role="list" aria-label="Social media links">
-              <a href="https://www.linkedin.com/company/vamix" target="_blank" rel="noopener noreferrer" className="contact-meta__social-link" role="listitem">LI</a>
-              <a href="https://www.instagram.com/vamix" target="_blank" rel="noopener noreferrer" className="contact-meta__social-link" role="listitem">IG</a>
+            <div className="contact-meta__social" aria-label="Social media links">
+              <a href="https://www.linkedin.com/company/vamix" target="_blank" rel="noopener noreferrer" className="contact-meta__social-link" aria-label="LinkedIn (LI)">LI</a>
+              <a href="https://www.instagram.com/vamix" target="_blank" rel="noopener noreferrer" className="contact-meta__social-link" aria-label="Instagram (IG)">IG</a>
             </div>
             <button onClick={scrollToTop} className="contact-meta__top-btn" type="button" aria-label="Back to top">
               BACK TO TOP

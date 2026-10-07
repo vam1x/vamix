@@ -98,10 +98,10 @@ export default function Timeline() {
         </div>
 
         {/* Lower Row: Bottom-Aligned Staircase Timeline Milestones */}
-        <nav className="milestones" aria-labelledby="milestones-heading" role="list">
-          <h2 id="milestones-heading" className="visually-hidden">Company Milestones</h2>
+        <h2 id="milestones-heading" className="visually-hidden">Company Milestones</h2>
+        <div className="milestones" aria-labelledby="milestones-heading" role="list">
           {milestones.map((m, idx) => (
-            <article
+            <div
               key={idx}
               className="milestone"
               style={{ '--milestone-gap': m.gap }}
@@ -127,9 +127,9 @@ export default function Timeline() {
               <p className="mono-label" style={{ whiteSpace: 'pre-line' }}>
                 {m.desc}
               </p>
-            </article>
+            </div>
           ))}
-        </nav>
+        </div>
       </div>
     </section>
   );

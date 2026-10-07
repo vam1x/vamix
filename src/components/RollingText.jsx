@@ -9,31 +9,34 @@ export default function RollingText({ text, className = '' }) {
   const chars = Array.from(text);
 
   return (
-    <span 
-      className={`roll-text-container ${isHovered ? 'is-active' : ''} ${className}`} 
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      aria-label={text}
-    >
-      {chars.map((char, idx) => {
-        const displayChar = char === ' ' ? '\u00A0' : char;
-        return (
-          <span key={idx} className="roll-slot">
-            <span 
-              className="roll-char roll-main"
-              style={{ transitionDelay: `${idx * 22}ms` }}
-            >
-              {displayChar}
+    <>
+      <span className="sr-only">{text}</span>
+      <span 
+        className={`roll-text-container ${isHovered ? 'is-active' : ''} ${className}`} 
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        aria-hidden="true"
+      >
+        {chars.map((char, idx) => {
+          const displayChar = char === ' ' ? '\u00A0' : char;
+          return (
+            <span key={idx} className="roll-slot">
+              <span 
+                className="roll-char roll-main"
+                style={{ transitionDelay: `${idx * 22}ms` }}
+              >
+                {displayChar}
+              </span>
+              <span 
+                className="roll-char roll-clone"
+                style={{ transitionDelay: `${idx * 22}ms` }}
+              >
+                {displayChar}
+              </span>
             </span>
-            <span 
-              className="roll-char roll-clone"
-              style={{ transitionDelay: `${idx * 22}ms` }}
-            >
-              {displayChar}
-            </span>
-          </span>
-        );
-      })}
-    </span>
+          );
+        })}
+      </span>
+    </>
   );
 }

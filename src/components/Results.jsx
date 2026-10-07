@@ -104,6 +104,7 @@ export default function Results({ navigate }) {
             <a
               className="cta-block case-section__cta"
               href="/case-studies"
+              aria-label="See how we did it - view case studies"
               onClick={(e) => {
                 e.preventDefault();
                 e.currentTarget?.blur();

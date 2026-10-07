@@ -69,14 +69,14 @@ export default function WhyUs() {
 
             <div className="advantage-items" role="list">
               {advantages.map((item, idx) => (
-                <article key={idx} className="advantage-item" role="listitem">
+                <div key={idx} className="advantage-item" role="listitem">
                   <i className="corner-mark corner-mark--bottom-left" aria-hidden="true"></i>
                   <span className="advantage-item__number">{item.num}</span>
                   <div className="advantage-item__copy">
                     <span className="advantage-item__line">{item.line1}</span>
                     <span className="advantage-item__line">{item.line2}</span>
                   </div>
-                </article>
+                </div>
               ))}
             </div>
 
@@ -144,6 +144,8 @@ export default function WhyUs() {
             aria-hidden="true"
             width="676"
             height="563"
+            loading="lazy"
+            decoding="async"
             className="stats-panel__gradient"
           />
         </aside>

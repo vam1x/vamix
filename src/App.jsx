@@ -13,16 +13,17 @@ import MoreProjects from './components/MoreProjects';
 import Timeline from './components/Timeline';
 import Faq from './components/Faq';
 import Contact from './components/Contact';
-import ContactPage from './components/ContactPage';
 import Footer from './components/Footer';
-import AboutPage from './pages/AboutPage';
-import CaseStudiesPage from './pages/CaseStudiesPage';
-import ServicesPage from './pages/ServicesPage';
-import InsightsPage from './pages/InsightsPage';
-import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
-import TermsOfServicePage from './pages/TermsOfServicePage';
-import NotFoundPage from './pages/NotFoundPage';
 import useSeo from './hooks/useSeo';
+
+const AboutPage = React.lazy(() => import('./pages/AboutPage'));
+const CaseStudiesPage = React.lazy(() => import('./pages/CaseStudiesPage'));
+const ServicesPage = React.lazy(() => import('./pages/ServicesPage'));
+const InsightsPage = React.lazy(() => import('./pages/InsightsPage'));
+const PrivacyPolicyPage = React.lazy(() => import('./pages/PrivacyPolicyPage'));
+const TermsOfServicePage = React.lazy(() => import('./pages/TermsOfServicePage'));
+const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage'));
+const ContactPage = React.lazy(() => import('./components/ContactPage'));
 
 export default function App() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -181,53 +182,55 @@ export default function App() {
 
         {/* Main Content Area */}
         <main id="main-content" tabIndex={-1}>
-          {currentRoute === 'privacy-policy' ? (
-            <PrivacyPolicyPage navigate={navigate} />
-          ) : currentRoute === 'terms-of-service' ? (
-            <TermsOfServicePage navigate={navigate} />
-          ) : currentRoute === 'case-studies' ? (
-            <CaseStudiesPage navigate={navigate} />
-          ) : currentRoute === 'services' ? (
-            <ServicesPage navigate={navigate} />
-          ) : currentRoute === 'about' ? (
-            <AboutPage navigate={navigate} />
-          ) : currentRoute === 'insights' ? (
-            <InsightsPage navigate={navigate} />
-          ) : currentRoute === 'contact' ? (
-            <ContactPage navigate={navigate} />
-          ) : currentRoute === 'not-found' ? (
-            <NotFoundPage navigate={navigate} />
-          ) : (
-            <>
-              {/* Section 01: Hero */}
-              <Hero navigate={navigate} />
+          <React.Suspense fallback={null}>
+            {currentRoute === 'privacy-policy' ? (
+              <PrivacyPolicyPage navigate={navigate} />
+            ) : currentRoute === 'terms-of-service' ? (
+              <TermsOfServicePage navigate={navigate} />
+            ) : currentRoute === 'case-studies' ? (
+              <CaseStudiesPage navigate={navigate} />
+            ) : currentRoute === 'services' ? (
+              <ServicesPage navigate={navigate} />
+            ) : currentRoute === 'about' ? (
+              <AboutPage navigate={navigate} />
+            ) : currentRoute === 'insights' ? (
+              <InsightsPage navigate={navigate} />
+            ) : currentRoute === 'contact' ? (
+              <ContactPage navigate={navigate} />
+            ) : currentRoute === 'not-found' ? (
+              <NotFoundPage navigate={navigate} />
+            ) : (
+              <>
+                {/* Section 01: Hero */}
+                <Hero navigate={navigate} />
 
-              {/* Section 02: Our Approach & Services */}
-              <Approach navigate={navigate} />
+                {/* Section 02: Our Approach & Services */}
+                <Approach navigate={navigate} />
 
-              {/* Section 03: Why Companies Choose VAMIX */}
-              <WhyUs navigate={navigate} />
+                {/* Section 03: Why Companies Choose VAMIX */}
+                <WhyUs navigate={navigate} />
 
-              {/* Section 04: The Fast Track & Cost of Delay Matrix */}
-              <HowWeDoIt navigate={navigate} />
+                {/* Section 04: The Fast Track & Cost of Delay Matrix */}
+                <HowWeDoIt navigate={navigate} />
 
-              {/* Section 05: Results & DV Jewellery Designer Success Story */}
-              <Results navigate={navigate} />
+                {/* Section 05: Results & DV Jewellery Designer Success Story */}
+                <Results navigate={navigate} />
 
-              {/* Section 06: More Projects Showcase */}
-              <MoreProjects navigate={navigate} />
+                {/* Section 06: More Projects Showcase */}
+                <MoreProjects navigate={navigate} />
 
 
-              {/* Section 08 & 09: Milestones & Studio Beliefs */}
-              <Timeline navigate={navigate} />
+                {/* Section 08 & 09: Milestones & Studio Beliefs */}
+                <Timeline navigate={navigate} />
 
-              {/* Section 11: Help & Info FAQ */}
-              <Faq navigate={navigate} />
+                {/* Section 11: Help & Info FAQ */}
+                <Faq navigate={navigate} />
 
-              {/* Section 12: Get In Touch */}
-              <Contact navigate={navigate} />
-            </>
-          )}
+                {/* Section 12: Get In Touch */}
+                <Contact navigate={navigate} />
+              </>
+            )}
+          </React.Suspense>
         </main>
 
         {/* Sub-Footer Legal Bar */}

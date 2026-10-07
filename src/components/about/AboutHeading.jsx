@@ -3,11 +3,11 @@ import { motion } from 'framer-motion';
 
 export default function AboutHeading() {
   const reviewAvatars = [
-    "/images/avatars/client-avatar-1.jpg",
-    "/images/avatars/client-avatar-2.jpg",
-    "/images/avatars/client-avatar-3.jpg",
-    "/images/avatars/client-avatar-4.jpg",
-    "/images/avatars/client-avatar-5.jpg"
+    "/images/avatars/client-avatar-1.webp",
+    "/images/avatars/client-avatar-2.webp",
+    "/images/avatars/client-avatar-3.webp",
+    "/images/avatars/client-avatar-4.webp",
+    "/images/avatars/client-avatar-5.webp"
   ];
 
   const line1Words = ["WHO", "WE", "ARE:"];
@@ -116,7 +116,15 @@ export default function AboutHeading() {
               <div className="about-reviews-avatars">
                 {reviewAvatars.map((url, i) => (
                   <div key={i} className="about-avatar-wrapper" style={{ left: `${i * 22}px`, zIndex: 10 - i }}>
-                    <img src={url} alt={`Client ${i + 1}`} className="about-avatar-img" />
+                    <img
+                      src={url}
+                      alt={`Client ${i + 1}`}
+                      className="about-avatar-img"
+                      width="36"
+                      height="36"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
                 ))}
               </div>

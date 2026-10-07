@@ -22,14 +22,6 @@
       "destination": "/contact/index.html"
     },
     {
-      "source": "/insights",
-      "destination": "/insights/index.html"
-    },
-    {
-      "source": "/blog",
-      "destination": "/insights/index.html"
-    },
-    {
       "source": "/privacy-policy",
       "destination": "/privacy-policy/index.html"
     },

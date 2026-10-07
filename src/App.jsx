@@ -19,7 +19,6 @@ import useSeo from './hooks/useSeo';
 const AboutPage = React.lazy(() => import('./pages/AboutPage'));
 const CaseStudiesPage = React.lazy(() => import('./pages/CaseStudiesPage'));
 const ServicesPage = React.lazy(() => import('./pages/ServicesPage'));
-const InsightsPage = React.lazy(() => import('./pages/InsightsPage'));
 const PrivacyPolicyPage = React.lazy(() => import('./pages/PrivacyPolicyPage'));
 const TermsOfServicePage = React.lazy(() => import('./pages/TermsOfServicePage'));
 const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage'));
@@ -37,7 +36,6 @@ export default function App() {
     if (full.includes('privacy-policy') || full.includes('privacy')) return 'privacy-policy';
     if (full.includes('terms-of-service') || full.includes('terms')) return 'terms-of-service';
     if (full.includes('case-studies')) return 'case-studies';
-    if (full.includes('insights') || full.includes('blog')) return 'insights';
     if (path.includes('services') || hash.includes('services') || search.includes('services')) {
       return 'services';
     }
@@ -76,10 +74,6 @@ export default function App() {
     } else if (cleanRoute.includes('about')) {
       setCurrentRoute('about');
       window.history.pushState({ route: 'about' }, '', '/about');
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    } else if (cleanRoute.includes('insights') || cleanRoute.includes('blog')) {
-      setCurrentRoute('insights');
-      window.history.pushState({ route: 'insights' }, '', '/insights');
       window.scrollTo({ top: 0, behavior: 'instant' });
     } else if (cleanRoute.includes('contact')) {
       setCurrentRoute('contact');
@@ -122,8 +116,6 @@ export default function App() {
         setCurrentRoute('services');
       } else if (path.includes('about') || hash.includes('about')) {
         setCurrentRoute('about');
-      } else if (path.includes('insights') || hash.includes('insights') || path.includes('blog') || hash.includes('blog')) {
-        setCurrentRoute('insights');
       } else if (path.includes('contact') || hash.includes('contact')) {
         setCurrentRoute('contact');
       } else if (path === '/' || path === '' || hash === '#/' || hash === '' || hash === '#') {
@@ -193,8 +185,6 @@ export default function App() {
               <ServicesPage navigate={navigate} />
             ) : currentRoute === 'about' ? (
               <AboutPage navigate={navigate} />
-            ) : currentRoute === 'insights' ? (
-              <InsightsPage navigate={navigate} />
             ) : currentRoute === 'contact' ? (
               <ContactPage navigate={navigate} />
             ) : currentRoute === 'not-found' ? (

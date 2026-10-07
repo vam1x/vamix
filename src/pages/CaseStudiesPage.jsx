@@ -23,7 +23,7 @@ export default function CaseStudiesPage({ navigate }) {
 
   const handleLink = (e, href) => {
     if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
-    if (['/', '/about', '/case-studies', '/services', '/contact', '/insights'].includes(href)) {
+    if (['/', '/about', '/case-studies', '/services', '/contact'].includes(href)) {
       e.preventDefault();
       if (navigate) navigate(href);
     }

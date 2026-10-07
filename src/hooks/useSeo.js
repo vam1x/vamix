@@ -62,18 +62,6 @@ const SEO_MAP = {
       { name: 'Contact', item: `${BASE_URL}/contact` }
     ]
   },
-  insights: {
-    title: 'Insights & Tech Perspectives | VAMIX Product Studio',
-    description: 'Practical insights on digital product design, web engineering, UI/UX systems, and AI development from VAMIX.',
-    canonical: `${BASE_URL}/insights`,
-    robots: 'index, follow, max-image-preview:large',
-    ogImage: `${BASE_URL}/og-image.jpg`,
-    ogImageAlt: 'VAMIX Insights - Tech & Design Perspectives',
-    breadcrumb: [
-      { name: 'Home', item: `${BASE_URL}/` },
-      { name: 'Insights', item: `${BASE_URL}/insights` }
-    ]
-  },
   'privacy-policy': {
     title: 'Privacy Policy | VAMIX Digital Product Studio',
     description: 'Read the Privacy Policy for VAMIX Digital Product Studio. Learn how your data is collected, protected, and handled.',

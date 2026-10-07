@@ -57,7 +57,6 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
     { title: "ABOUT", href: "/about" },
     { title: "SERVICES", href: "/services" },
     { title: "CASE STUDIES", href: "/case-studies" },
-    { title: "INSIGHTS", href: "/insights" },
     { title: "CONTACT", href: "/contact" }
   ];
 
@@ -90,7 +89,7 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
       }
       return;
     }
-    if (href === '/about' || href === '/services' || href === '/contact' || href === '/case-studies' || href === '/insights') {
+    if (href === '/about' || href === '/services' || href === '/contact' || href === '/case-studies') {
       e.preventDefault();
       if (navigate) {
         navigate(href);

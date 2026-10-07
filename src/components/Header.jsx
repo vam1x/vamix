@@ -278,7 +278,6 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
           <a href="/">Home</a>
           <a href="/services">Services</a>
           <a href="/case-studies">Case Studies</a>
-          <a href="/insights">Insights</a>
           <a href="/about">About</a>
           <a href="/contact">Contact</a>
         </nav>

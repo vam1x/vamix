@@ -14,12 +14,9 @@ if (!fs.existsSync(distHtmlPath)) {
 
 const baseHtml = fs.readFileSync(distHtmlPath, 'utf-8');
 
-// Load structured project and insight data
+// Load structured project data
 const caseStudies = JSON.parse(
   fs.readFileSync(path.join(rootDir, 'src', 'pages', 'caseStudiesData.json'), 'utf-8')
-);
-const insights = JSON.parse(
-  fs.readFileSync(path.join(rootDir, 'src', 'pages', 'insightsData.json'), 'utf-8')
 );
 
 // Services definitions
@@ -192,7 +189,6 @@ const servicesBodyHtml = `
         <a href="/">Home</a>
         <a href="/services">Services</a>
         <a href="/case-studies">Case Studies</a>
-        <a href="/insights">Insights</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
       </nav>
@@ -328,7 +324,6 @@ const caseStudiesBodyHtml = `
         <a href="/">Home</a>
         <a href="/services">Services</a>
         <a href="/case-studies">Case Studies</a>
-        <a href="/insights">Insights</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
       </nav>
@@ -460,7 +455,6 @@ const aboutBodyHtml = `
         <a href="/">Home</a>
         <a href="/services">Services</a>
         <a href="/case-studies">Case Studies</a>
-        <a href="/insights">Insights</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
       </nav>
@@ -504,7 +498,7 @@ const aboutBodyHtml = `
         <li><a href="/services#development"><strong>Full-Stack Web &amp; Mobile Engineering:</strong></a> High-performance React web applications, native-grade mobile apps, internal tools, and robust backend APIs.</li>
         <li><a href="/services#development"><strong>AI Product Integration:</strong></a> Custom copilots, RAG architectures, and agentic workflows engineered for practical business operations.</li>
       </ul>
-      <p>Explore our recent work in our <a href="/case-studies">client case studies</a> or read our technical perspectives on <a href="/insights">Insights</a>.</p>
+      <p>Explore our recent work in our <a href="/case-studies">client case studies</a>.</p>
     </section>
 
     <section class="about-cta-section" aria-labelledby="about-cta-title">
@@ -584,7 +578,6 @@ const contactBodyHtml = `
         <a href="/">Home</a>
         <a href="/services">Services</a>
         <a href="/case-studies">Case Studies</a>
-        <a href="/insights">Insights</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
       </nav>
@@ -700,131 +693,7 @@ writePage('contact', injectPageData(baseHtml, {
   bodyHtml: contactBodyHtml
 }));
 
-// =============================================================================
-// 5. INSIGHTS PAGE
-// =============================================================================
-const insightsBodyHtml = `
-  <header class="site-header" role="banner">
-    <div class="header-inner-grid">
-      <div class="header-col-logo">
-        <a href="/" class="brand-logo-link" aria-label="VAMIX Home">VAMIX</a>
-      </div>
-      <nav class="sr-only" aria-label="Main Navigation">
-        <a href="/">Home</a>
-        <a href="/services">Services</a>
-        <a href="/case-studies">Case Studies</a>
-        <a href="/insights">Insights</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-      </nav>
-    </div>
-  </header>
 
-  <main id="main-content" class="insights-page-wrapper">
-    <section class="insights-hero-section" aria-labelledby="insights-hero-title">
-      <div class="insights-hero-container">
-        <div class="insights-hero-badge">
-          <span class="insights-hero-dot" aria-hidden="true"></span>
-          <span>EDITORIAL &amp; INSIGHTS</span>
-        </div>
-        <div class="insights-hero-content">
-          <h1 id="insights-hero-title">INSIGHTS &amp; PERSPECTIVES: PRODUCT DESIGN &amp; SOFTWARE ENGINEERING</h1>
-          <p class="insights-hero-subhead">
-            Real talk about software architecture, product design, design systems, and engineering without buzzwords.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="insights-feed-section" aria-label="Editorial Articles Feed">
-      <div class="insights-feed-container">
-        <div class="insights-feed-grid" role="list">
-          ${insights
-            .map(
-              (art) => `
-            <article class="insights-article-card" id="${art.slug}" role="listitem">
-              <div class="insights-card-body">
-                <div class="insights-card-meta">
-                  <span class="insights-card-cat">${art.category}</span> &middot;
-                  <time dateTime="${art.date}">${art.date}</time> &middot;
-                  <span>${art.readTime}</span>
-                </div>
-                <h2 class="insights-card-title">${art.title}</h2>
-                <p class="insights-card-excerpt">${art.excerpt}</p>
-                <div class="insights-card-summary">
-                  <p>${art.summary}</p>
-                </div>
-                ${
-                  art.keyTakeaways && art.keyTakeaways.length > 0
-                    ? `
-                  <div class="insights-takeaways">
-                    <strong>Key Insights:</strong>
-                    <ul>
-                      ${art.keyTakeaways.map((point) => `<li>${point}</li>`).join('')}
-                    </ul>
-                  </div>`
-                    : ''
-                }
-                <div class="insights-card-footer">
-                  <a href="${art.relatedService}" class="insights-service-ref">Related Service: ${art.relatedServiceName} ↗</a>
-                </div>
-              </div>
-            </article>`
-            )
-            .join('')}
-        </div>
-      </div>
-    </section>
-
-    <section class="insights-cta-section" aria-labelledby="insights-cta-title">
-      <h2 id="insights-cta-title">INTERESTED IN COLLABORATING?</h2>
-      <p>Reach out to discuss your digital product, engineering architecture, or design system requirements.</p>
-      <a href="/contact" class="btn-primary">Schedule Consultation ↗</a>
-    </section>
-  </main>
-`;
-
-const insightsSchema = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'CollectionPage',
-      '@id': 'https://vamix.in/insights#webpage',
-      url: 'https://vamix.in/insights',
-      name: 'Insights & Tech Perspectives | VAMIX Product Studio',
-      description: 'Practical insights on digital product design, web engineering, UI/UX systems, and AI development from VAMIX.',
-      breadcrumb: {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vamix.in/' },
-          { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://vamix.in/insights' }
-        ]
-      }
-    },
-    ...insights.map((art) => ({
-      '@type': 'BlogPosting',
-      '@id': `https://vamix.in/insights#${art.slug}`,
-      headline: art.title,
-      description: art.excerpt,
-      url: `https://vamix.in/insights#${art.slug}`,
-      image: `https://vamix.in${art.image}`,
-      datePublished: '2025-02-01',
-      dateModified: '2025-03-07',
-      author: { '@type': 'Organization', '@id': 'https://vamix.in/#organization', name: 'VAMIX' },
-      publisher: { '@id': 'https://vamix.in/#organization' },
-      articleSection: art.category
-    }))
-  ]
-};
-
-writePage('insights', injectPageData(baseHtml, {
-  slug: 'insights',
-  title: 'Insights & Tech Perspectives | VAMIX Product Studio',
-  description: 'Practical insights on digital product design, web engineering, UI/UX systems, and AI development from VAMIX.',
-  canonical: 'https://vamix.in/insights',
-  schema: insightsSchema,
-  bodyHtml: insightsBodyHtml
-}));
 
 // =============================================================================
 // 6. PRIVACY POLICY PAGE
@@ -839,7 +708,6 @@ const privacyPolicyBodyHtml = `
         <a href="/">Home</a>
         <a href="/services">Services</a>
         <a href="/case-studies">Case Studies</a>
-        <a href="/insights">Insights</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
         <a href="/privacy-policy">Privacy Policy</a>
@@ -994,7 +862,6 @@ const termsOfServiceBodyHtml = `
         <a href="/">Home</a>
         <a href="/services">Services</a>
         <a href="/case-studies">Case Studies</a>
-        <a href="/insights">Insights</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
         <a href="/privacy-policy">Privacy Policy</a>
@@ -1143,7 +1010,6 @@ const homeBodyHtml = `
         <a href="/">Home</a>
         <a href="/services">Services</a>
         <a href="/case-studies">Case Studies</a>
-        <a href="/insights">Insights</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
       </nav>
@@ -1188,13 +1054,7 @@ const homeBodyHtml = `
       <a href="/about">Learn More About VAMIX ↗</a>
     </section>
 
-    <section class="insights-section" id="insights" aria-labelledby="home-insights-title">
-      <h2 id="home-insights-title">LATEST PERSPECTIVES &amp; ARTICLES</h2>
-      <ul>
-        ${insights.map((a) => `<li><a href="/insights#${a.slug}">${a.title}</a> &mdash; ${a.category}</li>`).join('')}
-      </ul>
-      <a href="/insights">Read All Articles ↗</a>
-    </section>
+
 
     <section class="contact-section" id="contact" aria-labelledby="home-contact-title">
       <h2 id="home-contact-title">START YOUR NEXT PROJECT WITH VAMIX</h2>

@@ -134,6 +134,8 @@ export default function App() {
     };
   }, []);
 
+
+
   return (
     <ReactLenis 
       root 
@@ -226,7 +228,7 @@ export default function App() {
         {/* Sub-Footer Legal Bar */}
         <Footer navigate={navigate} />
       </div>
-      <Analytics />
+      {typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' && <Analytics />}
     </ReactLenis>
   );
 }

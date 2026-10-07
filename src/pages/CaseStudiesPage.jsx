@@ -232,9 +232,9 @@ export default function CaseStudiesPage({ navigate }) {
 
                           {/* Mobile inline preview card (visible on screens <= 1199px) */}
                           <div className="cs-mobile-preview-card">
-                            <img src={project.images[1]} alt={`${project.title} project preview`} className="cs-mobile-preview-img" loading="lazy" decoding="async" />
+                            <img src={project.images[1]} alt={`${project.title} project preview`} width="460" height="306" className="cs-mobile-preview-img" loading="lazy" decoding="async" />
                             <div className="cs-mobile-logo-wrap">
-                              <img src={project.images[0]} alt={`${project.title} brand logo`} className="cs-mobile-logo-img" loading="lazy" decoding="async" />
+                              <img src={project.images[0]} alt={`${project.title} brand logo`} width="160" height="70" className="cs-mobile-logo-img" loading="lazy" decoding="async" />
                             </div>
                           </div>
                         </motion.div>
@@ -263,7 +263,9 @@ export default function CaseStudiesPage({ navigate }) {
                       src={currentProject.images[1]}
                       alt={`${currentProject.title} featured showcase`}
                       className="cs-featured-bg-img"
-                      loading="eager"
+                      width="1440"
+                      height="900"
+                      loading="lazy"
                       decoding="async"
                     />
                     <div className="cs-logo-center-badge">
@@ -271,7 +273,9 @@ export default function CaseStudiesPage({ navigate }) {
                         src={currentProject.images[0]}
                         alt={`${currentProject.title} client logo`}
                         className="cs-client-logo-img"
-                        loading="eager"
+                        width="200"
+                        height="80"
+                        loading="lazy"
                         decoding="async"
                       />
                     </div>

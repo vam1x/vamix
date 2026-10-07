@@ -70,7 +70,7 @@ export default function Hero({ navigate }) {
   ];
 
   const clientLogos = [
-    { src: "/projects/real/dv-logo.png", alt: "DV Jewellery Designer", height: 38, width: 154, filter: "brightness(0)" },
+    { src: "/projects/real/dv-logo.webp", srcSet: "/projects/real/dv-logo.webp 1x, /projects/real/dv-logo-2x.webp 2x", alt: "DV Jewellery Designer", height: 38, width: 154, filter: "brightness(0)" },
     { src: "/projects/real/seogram-logo-black.svg", alt: "SEOGram", height: 34, width: 110 },
     { src: "/projects/real/konsept-logo-black.svg", alt: "Konsept", height: 26, width: 85 },
     { src: "/projects/real/fintecc-logo-black.svg", alt: "Fintecc", height: 36, width: 100 },
@@ -113,6 +113,8 @@ export default function Hero({ navigate }) {
         >
           <img
             src="/images/hero-art.webp"
+            srcSet="/images/hero-art-480w.webp 480w, /images/hero-art-640w.webp 640w, /images/hero-art-768w.webp 768w, /images/hero-art-1024w.webp 1024w"
+            sizes="(max-width: 809px) 31vw, 41vw"
             alt="Macro material abstraction"
             className="hero-art-img"
             loading="eager"
@@ -346,8 +348,10 @@ export default function Hero({ navigate }) {
                       <div key={`logo-a-${idx}`} className="hero-ticker-item">
                         <img
                           src={logo.src}
+                          srcSet={logo.srcSet}
                           alt={logo.alt}
                           className="hero-ticker-img"
+                          width={logo.width}
                           height={logo.height}
                           loading="lazy"
                           decoding="async"
@@ -361,9 +365,11 @@ export default function Hero({ navigate }) {
                       <div key={`logo-b-${idx}`} className="hero-ticker-item">
                         <img
                           src={logo.src}
+                          srcSet={logo.srcSet}
                           alt=""
                           aria-hidden="true"
                           className="hero-ticker-img"
+                          width={logo.width}
                           height={logo.height}
                           loading="lazy"
                           decoding="async"

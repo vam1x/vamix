@@ -113,11 +113,13 @@ export default function Approach({ navigate }) {
               <div className="approach-section__visual">
                 <img
                   src="/services/approach-dashboard.webp"
+                  srcSet="/services/approach-dashboard-240w.webp 240w, /services/approach-dashboard.webp 480w"
+                  sizes="(max-width: 768px) 100vw, 300px"
                   alt="VAMIX approach dashboard showing product development workflow"
                   loading="lazy"
                   decoding="async"
-                  width="1672"
-                  height="941"
+                  width="480"
+                  height="270"
                 />
               </div>
             </motion.div>

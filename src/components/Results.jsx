@@ -50,11 +50,10 @@ export default function Results({ navigate }) {
         <img
           src="/projects/real/dv-hero.jpg"
           alt="DV Jewellery Designer luxury digital boutique homepage showing fine jewelry collections"
-          loading="eager"
-          fetchpriority="high"
+          loading="lazy"
           decoding="async"
           width="1440"
-          height="960"
+          height="900"
         />
         <div className="case-section__mask"></div>
       </motion.div>

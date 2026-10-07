@@ -38,7 +38,7 @@ export default function ServiceRow({ service, index, navigate }) {
         <motion.div className="service-visual-group" initial={false}
           animate={{ opacity: active ? 1 : 0, scale: 1 }}
           transition={{ duration: reducedMotion ? 0 : 0.58, delay: active && !reducedMotion ? 0.08 : 0, ease: [0.16, 1, 0.3, 1] }}>
-          <span className="service-visual-logo" /><img src={service.img} alt="" loading="lazy" decoding="async" className="service-visual-photo" />
+          <span className="service-visual-logo" /><img src={service.img} alt="" width="480" height="320" loading="lazy" decoding="async" className="service-visual-photo" />
         </motion.div>
       </div>
     </motion.article>

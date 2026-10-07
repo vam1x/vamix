@@ -8,6 +8,7 @@ import AboutFaq from '../components/about/AboutFaq';
 import AboutBooking from '../components/about/AboutBooking';
 import Contact from '../components/Contact';
 import useSeo from '../hooks/useSeo';
+import '../about-reference.css';
 
 export default function AboutPage({ navigate }) {
   useSeo('about');

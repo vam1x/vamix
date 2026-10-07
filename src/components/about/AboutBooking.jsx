@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import RollingText from '../RollingText';
 import './about-booking.css';
 
-const auroraImage = 'https://framerusercontent.com/images/0iIr9plKeMJd8dBb4O7iHnWw.png?scale-down-to=512&width=676&height=563';
+const auroraImage = '/stats-gradient.webp';
 const rubyImage = '/images/ruby-avatar.webp';
 
 export default function AboutBooking({ navigate }) {
@@ -18,7 +18,7 @@ export default function AboutBooking({ navigate }) {
   return (
     <section className="booking-band" id="swup-booking" aria-labelledby="booking-title">
       <div className="booking-hand" aria-hidden="true">
-        <img src={auroraImage} alt="" loading="lazy" />
+        <img src={auroraImage} alt="" width="676" height="563" loading="lazy" decoding="async" />
       </div>
       <div className="booking-grid" aria-hidden="true">
         <span></span>

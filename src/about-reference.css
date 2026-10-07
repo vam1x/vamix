@@ -54,7 +54,7 @@
   pointer-events: none;
   z-index: 3;
   opacity: .027;
-  background: url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');
+  background: url('/images/film-grain.png');
 }
 
 .about-heading-grid-lines { display: none; }

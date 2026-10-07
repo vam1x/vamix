@@ -2,12 +2,12 @@ import React from 'react';
 
 export default function LogoMarquee() {
   const logos = [
-    { src: "/projects/real/dv-logo.png", alt: "DV Jewellery Designer", height: 38, filter: "brightness(0)" },
-    { src: "/projects/real/seogram-logo-black.svg", alt: "SEOGram", height: 34 },
-    { src: "/projects/real/konsept-logo-black.svg", alt: "Konsept", height: 26 },
-    { src: "/projects/real/fintecc-logo-black.svg", alt: "Fintecc", height: 36 },
-    { src: "/projects/real/shreeji-logo-black.svg", alt: "Shreeji Fashion", height: 38 },
-    { src: "/projects/real/nexode-logo-black.svg", alt: "Nexode", height: 26 }
+    { src: "/projects/real/dv-logo.webp", srcSet: "/projects/real/dv-logo.webp 1x, /projects/real/dv-logo-2x.webp 2x", alt: "DV Jewellery Designer", width: 154, height: 38, filter: "brightness(0)" },
+    { src: "/projects/real/seogram-logo-black.svg", alt: "SEOGram", width: 156, height: 34 },
+    { src: "/projects/real/konsept-logo-black.svg", alt: "Konsept", width: 135, height: 26 },
+    { src: "/projects/real/fintecc-logo-black.svg", alt: "Fintecc", width: 130, height: 36 },
+    { src: "/projects/real/shreeji-logo-black.svg", alt: "Shreeji Fashion", width: 144, height: 38 },
+    { src: "/projects/real/nexode-logo-black.svg", alt: "Nexode", width: 106, height: 26 }
   ];
 
   // Repeat twice for seamless infinite scrolling
@@ -22,8 +22,10 @@ export default function LogoMarquee() {
             <img 
               key={idx} 
               src={logo.src} 
+              srcSet={logo.srcSet}
               alt={isDuplicate ? "" : logo.alt}
               aria-hidden={isDuplicate ? "true" : undefined}
+              width={logo.width}
               height={logo.height || 24}
               loading="lazy"
               decoding="async"

@@ -1,0 +1,10 @@
+# VAMIX
+
+> VAMIX is a digital product studio based in Surat, India. We design and engineer intuitive digital products, scalable web and mobile applications, and AI integrations.
+
+## Core Pages
+- [Home](https://vamix.in/): Custom website development, UI/UX design, and full-stack software solutions.
+- [Services](https://vamix.in/services): Product discovery, design systems, AI products, web & mobile applications.
+- [Case Studies](https://vamix.in/case-studies): Client deliverables and case studies across e-commerce, fintech, and digital products.
+- [About](https://vamix.in/about): Who we are, 10-member studio team, and core disciplines.
+- [Contact](https://vamix.in/contact): Get in touch to start your next digital product.

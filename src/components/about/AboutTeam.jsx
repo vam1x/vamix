@@ -80,8 +80,11 @@ export default function AboutTeam() {
                   <img
                     src={member.img}
                     alt={member.name}
+                    width="725"
+                    height="1024"
                     className="about-team-card-photo"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
 

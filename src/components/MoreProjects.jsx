@@ -162,6 +162,8 @@ export default function MoreProjects({ navigate }) {
                       alt={`${project.title} project showcase`}
                       loading="lazy"
                       decoding="async"
+                      width="460"
+                      height="306"
                       data-case-hover-photo="true"
                       style={{
                         transform: isActive ? 'scale(1.04)' : 'scale(1)',
@@ -174,6 +176,8 @@ export default function MoreProjects({ navigate }) {
                         alt={`${project.title} brand logo`}
                         loading="lazy"
                         decoding="async"
+                        width="160"
+                        height="70"
                         className="case-row__visual-logo"
                       />
                     )}

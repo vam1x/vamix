@@ -16,7 +16,7 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');
+  background: url('/images/film-grain.png');
   opacity: .027;
   pointer-events: none;
 }

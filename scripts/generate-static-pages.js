@@ -827,7 +827,311 @@ writePage('insights', injectPageData(baseHtml, {
 }));
 
 // =============================================================================
-// 6. HOMEPAGE ROOT PRE-RENDERING
+// 6. PRIVACY POLICY PAGE
+// =============================================================================
+const privacyPolicyBodyHtml = `
+  <header class="site-header" role="banner">
+    <div class="header-inner-grid">
+      <div class="header-col-logo">
+        <a href="/" class="brand-logo-link" aria-label="VAMIX Home">VAMIX</a>
+      </div>
+      <nav class="sr-only" aria-label="Main Navigation">
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/case-studies">Case Studies</a>
+        <a href="/insights">Insights</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms-of-service">Terms of Service</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="legal-page">
+    <section class="legal-page__text" aria-labelledby="legal-page-title">
+      <div class="legal-page__container">
+        <div class="legal-page__date">
+          <div class="legal-date-badge">
+            <span class="legal-date-dot" aria-hidden="true"></span>
+            <time dateTime="2026-09-22">SEP 22, 2026</time>
+          </div>
+        </div>
+
+        <div class="legal-page__items">
+          <h1 id="legal-page-title" class="legal-page-title">Privacy policy</h1>
+
+          <div class="legal-page__content">
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">1. WHO WE ARE AND WHAT THIS POLICY COVERS</h2>
+              <p class="legal-paragraph">
+                VAMIX (&ldquo;VAMIX&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) is a full-stack digital product design and development studio based in Surat, Gujarat, India.
+              </p>
+              <p class="legal-paragraph">
+                This policy covers personal information handled through the VAMIX website, including its enquiry and contact forms. It explains what information we collect, why we collect it, how it is handled, and your rights concerning your personal data.
+              </p>
+              <p class="legal-paragraph">
+                For any privacy questions or requests, please email <a href="mailto:vamixlabs@gmail.com" class="legal-link">vamixlabs@gmail.com</a> or call us at <a href="tel:+916359198825" class="legal-link">+91 63591 98825</a>.
+              </p>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">2. INFORMATION YOU GIVE US</h2>
+              <p class="legal-paragraph">
+                When you use our enquiry or contact form, we receive your name and email address. The interactive contact workflow may also collect a company name, information about your product challenges, timeline, and an estimated project budget that you choose to provide.
+              </p>
+              <p class="legal-paragraph">
+                When you contact us regarding potential collaboration or hiring, we receive your name, email address, portfolio or project links, and any introduction or brief you provide. We treat all client concepts, intellectual property, and project briefs under strict professional confidentiality and non-disclosure standards.
+              </p>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">3. WEBSITE USAGE AND TECHNICAL INFORMATION</h2>
+              <p class="legal-paragraph">
+                We collect anonymized telemetry and website analytics to understand visits and interactions with our site. Default collection can include pages viewed, session duration, interaction depth, approximate geographic location, and device/browser technical specifications.
+              </p>
+              <p class="legal-paragraph">
+                Analytics systems use first-party cookies, including a pseudonymous client identifier, to distinguish individual sessions. IP addresses are utilized during initial network collection for packet routing and approximate location, and are anonymized or discarded before being permanently stored.
+              </p>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">4. PROVIDERS WE USE</h2>
+              <ul class="legal-list">
+                <li class="legal-list-item"><strong>Hosting &amp; Edge Delivery:</strong> High-performance cloud hosting provides continuous global uptime, SSL/TLS certificate termination, and edge caching.</li>
+                <li class="legal-list-item"><strong>Form &amp; Notification Infrastructure:</strong> Form submissions are securely parsed and relayed via encrypted webhooks to our internal studio management systems.</li>
+                <li class="legal-list-item"><strong>Spam &amp; Bot Mitigation:</strong> Automated bot-checking mechanisms verify user interaction signals to prevent malicious spam flooding without compromising human experience.</li>
+                <li class="legal-list-item"><strong>Analytics:</strong> Aggregated analytical platforms monitor site speed, engagement metrics, and page conversion flows.</li>
+              </ul>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">5. HOW LONG WE KEEP INFORMATION</h2>
+              <p class="legal-paragraph">
+                Our standard retention policy is to remove routine enquiry emails from our active inbox 12 months after the last communication regarding that enquiry, unless an active client agreement is executed.
+              </p>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">6. YOUR REQUESTS</h2>
+              <p class="legal-paragraph">
+                You may at any time email <a href="mailto:vamixlabs@gmail.com" class="legal-link">vamixlabs@gmail.com</a> to inquire what personal data you have shared with us, request corrections, or request deletion of your information from our communications channels.
+              </p>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">7. SECURITY AND EXTERNAL LINKS</h2>
+              <p class="legal-paragraph">
+                The VAMIX site operates strictly over HTTPS with end-to-end transport layer encryption. While we apply modern industry best practices across our digital infrastructure, no internet transmission is ever completely immune to threats.
+              </p>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">8. CHANGES TO THIS POLICY</h2>
+              <p class="legal-paragraph">
+                We may revise this Privacy Policy periodically as our service offerings evolve or regulatory mandates change. The revised version and updated timestamp will always be published on this page.
+              </p>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">9. CONTACT</h2>
+              <div class="legal-contact-card">
+                <div class="legal-contact-name">VAMIX DIGITAL PRODUCT STUDIO</div>
+                <div class="legal-contact-detail">Surat, Gujarat, India</div>
+                <div class="legal-contact-detail">Phone: <a href="tel:+916359198825">+91 63591 98825</a></div>
+                <div class="legal-contact-detail">Email: <a href="mailto:vamixlabs@gmail.com">vamixlabs@gmail.com</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+`;
+
+const privacyPolicySchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': 'https://vamix.in/privacy-policy#webpage',
+      url: 'https://vamix.in/privacy-policy',
+      name: 'Privacy Policy | VAMIX Digital Product Studio',
+      description: 'Read the Privacy Policy for VAMIX Digital Product Studio. Learn how your data is collected, protected, and handled.',
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vamix.in/' },
+          { '@type': 'ListItem', position: 2, name: 'Privacy Policy', item: 'https://vamix.in/privacy-policy' }
+        ]
+      },
+      about: {
+        '@id': 'https://vamix.in/#organization'
+      }
+    }
+  ]
+};
+
+writePage('privacy-policy', injectPageData(baseHtml, {
+  slug: 'privacy-policy',
+  title: 'Privacy Policy | VAMIX Digital Product Studio',
+  description: 'Read the Privacy Policy for VAMIX Digital Product Studio. Learn how your data is collected, protected, and handled.',
+  canonical: 'https://vamix.in/privacy-policy',
+  schema: privacyPolicySchema,
+  bodyHtml: privacyPolicyBodyHtml
+}));
+
+// =============================================================================
+// 7. TERMS OF SERVICE PAGE
+// =============================================================================
+const termsOfServiceBodyHtml = `
+  <header class="site-header" role="banner">
+    <div class="header-inner-grid">
+      <div class="header-col-logo">
+        <a href="/" class="brand-logo-link" aria-label="VAMIX Home">VAMIX</a>
+      </div>
+      <nav class="sr-only" aria-label="Main Navigation">
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/case-studies">Case Studies</a>
+        <a href="/insights">Insights</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms-of-service">Terms of Service</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="legal-page">
+    <section class="legal-page__text" aria-labelledby="legal-page-title">
+      <div class="legal-page__container">
+        <div class="legal-page__date">
+          <div class="legal-date-badge">
+            <span class="legal-date-dot" aria-hidden="true"></span>
+            <time dateTime="2025-09-17">SEP 17, 2025</time>
+          </div>
+        </div>
+
+        <div class="legal-page__items">
+          <h1 id="legal-page-title" class="legal-page-title">Terms of service</h1>
+
+          <div class="legal-page__content">
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">1. USE OF THE SITE</h2>
+              <p class="legal-paragraph">
+                Welcome to VAMIX. By accessing or using our website, you agree to comply with and be bound by these Terms of Service. You agree to use the Site only for lawful purposes and in compliance with these Terms. You may not:
+              </p>
+              <ul class="legal-list">
+                <li class="legal-list-item">Violate any applicable local, national, or international laws or regulations</li>
+                <li class="legal-list-item">Engage in unauthorized access, automated data extraction, web crawling, scraping, or harvesting of our digital assets</li>
+                <li class="legal-list-item">Disrupt, impair, or interfere with the Site's security, server infrastructure, or overall technical functionality</li>
+                <li class="legal-list-item">Impersonate any person, business entity, or falsely claim affiliation with VAMIX or its partners</li>
+              </ul>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">2. INTELLECTUAL PROPERTY</h2>
+              <p class="legal-paragraph">
+                All content published on this Site—including typography, graphic elements, UX blueprints, code showcases, video animations, brand identities, and layout designs—is the proprietary intellectual property of VAMIX and is protected under applicable copyright and trademark laws.
+              </p>
+              <p class="legal-paragraph">
+                For formal client partnerships, all project deliverables, software architecture, UI kits, design systems, and source code generated during the engagement are transferred 100% to the client upon full milestone sign-off and payment completion, as stipulated in our Master Services Agreement.
+              </p>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">3. SERVICE AVAILABILITY</h2>
+              <p class="legal-paragraph">
+                We strive to maintain continuous uptime and exceptional performance across our website. However, we do not guarantee that the site will always be available without disruption or error-free. We reserve the right to revise, update, suspend, or discontinue any feature or content at our discretion without prior notice.
+              </p>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">4. LIMITATION OF LIABILITY</h2>
+              <p class="legal-paragraph">
+                To the fullest extent permitted by applicable law, VAMIX and its founders, employees, and affiliates will not be liable for any direct, indirect, incidental, or consequential damages arising from your access to or use of the Site.
+              </p>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">5. THIRD-PARTY SERVICES</h2>
+              <p class="legal-paragraph">
+                Our Site may feature case studies containing links to external third-party applications, client production domains, or design references. We do not endorse or take responsibility for the terms, security practices, or content of any third-party websites.
+              </p>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">6. INDEMNIFICATION</h2>
+              <p class="legal-paragraph">
+                You agree to defend, indemnify, and hold harmless VAMIX, its directors, officers, employees, and agents from any claims, liabilities, costs, damages, or expenses resulting from your breach of these Terms or misuse of the Site.
+              </p>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">7. GOVERNING LAW</h2>
+              <p class="legal-paragraph">
+                These Terms of Service are governed by and construed in accordance with the laws of India. Any dispute or claim arising out of or related to these Terms shall be subject to the exclusive jurisdiction of the competent courts of Surat, Gujarat, India.
+              </p>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">8. CHANGES TO THESE TERMS</h2>
+              <p class="legal-paragraph">
+                We reserve the right to amend or replace these Terms at any time. When modifications are made, the revised date at the top of this page will be updated. Your continued use of the Site following any changes indicates your agreement to the new Terms.
+              </p>
+            </div>
+
+            <div class="legal-section-block">
+              <h2 class="legal-section-title">9. CONTACT US</h2>
+              <div class="legal-contact-card">
+                <div class="legal-contact-name">VAMIX DIGITAL PRODUCT STUDIO</div>
+                <div class="legal-contact-detail">Surat, Gujarat, India</div>
+                <div class="legal-contact-detail">Phone: <a href="tel:+916359198825">+91 63591 98825</a></div>
+                <div class="legal-contact-detail">Email: <a href="mailto:vamixlabs@gmail.com">vamixlabs@gmail.com</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+`;
+
+const termsOfServiceSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': 'https://vamix.in/terms-of-service#webpage',
+      url: 'https://vamix.in/terms-of-service',
+      name: 'Terms of Service | VAMIX Digital Product Studio',
+      description: 'Review the terms and conditions governing project engagement, design services, and development with VAMIX.',
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vamix.in/' },
+          { '@type': 'ListItem', position: 2, name: 'Terms of Service', item: 'https://vamix.in/terms-of-service' }
+        ]
+      },
+      about: {
+        '@id': 'https://vamix.in/#organization'
+      }
+    }
+  ]
+};
+
+writePage('terms-of-service', injectPageData(baseHtml, {
+  slug: 'terms-of-service',
+  title: 'Terms of Service | VAMIX Digital Product Studio',
+  description: 'Review the terms and conditions governing project engagement, design services, and development with VAMIX.',
+  canonical: 'https://vamix.in/terms-of-service',
+  schema: termsOfServiceSchema,
+  bodyHtml: termsOfServiceBodyHtml
+}));
+
+// =============================================================================
+// 8. HOMEPAGE ROOT PRE-RENDERING
 // =============================================================================
 const homeBodyHtml = `
   <header class="site-header" role="banner">

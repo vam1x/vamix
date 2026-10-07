@@ -16,15 +16,22 @@ export default function LogoMarquee() {
   return (
     <div className="trust-marquee-wrapper" aria-label="Trusted by industry leaders">
       <div className="trust-marquee-track">
-        {fullList.map((logo, idx) => (
-          <img 
-            key={idx} 
-            src={logo.src} 
-            alt={logo.alt} 
-            className="trust-brand-logo" 
-            style={{ height: `${logo.height || 24}px`, width: 'auto', filter: logo.filter || 'none' }}
-          />
-        ))}
+        {fullList.map((logo, idx) => {
+          const isDuplicate = idx >= logos.length;
+          return (
+            <img 
+              key={idx} 
+              src={logo.src} 
+              alt={isDuplicate ? "" : logo.alt}
+              aria-hidden={isDuplicate ? "true" : undefined}
+              height={logo.height || 24}
+              loading="lazy"
+              decoding="async"
+              className="trust-brand-logo" 
+              style={{ height: `${logo.height || 24}px`, width: 'auto', filter: logo.filter || 'none' }}
+            />
+          );
+        })}
       </div>
     </div>
   );

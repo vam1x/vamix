@@ -128,6 +128,7 @@ export default function HowWeDoIt({ navigate }) {
               <a
                 className="cta-block"
                 href="#contact"
+                aria-label="Start your project"
                 onClick={(e) => {
                   e.preventDefault();
                   navigate?.('contact');
@@ -189,7 +190,7 @@ export default function HowWeDoIt({ navigate }) {
 
           <div ref={delayRef} className="delay-cards" role="list">
             {delayCards.map((card, idx) => (
-              <article key={idx} className="delay-card" role="listitem">
+              <div key={idx} className="delay-card" role="listitem">
                 <div
                   className="delay-card__fill"
                   style={{
@@ -208,7 +209,7 @@ export default function HowWeDoIt({ navigate }) {
                 <div className="delay-card__metric">
                   <span>{card.metric}</span>
                 </div>
-              </article>
+              </div>
             ))}
           </div>
         </section>

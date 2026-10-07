@@ -68,7 +68,7 @@ export default function MoreProjects({ navigate }) {
           {projects.map((project, idx) => {
             const isActive = activeIdx === idx;
             return (
-              <article
+              <div
                 key={idx}
                 className={`case-row ${isActive ? 'is-active' : ''}`}
                 role="listitem"
@@ -79,7 +79,7 @@ export default function MoreProjects({ navigate }) {
                   }
                 }}
               >
-                <header
+                <div
                   className="case-row__heading"
                   role="button"
                   tabIndex={0}
@@ -104,7 +104,7 @@ export default function MoreProjects({ navigate }) {
                       <polyline points="6 9 12 15 18 9" />
                     </svg>
                   </span>
-                </header>
+                </div>
 
                 <div
                   className="case-row__reveal"
@@ -199,7 +199,7 @@ export default function MoreProjects({ navigate }) {
                 >
                   VIEW CASE STUDY
                 </a>
-              </article>
+              </div>
             );
           })}
         </div>

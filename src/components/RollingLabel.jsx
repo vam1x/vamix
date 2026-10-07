@@ -6,9 +6,12 @@ import React from 'react';
  */
 export default function RollingLabel({ text, className = '' }) {
   return (
-    <span className={`rolling-label ${className}`} aria-hidden="true">
-      <span className="rolling-label__copy">{text}</span>
-      <span className="rolling-label__copy rolling-label__copy--ghost">{text}</span>
-    </span>
+    <>
+      <span className="sr-only">{text}</span>
+      <span className={`rolling-label ${className}`} aria-hidden="true">
+        <span className="rolling-label__copy">{text}</span>
+        <span className="rolling-label__copy rolling-label__copy--ghost">{text}</span>
+      </span>
+    </>
   );
 }

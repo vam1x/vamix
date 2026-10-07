@@ -62,20 +62,20 @@ export default function Hero({ navigate }) {
   }, []);
 
   const avatars = [
-    "/images/avatars/client-avatar-1.jpg",
-    "/images/avatars/client-avatar-2.jpg",
-    "/images/avatars/client-avatar-3.jpg",
-    "/images/avatars/client-avatar-4.jpg",
-    "/images/avatars/client-avatar-5.jpg"
+    "/images/avatars/client-avatar-1.webp",
+    "/images/avatars/client-avatar-2.webp",
+    "/images/avatars/client-avatar-3.webp",
+    "/images/avatars/client-avatar-4.webp",
+    "/images/avatars/client-avatar-5.webp"
   ];
 
   const clientLogos = [
-    { src: "/projects/real/dv-logo.png", alt: "DV Jewellery Designer", height: 38, filter: "brightness(0)" },
-    { src: "/projects/real/seogram-logo-black.svg", alt: "SEOGram", height: 34 },
-    { src: "/projects/real/konsept-logo-black.svg", alt: "Konsept", height: 26 },
-    { src: "/projects/real/fintecc-logo-black.svg", alt: "Fintecc", height: 36 },
-    { src: "/projects/real/shreeji-logo-black.svg", alt: "Shreeji Fashion", height: 38 },
-    { src: "/projects/real/nexode-logo-black.svg", alt: "Nexode", height: 26 }
+    { src: "/projects/real/dv-logo.png", alt: "DV Jewellery Designer", height: 38, width: 154, filter: "brightness(0)" },
+    { src: "/projects/real/seogram-logo-black.svg", alt: "SEOGram", height: 34, width: 110 },
+    { src: "/projects/real/konsept-logo-black.svg", alt: "Konsept", height: 26, width: 85 },
+    { src: "/projects/real/fintecc-logo-black.svg", alt: "Fintecc", height: 36, width: 100 },
+    { src: "/projects/real/shreeji-logo-black.svg", alt: "Shreeji Fashion", height: 38, width: 120 },
+    { src: "/projects/real/nexode-logo-black.svg", alt: "Nexode", height: 26, width: 85 }
   ];
 
   const springConfig = {
@@ -117,6 +117,7 @@ export default function Hero({ navigate }) {
             className="hero-art-img"
             loading="eager"
             fetchpriority="high"
+            decoding="async"
             width="1024"
             height="1536"
           />
@@ -146,7 +147,15 @@ export default function Hero({ navigate }) {
               <div className="hero-avatars" data-framer-name="Avatars">
                 {avatars.map((url, i) => (
                   <div key={i} className="hero-avatar-shell" style={{ zIndex: 10 - i }}>
-                    <img src={url} alt={`Verified Client ${i + 1}`} className="hero-avatar-photo" />
+                    <img
+                      src={url}
+                      alt={`Verified Client ${i + 1}`}
+                      className="hero-avatar-photo"
+                      width="30"
+                      height="30"
+                      loading="eager"
+                      decoding="async"
+                    />
                   </div>
                 ))}
               </div>
@@ -339,6 +348,9 @@ export default function Hero({ navigate }) {
                           src={logo.src}
                           alt={logo.alt}
                           className="hero-ticker-img"
+                          height={logo.height}
+                          loading="lazy"
+                          decoding="async"
                           style={{ height: `${logo.height}px`, width: 'auto', filter: logo.filter || 'none' }}
                         />
                       </div>
@@ -349,8 +361,12 @@ export default function Hero({ navigate }) {
                       <div key={`logo-b-${idx}`} className="hero-ticker-item">
                         <img
                           src={logo.src}
-                          alt={logo.alt}
+                          alt=""
+                          aria-hidden="true"
                           className="hero-ticker-img"
+                          height={logo.height}
+                          loading="lazy"
+                          decoding="async"
                           style={{ height: `${logo.height}px`, width: 'auto', filter: logo.filter || 'none' }}
                         />
                       </div>

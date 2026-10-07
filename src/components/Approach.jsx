@@ -183,6 +183,7 @@ export default function Approach({ navigate }) {
                 <a
                   className="services-cta"
                   href="/case-studies"
+                  aria-label="Our Case Studies"
                   onClick={(e) => {
                     if (navigate) {
                       e.preventDefault();
@@ -195,6 +196,7 @@ export default function Approach({ navigate }) {
                 <a
                   className="services-cta services-cta--secondary"
                   href="/services"
+                  aria-label="All Services"
                   onClick={(e) => {
                     if (navigate) {
                       e.preventDefault();
@@ -211,7 +213,7 @@ export default function Approach({ navigate }) {
           {/* 6 Services Grid Items */}
           <div className="services-grid" role="list">
             {services.map((svc) => (
-              <motion.article
+              <motion.div
                 className="service-card"
                 key={svc.num}
                 role="listitem"
@@ -262,7 +264,7 @@ export default function Approach({ navigate }) {
                     </div>
                   </div>
                 </div>
-              </motion.article>
+              </motion.div>
             ))}
           </div>
         </section>

@@ -421,10 +421,10 @@ servicesHtml = servicesHtml.replace(
 const schemaTag = `\n  <script type="application/ld+json" id="services-page-schema">\n${JSON.stringify(servicesSchema, null, 2)}\n  </script>\n</head>`;
 servicesHtml = servicesHtml.replace(/<\/head>/i, schemaTag);
 
-// 7. Inject crawlable HTML into <div id="root"></div>
+// 7. Inject crawlable HTML into <noscript>
 servicesHtml = servicesHtml.replace(
-  /<div id="root"><\/div>/i,
-  `<div id="root">${servicesCrawlableHtml}</div>`
+  /<div id="root">[\s\S]*?<\/div>(\s*<noscript>[\s\S]*?<\/noscript>)?/i,
+  `<div id="root"></div>\n  <noscript>\n${servicesCrawlableHtml}\n  </noscript>`
 );
 
 // Write to dist/services/index.html

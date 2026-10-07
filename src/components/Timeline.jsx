@@ -39,54 +39,6 @@ export default function Timeline() {
         showTopLine={true}
       />
 
-      {/* JSON-LD Structured Data for Company Milestones */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "@id": "https://vamix.in/#organization",
-            "name": "VAMIX",
-            "foundingDate": "2023",
-            "location": {
-              "@type": "Place",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Surat",
-                "addressRegion": "Gujarat",
-                "addressCountry": "IN"
-              }
-            },
-            "hasHistory": [
-              {
-                "@type": "Event",
-                "name": "Founded in Surat",
-                "startDate": "2023",
-                "description": "Founded in Surat to solve real design problems"
-              },
-              {
-                "@type": "Event",
-                "name": "Opened Tennessee Office",
-                "startDate": "2024",
-                "description": "Opened Tennessee office to serve US clients"
-              },
-              {
-                "@type": "Event",
-                "name": "21+ Successful Client Projects",
-                "startDate": "2025",
-                "description": "Crossed 21+ successful client projects milestone"
-              },
-              {
-                "@type": "Event",
-                "name": "Scaling Global Impact",
-                "startDate": "2026",
-                "description": "Scaling global impact and next-gen digital products"
-              }
-            ]
-          })
-        }}
-      />
 
       <div className="belief-section__inner">
         {/* Upper 4-Column Row: Founder Profile, Quote Glyph & Manifesto Statement */}

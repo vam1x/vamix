@@ -102,13 +102,13 @@ export default function Hero({ navigate }) {
         <motion.div
           className="hero-art-img-wrapper"
           style={{ transformOrigin: 'center center' }}
-          initial={{ opacity: 0.001, scale: 1.4 }}
+          initial={{ opacity: 0, scale: 1.08 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{
             type: 'tween',
-            duration: 1.6,
+            duration: 0.9,
             delay: 0,
-            ease: [0.68, 0, 0, 1]
+            ease: [0.16, 1, 0.3, 1]
           }}
         >
           <img
@@ -138,11 +138,11 @@ export default function Hero({ navigate }) {
             <motion.div
               className="hero-social-proof"
               data-framer-name="Container"
-              initial={{ opacity: 1, y: 40 }}
+              initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 ...springConfig,
-                delay: isMobile ? 0.4 : 0.2
+                delay: isMobile ? 0.15 : 0.05
               }}
             >
               {/* Avatars */}
@@ -182,11 +182,11 @@ export default function Hero({ navigate }) {
             <h1 className="sr-only">DESIGN THAT CONVERTS</h1>
             <motion.div
               className="hero-h1-dual-container"
-              initial={{ opacity: 0, y: isMobile ? 25 : 40 }}
+              initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 ...springConfig,
-                delay: isMobile ? 0.2 : 0.1
+                delay: isMobile ? 0.1 : 0.05
               }}
             >
               <svg 
@@ -229,11 +229,11 @@ export default function Hero({ navigate }) {
             <div className="hero-secondary-content" data-framer-name="Text">
               <motion.div
                 className="hero-code-ships-wrap"
-                initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
+                initial={{ opacity: 0, y: isMobile ? 15 : 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
                   ...springConfig,
-                  delay: isMobile ? 0.3 : 0.1
+                  delay: isMobile ? 0.18 : 0.08
                 }}
               >
                 <svg 
@@ -254,11 +254,11 @@ export default function Hero({ navigate }) {
 
               <motion.p
                 className="hero-statement"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
                   ...springConfig,
-                  delay: isMobile ? 0.5 : 0.25
+                  delay: isMobile ? 0.22 : 0.12
                 }}
               >
                 One team designs your product and builds it. No handoffs, no lost intent.
@@ -283,11 +283,11 @@ export default function Hero({ navigate }) {
               }}
               className="hero-pill-btn hero-pill-black"
               data-framer-name="Desktop"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 ...springConfig,
-                delay: 0.6
+                delay: isMobile ? 0.25 : 0.15
               }}
             >
               <div className="hero-btn-roll-track" data-framer-name="Container">
@@ -310,11 +310,11 @@ export default function Hero({ navigate }) {
               }}
               className="hero-pill-btn hero-pill-white"
               data-framer-name="Desktop"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 ...springConfig,
-                delay: isMobile ? 0.7 : 0.65
+                delay: isMobile ? 0.28 : 0.18
               }}
             >
               <div className="hero-btn-roll-track" data-framer-name="Container">
@@ -334,11 +334,11 @@ export default function Hero({ navigate }) {
             <motion.div
               className="hero-ticker-container"
               data-framer-name="Ticker"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 ...springConfig,
-                delay: 0.5
+                delay: isMobile ? 0.3 : 0.2
               }}
             >
               <div className="hero-ticker-mask">

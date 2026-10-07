@@ -155,10 +155,10 @@ function injectPageData(base, config) {
     html = html.replace(/<\/head>/i, schemaTag);
   }
 
-  // Inject crawlable body inside <div id="root">
+  // Inject crawlable body inside <noscript> so crawlers can index it, while JS-enabled browsers never display raw unstyled HTML
   html = html.replace(
-    /<div id=["']root["']><\/div>/i,
-    `<div id="root">\n${config.bodyHtml}\n</div>`
+    /<div id=["']root["']>[\s\S]*?<\/div>(\s*<noscript>[\s\S]*?<\/noscript>)?/i,
+    `<div id="root"></div>\n  <noscript>\n${config.bodyHtml}\n  </noscript>`
   );
 
   return html;
@@ -1066,8 +1066,8 @@ const homeBodyHtml = `
 `;
 
 const updatedHomeHtml = baseHtml.replace(
-  /<div id=["']root["']><\/div>/i,
-  `<div id="root">\n${homeBodyHtml}\n</div>`
+  /<div id=["']root["']>[\s\S]*?<\/div>(\s*<noscript>[\s\S]*?<\/noscript>)?/i,
+  `<div id="root"></div>\n  <noscript>\n${homeBodyHtml}\n  </noscript>`
 );
 fs.writeFileSync(distHtmlPath, updatedHomeHtml, 'utf-8');
 console.log('Pre-rendered static HTML for homepage: /');

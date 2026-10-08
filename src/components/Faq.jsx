@@ -1,5 +1,6 @@
+import FaqAnswer from './FaqAnswer';
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import SectionGrid from './SectionGrid';
 
 export default function Faq({ navigate }) {
@@ -78,6 +79,9 @@ export default function Faq({ navigate }) {
             return (
               <div key={idx} className={`about-faq-item ${isOpen ? 'active' : ''}`}>
                 <button 
+                  type="button"
+                  id={`home-faq-question-${idx}`}
+                  aria-controls={`home-faq-answer-${idx}`}
                   className="about-faq-trigger"
                   onClick={() => setOpenIndex(isOpen ? -1 : idx)}
                   aria-expanded={isOpen}
@@ -86,22 +90,16 @@ export default function Faq({ navigate }) {
                     <span className="faq-index-pill">0{idx + 1}</span>
                     <span className="faq-question-text">{faq.q}</span>
                   </div>
-                  <span className="faq-icon-cross">{isOpen ? '−' : '+'}</span>
+                  <span className="faq-icon-cross" aria-hidden="true" />
                 </button>
 
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div 
-                      className="about-faq-answer-wrapper"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                      <p className="about-faq-answer-text">{faq.a}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <FaqAnswer
+                  isOpen={isOpen}
+                  id={`home-faq-answer-${idx}`}
+                  labelledBy={`home-faq-question-${idx}`}
+                >
+                  {faq.a}
+                </FaqAnswer>
               </div>
             );
           })}

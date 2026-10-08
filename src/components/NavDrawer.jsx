@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import RollingText from './RollingText';
 import VamixLogo from './VamixLogo';
 
 export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
+  const reducedMotion = useReducedMotion();
   const dialogRef = useRef(null);
   const previousActiveElement = useRef(null);
 
@@ -16,11 +17,11 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
         'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );
       if (focusableElements?.length) {
-        focusableElements[0].focus();
+        focusableElements[0].focus({ preventScroll: true });
       }
     } else if (previousActiveElement.current) {
       // Restore focus to the trigger element
-      previousActiveElement.current.focus();
+      previousActiveElement.current.focus({ preventScroll: true });
     }
   }, [isOpen]);
 
@@ -111,66 +112,54 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
     }
   };
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 809;
   const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1200;
 
   const cardVariants = {
-    initial: (desktop) => ({
-      opacity: 0,
-      y: desktop ? -56 : -18,
-      rotateX: desktop ? -18 : 0,
-      scale: desktop ? 0.95 : 0.98,
-    }),
-    animate: {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      scale: 1,
-      transition: {
-        duration: isDesktop ? 0.42 : 0.28,
-        ease: [0.16, 1, 0.3, 1],
-        staggerChildren: isDesktop ? 0.04 : 0,
-        delayChildren: isDesktop ? 0.05 : 0
-      }
+    initial: {
+      y: reducedMotion ? 0 : -28,
+      rotateX: reducedMotion ? 0 : -35,
+      rotateY: reducedMotion || !isDesktop ? 0 : 8,
+      opacity: 0
     },
-    exit: (desktop) => ({
+    animate: {
+      y: 0, rotateX: 0, rotateY: 0, opacity: 1,
+      transition: { duration: reducedMotion ? 0 : 0.42, ease: [0.16, 1, 0.3, 1] }
+    },
+    exit: {
+      y: reducedMotion ? 0 : -28,
+      rotateX: reducedMotion ? 0 : -35,
+      rotateY: reducedMotion || !isDesktop ? 0 : 8,
       opacity: 0,
-      y: desktop ? -36 : -14,
-      rotateX: desktop ? -12 : 0,
-      scale: desktop ? 0.96 : 0.98,
-      transition: {
-        duration: isDesktop ? 0.28 : 0.22,
-        ease: [0.25, 0.1, 0.25, 1]
-      }
-    })
-  };
-
-  const itemVariants = {
-    initial: { opacity: 0, y: isDesktop ? -8 : 0 },
-    animate: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } 
+      transition: { duration: reducedMotion ? 0 : 0.28, ease: [0.4, 0, 1, 1] }
     }
   };
 
+  // Keep the content attached to the folding panel instead of fading it separately.
+  const itemVariants = {};
+
   return (
-    <AnimatePresence>
+    <AnimatePresence initial={false}>
       {isOpen && (
-        <>
-          {/* Subtle click-outside backdrop overlay */}
           <motion.div
+            key="menu-backdrop"
             className="nav-drawer-backdrop"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: reducedMotion ? 0 : 0.28 }}
             aria-hidden="true"
           />
-
-          {/* 3D Perspective Shell matching webus.in exactly */}
-          <div className="menu-shell-container" aria-hidden={!isOpen}>
+      )}
+      {isOpen && (
+          <motion.div
+            key="menu-shell"
+            className="menu-shell-container"
+            aria-hidden={!isOpen}
+            style={{ pointerEvents: isOpen ? undefined : "none" }}
+            exit={{ opacity: 1 }}
+            transition={{ duration: reducedMotion ? 0 : 0.28 }}
+          >
             <button 
               className="menu-filler" 
               type="button" 
@@ -248,8 +237,7 @@ export default function NavDrawer({ isOpen, onClose, currentRoute, navigate }) {
                 <a href="https://www.instagram.com/vamix" target="_blank" rel="noopener noreferrer" className="nav-card-social-link" role="listitem">IG</a>
               </motion.div>
             </motion.div>
-          </div>
-        </>
+          </motion.div>
       )}
     </AnimatePresence>
   );

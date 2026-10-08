@@ -1,3 +1,4 @@
+import RevealHeading from './RevealHeading';
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import RollingText from './RollingText';
@@ -188,13 +189,7 @@ export default function ContactPage({ navigate }) {
           {/* Columns 2-4: Main Headline */}
           <div className="contact-hero-copy">
             <h1 id="contact-hero-heading">
-              <motion.span
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-              >
-                LET&rsquo;S BUILD YOUR NEXT PRODUCT
-              </motion.span>
+              <RevealHeading text="LET’S BUILD YOUR NEXT PRODUCT" />
             </h1>
           </div>
         </div>

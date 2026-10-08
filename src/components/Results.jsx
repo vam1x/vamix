@@ -99,6 +99,7 @@ export default function Results({ navigate }) {
                 <dd>Standard digital catalog lacked tactile prestige, suppressing high-ticket custom conversions</dd>
               </div>
             </dl>
+          </div>
 
             <a
               className="cta-block case-section__cta"
@@ -151,11 +152,11 @@ export default function Results({ navigate }) {
                 </strong>
               </div>
             </div>
-          </div>
         </article>
 
         {/* Right Column: Immersive Quote & Glyph */}
         <figure className="case-section__quote" aria-labelledby="quote-text">
+          <div className="case-section__quote-body">
           <svg
             className="case-section__quote-glyph"
             width="88"
@@ -176,6 +177,7 @@ export default function Results({ navigate }) {
               theme="dark"
             />
           </blockquote>
+          </div>
 
           <figcaption>
             <div className="case-section__quote-lines">

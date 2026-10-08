@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useLayoutEffect } from 'react';
 import { ReactLenis, useLenis } from 'lenis/react';
 import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header';
@@ -16,13 +16,13 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import useSeo from './hooks/useSeo';
 
-const AboutPage = React.lazy(() => import('./pages/AboutPage'));
-const CaseStudiesPage = React.lazy(() => import('./pages/CaseStudiesPage'));
-const ServicesPage = React.lazy(() => import('./pages/ServicesPage'));
-const PrivacyPolicyPage = React.lazy(() => import('./pages/PrivacyPolicyPage'));
-const TermsOfServicePage = React.lazy(() => import('./pages/TermsOfServicePage'));
-const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage'));
-const ContactPage = React.lazy(() => import('./components/ContactPage'));
+import AboutPage from './pages/AboutPage';
+import CaseStudiesPage from './pages/CaseStudiesPage';
+import ServicesPage from './pages/ServicesPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsOfServicePage from './pages/TermsOfServicePage';
+import NotFoundPage from './pages/NotFoundPage';
+import ContactPage from './components/ContactPage';
 
 export default function App() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -176,7 +176,7 @@ export default function App() {
 
         {/* Main Content Area */}
         <main id="main-content" tabIndex={-1}>
-          <React.Suspense fallback={null}>
+          {/* Route modules are loaded up front so navigation never renders an empty page. */}
             {currentRoute === 'privacy-policy' ? (
               <PrivacyPolicyPage navigate={navigate} />
             ) : currentRoute === 'terms-of-service' ? (
@@ -222,7 +222,7 @@ export default function App() {
                 <Contact navigate={navigate} />
               </>
             )}
-          </React.Suspense>
+
         </main>
 
         {/* Sub-Footer Legal Bar */}

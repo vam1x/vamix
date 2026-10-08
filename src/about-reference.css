@@ -502,7 +502,8 @@
   line-height: .9;
   letter-spacing: -5px;
 }
-.about-faq-accordion { width: 75%; margin: 0 0 0 25%; border-top: 1px solid rgba(23,23,23,.08); }
+/* Mask the section grid only behind questions 1–5 and their answers. */
+.about-faq-accordion { background-color: #f5f5f5; box-shadow: -1px 0 0 rgba(23,23,23,.065); width: 75%; margin: 0 0 0 25%; border-top: 1px solid rgba(23,23,23,.08); }
 .about-faq-item { border-color: rgba(23,23,23,.08); }
 .about-faq-trigger {
   box-sizing: border-box;
@@ -721,3 +722,6 @@
   .about-support-quote { margin-bottom: 30px; font-size: 14px; line-height: 20px; }
   .about-support-avatar { width: 42px; height: 42px; }
 }
+
+/* The shared FAQ supplies its own grid on every page. */
+.about-page-wrapper > .faq-section::before { background: none; }

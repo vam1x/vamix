@@ -590,10 +590,9 @@
 .services-page-wrapper::after { content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none; background: url('/images/services/grain.png') repeat; opacity: .035; }
 .services-page-wrapper .section-content { padding: 0; }
 .services-hero .display-heading { word-break: normal; }
-.services-hero .display-heading > .services-reveal { display: block; }
+.services-hero .display-heading > .hero-reveal { display: block; }
 .services-hero .display-heading__muted { color: rgba(23,23,23,.6); }
-.services-reveal-word { display: inline-block; white-space: nowrap; overflow: hidden; vertical-align: top; }
-.services-reveal-word > span { display: inline-block; }
+
 .services-page-wrapper .service-row {
   padding: 0 0 14px;
   align-items: flex-start;

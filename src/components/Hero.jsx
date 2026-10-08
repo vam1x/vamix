@@ -1,11 +1,13 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
+import { motion, useAnimationControls, useReducedMotion } from 'framer-motion';
 import SectionGrid from './SectionGrid';
 
 export default function Hero({ navigate }) {
   const panelRef = useRef(null);
   const h1ContainerRef = useRef(null);
-  const [isHeroPulsing, setIsHeroPulsing] = useState(false);
+  const controls = useAnimationControls();
+  const reducedMotion = useReducedMotion();
+  const lastEntrance = useRef(0);
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.matchMedia('(max-width: 809.98px)').matches;
@@ -14,21 +16,21 @@ export default function Hero({ navigate }) {
   });
 
   useEffect(() => {
-    let timeoutId;
-    const handleHeroActivate = () => {
-      setIsHeroPulsing(true);
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        setIsHeroPulsing(false);
-      }, 1200);
+    const playEntrance = () => {
+      // Home navigation can emit twice; never restart an entrance already in flight.
+      const now = performance.now();
+      if (now - lastEntrance.current < 1400 && lastEntrance.current) return;
+      lastEntrance.current = now;
+      controls.set('hidden');
+      controls.start('visible');
     };
-
-    window.addEventListener('vamix:hero-activate', handleHeroActivate);
+    const frame = requestAnimationFrame(playEntrance);
+    window.addEventListener('vamix:hero-activate', playEntrance);
     return () => {
-      window.removeEventListener('vamix:hero-activate', handleHeroActivate);
-      clearTimeout(timeoutId);
+      cancelAnimationFrame(frame);
+      window.removeEventListener('vamix:hero-activate', playEntrance);
     };
-  }, []);
+  }, [controls, reducedMotion]);
 
   const [splitRatio, setSplitRatio] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -38,7 +40,7 @@ export default function Hero({ navigate }) {
     return 0.40;
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const updateSplit = () => {
       if (panelRef.current && h1ContainerRef.current) {
         const pRect = panelRef.current.getBoundingClientRect();
@@ -53,9 +55,13 @@ export default function Hero({ navigate }) {
       }
     };
     updateSplit();
+    const observer = new ResizeObserver(updateSplit);
+    if (h1ContainerRef.current) observer.observe(h1ContainerRef.current);
+    if (panelRef.current) observer.observe(panelRef.current);
     window.addEventListener('resize', updateSplit);
     window.addEventListener('orientationchange', updateSplit);
     return () => {
+      observer.disconnect();
       window.removeEventListener('resize', updateSplit);
       window.removeEventListener('orientationchange', updateSplit);
     };
@@ -85,12 +91,23 @@ export default function Hero({ navigate }) {
     mass: 0.3
   };
 
+  const entrance = (y, delay, scale = 1) => ({
+    initial: 'hidden',
+    animate: controls,
+    variants: {
+      hidden: { opacity: reducedMotion ? 1 : 0, y: reducedMotion ? 0 : y, scale: reducedMotion ? 1 : scale },
+      visible: { opacity: 1, y: 0, scale: 1, transition: reducedMotion
+        ? { duration: 0 }
+        : { ...springConfig, delay, opacity: { duration: 0.3, delay } } }
+    }
+  });
+
   const svgSplitX = splitRatio * 1120;
   const clipX = isMobile ? svgSplitX : 0;
   const clipWidth = isMobile ? Math.max(0, 1120 - svgSplitX) : svgSplitX;
 
   return (
-    <section className={`webus-hero ${isHeroPulsing ? 'hero-is-activating' : ''}`} id="hero" data-framer-name="Hero">
+    <section className="webus-hero" id="hero" data-framer-name="Hero">
       {/* Background Blueprint Grid Guides (5 Lines / 4 Columns with Crosshairs) */}
       <SectionGrid
         theme="light"
@@ -102,14 +119,7 @@ export default function Hero({ navigate }) {
         <motion.div
           className="hero-art-img-wrapper"
           style={{ transformOrigin: 'center center' }}
-          initial={{ opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            type: 'tween',
-            duration: 0.9,
-            delay: 0,
-            ease: [0.16, 1, 0.3, 1]
-          }}
+          {...entrance(0, 0.1, 1.4)}
         >
           <img
             src="/images/hero-art.webp"
@@ -138,12 +148,7 @@ export default function Hero({ navigate }) {
             <motion.div
               className="hero-social-proof"
               data-framer-name="Container"
-              initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                ...springConfig,
-                delay: isMobile ? 0.15 : 0.05
-              }}
+              {...entrance(40, isMobile ? 0.4 : 0.1)}
             >
               {/* Avatars */}
               <div className="hero-avatars" data-framer-name="Avatars">
@@ -182,12 +187,7 @@ export default function Hero({ navigate }) {
             <h1 className="sr-only">DESIGN THAT CONVERTS</h1>
             <motion.div
               className="hero-h1-dual-container"
-              initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                ...springConfig,
-                delay: isMobile ? 0.1 : 0.05
-              }}
+              {...entrance(isMobile ? 70 : 150, isMobile ? 0.2 : 0.1)}
             >
               <svg 
                 className="hero-fit-text hero-fit-text-title" 
@@ -229,12 +229,7 @@ export default function Hero({ navigate }) {
             <div className="hero-secondary-content" data-framer-name="Text">
               <motion.div
                 className="hero-code-ships-wrap"
-                initial={{ opacity: 0, y: isMobile ? 15 : 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  ...springConfig,
-                  delay: isMobile ? 0.18 : 0.08
-                }}
+                {...entrance(isMobile ? -25 : -40, 0.4)}
               >
                 <svg 
                   className="hero-fit-text hero-fit-text-code" 
@@ -254,12 +249,7 @@ export default function Hero({ navigate }) {
 
               <motion.p
                 className="hero-statement"
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  ...springConfig,
-                  delay: isMobile ? 0.22 : 0.12
-                }}
+                {...entrance(16, 0.55)}
               >
                 One team designs your product and builds it. No handoffs, no lost intent.
               </motion.p>
@@ -283,12 +273,7 @@ export default function Hero({ navigate }) {
               }}
               className="hero-pill-btn hero-pill-black"
               data-framer-name="Desktop"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                ...springConfig,
-                delay: isMobile ? 0.25 : 0.15
-              }}
+              {...entrance(20, 0.75)}
             >
               <div className="hero-btn-roll-track" data-framer-name="Container">
                 <span className="hero-btn-roll-text hero-btn-roll-top">
@@ -310,12 +295,7 @@ export default function Hero({ navigate }) {
               }}
               className="hero-pill-btn hero-pill-white"
               data-framer-name="Desktop"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                ...springConfig,
-                delay: isMobile ? 0.28 : 0.18
-              }}
+              {...entrance(20, 0.85)}
             >
               <div className="hero-btn-roll-track" data-framer-name="Container">
                 <span className="hero-btn-roll-text hero-btn-roll-top">
@@ -334,12 +314,7 @@ export default function Hero({ navigate }) {
             <motion.div
               className="hero-ticker-container"
               data-framer-name="Ticker"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                ...springConfig,
-                delay: isMobile ? 0.3 : 0.2
-              }}
+              {...entrance(20, 0.65)}
             >
               <div className="hero-ticker-mask">
                 <div className="hero-ticker-track">

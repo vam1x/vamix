@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { useLenis } from 'lenis/react';
 import RollingText from './RollingText';
 import VamixLogo from './VamixLogo';
@@ -18,7 +18,7 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
     }
   }, [lenis]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let ticking = false;
 
     const isPointDark = (x, y) => {
@@ -33,7 +33,7 @@ export default function Header({ isDrawerOpen, setIsDrawerOpen, currentRoute, na
       }
 
       // b) Case section dark quote card (#171717 / #181818)
-      const quotePanel = document.querySelector('.case-section__quote');
+      const quotePanel = document.querySelector('.case-section__quote-body') || document.querySelector('.case-section__quote');
       if (quotePanel) {
         const rect = quotePanel.getBoundingClientRect();
         if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {

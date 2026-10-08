@@ -253,3 +253,18 @@ button:hover .roll-clone,
 .faq-item:hover {
   border-color: rgba(0, 0, 0, 0.25);
 }
+
+/* Shared Services-style hero reveal; word masks keep the layout stable. */
+.hero-reveal-word { display: inline-block; white-space: nowrap; overflow: hidden; vertical-align: top; }
+.hero-reveal-word > span { display: inline-block; }
+
+/* Collapse a padding-free shell; the original answer spacing stays inside it. */
+.faq-answer-motion { overflow: hidden; min-height: 0; padding: 0; }
+.faq-icon-cross { position: relative; display: inline-block; width: 18px; height: 18px; flex-shrink: 0; }
+.faq-icon-cross::before, .faq-icon-cross::after {
+  content: ''; position: absolute; left: 3px; top: 8px;
+  width: 12px; height: 1.5px; background: currentColor;
+}
+.faq-icon-cross::after { transform: rotate(90deg) scaleX(1); transition: transform .25s ease; }
+.about-faq-trigger[aria-expanded="true"] .faq-icon-cross::after { transform: rotate(90deg) scaleX(0); }
+@media (prefers-reduced-motion: reduce) { .faq-icon-cross::after { transition: none; } }

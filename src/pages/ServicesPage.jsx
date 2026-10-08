@@ -1,5 +1,7 @@
+import HeroDescription from '../components/HeroDescription';
+import RevealHeading from '../components/RevealHeading';
 import React, { useEffect } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import SectionGrid from '../components/SectionGrid';
 import RollingText from '../components/RollingText';
 import ServiceRow from '../components/services/ServiceRow';
@@ -98,15 +100,8 @@ const devServices = [
   }
 ];
 
-function RevealHeading({ text, className = '' }) {
-  const reducedMotion = useReducedMotion();
-  return <motion.span className={`services-reveal ${className}`} aria-label={text} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} transition={{ staggerChildren: reducedMotion ? 0 : 0.018 }}>
-    {text.split(' ').map((word, i) => <span className="services-reveal-word" aria-hidden="true" key={i}>{[...word].map((char, j) => <motion.span key={j} variants={{ hidden: { opacity: reducedMotion ? 1 : 0, y: reducedMotion ? 0 : '105%' }, visible: { opacity: 1, y: 0 } }} transition={{ duration: reducedMotion ? 0 : 0.65, ease: [0.16, 1, 0.3, 1] }}>{char}</motion.span>)}{'\u00a0'}</span>)}
-  </motion.span>;
-}
 
 export default function ServicesPage({ navigate }) {
-  const reducedMotion = useReducedMotion();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -138,9 +133,9 @@ export default function ServicesPage({ navigate }) {
               <span className="display-heading__muted"><RevealHeading text="THEN WE" /><br /><RevealHeading text="BUILD IT" /></span>
             </h1>
 
-            <motion.p className="hero-description" initial={{ opacity: reducedMotion ? 1 : 0, y: reducedMotion ? 0 : 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: reducedMotion ? 0 : 0.7, delay: reducedMotion ? 0 : 0.3 }}>
+            <HeroDescription className="hero-description">
               Two tracks under one roof. Design works out what to make. Development ships it as working software. One team runs both.
-            </motion.p>
+            </HeroDescription>
           </div>
         </div>
       </section>

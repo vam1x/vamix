@@ -1,3 +1,4 @@
+import RevealHeading from '../components/RevealHeading';
 import React, { useEffect } from 'react';
 import AboutBooking from '../components/about/AboutBooking';
 import Contact from '../components/Contact';
@@ -35,7 +36,7 @@ export default function PrivacyPolicyPage({ navigate }) {
           {/* Column 2-4: Legal Content */}
           <div className="legal-page__items">
             <h1 id="legal-page-title" className="legal-page-title">
-              Privacy policy
+              <RevealHeading text="Privacy policy" />
             </h1>
 
             <div className="legal-page__content">

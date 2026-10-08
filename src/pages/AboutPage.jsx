@@ -73,7 +73,7 @@ export default function AboutPage({ navigate }) {
       <AboutBelief />
 
       {/* 06: Help & Info FAQ */}
-      <AboutFaq />
+      <AboutFaq navigate={navigate} />
 
       {/* A first step from the reference Case Studies page, placed before contact. */}
       <AboutBooking navigate={navigate} />

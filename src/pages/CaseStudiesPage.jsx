@@ -1,3 +1,5 @@
+import HeroDescription from '../components/HeroDescription';
+import RevealHeading from '../components/RevealHeading';
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SectionGrid from '../components/SectionGrid';
@@ -90,23 +92,12 @@ export default function CaseStudiesPage({ navigate }) {
           {/* Column 2-4: Title and Subtitle */}
           <div className="cs-heading-col">
             <h1 id="cs-main-title" className="cs-main-title">
-              <motion.span
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              >
-                CASE STUDIES
-              </motion.span>
+              <RevealHeading text="CASE STUDIES" />
             </h1>
-            <motion.p
-              className="cs-subtitle"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            >
+            <HeroDescription className="cs-subtitle">
               Real projects where design solved actual business<br className="cs-desktop-break" />{' '}
               problems, not just made things look prettier.
-            </motion.p>
+            </HeroDescription>
           </div>
         </div>
       </section>

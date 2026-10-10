@@ -14,7 +14,7 @@ export default function Timeline() {
     {
       year: "2024",
       icon: "/beliefs/beliefs-3.webp",
-      desc: "OPENED TENNESSEE OFFICE\nTO SERVE US CLIENTS",
+      desc: "EXPANDED CORE DESIGN &\nENGINEERING TEAM",
       gap: "150px"
     },
     {

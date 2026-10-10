@@ -18,7 +18,7 @@ export default function AboutBelief() {
     },
     {
       year: "2024",
-      desc: "OPENED TENNESSEE OFFICE TO SERVE US CLIENTS"
+      desc: "EXPANDED CORE DESIGN & ENGINEERING TEAM"
     },
     {
       year: "2025",
